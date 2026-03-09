@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reverse 1B Generator — Rock Advisors</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Gothic+A1:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #1a1a1a;
+  --dark: #232323;
+  --gold: #c8a84e;
+  --gold-hover: #b8973e;
+  --gold-light: rgba(200,168,78,0.08);
+  --text: #232323;
+  --text-light: #777777;
+  --bg: #f5f5f3;
+  --white: #ffffff;
+  --border: #e0ddd8;
+  --radius: 6px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+}
+
+body {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ──────────────────────────────── */
+.header {
+  background: var(--black);
+  padding: 0;
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo img {
+  height: 40px;
+  width: auto;
+}
+.header-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 5px 14px;
+  border-radius: 3px;
+}
+
+/* ── Gold accent bar ─────────────────────── */
+.accent-bar {
+  background: var(--gold);
+  height: 3px;
+}
+
+/* ── Main ────────────────────────────────── */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  flex: 1;
+  width: 100%;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.subtitle {
+  font-size: 16px;
+  color: var(--text-light);
+  margin-bottom: 32px;
+}
+
+/* ── Flash messages ──────────────────────── */
+.flash {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ── Card ────────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--dark);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title::before {
+  content: '';
+  width: 3px;
+  height: 16px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* ── Form ────────────────────────────────── */
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.form-group .hint {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 400;
+  margin-top: 6px;
+}
+
+select, input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+select:focus, input[type="text"]:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200,168,78,0.15);
+}
+input[type="text"]::placeholder {
+  color: #bbb;
+}
+
+/* ── Inline field group (two fields side by side) ── */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .field-row { grid-template-columns: 1fr; }
+}
+
+/* ── File upload ─────────────────────────── */
+.upload-area {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.upload-area:hover,
+.upload-area.dragover {
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
+.upload-area.has-file {
+  border-color: var(--dark);
+  background: rgba(35,35,35,0.02);
+}
+.upload-icon {
+  font-size: 36px;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+.upload-text {
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 600;
+}
+.upload-hint {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+.upload-filename {
+  display: none;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+}
+.upload-area.has-file .upload-filename {
+  display: inline-block;
+}
+.upload-area.has-file .upload-icon,
+.upload-area.has-file .upload-text,
+.upload-area.has-file .upload-hint {
+  display: none;
+}
+.upload-area.has-file::after {
+  content: 'Click to change file';
+  display: block;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+.upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ── Building type toggle ────────────────── */
+.toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.toggle-option {
+  position: relative;
+}
+.toggle-option input {
+  position: absolute;
+  opacity: 0;
+}
+.toggle-option label {
+  display: block;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.toggle-option label .label-sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+.toggle-option input:checked + label {
+  border-color: var(--dark);
+  background: rgba(35,35,35,0.04);
+  color: var(--black);
+}
+
+/* ── Submit button ───────────────────────── */
+.btn-generate {
+  display: block;
+  width: 100%;
+  padding: 16px 24px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Gothic A1', 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow);
+}
+.btn-generate:hover {
+  background: #000000;
+  box-shadow: var(--shadow-lg);
+}
+.btn-generate:active {
+  transform: translateY(1px);
+}
+
+/* ── Loading state ───────────────────────── */
+.btn-generate.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ── Footer ──────────────────────────────── */
+.footer {
+  background: var(--black);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+}
+.footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+.footer .tagline {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 6px;
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 600px) {
+  .container { padding: 24px 16px; }
+  .card { padding: 24px 20px; }
+  h1 { font-size: 22px; }
+  .toggle-group { grid-template-columns: 1fr; }
+  .header-badge { display: none; }
+  .logo img { height: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-top">
+    <a href="/" class="logo">
+      <img src="{{ url_for('static', filename='logo-white.png') }}" alt="Rock Advisors">
+    </a>
+    <span class="header-badge">Reverse 1B Generator</span>
+  </div>
+</header>
+<div class="accent-bar"></div>
+
+<main class="container">
+
+  <h1>Generate Reverse 1B</h1>
+  <p class="subtitle">Upload a 1A proforma, select your parameters, and download a complete Reverse 1B financial model.</p>
+
+  <!-- Flash messages -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="/generate" enctype="multipart/form-data" id="generateForm">
+
+    <!-- File Upload -->
+    <div class="card">
+      <div class="card-title">1A Proforma File</div>
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">&#128196;</div>
+        <div class="upload-text">Drag & drop your 1A file here</div>
+        <div class="upload-hint">or click to browse (.xlsx or .xls)</div>
+        <div class="upload-filename" id="fileName"></div>
+        <input type="file" name="proforma" id="proformaInput" accept=".xlsx,.xls" required>
+      </div>
+    </div>
+
+    <!-- Municipality Selection -->
+    <div class="card">
+      <div class="card-title">Municipality</div>
+      <div class="form-group">
+        <label for="municipality">Select municipality for development charges</label>
+        <select name="municipality" id="municipality">
+          <option value="skip" data-tax="">-- Select municipality --</option>
+          {% for m in municipalities %}
+          <option value="{{ loop.index0 }}" data-tax="{{ m.tax_rate or '' }}">{{ m.name }}{% if m.notes %} — {{ m.notes }}{% endif %}</option>
+          {% endfor %}
+        </select>
+        <div class="hint">DC rates will be applied based on your selection. Choose the correct zone if applicable.</div>
+      </div>
+    </div>
+
+    <!-- Property Taxes -->
+    <div class="card" id="taxCard">
+      <div class="card-title">Property Taxes</div>
+      <div class="field-row">
+        <div class="form-group">
+          <label for="tax_rate">Tax Rate</label>
+          <input type="text" name="tax_rate" id="taxRate" placeholder="e.g. 0.0066">
+          <div class="hint">Annual municipal tax rate (decimal). Leave blank to use 1A value.</div>
+        </div>
+        <div class="form-group">
+          <label for="assessed_value">Assessed Value per Unit ($)</label>
+          <input type="text" name="assessed_value" id="assessedValue" placeholder="e.g. 350000">
+          <div class="hint">MPAC assessed value per unit. Leave blank to use 1A value.</div>
+        </div>
+      </div>
+      <div class="hint" id="taxHint">Values will auto-fill after file upload. Override if needed.</div>
+    </div>
+
+    <!-- Building Type -->
+    <div class="card">
+      <div class="card-title">Building Type</div>
+      <div class="form-group">
+        <label>Select building classification</label>
+        <div class="toggle-group">
+          <div class="toggle-option">
+            <input type="radio" name="building_type" id="midrise" value="mid-rise">
+            <label for="midrise">
+              Mid-Rise
+              <span class="label-sub">Up to 6 storeys</span>
+            </label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="building_type" id="highrise" value="high-rise" checked>
+            <label for="highrise">
+              High-Rise
+              <span class="label-sub">7+ storeys</span>
+            </label>
+          </div>
+        </div>
+        <div class="hint" id="buildingTypeHint">Auto-detected after file upload. Override if needed.</div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn-generate" id="submitBtn">
+      Generate Reverse 1B
+    </button>
+
+  </form>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; {{ current_year }} <a href="https://rockadvisorsinc.com/" target="_blank">Rock Advisors Inc.</a>, Brokerage. All rights reserved.</p>
+  <p class="tagline">Apartment Developer Solution Providers</p>
+</footer>
+
+<script>
+// File upload interaction
+var uploadArea = document.getElementById('uploadArea');
+var fileInput = document.getElementById('proformaInput');
+var fileName = document.getElementById('fileName');
+var buildingTypeHint = document.getElementById('buildingTypeHint');
+
+fileInput.addEventListener('change', function() {
+  if (this.files.length > 0) {
+    fileName.textContent = this.files[0].name;
+    uploadArea.classList.add('has-file');
+    previewFile(this.files[0]);
+  } else {
+    uploadArea.classList.remove('has-file');
+  }
+});
+
+function previewFile(file) {
+  var formData = new FormData();
+  formData.append('proforma', file);
+  buildingTypeHint.textContent = 'Analyzing file...';
+
+  fetch('/preview', { method: 'POST', body: formData })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error) {
+        buildingTypeHint.textContent = 'Could not auto-detect. Please select manually.';
+        return;
+      }
+      if (data.building_type === 'mid-rise') {
+        document.getElementById('midrise').checked = true;
+      } else {
+        document.getElementById('highrise').checked = true;
+      }
+      // Auto-select municipality if detected
+      var muniSelect = document.getElementById('municipality');
+      if (data.municipality_index !== null) {
+        muniSelect.value = data.municipality_index;
+        muniSelect.style.borderColor = '#c8a84e';
+      }
+      buildingTypeHint.textContent =
+        data.address + ' \u2014 ' + data.total_units + ' units, ~' +
+        data.est_floors + ' floors. Auto-selected ' + data.building_type +
+        '. Override if needed.';
+      // Update municipality hint
+      var muniHint = document.querySelector('#municipality').parentNode.querySelector('.hint');
+      if (data.municipality_name && data.municipality_index !== null) {
+        muniHint.textContent = 'Auto-detected: ' + data.municipality_name + '. Change if needed — verify the correct zone.';
+      }
+      // Auto-fill property tax fields from 1A
+      var taxHint = document.getElementById('taxHint');
+      var taxRateInput = document.getElementById('taxRate');
+      var assessedInput = document.getElementById('assessedValue');
+      if (data.tax_rate && data.tax_rate > 0) {
+        taxRateInput.value = data.tax_rate;
+        taxRateInput.style.borderColor = '#c8a84e';
+      }
+      if (data.assessed_value && data.assessed_value > 0) {
+        assessedInput.value = Math.round(data.assessed_value);
+        assessedInput.style.borderColor = '#c8a84e';
+      }
+      if ((data.tax_rate && data.tax_rate > 0) || (data.assessed_value && data.assessed_value > 0)) {
+        taxHint.textContent = 'Auto-filled from 1A. Override if needed.';
+      } else {
+        taxHint.textContent = 'No property tax data found in 1A. Enter values manually if known.';
+      }
+    })
+    .catch(function() {
+      buildingTypeHint.textContent = 'Could not auto-detect. Please select manually.';
+    });
+}
+
+// Drag and drop
+uploadArea.addEventListener('dragover', function(e) {
+  e.preventDefault();
+  this.classList.add('dragover');
+});
+uploadArea.addEventListener('dragleave', function() {
+  this.classList.remove('dragover');
+});
+uploadArea.addEventListener('drop', function(e) {
+  e.preventDefault();
+  this.classList.remove('dragover');
+  if (e.dataTransfer.files.length > 0) {
+    fileInput.files = e.dataTransfer.files;
+    fileName.textContent = e.dataTransfer.files[0].name;
+    uploadArea.classList.add('has-file');
+    previewFile(e.dataTransfer.files[0]);
+  }
+});
+
+// Auto-fill tax rate when municipality changes
+document.getElementById('municipality').addEventListener('change', function() {
+  var selected = this.options[this.selectedIndex];
+  var taxRate = selected.getAttribute('data-tax');
+  var taxRateInput = document.getElementById('taxRate');
+  var taxHint = document.getElementById('taxHint');
+  if (taxRate && taxRate !== '') {
+    taxRateInput.value = taxRate;
+    taxRateInput.style.borderColor = '#c8a84e';
+    taxHint.textContent = 'Tax rate set from ' + selected.textContent.trim().split(' —')[0] + '. Override if needed.';
+  }
+});
+
+// Loading state on submit
+document.getElementById('generateForm').addEventListener('submit', function() {
+  var btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.textContent = 'GENERATING...';
+});
+</script>
+
+</body>
+</html>
