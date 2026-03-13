@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reverse 1B — Rock Advisors</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0F1218;
+  --bg-deep: #0A0D11;
+  --card: #161B24;
+  --card-border: #1E2530;
+  --gold: #C9993A;
+  --gold-glow: rgba(201,153,58,0.15);
+  --text: #E8E6E1;
+  --dim: #8B8A87;
+  --green: #3DB06B;
+  --red: #D94F4F;
+  --blue: #6B8AE0;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+/* Slider reset */
+input[type=range] { -webkit-appearance: none; appearance: none; background: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--bg); box-shadow: 0 0 10px rgba(201,153,58,0.4);
+  margin-top: -7px; transition: transform 0.2s;
+}
+input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); }
+input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--card-border); }
+/* Tooltip */
+.tooltip-trigger { position: relative; cursor: help; }
+.tooltip-trigger .tooltip-text {
+  visibility: hidden; opacity: 0; position: absolute; bottom: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%); background: #2A2F3A; color: var(--text); padding: 10px 14px;
+  border-radius: 8px; font-size: 12px; font-weight: 400; line-height: 1.5; width: 260px;
+  text-align: left; z-index: 50; transition: opacity 0.2s; pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: 1px solid var(--card-border);
+  text-transform: none; letter-spacing: 0;
+}
+.tooltip-trigger:hover .tooltip-text { visibility: visible; opacity: 1; }
+/* Fade-in entrance animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Card hover effects */
+.card-hover {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  box-shadow: 0 8px 32px rgba(201,153,58,0.12);
+  border-color: rgba(201,153,58,0.3) !important;
+}
+/* Scroll progress bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #C9993A, #E8C16A);
+  z-index: 200;
+  transition: width 0.05s linear;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+/* ─── Design Tokens ─── */
+const C = {
+  bg: '#0F1218', deep: '#0A0D11', card: '#161B24', border: '#1E2530',
+  gold: '#C9993A', text: '#E8E6E1', dim: '#8B8A87',
+  green: '#3DB06B', red: '#D94F4F', blue: '#6B8AE0',
+};
+const SERIF = "'Instrument Serif', serif";
+const MONO = "'JetBrains Mono', monospace";
+const SANS = "'DM Sans', sans-serif";
+
+/* ─── Formatters ─── */
+function fmtCurrency(v, dec = 0) {
+  if (v == null || isNaN(v)) return '$0';
+  const abs = Math.abs(v);
+  const sign = v < 0 ? '-' : '';
+  if (abs >= 1e9) return sign + '$' + (abs / 1e9).toFixed(1) + 'B';
+  if (abs >= 1e6) return sign + '$' + (abs / 1e6).toFixed(dec || 1) + 'M';
+  if (abs >= 1e3) return sign + '$' + Math.round(abs).toLocaleString();
+  return sign + '$' + abs.toFixed(dec);
+}
+function fmtPct(v) { return (v * 100).toFixed(2) + '%'; }
+// Cap IRR display at 100% — extreme values look like bugs in presentations
+function fmtIRR(v) { return v > 1.0 ? '100%+' : v < -1.0 ? '<-100%' : (v * 100).toFixed(1) + '%'; }
+function fmtNum(v) { return Math.round(v).toLocaleString(); }
+
+/* ─── Animated Number ─── */
+function AnimNum({ value, fmt = 'currency', dec = 0, duration = 600 }) {
+  const [display, setDisplay] = useState(value);
+  const raf = useRef(null);
+  const from = useRef(value);
+  const t0 = useRef(null);
+  useEffect(() => {
+    from.current = display; t0.current = performance.now();
+    function tick(now) {
+      const p = Math.min((now - t0.current) / duration, 1);
+      const ease = p < 0.5 ? 2*p*p : -1 + (4 - 2*p)*p;
+      setDisplay(from.current + (value - from.current) * ease);
+      if (p < 1) raf.current = requestAnimationFrame(tick);
+    }
+    raf.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf.current);
+  }, [value]);
+  const text = fmt === 'currency' ? fmtCurrency(display, dec)
+    : fmt === 'irr' ? fmtIRR(display)
+    : fmt === 'pct' ? fmtPct(display)
+    : fmt === 'multiple' ? display.toFixed(2) + 'x'
+    : fmtNum(display);
+  return <span>{text}</span>;
+}
+
+/* ─── Slider ─── */
+function Slider({ label, value, min, max, step, onChange, fmt = 'currency', unit = '', tooltip, baseline }) {
+  const pct = ((value - min) / (max - min)) * 100;
+  const display = fmt === 'currency' ? '$' + value.toFixed(2)
+    : fmt === 'pct' ? (value * 100).toFixed(2) + '%'
+    : value.toFixed(2);
+  const baseDisplay = baseline != null
+    ? (fmt === 'currency' ? '$' + baseline.toFixed(2) : fmt === 'pct' ? (baseline * 100).toFixed(2) + '%' : baseline.toFixed(2))
+    : null;
+  // Show baseline when slider has moved away from it
+  const moved = baseline != null && Math.abs(value - baseline) > step * 0.5;
+  return (
+    <div style={{ marginBottom: 28 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+        <span className={tooltip ? 'tooltip-trigger' : ''} style={{ color: '#9B9A97', fontSize: 13, letterSpacing: 2, textTransform: 'uppercase', fontFamily: SANS }}>
+          {label}
+          {tooltip && <span className="tooltip-text">{tooltip}</span>}
+        </span>
+        <span style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+          {moved && <span style={{ color: C.dim, fontSize: 12, fontFamily: MONO }}>base {baseDisplay}{unit}</span>}
+          <span style={{ color: C.gold, fontSize: 22, fontFamily: MONO, fontWeight: 600 }}>{display}{unit}</span>
+        </span>
+      </div>
+      <div style={{ position: 'relative', height: 6, background: C.border, borderRadius: 3 }}>
+        <div style={{ position: 'absolute', left: 0, top: 0, height: 6, borderRadius: 3, width: pct + '%',
+          background: `linear-gradient(90deg, ${C.gold}, #E8C16A)`, transition: 'width 0.08s' }} />
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={e => onChange(parseFloat(e.target.value))}
+        style={{ width: '100%', marginTop: -8, height: 28, position: 'relative', zIndex: 2 }} />
+    </div>
+  );
+}
+
+/* ─── Metric Card ─── */
+function MetricCard({ label, value, fmt, sub, highlight, tooltip, size = 'normal' }) {
+  const fontSize = size === 'hero' ? 48 : size === 'large' ? 36 : 30;
+  return (
+    <div className="card-hover" style={{
+      background: C.card, border: `1px solid ${highlight ? C.gold + '44' : C.border}`, borderRadius: 16,
+      padding: size === 'hero' ? '36px 32px' : '22px 20px', flex: 1, minWidth: 180,
+      transition: 'all 0.3s', boxShadow: highlight ? `0 0 30px ${C.gold}22` : 'none',
+    }}>
+      <div className={tooltip ? 'tooltip-trigger' : ''} style={{ color: '#9B9A97', fontSize: 13, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 8, fontFamily: SANS }}>
+        {label}
+        {tooltip && <span className="tooltip-text">{tooltip}</span>}
+      </div>
+      <div style={{ fontSize, fontWeight: 400, color: C.text, fontFamily: SERIF, lineHeight: 1.1 }}>
+        <AnimNum value={value} fmt={fmt} />
+      </div>
+      {sub && <div style={{ color: C.dim, fontSize: 12, marginTop: 8, fontFamily: SANS }}>{sub}</div>}
+    </div>
+  );
+}
+
+/* ─── Data Row ─── */
+function DataRow({ label, value, highlight }) {
+  return (
+    <div style={{
+      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+      padding: '13px 20px', background: C.card, borderRadius: 10,
+      border: `1px solid ${highlight ? C.gold + '33' : C.border}`,
+    }}>
+      <span style={{ color: '#9B9A97', fontSize: 15 }}>{label}</span>
+      <span style={{ fontFamily: MONO, fontWeight: 600, color: highlight ? C.gold : C.text, fontSize: 17 }}>{value}</span>
+    </div>
+  );
+}
+
+/* ─── Section Label ─── */
+function SectionLabel({ text }) {
+  return (
+    <div style={{ color: C.gold, fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', marginBottom: 8, fontWeight: 500 }}>
+      {text}
+    </div>
+  );
+}
+
+/* ─── Financial Calculations ─── */
+function calculate(P, overrides = {}) {
+  // Rent: accept $/sf override, derive multiplier from baseline
+  const totalRentableSf = P.units.types.reduce((s, u) => s + u.count * u.sf, 0);
+  const baseRentPsf = totalRentableSf > 0
+    ? P.units.types.reduce((s, u) => s + u.count * u.rent, 0) / totalRentableSf : 0;
+  const rentPsfOverride = overrides.rentPsf ?? null;
+  const rentMultiplier = (rentPsfOverride !== null && baseRentPsf > 0)
+    ? rentPsfOverride / baseRentPsf : 1;
+
+  const capRateBase = overrides.capRate ?? P.cap_rates.base;
+  const constructionPsf = overrides.constructionPsf ?? P.development.construction_cost_psf;
+  const vacancyRate = overrides.vacancyRate ?? P.vacancy_rate;
+  const permRate = overrides.interestRate ?? P.financing.perm_loan_rate;
+
+  const units = P.units.total;
+
+  // Revenue — per unit type, affected by rent multiplier
+  const residentialRent = P.units.types.reduce((s, u) => s + u.count * u.rent * rentMultiplier * 12, 0);
+  const parkingRevenue = (P.parking.underground.spaces * P.parking.underground.fee
+    + P.parking.visitor.spaces * P.parking.visitor.fee
+    + P.parking.retail.spaces * P.parking.retail.fee) * 12;
+  const storageRevenue = P.storage.count * P.storage.fee * 12;
+  // Submetering — handle both object and number
+  const submetering = typeof P.submetering === 'object'
+    ? (P.submetering.count || 0) * (P.submetering.fee || 0) * 12 : (P.submetering || 0);
+  const commercialRevenue = P.commercial.sf * P.commercial.rate;
+
+  // Match Excel: residential vacancy on rent+parking+storage+submetering,
+  // commercial vacancy separate
+  const residentialSubtotal = residentialRent + parkingRevenue + storageRevenue + submetering;
+  const pgi = residentialSubtotal + commercialRevenue;
+  const residentialVacancy = residentialSubtotal * vacancyRate;
+  const commercialVacancy = commercialRevenue * (P.commercial.vacancy || 0);
+  const totalVacancy = residentialVacancy + commercialVacancy;
+  const egi = pgi - totalVacancy;
+
+  // OpEx
+  const mgmtFee = egi * P.opex.mgmt_fee_pct;
+  const propertyTax = P.opex.tax_rate * P.opex.assessed_value_per_unit * units;
+  const insurance = P.opex.insurance_per_unit * units;
+  const rm = P.opex.rm_per_unit * units;
+  const staffing = P.opex.staffing_per_unit * units;
+  const marketing = P.opex.marketing_per_unit * units;
+  const ga = P.opex.ga_per_unit * units;
+  // Common area = GFA - rentable SF, matching Excel's utilities formula
+  const commonArea = Math.max(0, P.areas.gfa - P.areas.total_rentable_sf);
+  const utilities = P.opex.utilities_psf * commonArea;
+  const reserve = P.opex.reserve_pct * egi;
+  const totalOpex = mgmtFee + propertyTax + insurance + rm + staffing + marketing + ga + utilities + reserve;
+
+  const noi = egi - totalOpex;
+
+  // Development timeline (used for IRR calculations)
+  const predevMo = P.schedule?.predev_months || 12;
+  const constrMo = P.schedule?.construction_months || 18;
+  const leaseUpMo = Math.ceil(units / 15);
+  // Stabilization month (1-indexed) — matches Sheet 10/11 structure
+  const stabMonth = predevMo + constrMo + leaseUpMo + 2;
+  const devYears = Math.ceil(stabMonth / 12);
+  // Stabilized NOI — inflation from start year: 1.02^(devYears - 1)
+  const noiStabilized = noi * Math.pow(1.02, devYears - 1);
+
+  // Valuation uses Stabilized NOI (matches Exec Summary Sheet 2)
+  // Sheet 2 formula: NOI @ Stabilization / Cap Rate
+  const valueBest = noiStabilized / P.cap_rates.best;
+  const valueBase = noiStabilized / capRateBase;
+  const valueWorst = noiStabilized / P.cap_rates.worst;
+
+  // Selling costs (1% of value, per Exec Summary row 12)
+  const sellingCostPct = 0.01;
+  const salesProceeds = valueBase * (1 - sellingCostPct);
+
+  // ── Development costs — mirrors Sheet 9 line-by-line ──
+  const profitPct = P.development.profit_pct || 0.08;
+  const constrRate = P.financing.construction_loan_rate || 0.0587;
+
+  // 1. LAND — backed out from stabilized value (Sheet 5: value × (profit% + 2.5%))
+  const landCost = valueBase * (profitPct + 0.025);
+  const landClosing = landCost * 0.05;
+  const totalLand = landCost + landClosing;
+
+  // 2. CONSTRUCTION
+  const hardCosts = constructionPsf * P.areas.gfa;
+  const constrContingency = hardCosts * 0.02;
+  const totalConstruction = hardCosts + constrContingency;
+
+  // 3. PROFESSIONAL FEES — architect 3% of hard cost + 5% fee contingency
+  const architect = hardCosts * 0.03;
+  const feeContingency = architect * 0.05;
+  const profFees = architect + feeContingency;
+
+  // 4. DEV MANAGEMENT — 2.5% of (HC + contingency + fees)
+  const devMgmt = (hardCosts + constrContingency + architect + feeContingency) * 0.025;
+
+  // 5. PERMITS — DCs + contingency − submeter credit
+  const dcTotal = P.development.dc_total;
+  const submeterCredit = 600 * units;
+  const permitContingency = dcTotal * 0.05;
+  const totalPermits = dcTotal - submeterCredit + permitContingency;
+
+  // 6. MARKETING — 1.5 months of (rent + parking) revenue × 2
+  const monthlyRevForMktg = (residentialRent + parkingRevenue) / 12;
+  const commissions = monthlyRevForMktg * 1.5;
+  const marketingCost = commissions; // marketing = same as commissions
+  const totalMarketing = commissions + marketingCost;
+
+  const preFinancingCost = totalLand + totalConstruction + profFees + devMgmt + totalPermits + totalMarketing;
+
+  // 7. FINANCING — loan fees + construction interest from monthly draw schedule
+  const constrLoanPctEst = P.financing.construction_loan_pct || 0.90;
+  const totalDebtEst = preFinancingCost * constrLoanPctEst;
+  const loanFees = totalDebtEst * 0.01;
+  const finContingency = totalDebtEst * 0.005;
+
+  // Monthly draw schedule for construction interest
+  const predevDrawCost = totalLand + totalPermits * 0.5;
+  const constrDrawCost = totalConstruction + profFees + devMgmt + totalPermits * 0.5 + totalMarketing;
+  let monthlyInterest = 0;
+  let cumulative = 0;
+  for (let m = 0; m < predevMo + constrMo; m++) {
+    if (m < predevMo) {
+      cumulative += predevMo > 0 ? predevDrawCost / predevMo : 0;
+    } else {
+      cumulative += constrMo > 0 ? constrDrawCost / constrMo : 0;
+    }
+    monthlyInterest += cumulative * (constrRate / 12);
+  }
+  const financingCost = loanFees + finContingency + monthlyInterest;
+
+  // 8. LEASE-UP INCOME (reduces TDC)
+  const monthlyGrossRev = residentialRent / 12 + parkingRevenue / 12 + storageRevenue / 12;
+  const monthlyOpex = totalOpex / 12;
+  let leaseUpIncome = 0;
+  let leaseUpExpenses = 0;
+  for (let m = 0; m < leaseUpMo; m++) {
+    const occ = Math.min((m + 1) * 15, units) / units;
+    leaseUpIncome += monthlyGrossRev * occ;
+    leaseUpExpenses += monthlyOpex * occ;
+  }
+  const leaseUpVacancy = leaseUpIncome * vacancyRate;
+  const netLeaseUp = leaseUpIncome - leaseUpVacancy - leaseUpExpenses;
+
+  const totalDevCost = preFinancingCost + financingCost - netLeaseUp;
+
+  // Key metrics — all match Exec Summary (Sheet 2 rows 15-17)
+  const devProfit = salesProceeds - totalDevCost;
+  const merchantReturn = totalDevCost > 0 ? devProfit / totalDevCost : 0;
+  const devYield = noiStabilized / totalDevCost;
+  const yieldSpread = devYield - capRateBase;
+  const equityMultiple = valueBase / totalDevCost;
+
+  // CMHC MLI Select permanent take-out loan (matches Sheet 6 → Sheet 11)
+  // Loan sized to lesser of: (a) max LTV × value, (b) PV of NOI/DSCR payments
+  // Sizing uses ANNUAL compounding PV; debt service uses MONTHLY compounding PMT
+  const permLTV = P.financing.perm_loan_ltv;    // 0.95 max
+  const permDSCR = P.financing.perm_loan_dscr;  // 1.1 minimum
+  const permAmort = P.financing.perm_loan_term;  // 40 years
+  const cmhcPremiumRate = P.financing.cmhc_premium; // 0.0518
+
+  // (a) LTV-based loan
+  const ltvLoan = permLTV * valueBase;
+  // (b) DSCR-based loan — annual PV (matching Sheet 11 K12: -PV(rate, nper, NOI/DSCR))
+  const allowedAnnualPmt = noiStabilized / permDSCR;
+  const pvFactorAnnual = permRate > 0
+    ? (1 - Math.pow(1 + permRate, -permAmort)) / permRate : 0;
+  const dscrLoan = allowedAnnualPmt * pvFactorAnnual;
+  const permLoan = Math.min(ltvLoan, dscrLoan);
+
+  // Debt service — monthly compounding (matching Sheet 11 K16: -PMT(rate/12, term*12, loan)*12)
+  const monthlyRate = permRate / 12;
+  const nMonths = permAmort * 12;
+  const monthlyPmt = monthlyRate > 0
+    ? (monthlyRate * permLoan) / (1 - Math.pow(1 + monthlyRate, -nMonths)) : 0;
+  const annualDebt = monthlyPmt * 12;
+  const dscr = annualDebt > 0 ? noiStabilized / annualDebt : 0;
+  const cmhcPremium = permLoan * (cmhcPremiumRate || 0);
+  const impliedLTV = valueBase > 0 ? permLoan / valueBase : 0;
+  const equity = Math.max(0, totalDevCost - permLoan);
+  const cashOnCash = equity > 0 ? (noiStabilized - annualDebt) / equity : 0;
+
+  // Construction financing basis — developer invests 10% equity during build
+  const constrLoanPct = P.financing.construction_loan_pct || 0.90;
+  const constrEquity = totalDevCost * (1 - constrLoanPct);
+  const constrDebt = totalDevCost * constrLoanPct;
+
+  // Merchant IRR — CAGR matching Sheet 10 G105
+  // Sheet 10: equity at month 0, sale at month N, all intermediate CFs = 0
+  // +1 for stabilization month (building sold one month after full lease-up)
+  const merchantProceeds = salesProceeds - constrDebt;
+  const totalDevMonths = predevMo + constrMo + leaseUpMo + 1;
+  const merchantIRR = (() => {
+    if (constrEquity <= 0 || merchantProceeds <= 0 || totalDevMonths <= 0) return 0;
+    const monthlyR = Math.pow(merchantProceeds / constrEquity, 1 / totalDevMonths) - 1;
+    return Math.pow(1 + monthlyR, 12) - 1;
+  })();
+
+  // Hold IRR — 10-year annual cash flow model matching Sheet 11 B67
+  // Always 10 entries (years 1-10). Exit at year 10 regardless of dev period.
+  const holdYears = 10;
+  const exitCapRate = capRateBase;
+  const refiCashOut = permLoan - constrDebt - cmhcPremium;
+  // Partial months = stabilized operating months in the refi year
+  const partialMonths = devYears * 12 - stabMonth;
+  const partialYearIncome = (noiStabilized - annualDebt) * (partialMonths / 12);
+  const holdIRR = (() => {
+    if (constrEquity <= 0) return 0;
+    const cf = [];
+    // Year 1: equity investment
+    cf.push(-constrEquity);
+    // Years 2 through devYears-1: zero (development)
+    for (let y = 2; y < devYears; y++) cf.push(0);
+    // Year devYears: CMHC refi + partial year income
+    cf.push(refiCashOut + partialYearIncome);
+    // Years devYears+1 through holdYears-1: full operating income
+    for (let y = devYears + 1; y < holdYears; y++) {
+      const yearsFromStab = y - devYears;
+      cf.push(noiStabilized * Math.pow(1.02, yearsFromStab) - annualDebt);
+    }
+    // Year holdYears (10): operating income + exit sale
+    const exitYearsFromStab = holdYears - devYears;
+    const exitNOI = noiStabilized * Math.pow(1.02, exitYearsFromStab);
+    const exitValue = exitNOI / exitCapRate;
+    // Exit debt = balance at START of final year (matches Sheet 11 Row 34)
+    const exitDebtMonths = partialMonths + (holdYears - devYears - 1) * 12;
+    const balGrowth = Math.pow(1 + monthlyRate, exitDebtMonths);
+    const exitDebtBalance = monthlyRate > 0
+      ? permLoan * balGrowth - monthlyPmt * (balGrowth - 1) / monthlyRate
+      : permLoan * (1 - exitDebtMonths / (permAmort * 12));
+    const exitProceeds = exitValue * (1 - sellingCostPct) - Math.max(0, exitDebtBalance);
+    cf.push((noiStabilized * Math.pow(1.02, exitYearsFromStab) - annualDebt) + exitProceeds);
+    // Newton's method
+    let guess = 0.12;
+    for (let iter = 0; iter < 50; iter++) {
+      let npv = 0, dnpv = 0;
+      for (let y = 0; y < cf.length; y++) {
+        const disc = Math.pow(1 + guess, y);
+        npv += cf[y] / disc;
+        if (y > 0) dnpv -= y * cf[y] / Math.pow(1 + guess, y + 1);
+      }
+      if (Math.abs(dnpv) < 1e-10) break;
+      const next = guess - npv / dnpv;
+      if (Math.abs(next - guess) < 1e-8) { guess = next; break; }
+      guess = Math.max(-0.5, Math.min(next, 2.0));
+    }
+    return guess;
+  })();
+
+  // Avg rent per SF (uses the derived multiplier)
+  const avgRentPsf = baseRentPsf * rentMultiplier;
+
+  return {
+    // Revenue
+    residentialRent, parkingRevenue, storageRevenue, submetering, commercialRevenue,
+    pgi, egi, totalVacancy, avgRentPsf,
+    // OpEx
+    mgmtFee, propertyTax, insurance, rm, staffing, marketing, ga, utilities, reserve, totalOpex,
+    // NOI & Valuation
+    noi, noiStabilized, valueBest, valueBase, valueWorst, salesProceeds, sellingCostPct,
+    // Dev Costs
+    hardCosts, profFees, devMgmt, dcTotal, totalMarketing, totalLand, financingCost, totalDevCost,
+    totalConstruction, totalPermits, netLeaseUp,
+    // Key Metrics
+    devProfit, merchantReturn, devYield, yieldSpread, equityMultiple, merchantIRR, holdIRR, totalDevMonths,
+    // Financing
+    constrEquity, constrDebt, permLoan, annualDebt, dscr, equity, cashOnCash, cmhcPremium, impliedLTV,
+    // Inputs used
+    capRateBase, constructionPsf, vacancyRate, permRate, devYears,
+  };
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MAIN APP
+   ═══════════════════════════════════════════════════════════════════ */
+
+function App() {
+  const [P, setP] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeSection, setActiveSection] = useState(0);
+
+  // Sensitivity overrides
+  const [rentPsf, setRentPsf] = useState(null);
+  const [capRate, setCapRate] = useState(null);
+  const [constructionPsf, setConstructionPsf] = useState(null);
+  const [vacancyRate, setVacancyRate] = useState(null);
+  const [interestRate, setInterestRate] = useState(null);
+  const [exporting, setExporting] = useState(false);
+
+  // Load project data
+  useEffect(() => {
+    const filename = '__PROJECT_FILENAME__';
+    fetch('/projects/' + filename)
+      .then(r => { if (!r.ok) throw new Error('Project not found'); return r.json(); })
+      .then(data => {
+        // Ensure CMHC fields exist (backwards compat with older JSON files)
+        if (!data.financing.perm_loan_dscr) data.financing.perm_loan_dscr = 1.1;
+        if (!data.financing.cmhc_premium) data.financing.cmhc_premium = 0.0518;
+        if (data.financing.perm_loan_ltv < 0.9) {
+          // Old JSON had 0.75 LTV — upgrade to CMHC defaults
+          data.financing.perm_loan_ltv = 0.95;
+          data.financing.perm_loan_rate = 0.037;
+          data.financing.perm_loan_term = 40;
+        }
+        setP(data);
+        // Compute baseline avg rent $/sf for the slider
+        const totalSf = data.units.types.reduce((s, u) => s + u.count * u.sf, 0);
+        const baseRentPsf = totalSf > 0
+          ? data.units.types.reduce((s, u) => s + u.count * u.rent, 0) / totalSf
+          : 0;
+        setRentPsf(Math.round(baseRentPsf * 20) / 20); // round to nearest $0.05
+        setCapRate(data.cap_rates.base);
+        setConstructionPsf(data.development.construction_cost_psf);
+        setVacancyRate(data.vacancy_rate);
+        setInterestRate(data.financing.perm_loan_rate);
+        setLoading(false);
+      })
+      .catch(e => { setError(e.message); setLoading(false); });
+  }, []);
+
+  // Scroll-based section tracking via IntersectionObserver
+  useEffect(() => {
+    const sectionEls = Array.from({ length: 6 }, (_, i) => document.getElementById('section-' + i));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = sectionEls.indexOf(entry.target);
+            if (idx !== -1) setActiveSection(idx);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    sectionEls.forEach((el) => { if (el) observer.observe(el); });
+    return () => observer.disconnect();
+  }, [loading]);
+
+  // Fade-in observer — adds 'visible' class when sections scroll into view
+  useEffect(() => {
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    fadeEls.forEach((el) => fadeObserver.observe(el));
+    return () => fadeObserver.disconnect();
+  }, [loading]);
+
+  // Scroll progress bar
+  useEffect(() => {
+    function updateProgress() {
+      const bar = document.getElementById('scroll-progress');
+      if (!bar) return;
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    return () => window.removeEventListener('scroll', updateProgress);
+  }, []);
+
+  if (loading) return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: C.bg }}>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ color: C.gold, fontSize: 12, letterSpacing: 3, textTransform: 'uppercase', marginBottom: 16 }}>Loading</div>
+        <div style={{ color: C.dim, fontSize: 14 }}>Preparing financial model...</div>
+      </div>
+    </div>
+  );
+  if (error) return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: C.bg }}>
+      <div style={{ textAlign: 'center', color: C.red }}>{error}</div>
+    </div>
+  );
+
+  // Calculate with current overrides
+  const R = calculate(P, { rentPsf, capRate, constructionPsf, vacancyRate, interestRate });
+  // Baseline (no overrides) for delta calculations
+  const base = calculate(P);
+  // Verified metrics (from auto-calc or reimported spreadsheet).
+  // Show exact values at baseline; switch to JS calculations when sliders move.
+  const V = P.verified || null;
+  const hasVerified = V != null;
+  // Compare slider values to their INITIAL values (not base.avgRentPsf which is unrounded).
+  // rentPsf is initialized as Math.round(baseRentPsf * 20) / 20, so compare to that.
+  const initRentPsf = Math.round(base.avgRentPsf * 20) / 20;
+  const slidersAtBaseline = hasVerified
+    && Math.abs((rentPsf || 0) - initRentPsf) < 0.001
+    && Math.abs((capRate || 0) - P.cap_rates.base) < 0.0001
+    && Math.abs((constructionPsf || 0) - P.development.construction_cost_psf) < 1
+    && Math.abs((vacancyRate || 0) - P.vacancy_rate) < 0.0001
+    && Math.abs((interestRate || 0) - P.financing.perm_loan_rate) < 0.0001;
+  const showVerified = hasVerified && slidersAtBaseline;
+  // exact_keys lists metrics that came from Excel formula evaluation (exact).
+  // Everything else (dev cost, IRRs) is a Python screening estimate.
+  const exactKeys = V?.exact_keys || [];
+  const isExact = (key) => showVerified && exactKeys.includes(key);
+  // "(est.)" shown on dev-side metrics at baseline, or ALL metrics when sliders move
+  const estLabel = (key) => !slidersAtBaseline || !isExact(key) ? ' (est.)' : '';
+  // When verified & at baseline, use exact Excel values; otherwise use JS calculations.
+  // Use != null instead of truthiness to handle legitimate zero/negative values (e.g. break-even profit).
+  const vv = (key, fallback) => showVerified && V[key] != null ? V[key] : fallback;
+  const D = {
+    noi:             vv('noi',               R.noiStabilized),
+    valueBase:       vv('value',             R.valueBase),
+    totalDevCost:    vv('total_dev_cost',    R.totalDevCost),
+    merchantIRR:     vv('merchant_irr',      R.merchantIRR),
+    holdIRR:         vv('hold_irr',          R.holdIRR),
+    merchantReturn:  vv('merchant_return',   R.merchantReturn),
+    devProfit:       vv('profit',            R.devProfit),
+    permLoan:        vv('perm_loan',         R.permLoan),
+    annualDebt:      vv('annual_debt',       R.annualDebt),
+    dscr:            vv('dscr',              R.dscr),
+    impliedLTV:      vv('ltv',              R.impliedLTV),
+  };
+
+  // Rent delta for the killer callout
+  const rentPsfNow = R.avgRentPsf;
+  const rentPsfBase = base.avgRentPsf;
+  const rentDelta = rentPsfNow - rentPsfBase;
+  const valueDelta = R.valueBase - base.valueBase;
+
+  // Per $0.10/sf impact (for the callout)
+  const impactPer10Cents = base.valueBase > 0
+    ? (calculate(P, { rentPsf: rentPsfBase + 0.10 }).valueBase - base.valueBase)
+    : 0;
+
+  const sections = ['Overview', 'Revenue', 'Costs', 'Metrics', 'Sensitivity', 'Financing'];
+
+  return (
+    <div style={{ background: C.bg, color: C.text, minHeight: '100vh', fontFamily: SANS }}>
+
+      {/* ═══ HEADER ═══ */}
+      <div style={{
+        position: 'sticky', top: 0, zIndex: 100, background: C.deep + 'EE',
+        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: `1px solid ${C.border}`, padding: '14px 48px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      }}>
+        <img src="/static/logo-white.png" alt="Rock Advisors" style={{ height: 36, opacity: 0.9 }} />
+        <div style={{ display: 'flex', gap: 6 }}>
+          {sections.map((s, i) => (
+            <a key={s} href={'#section-' + i} onClick={() => setActiveSection(i)} style={{
+              background: activeSection === i ? C.gold + '22' : 'transparent',
+              border: `1px solid ${activeSection === i ? C.gold + '66' : 'transparent'}`,
+              color: activeSection === i ? C.gold : C.dim,
+              padding: '6px 16px', borderRadius: 20, fontSize: 12, cursor: 'pointer',
+              letterSpacing: 0.5, fontFamily: SANS, transition: 'all 0.3s', textDecoration: 'none',
+            }}>{s}</a>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 40px' }}>
+
+        {/* ═══ SECTION 0: HERO ═══ */}
+        <div id="section-0" className="fade-in" style={{ paddingTop: 60, paddingBottom: 36, textAlign: 'center' }}>
+          <SectionLabel text="Reverse 1B Financial Analysis" />
+          <h1 style={{ fontFamily: SERIF, fontSize: 56, fontWeight: 400, margin: 0, lineHeight: 1.1 }}>
+            {P.project.name}
+          </h1>
+          <p style={{ color: C.dim, fontSize: 18, marginTop: 8 }}>{P.project.city}</p>
+
+          <div style={{
+            marginTop: 36, display: 'inline-block', padding: '16px 56px', borderRadius: 24,
+            background: `linear-gradient(135deg, ${C.gold}12, ${C.gold}06)`,
+            border: `1px solid ${C.gold}33`,
+          }}>
+            <div style={{ color: C.dim, fontSize: 13, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 6 }}>
+              Building Value at Stabilization
+            </div>
+            <div style={{ fontFamily: SERIF, fontSize: 64, fontWeight: 400, color: C.text, lineHeight: 1 }}>
+              <AnimNum value={D.valueBase} fmt="currency" />
+            </div>
+            <div style={{ color: C.dim, fontSize: 13, marginTop: 8 }}>at {fmtPct(R.capRateBase)} cap rate</div>
+          </div>
+        </div>
+
+        {/* Project overview cards */}
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 40 }}>
+          {[
+            { l: 'Total Units', v: P.units.total },
+            { l: 'Est. Storeys', v: P.units.est_storeys },
+            { l: 'GFA', v: fmtNum(P.areas.gfa) + ' sf' },
+            { l: 'Parking', v: fmtNum(P.areas.parking_sf) + ' sf' },
+            { l: 'Unit Mix', v: P.units.types.filter(u => u.count > 0).map(u => u.label).join(', ') },
+          ].map(({ l, v }) => (
+            <div key={l} className="card-hover" style={{
+              background: C.card, border: `1px solid ${C.border}`, borderRadius: 12,
+              padding: '16px 20px', flex: '1 1 160px',
+            }}>
+              <div style={{ color: '#9B9A97', fontSize: 12, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 4 }}>{l}</div>
+              <div style={{ fontSize: 20, fontWeight: 600, fontFamily: MONO }}>{v}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* ═══ SECTION 1: REVENUE ═══ */}
+        <div id="section-1" className="fade-in" style={{ marginBottom: 40 }}>
+          <SectionLabel text="Financial Summary" />
+          <h2 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 400, marginBottom: 20 }}>Revenue &amp; Income</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+            <DataRow label="Avg Rent / SF / Month" value={'$' + R.avgRentPsf.toFixed(2) + ' /sf'} />
+            <DataRow label="Potential Gross Income" value={fmtCurrency(R.pgi)} />
+            <DataRow label="Vacancy Provision" value={fmtPct(R.vacancyRate)} />
+            <DataRow label="Effective Gross Income" value={fmtCurrency(R.egi)} />
+            <DataRow label="Total Operating Expenses" value={fmtCurrency(R.totalOpex)} />
+            <DataRow label="Net Operating Income (Day 1)" value={fmtCurrency(R.noi)} />
+            <DataRow label="NOI @ Stabilization" value={fmtCurrency(D.noi)} highlight />
+          </div>
+        </div>
+
+        {/* ═══ SECTION 2: COSTS ═══ */}
+        <div id="section-2" className="fade-in" style={{ marginBottom: 40 }}>
+          <SectionLabel text="Development Budget" />
+          <h2 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 400, marginBottom: 20 }}>Cost Breakdown</h2>
+          {(() => {
+            const items = [
+              { l: 'Land', v: R.totalLand, c: '#8B7355' },
+              { l: 'Construction', v: R.totalConstruction, c: C.gold },
+              { l: 'Professional Fees', v: R.profFees, c: C.blue },
+              { l: 'Dev Management', v: R.devMgmt, c: '#7BA4C9' },
+              { l: 'Permits & DC', v: R.totalPermits, c: '#9B7DD4' },
+              { l: 'Marketing & Leasing', v: R.totalMarketing, c: '#5BA88C' },
+              { l: 'Financing', v: R.financingCost, c: '#D4837D' },
+              { l: 'Lease-Up Income', v: -R.netLeaseUp, c: '#4CAF50' },
+            ];
+            // Use JS-calculated total for bar chart proportions (categories are JS-calc'd)
+            // The gold total card below shows verified total when available
+            const total = R.totalDevCost;
+            return (
+              <div>
+                {/* Stacked bar */}
+                <div style={{ display: 'flex', height: 14, borderRadius: 7, overflow: 'hidden', marginBottom: 18 }}>
+                  {items.map(it => (
+                    <div key={it.l} style={{ width: Math.max(0.5, it.v / total * 100) + '%', background: it.c, transition: 'width 0.5s' }} />
+                  ))}
+                </div>
+                {/* Category cards */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+                  {items.map(it => (
+                    <div key={it.l} className="card-hover" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: '14px 18px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                        <div style={{ width: 8, height: 8, borderRadius: 2, background: it.c, flexShrink: 0 }} />
+                        <span style={{ color: '#9B9A97', fontSize: 13 }}>{it.l}</span>
+                      </div>
+                      <div style={{ fontSize: 22, fontWeight: 600, fontFamily: MONO }}>
+                        <AnimNum value={it.v} fmt="currency" />
+                      </div>
+                      <div style={{ color: C.dim, fontSize: 12, marginTop: 3 }}>{(it.v / total * 100).toFixed(1)}% of total</div>
+                    </div>
+                  ))}
+                </div>
+                {/* Total card */}
+                <div style={{
+                  marginTop: 12, background: `linear-gradient(135deg, ${C.gold}12, ${C.gold}06)`,
+                  border: `1px solid ${C.gold}33`, borderRadius: 14, padding: '20px 24px',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                }}>
+                  <span style={{ color: C.dim, fontSize: 13, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>{'Total Development Cost' + estLabel('total_dev_cost')}</span>
+                  <span style={{ fontSize: 28, fontWeight: 600, fontFamily: MONO, color: C.gold }}>
+                    <AnimNum value={D.totalDevCost} fmt="currency" />
+                  </span>
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* ═══ SECTION 3: KEY METRICS ═══ */}
+        <div id="section-3" className="fade-in" style={{ marginBottom: 40 }}>
+          <SectionLabel text="Performance" />
+          <h2 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 400, marginBottom: 20 }}>Key Metrics</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+            <MetricCard label={'Merchant Builder Return' + estLabel('merchant_return')} value={D.merchantReturn} fmt="pct"
+              sub="Profit / Total Costs" highlight={D.merchantReturn > 0.08}
+              tooltip="Profit as a percentage of total development costs — the standard return metric for developers." />
+            <MetricCard label={'Profit Before Taxes' + estLabel('profit')} value={D.devProfit} fmt="currency"
+              sub="Sales Proceeds − Total Costs"
+              tooltip="Profit if sold at stabilization, after 1% selling costs." />
+            <MetricCard label="Equity Multiple" value={R.equityMultiple} fmt="multiple"
+              sub="Value relative to total cost"
+              tooltip="How many times the building's value covers the total development cost. Above 1.0x means positive returns." />
+            <MetricCard label="Development Yield" value={R.devYield} fmt="pct"
+              sub="NOI / Total Dev Cost" highlight={R.devYield > R.capRateBase}
+              tooltip="The annual return the project generates relative to total development cost." />
+            <MetricCard label={'Merchant IRR' + estLabel('merchant_irr')} value={D.merchantIRR} fmt="irr"
+              sub={R.totalDevMonths + ' mo to stabilization'} highlight={D.merchantIRR > 0.15}
+              tooltip="IRR for a merchant build — develop and sell at stabilization." />
+            <MetricCard label={'10-Year Hold IRR' + estLabel('hold_irr')} value={D.holdIRR} fmt="irr"
+              sub="Build, hold 10 years, sell" highlight={D.holdIRR > 0.10}
+              tooltip="IRR for a 10-year hold with CMHC refinancing and 2% annual NOI growth." />
+          </div>
+          <p style={{ color: C.dim, fontSize: 12, marginTop: 14, textAlign: 'center', fontStyle: 'italic' }}>
+            {'Adjust assumptions below to stress-test returns.'}
+          </p>
+        </div>
+
+        {/* ═══ SECTION 4: SENSITIVITY — THE SHOWSTOPPER ═══ */}
+        <div id="section-4" className="fade-in" style={{
+          marginBottom: 40, padding: '40px 40px', borderRadius: 28,
+          background: `linear-gradient(180deg, ${C.card}, ${C.deep})`,
+          border: `1px solid ${C.border}`,
+        }}>
+          <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <SectionLabel text="Interactive" />
+            <h2 style={{ fontFamily: SERIF, fontSize: 42, fontWeight: 400, margin: 0 }}>Sensitivity Analysis</h2>
+            <p style={{ color: C.dim, marginTop: 8, fontSize: 15 }}>
+              Adjust assumptions to see how they drive your building's value
+            </p>
+            {/* Killer headline — the $0.10/sf pitch line, always visible */}
+            <div style={{
+              marginTop: 20, padding: '16px 28px', borderRadius: 12,
+              background: C.gold + '08', border: `1px solid ${C.gold}22`,
+              display: 'inline-block',
+            }}>
+              <span style={{ fontSize: 15, color: C.dim }}>On this building, every </span>
+              <span style={{ fontSize: 15, color: C.gold, fontWeight: 600 }}>$0.10/sf</span>
+              <span style={{ fontSize: 15, color: C.dim }}> in rent is worth </span>
+              <span style={{ fontSize: 15, color: C.gold, fontWeight: 700, fontFamily: MONO }}>
+                {impactPer10Cents >= 1000000
+                  ? '$' + (impactPer10Cents / 1000000).toFixed(1) + 'M'
+                  : '$' + Math.round(impactPer10Cents).toLocaleString()}
+              </span>
+              <span style={{ fontSize: 15, color: C.dim }}> in building value</span>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }}>
+            {/* Left: Sliders */}
+            <div>
+              <Slider label="Avg Rent / SF" value={rentPsf}
+                min={Math.round((base.avgRentPsf * 0.80) * 20) / 20}
+                max={Math.round((base.avgRentPsf * 1.20) * 20) / 20}
+                step={0.05}
+                onChange={setRentPsf}
+                baseline={Math.round(base.avgRentPsf * 20) / 20}
+                fmt="currency" unit="/sf"
+                tooltip="Average rent across all unit types. This is the lever you control — optimize design, finishes, or positioning to drive building value." />
+
+              <Slider label="Capitalization Rate" value={capRate}
+                min={0.03} max={0.07} step={0.0025}
+                onChange={setCapRate} fmt="pct"
+                baseline={P.cap_rates.base}
+                tooltip="The market cap rate determines building value. Lower cap rates mean higher valuations. The market determines this rate." />
+
+              <Slider label="Construction Cost / SF" value={constructionPsf}
+                min={Math.round(P.development.construction_cost_psf * 0.7)}
+                max={Math.round(P.development.construction_cost_psf * 1.4)}
+                step={5} onChange={setConstructionPsf} fmt="currency" unit="/sf"
+                baseline={P.development.construction_cost_psf}
+                tooltip="Hard construction cost per square foot of gross floor area. Includes structure, envelope, mechanical, electrical, and finishes." />
+
+              <Slider label="Vacancy Rate" value={vacancyRate}
+                min={0} max={0.10} step={0.005}
+                onChange={setVacancyRate} fmt="pct"
+                baseline={P.vacancy_rate}
+                tooltip="Percentage of residential income lost to vacancy. Well-managed purpose-built rentals in strong markets typically run 2-4%." />
+
+              <Slider label="CMHC Loan Rate" value={interestRate}
+                min={0.025} max={0.065} step={0.0025}
+                onChange={setInterestRate} fmt="pct"
+                baseline={P.financing.perm_loan_rate}
+                tooltip="CMHC MLI Select permanent loan rate. Directly impacts debt service, DSCR, cash-on-cash, and hold IRR. Stress-test against rate changes to see the impact on returns." />
+            </div>
+
+            {/* Right: Live Results */}
+            <div>
+              <div style={{ textAlign: 'center', padding: '20px 0 24px' }}>
+                <div style={{ color: C.dim, fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 8 }}>Building Value</div>
+                <div style={{ fontFamily: SERIF, fontSize: 56, color: C.text, lineHeight: 1 }}>
+                  <AnimNum value={D.valueBase} fmt="currency" />
+                </div>
+              </div>
+
+              {/* THE KILLER CALLOUT — threshold > $0.02 to avoid floating-point noise from $0.05 rounding */}
+              {Math.abs(rentDelta) > 0.02 && (
+                <div style={{
+                  marginTop: 16, padding: '24px 28px', borderRadius: 16,
+                  background: valueDelta >= 0 ? C.green + '10' : C.red + '10',
+                  border: `1px solid ${valueDelta >= 0 ? C.green + '30' : C.red + '30'}`,
+                  textAlign: 'center',
+                }}>
+                  <div style={{ fontSize: 13, color: C.dim, marginBottom: 6 }}>
+                    A <span style={{ color: C.gold, fontWeight: 600 }}>${Math.abs(rentDelta).toFixed(2)}/sf</span> rent {rentDelta > 0 ? 'increase' : 'decrease'}
+                  </div>
+                  <div style={{ fontSize: 36, fontWeight: 700, color: valueDelta >= 0 ? C.green : C.red, fontFamily: MONO }}>
+                    {valueDelta >= 0 ? '+' : ''}<AnimNum value={valueDelta} fmt="currency" />
+                  </div>
+                  <div style={{ fontSize: 13, color: C.dim, marginTop: 6 }}>in building value</div>
+                </div>
+              )}
+
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 20 }}>
+                <MetricCard label={'Merchant Return' + estLabel('merchant_return')} value={D.merchantReturn} fmt="pct" highlight={D.merchantReturn > 0.08}
+                  tooltip="Profit as % of total costs. Updates live with your adjustments." />
+                <MetricCard label={'Profit' + estLabel('profit')} value={D.devProfit} fmt="currency"
+                  tooltip="Sales proceeds minus total development costs." />
+                <MetricCard label={'Merchant IRR' + estLabel('merchant_irr')} value={D.merchantIRR} fmt="irr" highlight={D.merchantIRR > 0.15}
+                  tooltip="Estimated annualized return if you develop and sell at stabilization. Updates live with your adjustments." />
+                <MetricCard label={'Hold IRR' + estLabel('hold_irr')} value={D.holdIRR} fmt="irr" highlight={D.holdIRR > 0.10}
+                  tooltip="Estimated 10-year hold return with 2% NOI growth. Updates live with your adjustments." />
+              </div>
+            </div>
+          </div>
+
+          {/* Scenario Export & Reset Buttons */}
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 40 }}>
+            <button
+              onClick={() => {
+                if (exporting) return;
+                setExporting(true);
+                // Backend expects rentMultiplier — derive from $/sf
+                const _baseRent = base.avgRentPsf;
+                const body = {
+                  filename: '__PROJECT_FILENAME__',
+                  rentMultiplier: (_baseRent > 0 && rentPsf !== null) ? rentPsf / _baseRent : 1,
+                  capRate,
+                  constructionPsf,
+                  vacancyRate,
+                  interestRate,
+                };
+                fetch('/export-scenario', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(body),
+                })
+                  .then(resp => {
+                    if (!resp.ok) throw new Error('Export failed');
+                    return resp.blob();
+                  })
+                  .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'Reverse_1B_scenario.xlsx';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                  })
+                  .catch(err => alert('Export error: ' + err.message))
+                  .finally(() => setExporting(false));
+              }}
+              style={{
+                background: exporting ? C.gold + '88' : C.gold,
+                color: '#1a1a1a',
+                border: 'none',
+                padding: '14px 36px',
+                borderRadius: 8,
+                fontSize: 13,
+                fontWeight: 700,
+                fontFamily: SANS,
+                textTransform: 'uppercase',
+                letterSpacing: 2,
+                cursor: exporting ? 'default' : 'pointer',
+                opacity: exporting ? 0.6 : 1,
+                transition: 'all 0.3s',
+              }}
+            >
+              {exporting ? 'GENERATING...' : 'SAVE SCENARIO & EXPORT'}
+            </button>
+
+            <button
+              onClick={() => {
+                // Reset rent to baseline $/sf (rounded to nearest $0.05)
+                const _totalSf = P.units.types.reduce((s, u) => s + u.count * u.sf, 0);
+                const _baseRentPsf = _totalSf > 0
+                  ? P.units.types.reduce((s, u) => s + u.count * u.rent, 0) / _totalSf : 0;
+                setRentPsf(Math.round(_baseRentPsf * 20) / 20);
+                setCapRate(P.cap_rates.base);
+                setConstructionPsf(P.development.construction_cost_psf);
+                setVacancyRate(P.vacancy_rate);
+                setInterestRate(P.financing.perm_loan_rate);
+              }}
+              style={{
+                background: 'transparent',
+                color: C.dim,
+                border: `1px solid ${C.border}`,
+                padding: '14px 36px',
+                borderRadius: 8,
+                fontSize: 13,
+                fontWeight: 600,
+                fontFamily: SANS,
+                textTransform: 'uppercase',
+                letterSpacing: 2,
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+              }}
+            >
+              RESET TO BASELINE
+            </button>
+          </div>
+        </div>
+
+        {/* ═══ SECTION 5: FINANCING ═══ */}
+        <div id="section-5" className="fade-in" style={{ marginBottom: 40 }}>
+          <SectionLabel text="Debt Advisory" />
+          <h2 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 400, marginBottom: 8 }}>Financing Preview</h2>
+          <p style={{ color: C.dim, fontSize: 14, marginBottom: 8 }}>
+            CMHC MLI Select permanent take-out loan — our debt advisory team can walk through these in detail.
+          </p>
+          <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>
+            {[
+              { l: 'Max LTV', v: (P.financing.perm_loan_ltv * 100).toFixed(0) + '%' },
+              { l: 'Min DSCR', v: P.financing.perm_loan_dscr.toFixed(1) + 'x' },
+              { l: 'Amortization', v: P.financing.perm_loan_term + ' yr' },
+              { l: 'CMHC Premium', v: (P.financing.cmhc_premium * 100).toFixed(2) + '%' },
+            ].map(({ l, v }) => (
+              <div key={l} style={{
+                fontFamily: MONO, fontSize: 12, color: C.dim,
+                border: `1px solid ${C.border}`, borderRadius: 6,
+                padding: '6px 12px', background: C.bg,
+              }}>
+                <span style={{ color: '#9B9A97' }}>{l}: </span>
+                <span style={{ color: C.gold }}>{v}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
+            {[
+              { l: 'Permanent Loan', v: fmtCurrency(D.permLoan), s: (D.impliedLTV * 100).toFixed(1) + '% LTV (DSCR-constrained)',
+                tip: 'CMHC MLI Select insured loan. Sized to the lesser of 95% LTV or 1.1x DSCR — in most cases DSCR is the binding constraint.' },
+              { l: 'Annual Debt Service', v: fmtCurrency(D.annualDebt), s: (R.permRate * 100).toFixed(2) + '% / ' + P.financing.perm_loan_term + 'yr amort',
+                tip: 'Annual mortgage payment (principal + interest) on the CMHC permanent loan. Rate adjustable in the sensitivity section above.' },
+              { l: 'Debt Service Coverage', v: D.dscr.toFixed(2) + 'x', s: D.dscr >= P.financing.perm_loan_dscr ? 'Meets CMHC minimum' : 'Below CMHC minimum',
+                tip: 'NOI divided by annual debt service. CMHC MLI Select requires minimum 1.10x coverage.' },
+              { l: 'CMHC Premium', v: fmtCurrency(R.cmhcPremium), s: (P.financing.cmhc_premium * 100).toFixed(2) + '% of loan',
+                tip: 'One-time insurance premium for the CMHC loan — the cost of accessing favorable terms (lower rate, longer amortization).' },
+              { l: 'Equity Requirement', v: R.equity > 0 ? fmtCurrency(R.equity) : '$0',
+                s: R.equity > 0 ? 'Total Dev Cost − Loan' : 'Fully financed by debt',
+                tip: 'The gap between total development cost and the permanent loan. When the loan exceeds dev costs, no equity is needed.' },
+              { l: 'Cash-on-Cash Return', v: R.cashOnCash > 0 ? fmtPct(R.cashOnCash) : (R.equity <= 0 ? 'N/A' : fmtPct(R.cashOnCash)),
+                s: R.equity <= 0 ? 'No equity required' : '(NOI − Debt) / Equity',
+                tip: R.equity <= 0
+                  ? 'The loan covers all development costs — no equity required. This metric does not apply.'
+                  : 'Annual cash return on invested equity after debt service. A key metric for equity investors.' },
+            ].map(({ l, v, s, tip }) => (
+              <div key={l} className="card-hover" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: '18px 20px' }}>
+                <div className="tooltip-trigger" style={{ color: '#9B9A97', fontSize: 13, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>
+                  {l}
+                  <span className="tooltip-text">{tip}</span>
+                </div>
+                <div style={{ fontSize: 24, fontWeight: 600, fontFamily: MONO }}>{v}</div>
+                {s && <div style={{ color: C.dim, fontSize: 13, marginTop: 4 }}>{s}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ═══ DATA SOURCES FOOTER ═══ */}
+        <div style={{
+          borderTop: `1px solid ${C.border}`, padding: '24px 0 48px',
+          display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center',
+        }}>
+          {[
+            { l: 'Construction Costs', v: 'Altus Guide', d: 'Through Jun 2026' },
+            { l: 'Development Charges', v: P.project.municipality, d: '2026 Rates' },
+            { l: 'Property Taxes', v: P.project.municipality.split(',')[0], d: '2025-2026 Rates' },
+            { l: 'Permanent Financing', v: 'CMHC MLI Select', d: 'Current Terms' },
+          ].map(({ l, v, d }) => (
+            <div key={l} style={{ textAlign: 'center' }}>
+              <span style={{ color: C.dim, fontSize: 13 }}>{l}: </span>
+              <span style={{ color: C.text, fontSize: 13, fontWeight: 500 }}>{v}</span>
+              <span style={{ color: C.gold, fontSize: 13 }}> ({d})</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

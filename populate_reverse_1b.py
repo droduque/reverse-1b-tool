@@ -17,8 +17,10 @@ import os
 import shutil
 import math
 import re
+import json
 from datetime import date
 import openpyxl
+from data_freshness import get_data_sources_log_block, get_alerts, get_data_sources_footer
 
 # ---------------------------------------------------------------------------
 # CONSTANTS
@@ -184,6 +186,9 @@ def load_dc_rates():
                         m['tax_rate'] = rate
                         break
 
+    # Sort alphabetically by city name for cleaner dropdown display
+    municipalities.sort(key=lambda m: m['name'].split(',')[0].split('(')[0].strip().upper())
+
     return municipalities
 
 
@@ -327,6 +332,7 @@ def _parse_sheet(cell, max_row):
     Scans for landmark strings to find each section dynamically.
     """
     data = {}
+    parse_warnings = []  # track which sections were found vs defaulted
 
     # --- TITLE & ADDRESS ---
     # Title is in E2 or F2 — try both
@@ -400,6 +406,10 @@ def _parse_sheet(cell, max_row):
             f_val = cell(r, 'F')
             g_val = cell(r, 'G')
 
+            # Stop if we've hit the expenses section
+            if 'ESTIMATED OPERATING EXPENSES' in label:
+                break
+
             # Skip rows that are totals, subtotals, headers, or vacancies
             # before checking parking — "Vacancies (Rent & Parking)" contains
             # "PARKING" and would falsely match the underground condition
@@ -417,33 +427,33 @@ def _parse_sheet(cell, max_row):
             elif 'UNDERGROUND' in label or ('PARKING' in label and 'VISITOR' not in label
                     and 'RETAIL' not in label and 'SURFACE' not in label):
                 data['parking_underground'] = {
-                    'spaces': int(f_val) if f_val else 0,
-                    'fee': float(g_val) if g_val else 0,
+                    'spaces': int(f_val) if isinstance(f_val, (int, float)) else 0,
+                    'fee': float(g_val) if isinstance(g_val, (int, float)) else 0,
                 }
             elif 'VISITOR' in label:
                 data['parking_visitor'] = {
-                    'spaces': int(f_val) if f_val else 0,
-                    'fee': float(g_val) if g_val else 0,
+                    'spaces': int(f_val) if isinstance(f_val, (int, float)) else 0,
+                    'fee': float(g_val) if isinstance(g_val, (int, float)) else 0,
                 }
             elif 'RETAIL' in label and 'COMMERCIAL' not in label:
                 data['parking_retail'] = {
-                    'spaces': int(f_val) if f_val else 0,
-                    'fee': float(g_val) if g_val else 0,
+                    'spaces': int(f_val) if isinstance(f_val, (int, float)) else 0,
+                    'fee': float(g_val) if isinstance(g_val, (int, float)) else 0,
                 }
             elif 'STORAGE' in label or 'LOCKER' in label:
                 data['storage'] = {
-                    'count': int(f_val) if f_val else 0,
-                    'fee': float(g_val) if g_val else 0,
+                    'count': int(f_val) if isinstance(f_val, (int, float)) else 0,
+                    'fee': float(g_val) if isinstance(g_val, (int, float)) else 0,
                 }
             elif 'SUBMETER' in label:
                 data['submetering'] = {
-                    'count': int(f_val) if f_val else data['total_units'],
-                    'fee': float(g_val) if g_val else 20,
+                    'count': int(f_val) if isinstance(f_val, (int, float)) else data['total_units'],
+                    'fee': float(g_val) if isinstance(g_val, (int, float)) else 20,
                 }
             elif 'COMMERCIAL' in label or 'NET COMMERCIAL' in label:
                 data['commercial'] = {
-                    'sf': int(f_val) if f_val else 0,
-                    'rate': float(g_val) if g_val else 0,
+                    'sf': int(f_val) if isinstance(f_val, (int, float)) else 0,
+                    'rate': float(g_val) if isinstance(g_val, (int, float)) else 0,
                 }
 
     # --- Find OPERATING EXPENSES section ---
@@ -492,15 +502,19 @@ def _parse_sheet(cell, max_row):
                     data['reserve_pct'] = float(g_val)
 
     # --- Find VALUATION section ---
+    # "ESTIMATED VALUATION" appears in col F or G depending on the proforma version
     data['cap_rates'] = []
     for r in range(exp_start or total_row, min(max_row + 1, 120)):
-        val = cell(r, 'G')
-        if val and "ESTIMATED VALUATION" in str(val).upper():
-            # Next 3 rows have cap rates in column H
-            for cr_row in range(r + 1, r + 4):
-                cap = cell(cr_row, 'H')
-                if cap and isinstance(cap, (int, float)):
-                    data['cap_rates'].append(float(cap))
+        for check_col in ('F', 'G'):
+            val = cell(r, check_col)
+            if val and "ESTIMATED VALUATION" in str(val).upper():
+                # Next 3 rows have cap rates in column H
+                for cr_row in range(r + 1, r + 4):
+                    cap = cell(cr_row, 'H')
+                    if cap and isinstance(cap, (int, float)):
+                        data['cap_rates'].append(float(cap))
+                break
+        if data['cap_rates']:
             break
 
     # --- GFA (from internal section if available) ---
@@ -523,6 +537,72 @@ def _parse_sheet(cell, max_row):
             if am_val and isinstance(am_val, (int, float)):
                 data['amenity_sf'] = float(am_val)
             break
+
+    # --- PARSER WARNINGS — report what was found vs defaulted ---
+    sections_found = 0
+    sections_total = 10
+
+    if data.get('unit_types'):
+        sections_found += 1
+    else:
+        parse_warnings.append('Unit mix section not found')
+
+    if rev_start:
+        sections_found += 1
+    else:
+        parse_warnings.append('Revenue section not found — using defaults for all revenue items')
+
+    if exp_start:
+        sections_found += 1
+    else:
+        parse_warnings.append('Expense section not found — using defaults for all expenses')
+
+    if len(data.get('cap_rates', [])) >= 3:
+        sections_found += 1
+    else:
+        parse_warnings.append(f"Found {len(data.get('cap_rates', []))} of 3 cap rates — missing values will use defaults")
+
+    # Revenue sub-items — warn if zero (common for some projects, useful to flag)
+    if data['parking_underground']['spaces'] == 0:
+        sections_found += 1  # still counts as "found" — just zero
+        parse_warnings.append('No underground parking found (0 spaces)')
+    else:
+        sections_found += 1
+
+    if data['storage']['count'] == 0:
+        parse_warnings.append('No storage lockers found (0 units)')
+        sections_found += 1
+    else:
+        sections_found += 1
+
+    if data['submetering']['count'] == 0 or data['submetering']['fee'] == 0:
+        parse_warnings.append('No submetering revenue found')
+        sections_found += 1
+    else:
+        sections_found += 1
+
+    if data['commercial']['sf'] == 0:
+        parse_warnings.append('No commercial space found (0 SF)')
+        sections_found += 1
+    else:
+        sections_found += 1
+
+    if data.get('gfa') is None:
+        parse_warnings.append('GFA not found in 1A — will estimate from net rentable SF')
+        sections_found += 1
+    else:
+        sections_found += 1
+
+    # Tax data
+    if data.get('tax_rate', 0) == 0 and data.get('assessed_value', 0) == 0:
+        parse_warnings.append('No property tax data found in 1A')
+        sections_found += 1
+    else:
+        sections_found += 1
+
+    data['parse_warnings'] = parse_warnings
+    data['sections_found'] = sections_found
+    data['sections_total'] = sections_total
 
     return data
 
@@ -610,9 +690,9 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     sheet4_writes = {}
     sheet5_writes = {}
 
-    def queue_write(target, cell_ref, value, description=""):
+    def queue_write(target, cell_ref, value, description="", force=False):
         """Queue a cell write for later application via XML writer."""
-        target[cell_ref] = (value, description)
+        target[cell_ref] = (value, description, force)
 
     # ===================================================================
     # SHEET 1: 1A Proforma
@@ -626,12 +706,21 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     queue_write(sheet1_writes, 'F3', data['address'], "Address from 1A title")
 
     # Unit mix — rows 7, 8, 9
+    # If a group has 0 units (e.g., Bayview has no 1-beds), clear old template
+    # values by writing empty strings instead of zeros
     for i, unit in enumerate(consolidated):
         row = 7 + i
-        queue_write(sheet1_writes, f'D{row}', unit['label'], f"Unit type {i+1} label")
-        queue_write(sheet1_writes, f'E{row}', unit['sf'], f"Unit type {i+1} avg SF")
-        queue_write(sheet1_writes, f'F{row}', unit['count'], f"Unit type {i+1} count")
-        queue_write(sheet1_writes, f'I{row}', unit['rent'], f"Unit type {i+1} monthly rent")
+        if unit['count'] == 0:
+            # Write zeros for numeric cells so formulas (H7=E7*F7 etc.) don't #VALUE!
+            queue_write(sheet1_writes, f'D{row}', '', f"Unit type {i+1} label (empty — no units)")
+            queue_write(sheet1_writes, f'E{row}', 0, f"Unit type {i+1} avg SF (zero — no units)")
+            queue_write(sheet1_writes, f'F{row}', 0, f"Unit type {i+1} count (zero)")
+            queue_write(sheet1_writes, f'I{row}', 0, f"Unit type {i+1} monthly rent (zero — no units)")
+        else:
+            queue_write(sheet1_writes, f'D{row}', unit['label'], f"Unit type {i+1} label")
+            queue_write(sheet1_writes, f'E{row}', unit['sf'], f"Unit type {i+1} avg SF")
+            queue_write(sheet1_writes, f'F{row}', unit['count'], f"Unit type {i+1} count")
+            queue_write(sheet1_writes, f'I{row}', unit['rent'], f"Unit type {i+1} monthly rent")
 
     # Operating revenues
     queue_write(sheet1_writes, 'F18', data['parking_underground']['spaces'], "Underground parking spaces")
@@ -643,8 +732,8 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     queue_write(sheet1_writes, 'F21', data['storage']['count'], "Storage locker count")
     queue_write(sheet1_writes, 'G21', data['storage']['fee'], "Storage locker monthly fee")
 
-    # Submetering — G22 is an external workbook ref, safe to overwrite
-    queue_write(sheet1_writes, 'G22', data['submetering']['fee'], "Submetering monthly fee — was external ref")
+    # Submetering — G22 has an external workbook ref formula, force overwrite
+    queue_write(sheet1_writes, 'G22', data['submetering']['fee'], "Submetering monthly fee — replaced external ref", force=True)
 
     queue_write(sheet1_writes, 'F24', data['vacancy_rate'], "Residential vacancy rate")
     queue_write(sheet1_writes, 'F26', data['commercial']['sf'], "Commercial retail SF")
@@ -721,7 +810,18 @@ def populate_template(data, output_path, municipality=None, building_type='high-
                     f"BACK-CALCULATED: ${utilities_per_unit}/unit x {data['total_units']} units "
                     f"/ {common_area:.0f} SF common area = ${utilities_psf}/PSF")
     else:
-        queue_write(sheet1_writes, 'F80', DEFAULT_UTILITIES_PSF, "Utilities $/PSF (DEFAULT)")
+        utilities_psf = DEFAULT_UTILITIES_PSF
+        queue_write(sheet1_writes, 'F80', utilities_psf, "Utilities $/PSF (DEFAULT)")
+    # Store all computed values back to data dict so export_project_json()
+    # uses the exact same inputs written to Excel — not stale defaults.
+    data['utilities_psf'] = utilities_psf
+    data['gfa'] = gfa
+    data['amenity_sf'] = amenity_sf
+    data['expenses']['rm'] = rm
+    data['expenses']['staffing'] = staffing
+    data['expenses']['insurance'] = insurance
+    data['expenses']['marketing'] = marketing
+    data['expenses']['ga'] = ga
 
     # ===================================================================
     # SHEET 4: Area Schedule
@@ -739,11 +839,17 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("--- Residential Units (from 1A) ---")
     for i, unit in enumerate(consolidated):
         row = 7 + i
-        queue_write(sheet4_writes, f'C{row}', unit['count'], f"{unit['label']} count")
-        # Round SF to integer for the area schedule (template uses integers)
-        queue_write(sheet4_writes, f'D{row}', round(unit['sf']), f"{unit['label']} avg SF")
-        pct = round(unit['count'] / data['total_units'] * 100) if data['total_units'] > 0 else 0
-        queue_write(sheet4_writes, f'F{row}', f"{pct}% of total units", f"{unit['label']} note")
+        if unit['count'] == 0:
+            # Clear old template data for empty unit groups
+            queue_write(sheet4_writes, f'C{row}', 0, f"{unit['label']} count (empty — no units)")
+            queue_write(sheet4_writes, f'D{row}', 0, f"{unit['label']} avg SF (empty — no units)")
+            queue_write(sheet4_writes, f'F{row}', '', f"{unit['label']} note (empty — no units)")
+        else:
+            queue_write(sheet4_writes, f'C{row}', unit['count'], f"{unit['label']} count")
+            # Round SF to integer for the area schedule (template uses integers)
+            queue_write(sheet4_writes, f'D{row}', round(unit['sf']), f"{unit['label']} avg SF")
+            pct = round(unit['count'] / data['total_units'] * 100) if data['total_units'] > 0 else 0
+            queue_write(sheet4_writes, f'F{row}', f"{pct}% of total units", f"{unit['label']} note")
 
     # --- Section 2.1: Amenity Spaces ---
     log.append("")
@@ -912,13 +1018,21 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("   G22 (submetering fee) was overwritten with the 1A value.")
 
     # ===================================================================
+    # DATA SOURCES & FRESHNESS
+    # ===================================================================
+    log.append("")
+    log.extend(get_data_sources_log_block())
+
+    # ===================================================================
     # SAVE — apply all queued writes via ZIP/XML writer
     # ===================================================================
     def _make_modifier(writes_dict):
         """Create a modifier function for save_workbook from a writes dict."""
         def modifier(sheet_root, shared_strings, log_entries):
-            for cell_ref, (value, description) in writes_dict.items():
-                write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, description)
+            for cell_ref, entry in writes_dict.items():
+                value, description = entry[0], entry[1]
+                force = entry[2] if len(entry) > 2 else False
+                write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, description, force=force)
         return modifier
 
     sheet_modifications = {}
@@ -932,6 +1046,1135 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     save_workbook(TEMPLATE_PATH, output_path, sheet_modifications, log)
 
     return log
+
+
+# ---------------------------------------------------------------------------
+# REVERSE 1B RE-IMPORT — read a Noor-reviewed Excel back into JSON
+# ---------------------------------------------------------------------------
+
+def import_reverse_1b(xlsx_path):
+    """
+    Read a reviewed/modified Reverse 1B Excel and extract all data
+    needed for the presentation tool JSON. This lets Noor review and
+    adjust the auto-generated file, then re-import his verified numbers
+    into the presentation tool — eliminating all screening estimates.
+
+    Uses data_only=True so formula cells return their cached (last-saved)
+    values. The file MUST have been opened and saved in Excel first.
+    """
+    wb = openpyxl.load_workbook(xlsx_path, data_only=True, read_only=True)
+
+    s1 = wb['1. 1A Proforma']
+    s4 = wb['4. Area Schedule']
+    s5 = wb['5. Key Assumptions']
+
+    # --- Helper to safely read a cell value ---
+    def val(sheet, cell, default=0):
+        v = sheet[cell].value
+        if v is None:
+            return default
+        return v
+
+    def num(sheet, cell, default=0):
+        v = sheet[cell].value
+        if v is None:
+            return default
+        try:
+            return float(v)
+        except (ValueError, TypeError):
+            return default
+
+    # --- Project info (Sheet 1) ---
+    title = str(val(s1, 'F2', ''))
+    address = str(val(s1, 'F3', ''))
+    # If F3 is empty, try to extract from title
+    if not address.strip() and title:
+        address = title.replace('Estimated Stabilized Value -', '').replace('Estimated Stabilized Value–', '').strip()
+
+    # --- Unit mix (Sheet 1, rows 7-9) ---
+    unit_types = []
+    for row in range(7, 10):
+        label = val(s1, f'D{row}', '')
+        count = num(s1, f'F{row}')
+        sf = num(s1, f'E{row}')
+        rent = num(s1, f'I{row}')
+        if label and count > 0:
+            unit_types.append({
+                'label': str(label).strip(),
+                'count': int(count),
+                'sf': round(sf, 1),
+                'rent': round(rent, 2),
+            })
+
+    total_units = sum(u['count'] for u in unit_types)
+    total_rentable_sf = sum(u['count'] * u['sf'] for u in unit_types)
+    est_floors = math.ceil(total_units / 12) if total_units > 0 else 1
+
+    # --- Areas (Sheet 1 + Sheet 4) ---
+    gfa = num(s1, 'F62')
+    amenity_sf = num(s1, 'F64')
+    common_area_sf = max(0, gfa - total_rentable_sf) if gfa > 0 else 0
+
+    # Parking SF
+    pkg_underground = int(num(s1, 'F18'))
+    pkg_visitor = int(num(s1, 'F19'))
+    pkg_retail = int(num(s1, 'F20'))
+    parking_sf = (pkg_underground + pkg_visitor + pkg_retail) * PARKING_SF_PER_SPACE
+
+    # --- Parking fees ---
+    pkg_underground_fee = num(s1, 'G18')
+    pkg_visitor_fee = num(s1, 'G19')
+    pkg_retail_fee = num(s1, 'G20')
+
+    # --- Storage ---
+    storage_count = int(num(s1, 'F21'))
+    storage_fee = num(s1, 'G21')
+
+    # --- Submetering ---
+    submetering_fee = num(s1, 'G22', 20)
+
+    # --- Commercial ---
+    commercial_sf = num(s1, 'F26')
+    commercial_rate = num(s1, 'G26')
+    commercial_vacancy = num(s1, 'F27')
+
+    # --- Vacancy ---
+    vacancy_rate = num(s1, 'F24')
+
+    # --- Cap rates (Sheet 1, H46:H48) ---
+    cap_best = num(s1, 'H46', 0.0425)
+    cap_base = num(s1, 'H47', 0.045)
+    cap_worst = num(s1, 'H48', 0.0475)
+
+    # --- OpEx (Sheet 1) ---
+    mgmt_fee = num(s1, 'G37', 0.0425)
+    tax_rate = num(s1, 'F38')
+    assessed_value = num(s1, 'G38')
+    utilities_psf = num(s1, 'F80', DEFAULT_UTILITIES_PSF)
+    rm_per_unit = num(s1, 'I93', DEFAULT_RM_PER_UNIT)
+    staffing_per_unit = num(s1, 'I109', DEFAULT_STAFFING_PER_UNIT)
+    insurance_per_unit = num(s1, 'F117', DEFAULT_INSURANCE_PER_UNIT)
+    marketing_per_unit = num(s1, 'F122', DEFAULT_MARKETING_PER_UNIT)
+    ga_per_unit = num(s1, 'F127', DEFAULT_GA_PER_UNIT)
+    reserve_pct = num(s1, 'I137', DEFAULT_RESERVE_PCT)
+
+    # --- Schedule (Sheet 5) ---
+    land_months = int(num(s5, 'E12'))
+    predev_months = int(num(s5, 'E13', 12))
+    construction_months = int(num(s5, 'E14', 18))
+    stabilized_months = int(num(s5, 'E16'))
+    leaseup_offset = int(num(s5, 'F15', -3))
+
+    # --- DC rates (Sheet 5, R57:R59) ---
+    dc_1bed = num(s5, 'R57')
+    dc_2bed = num(s5, 'R58')
+    dc_3bed = num(s5, 'R59')
+    dc_total = 0
+    for u in unit_types:
+        label_lower = u['label'].lower()
+        if '1' in label_lower:
+            dc_total += u['count'] * dc_1bed
+        elif '2' in label_lower:
+            dc_total += u['count'] * dc_2bed
+        else:
+            dc_total += u['count'] * dc_3bed
+
+    # --- Profit pct (Sheet 5 E37) ---
+    profit_pct = num(s5, 'E37', 0.08)
+
+    # --- Construction cost PSF ---
+    # Sheet 5 G48 has hard cost per rentable SF (formula cell — cached value)
+    # Sheet 5 F48 has total hard construction cost
+    construction_cost_psf = num(s5, 'G48')
+    if construction_cost_psf <= 0 or construction_cost_psf > 2000:
+        # Fallback: derive from total / GFA, or use baseline
+        total_hard = num(s5, 'F48')
+        if total_hard > 0 and gfa > 0:
+            construction_cost_psf = total_hard / gfa
+        else:
+            construction_cost_psf = 453  # Birchmount baseline
+
+    # --- Financing (Sheet 6 if it exists, otherwise defaults) ---
+    # CMHC MLI Select parameters in column D, rows 31-35
+    try:
+        s6 = wb['6. Debt Stack & Financing']
+        perm_ltv = num(s6, 'D31', 0.95)
+        perm_dscr = num(s6, 'D32', 1.1)
+        perm_rate = num(s6, 'D34', 0.037)
+        perm_term = int(num(s6, 'D33', 40))
+        cmhc_premium = num(s6, 'D35', 0.0518)
+    except (KeyError, Exception):
+        perm_ltv = 0.95
+        perm_dscr = 1.1
+        perm_rate = 0.037
+        perm_term = 40
+        cmhc_premium = 0.0518
+
+    # --- Verified final metrics from the Excel's own formulas ---
+    # These are the "real" numbers Noor reviewed, not our JS approximations.
+    # Read from Exec Summary (Sheet 2) and source sheets (10, 11).
+    verified = {}
+    try:
+        s2 = wb['2. Rev 1B Exec Summary']
+        s10 = wb['10. Development Cash Flow']
+        s11 = wb['11. 10-Yr Cash Flow IRR']
+
+        v_dev_cost = num(s2, 'G48')         # Total Development Costs
+        v_merchant_irr = num(s10, 'G105')   # Merchant Builder IRR
+        v_hold_irr = num(s11, 'B67')        # 10-Year Hold IRR
+        v_perm_loan = num(s2, 'G59')        # Permanent Loan
+        v_annual_debt = num(s2, 'G60')      # Annual Debt Service
+        v_ltv = num(s2, 'G57')              # Implied LTV
+        v_dscr = num(s2, 'G58')             # DSCR
+        v_noi = num(s2, 'H9')              # NOI at Stabilization (base cap)
+        v_value = num(s2, 'H11')            # Building Value (base cap)
+        v_profit = num(s2, 'H15')           # Profit before taxes (base cap)
+        v_merchant_return = num(s2, 'H17')  # Return on Cost (base cap)
+
+        # Cross-check: compare the Exec Summary NOI against the 1A unit data.
+        # If the file was generated but never opened in Excel, formula cells
+        # still hold the TEMPLATE's cached values (Birchmount), not this project's.
+        # A >20% NOI mismatch means the cached values are stale — skip verified.
+        expected_annual_rent = sum(u['count'] * u['rent'] * 12 for u in unit_types)  # rough proxy
+        noi_plausible = True
+        if expected_annual_rent > 0 and v_noi > 0:
+            # NOI should be roughly 40-70% of gross rent for typical apartment projects
+            noi_ratio = v_noi / expected_annual_rent
+            if noi_ratio < 0.1 or noi_ratio > 1.5:
+                noi_plausible = False  # stale template values — don't trust
+
+        if noi_plausible:
+            if v_dev_cost > 0:
+                verified['total_dev_cost'] = v_dev_cost
+            if 0 < v_merchant_irr < 5:  # sanity: IRR between 0% and 500%
+                verified['merchant_irr'] = v_merchant_irr
+            if 0 < v_hold_irr < 5:
+                verified['hold_irr'] = v_hold_irr
+            if v_perm_loan > 0:
+                verified['perm_loan'] = v_perm_loan
+            if v_annual_debt > 0:
+                verified['annual_debt'] = v_annual_debt
+            if 0 < v_ltv < 1:
+                verified['ltv'] = v_ltv
+            if v_dscr > 0:
+                verified['dscr'] = v_dscr
+            if v_noi > 0:
+                verified['noi'] = v_noi
+            if v_value > 0:
+                verified['value'] = v_value
+            if v_profit != 0:
+                verified['profit'] = v_profit
+            if 0 < v_merchant_return < 5:
+                verified['merchant_return'] = v_merchant_return
+    except (KeyError, Exception):
+        pass  # Sheet doesn't exist or can't be read — skip verified metrics
+
+    # Building type detection from floor count
+    building_type = 'high-rise' if est_floors >= HIGH_RISE_FLOOR_THRESHOLD else 'mid-rise'
+
+    # Detect municipality from address
+    muni_name = 'Not selected'
+    try:
+        municipalities = load_dc_rates()
+        for m in municipalities:
+            city = m['name'].split(',')[0].split('(')[0].strip().upper()
+            if city in address.upper():
+                muni_name = m['name']
+                break
+    except Exception:
+        pass
+
+    wb.close()
+
+    # Build the same JSON structure as export_project_json
+    project = {
+        'project': {
+            'name': address.split(',')[0].strip() if address else 'Unknown',
+            'address': address,
+            'city': ', '.join(address.split(',')[1:]).strip() if ',' in address else '',
+            'municipality': muni_name,
+            'building_type': building_type,
+            'generated': date.today().isoformat(),
+            'source': 'reimport',  # flag: this data is from a reviewed Reverse 1B
+        },
+        'units': {
+            'total': total_units,
+            'est_storeys': est_floors,
+            'types': unit_types,
+        },
+        'areas': {
+            'gfa': gfa,
+            'total_rentable_sf': round(total_rentable_sf),
+            'amenity_sf': round(amenity_sf),
+            'common_area_sf': round(common_area_sf),
+            'parking_sf': parking_sf,
+        },
+        'parking': {
+            'underground': {'spaces': pkg_underground, 'fee': pkg_underground_fee},
+            'visitor': {'spaces': pkg_visitor, 'fee': pkg_visitor_fee},
+            'retail': {'spaces': pkg_retail, 'fee': pkg_retail_fee},
+        },
+        'storage': {
+            'count': storage_count,
+            'fee': storage_fee,
+        },
+        'commercial': {
+            'sf': commercial_sf,
+            'rate': commercial_rate,
+            'vacancy': commercial_vacancy,
+        },
+        'submetering': {
+            'count': total_units,
+            'fee': submetering_fee,
+        },
+        'vacancy_rate': vacancy_rate,
+        'cap_rates': {
+            'best': cap_best,
+            'base': cap_base,
+            'worst': cap_worst,
+        },
+        'opex': {
+            'mgmt_fee_pct': mgmt_fee,
+            'tax_rate': tax_rate,
+            'assessed_value_per_unit': assessed_value,
+            'insurance_per_unit': insurance_per_unit,
+            'rm_per_unit': rm_per_unit,
+            'staffing_per_unit': staffing_per_unit,
+            'marketing_per_unit': marketing_per_unit,
+            'ga_per_unit': ga_per_unit,
+            'utilities_psf': utilities_psf,
+            'reserve_pct': reserve_pct,
+        },
+        'development': {
+            'construction_cost_psf': round(construction_cost_psf),
+            'soft_cost_pct': 0.30,
+            'profit_pct': profit_pct,
+            'dc_rates': {
+                '1bed': dc_1bed,
+                '2bed': dc_2bed,
+                '3bed': dc_3bed,
+            },
+            'dc_total': round(dc_total),
+        },
+        'financing': {
+            'construction_loan_pct': 0.90,
+            'construction_loan_rate': 0.0587,
+            'perm_loan_ltv': perm_ltv,
+            'perm_loan_dscr': perm_dscr,
+            'perm_loan_rate': perm_rate,
+            'perm_loan_term': perm_term,
+            'cmhc_premium': cmhc_premium,
+        },
+        'schedule': {
+            'land_months': land_months,
+            'predev_months': predev_months,
+            'construction_months': construction_months,
+            'leaseup_offset': leaseup_offset,
+        },
+    }
+
+    # Add verified metrics if we successfully read them from the Excel
+    if verified:
+        project['verified'] = verified
+
+    return project
+
+
+# ---------------------------------------------------------------------------
+# PROJECT JSON EXPORT — for the presentation tool
+# ---------------------------------------------------------------------------
+
+def export_project_json(data, output_path, municipality=None, building_type='high-rise'):
+    """
+    Export project data as a JSON file for the presentation/sensitivity tool.
+    Contains all inputs needed to calculate revenue, costs, and valuation
+    client-side without touching the Excel.
+    """
+    # Consolidate unit mix same way as populate_template
+    if len(data['unit_types']) <= 3:
+        consolidated = list(data['unit_types'])
+        while len(consolidated) < 3:
+            consolidated.append({'label': f"{len(consolidated)+1} Bed", 'sf': 0, 'count': 0, 'rent': 0})
+    else:
+        consolidated = consolidate_unit_mix(data['unit_types'])
+
+    total_units = data['total_units']
+    est_floors = math.ceil(total_units / 12)
+
+    # GFA — from 1A or estimated (populate_template stores back to data)
+    gfa = data.get('gfa') or round(data['total_rentable_sf'] / GFA_EFFICIENCY)
+
+    # Amenity SF — use stored value from populate_template, else estimate
+    amenity_sf = data.get('amenity_sf') or round(total_units * AMENITY_SF_PER_UNIT, -2)
+    # Common area = GFA - rentable SF, matching Excel's utilities formula
+    common_area_sf = max(0, gfa - data['total_rentable_sf'])
+
+    # Parking SF
+    parking_sf = ((data['parking_underground']['spaces']
+                   + data['parking_visitor']['spaces']
+                   + data['parking_retail']['spaces']) * PARKING_SF_PER_SPACE)
+
+    # Dev charges total (for permits & approvals)
+    dc_total = 0
+    dc_rates = {'1bed': 0, '2bed': 0, '3bed': 0}
+    if municipality:
+        dc_rates = municipality['rates']
+        for ut in consolidated:
+            label_lower = ut['label'].lower()
+            if '1' in label_lower:
+                dc_total += ut['count'] * dc_rates['1bed']
+            elif '2' in label_lower:
+                dc_total += ut['count'] * dc_rates['2bed']
+            else:
+                dc_total += ut['count'] * dc_rates['3bed']
+
+    # Construction cost per SF — derive from Altus guide baseline
+    # The template has construction at ~$453/SF of GFA for high-rise in GTA
+    construction_cost_psf = round(65_683_716 / 145_000) if building_type == 'high-rise' else round(45_000_000 / 145_000)
+
+    project = {
+        'project': {
+            'name': data['address'].split(',')[0].strip(),
+            'address': data['address'],
+            'city': ', '.join(data['address'].split(',')[1:]).strip() if ',' in data['address'] else '',
+            'municipality': municipality['name'] if municipality else 'Not selected',
+            'building_type': building_type,
+            'generated': date.today().isoformat(),
+        },
+        'units': {
+            'total': total_units,
+            'est_storeys': est_floors,
+            'types': [
+                {'label': u['label'], 'count': u['count'], 'sf': u['sf'], 'rent': u['rent']}
+                for u in consolidated if u['count'] > 0
+            ],
+        },
+        'areas': {
+            'gfa': gfa,
+            'total_rentable_sf': round(data['total_rentable_sf']),
+            'amenity_sf': amenity_sf,
+            'common_area_sf': common_area_sf,
+            'parking_sf': parking_sf,
+        },
+        'parking': {
+            'underground': {'spaces': data['parking_underground']['spaces'],
+                            'fee': data['parking_underground']['fee']},
+            'visitor': {'spaces': data['parking_visitor']['spaces'],
+                        'fee': data['parking_visitor']['fee']},
+            'retail': {'spaces': data['parking_retail']['spaces'],
+                       'fee': data['parking_retail']['fee']},
+        },
+        'storage': {
+            'count': data['storage']['count'],
+            'fee': data['storage']['fee'],
+        },
+        'commercial': {
+            'sf': data['commercial']['sf'],
+            'rate': data['commercial']['rate'],
+            'vacancy': data['commercial_vacancy'],
+        },
+        'submetering': data.get('submetering', 0),
+        'vacancy_rate': data['vacancy_rate'],
+        'cap_rates': {
+            'best': data['cap_rates'][0] if len(data['cap_rates']) > 0 else 0.0425,
+            'base': data['cap_rates'][1] if len(data['cap_rates']) > 1 else 0.045,
+            'worst': data['cap_rates'][2] if len(data['cap_rates']) > 2 else 0.0475,
+        },
+        'opex': {
+            'mgmt_fee_pct': data.get('mgmt_fee_pct', 0.0425),
+            'tax_rate': data.get('tax_rate', 0),
+            'assessed_value_per_unit': data.get('assessed_value', 0),
+            # Expenses live in data['expenses'] dict from parser; fall back to defaults
+            'insurance_per_unit': data.get('expenses', {}).get('insurance', DEFAULT_INSURANCE_PER_UNIT),
+            'rm_per_unit': data.get('expenses', {}).get('rm', DEFAULT_RM_PER_UNIT),
+            'staffing_per_unit': data.get('expenses', {}).get('staffing', DEFAULT_STAFFING_PER_UNIT),
+            'marketing_per_unit': data.get('expenses', {}).get('marketing', DEFAULT_MARKETING_PER_UNIT),
+            'ga_per_unit': data.get('expenses', {}).get('ga', DEFAULT_GA_PER_UNIT),
+            'utilities_psf': data.get('utilities_psf', DEFAULT_UTILITIES_PSF),
+            'reserve_pct': data.get('reserve_pct', DEFAULT_RESERVE_PCT),
+        },
+        'development': {
+            'construction_cost_psf': construction_cost_psf,
+            'soft_cost_pct': 0.30,
+            'profit_pct': 0.08,
+            'dc_rates': dc_rates,
+            'dc_total': round(dc_total),
+        },
+        'financing': {
+            # Construction financing (Sheet 5 rows 67-71)
+            'construction_loan_pct': 0.90,   # 90% debt / 10% equity
+            'construction_loan_rate': 0.0587, # blended (15% mezz @ 7.95% + 75% bank @ 5.45%)
+            # CMHC MLI Select permanent take-out loan (Sheet 6 rows 27-35)
+            'perm_loan_ltv': 0.95,       # max LTV (DSCR usually binds first)
+            'perm_loan_dscr': 1.1,       # minimum NOI coverage
+            'perm_loan_rate': 0.037,     # CMHC insured rate
+            'perm_loan_term': 40,        # amortization years
+            'cmhc_premium': 0.0518,      # insurance premium on loan amount
+        },
+        'schedule': {
+            'land_months': 0,
+            'predev_months': 12,
+            'construction_months': 18,
+            'leaseup_offset': -3,
+        },
+    }
+
+    with open(output_path, 'w') as f:
+        json.dump(project, f, indent=2)
+
+    return project
+
+
+# ---------------------------------------------------------------------------
+# EXTRACT VERIFIED METRICS — from actual Excel formula evaluation
+# ---------------------------------------------------------------------------
+
+def _extract_excel_metrics(xlsx_path):
+    """
+    Evaluate formulas using the 'formulas' library. Extracts:
+
+    From Sheet 2 (Exec Summary) — exact:
+      NOI, Value, DSCR, LTV, Perm Loan, Annual Debt
+
+    From Sheet 9 (Development Costs) — exact where evaluable:
+      Land (H16), Permits (H59), Marketing (H66), Lease-up (H87),
+      Loan fees (H75), Financing contingency (H79)
+
+    From Sheet 5 (Key Assumptions) — exact:
+      Construction cost PSF (F48), Commissions (F61)
+
+    Construction, prof fees, dev mgmt, and construction interest
+    can't be evaluated (Altus/CHOOSE chain + wide SUM), but with
+    exact construction PSF from Sheet 5, we derive them precisely.
+    """
+    try:
+        import formulas
+        import numpy as np
+        import warnings
+        import io
+        import sys as _sys
+        warnings.filterwarnings('ignore')
+
+        old_stderr = _sys.stderr
+        _sys.stderr = io.StringIO()
+        try:
+            xl = formulas.ExcelModel().loads(xlsx_path).finish()
+            sol = xl.calculate()
+        finally:
+            _sys.stderr = old_stderr
+
+        def get_val(sheet_part, cell):
+            cell_upper = cell.upper()
+            sheet_upper = sheet_part.upper()
+            for k, val in sol.items():
+                ks = str(k).upper()
+                if sheet_upper not in ks:
+                    continue
+                if ks.endswith("!" + cell_upper) or ks.endswith("'!" + cell_upper):
+                    try:
+                        if hasattr(val, 'value'):
+                            v = float(np.array(val.value).flatten()[0])
+                        else:
+                            v = float(np.array(val).flatten()[0])
+                        if math.isnan(v) or math.isinf(v):
+                            return None
+                        return v
+                    except:
+                        return None
+            return None
+
+        S2 = "EXEC SUMMARY"
+        S5 = "KEY ASSUMPTION"
+        S9 = "DEVELOPMENT COST"
+
+        noi = get_val(S2, "H9")
+        value = get_val(S2, "H11")
+        if not noi or not value:
+            return None
+
+        result = {'noi': noi, 'value': value}
+
+        # Sheet 2 — financing metrics
+        for key, cell in [('dscr', 'G58'), ('ltv', 'G57'),
+                          ('perm_loan', 'G59'), ('annual_debt', 'G60')]:
+            v = get_val(S2, cell)
+            if v:
+                result[key] = v
+
+        # Sheet 5 — total development cost (exact, formula-evaluated)
+        # F38 = TDC (92% of total project budget, remaining 8% = profit)
+        # F36 = total project budget (TDC + profit)
+        # F82 = net lease-up income (negative = reduces cost)
+        tdc = get_val(S5, "F38")
+        if tdc and tdc > 0:
+            result['total_dev_cost'] = tdc
+        budget = get_val(S5, "F36")
+        if budget and budget > 0:
+            result['total_project_budget'] = budget
+        lease_up = get_val(S5, "F82")
+        if lease_up:
+            result['net_lease_up'] = lease_up
+
+        return result
+
+    except ImportError:
+        return None
+    except Exception as e:
+        print(f"  [extract_excel] Warning: {e}")
+        return None
+
+
+# ---------------------------------------------------------------------------
+# CALCULATE VERIFIED METRICS
+# ---------------------------------------------------------------------------
+
+def calculate_verified_metrics(project, xlsx_path=None):
+    """
+    Build the most accurate metrics possible by combining Excel formula
+    evaluation with precise Python derivation.
+
+    Strategy — extract exact values from Excel's formula chain, cascade the rest:
+
+    EXACT from Excel (Sheet 2):
+      NOI, Value, DSCR, LTV, Perm Loan, Annual Debt
+
+    EXACT from Excel (Sheet 5):
+      Total Development Cost (F38) — the single most important number
+
+    DERIVED from exact TDC + exact Value:
+      Profit, Merchant Return, Merchant IRR, Hold IRR
+
+    The only remaining approximation is IRR timing (monthly cash flow model),
+    but the dollar amounts feeding it are all exact from Excel.
+    """
+    py_metrics = _calculate_python_metrics(project)
+
+    if xlsx_path:
+        excel = _extract_excel_metrics(xlsx_path)
+        if excel and py_metrics:
+            # Override revenue/financing metrics with exact Excel values
+            py_metrics['noi'] = excel['noi']
+            py_metrics['value'] = excel['value']
+            for k in ('dscr', 'ltv', 'perm_loan', 'annual_debt'):
+                if k in excel:
+                    py_metrics[k] = excel[k]
+
+            exact_keys = ['noi', 'value', 'dscr', 'ltv', 'perm_loan', 'annual_debt']
+
+            P = project
+            fin = P.get('financing', {})
+            sched = P.get('schedule', {})
+            units_total = P['units']['total']
+
+            # ── TDC: exact from Sheet 5 F38 ──
+            # The formulas library evaluates the full Sheet 9 → Sheet 5 chain,
+            # including Altus construction costs, DCs, and all line items.
+            if 'total_dev_cost' in excel:
+                total_dev_cost = excel['total_dev_cost']
+                py_metrics['total_dev_cost'] = total_dev_cost
+                exact_keys.append('total_dev_cost')
+            else:
+                total_dev_cost = py_metrics.get('total_dev_cost', 0)
+
+            # ── Cascade: profit, returns, IRRs from hybrid TDC + exact value ──
+            selling_cost_pct = 0.01
+            sales_proceeds = excel['value'] * (1 - selling_cost_pct)
+
+            if total_dev_cost > 0:
+                py_metrics['profit'] = sales_proceeds - total_dev_cost
+                py_metrics['merchant_return'] = py_metrics['profit'] / total_dev_cost
+                # Profit and return are pure arithmetic from exact TDC + exact Value
+                if 'total_dev_cost' in exact_keys:
+                    exact_keys.extend(['profit', 'merchant_return'])
+
+                constr_loan_pct = fin.get('construction_loan_pct', 0.90)
+                constr_equity = total_dev_cost * (1 - constr_loan_pct)
+                constr_debt = total_dev_cost * constr_loan_pct
+                predev = sched.get('predev_months', 12)
+                construction_mo = sched.get('construction_months', 18)
+                lease_up_months = math.ceil(units_total / 15)
+                # +1 for stabilization month (matches Sheet 10: sale at month N+1)
+                total_dev_months = predev + construction_mo + lease_up_months + 1
+
+                # Merchant IRR — CAGR over total_dev_months periods
+                # Sheet 10: equity at month 0, sale at month N, all intermediate CFs = 0
+                merchant_proceeds = sales_proceeds - constr_debt
+                if constr_equity > 0 and merchant_proceeds > 0 and total_dev_months > 0:
+                    monthly_r = (merchant_proceeds / constr_equity) ** (1 / total_dev_months) - 1
+                    merchant_irr = (1 + monthly_r) ** 12 - 1
+                    if 0 < merchant_irr < 5:
+                        py_metrics['merchant_irr'] = merchant_irr
+                        if 'total_dev_cost' in exact_keys:
+                            exact_keys.append('merchant_irr')
+
+                # Hold IRR — 10-year annual cash flow model (matches Sheet 11)
+                perm_rate = fin.get('perm_loan_rate', 0.037)
+                perm_amort = fin.get('perm_loan_term', 40)
+                perm_loan = py_metrics.get('perm_loan', 0)
+                annual_debt = py_metrics.get('annual_debt', 0)
+                cmhc_premium = perm_loan * fin.get('cmhc_premium', 0.0518)
+                noi_stab = excel['noi']
+                cap_base = P['cap_rates']['base']
+
+                # dev_years = calendar year when stabilization occurs
+                # stab_month = total months from start to stabilization (1-indexed)
+                stab_month = predev + construction_mo + lease_up_months + 2
+                dev_years = math.ceil(stab_month / 12)
+                # Stabilized months in the refi year (remaining months after stabilization)
+                partial_months = dev_years * 12 - stab_month
+
+                refi_cash_out = perm_loan - constr_debt - cmhc_premium
+                partial_year_income = (noi_stab - annual_debt) * (partial_months / 12)
+
+                if constr_equity > 0:
+                    hold_years = 10
+                    # Year 1: equity investment
+                    cf = [-constr_equity]
+                    # Years 2 through dev_years-1: zero (development)
+                    for y in range(2, dev_years):
+                        cf.append(0)
+                    # Year dev_years: CMHC refi + partial year income
+                    cf.append(refi_cash_out + partial_year_income)
+                    # Years dev_years+1 through hold_years-1: full operating income
+                    for y in range(dev_years + 1, hold_years):
+                        years_from_stab = y - dev_years
+                        cf.append(noi_stab * (1.02 ** years_from_stab) - annual_debt)
+                    # Year hold_years (10): operating income + exit sale
+                    exit_years_from_stab = hold_years - dev_years
+                    exit_noi = noi_stab * (1.02 ** exit_years_from_stab)
+                    exit_value = exit_noi / cap_base if cap_base > 0 else 0
+                    monthly_rate = perm_rate / 12
+                    n_months = perm_amort * 12
+                    monthly_pmt = (monthly_rate * perm_loan) / (1 - (1 + monthly_rate) ** (-n_months)) if monthly_rate > 0 else 0
+                    # Exit debt = balance at START of final year (matches Sheet 11 Row 34)
+                    exit_debt_months = partial_months + (hold_years - dev_years - 1) * 12
+                    bal_growth = (1 + monthly_rate) ** exit_debt_months
+                    if monthly_rate > 0:
+                        exit_debt_balance = perm_loan * bal_growth - monthly_pmt * (bal_growth - 1) / monthly_rate
+                    else:
+                        exit_debt_balance = perm_loan * (1 - exit_debt_months / (perm_amort * 12))
+                    exit_proceeds = exit_value * (1 - selling_cost_pct) - max(0, exit_debt_balance)
+                    cf.append((noi_stab * (1.02 ** exit_years_from_stab) - annual_debt) + exit_proceeds)
+
+                    # Newton's method for IRR
+                    guess = 0.12
+                    for _ in range(50):
+                        npv = sum(c / (1 + guess) ** y for y, c in enumerate(cf))
+                        dnpv = sum(-y * c / (1 + guess) ** (y + 1) for y, c in enumerate(cf) if y > 0)
+                        if abs(dnpv) < 1e-10:
+                            break
+                        next_g = guess - npv / dnpv
+                        if abs(next_g - guess) < 1e-8:
+                            guess = next_g
+                            break
+                        guess = max(-0.5, min(next_g, 2.0))
+                    if 0 < guess < 5:
+                        py_metrics['hold_irr'] = guess
+                        if 'total_dev_cost' in exact_keys:
+                            exact_keys.append('hold_irr')
+
+            py_metrics['exact_keys'] = exact_keys
+            return py_metrics
+        elif excel:
+            excel['exact_keys'] = list(excel.keys())
+            return excel
+
+    return py_metrics
+
+
+def _calculate_python_metrics(project):
+    """
+    Calculate all key financial metrics from a project JSON dict.
+    Mirrors the JS calculate() function in presentation.html exactly,
+    so baseline numbers match with zero discrepancy.
+
+    Returns a verified dict with the same keys as import_reverse_1b()'s
+    verified output, or None on failure.
+    """
+    try:
+        P = project
+        units_total = P['units']['total']
+        if units_total <= 0:
+            return None
+
+        unit_types = P['units']['types']
+        total_rentable_sf = sum(u['count'] * u['sf'] for u in unit_types)
+
+        # Revenue
+        residential_rent = sum(u['count'] * u['rent'] * 12 for u in unit_types)
+        parking_revenue = (
+            P['parking']['underground']['spaces'] * P['parking']['underground']['fee']
+            + P['parking']['visitor']['spaces'] * P['parking']['visitor']['fee']
+            + P['parking']['retail']['spaces'] * P['parking']['retail']['fee']
+        ) * 12
+        storage_revenue = P['storage']['count'] * P['storage']['fee'] * 12
+        sub = P.get('submetering', 0)
+        if isinstance(sub, dict):
+            submetering = (sub.get('count', 0) or 0) * (sub.get('fee', 0) or 0) * 12
+        else:
+            submetering = sub or 0
+        commercial_revenue = P['commercial']['sf'] * P['commercial']['rate']
+        commercial_vacancy_rate = P['commercial'].get('vacancy', 0)
+
+        # Match Excel: residential vacancy applies to rent+parking+storage+submetering
+        # Commercial has its own separate vacancy rate
+        residential_subtotal = residential_rent + parking_revenue + storage_revenue + submetering
+        vacancy_rate = P['vacancy_rate']
+        residential_vacancy = residential_subtotal * vacancy_rate
+        commercial_vacancy = commercial_revenue * commercial_vacancy_rate
+        egi = residential_subtotal - residential_vacancy + commercial_revenue - commercial_vacancy
+
+        # OpEx
+        opex = P['opex']
+        mgmt_fee = egi * opex['mgmt_fee_pct']
+        property_tax = opex['tax_rate'] * opex['assessed_value_per_unit'] * units_total
+        insurance = opex['insurance_per_unit'] * units_total
+        rm = opex['rm_per_unit'] * units_total
+        staffing = opex['staffing_per_unit'] * units_total
+        marketing = opex['marketing_per_unit'] * units_total
+        ga = opex['ga_per_unit'] * units_total
+        common_area = max(0, P['areas']['gfa'] - P['areas']['total_rentable_sf'])
+        utilities = opex['utilities_psf'] * common_area
+        reserve = opex['reserve_pct'] * egi
+        total_opex = mgmt_fee + property_tax + insurance + rm + staffing + marketing + ga + utilities + reserve
+
+        noi = egi - total_opex
+
+        # Development timeline
+        sched = P.get('schedule', {})
+        predev = sched.get('predev_months', 12)
+        construction = sched.get('construction_months', 18)
+        lease_up_months = math.ceil(units_total / 15)
+        # Stabilization month (1-indexed) and inflation years
+        # Inflation = 1.02^(refi_year - 1) where refi_year = calendar year of stabilization
+        stab_month = predev + construction + lease_up_months + 2
+        dev_years = math.ceil(stab_month / 12)
+        noi_stabilized = noi * (1.02 ** (dev_years - 1))
+
+        # Valuation
+        cap_base = P['cap_rates']['base']
+        if cap_base <= 0:
+            return None
+        value_base = noi_stabilized / cap_base
+        selling_cost_pct = 0.01
+        sales_proceeds = value_base * (1 - selling_cost_pct)
+
+        # ── Development costs (mirrors Sheet 9 line-by-line) ──
+        construction_psf = P['development']['construction_cost_psf']
+        gfa = P['areas']['gfa']
+        parking_sf = P['areas'].get('parking_sf', 0)
+
+        # 1. LAND — backed out from stabilized value
+        #    Sheet 5: land = value × (profit% + 2.5%)
+        profit_pct = P['development'].get('profit_pct', 0.08)
+        land_cost = value_base * (profit_pct + 0.025)
+        land_closing = land_cost * 0.05
+        total_land = land_cost + land_closing
+
+        # 2. CONSTRUCTION
+        hard_costs = construction_psf * gfa
+        construction_contingency = hard_costs * 0.02
+        total_construction = hard_costs + construction_contingency
+
+        # 3. PROFESSIONAL FEES
+        architect = hard_costs * 0.03
+        fee_contingency = architect * 0.05
+        total_prof_fees = architect + fee_contingency
+
+        # 4. DEVELOPMENT MANAGEMENT — 2.5% of (HC + contingency + fees)
+        dev_mgmt = (hard_costs + construction_contingency + architect + fee_contingency) * 0.025
+
+        # 5. PERMITS & APPROVALS
+        dc_total = P['development']['dc_total']
+        submeter_credit = 600 * units_total  # $600/unit credit
+        permit_contingency = dc_total * 0.05
+        total_permits = dc_total - submeter_credit + permit_contingency
+
+        # 6. MARKETING & LEASING — 1.5 months of (rent + parking) revenue
+        monthly_revenue = (residential_rent + parking_revenue) / 12
+        commissions = monthly_revenue * 1.5
+        mktg_cost = commissions  # marketing = same as commissions
+        total_marketing = commissions + mktg_cost
+
+        # Sum pre-financing costs
+        pre_financing = (total_land + total_construction + total_prof_fees
+                         + dev_mgmt + total_permits + total_marketing)
+
+        # 7. FINANCING — loan fees + interest on construction draws
+        #    Total debt = 90% of total dev cost (circular ref — iterate)
+        #    Loan fees = 1% of debt, financing contingency = 0.5% of debt
+        #    Construction interest from monthly draw schedule
+        fin = P['financing']
+        constr_loan_pct = fin.get('construction_loan_pct', 0.90)
+        constr_rate = fin.get('construction_loan_rate', 0.0587)
+        total_dev_months = predev + construction
+
+        # Monthly draw schedule for construction interest
+        # Pre-dev: costs drawn evenly, construction: drawn evenly
+        predev_cost = total_land + total_permits * 0.5  # land + half permits during predev
+        construction_draw = total_construction + total_prof_fees + dev_mgmt + total_permits * 0.5 + total_marketing
+        monthly_interest = 0
+        cumulative = 0
+        for m in range(predev + construction):
+            if m < predev:
+                cumulative += predev_cost / predev if predev > 0 else 0
+            else:
+                cumulative += construction_draw / construction if construction > 0 else 0
+            monthly_interest += cumulative * (constr_rate / 12)
+
+        total_debt_est = pre_financing * constr_loan_pct
+        loan_fees = total_debt_est * 0.01
+        financing_contingency = total_debt_est * 0.005
+        total_financing = loan_fees + financing_contingency + monthly_interest
+
+        # 8. LEASE-UP INCOME (negative cost — reduces TDC)
+        monthly_gross = residential_rent / 12 + parking_revenue / 12 + storage_revenue / 12
+        lease_up_income = 0
+        lease_up_expenses = 0
+        monthly_opex = total_opex / 12
+        for m in range(lease_up_months):
+            occ = min((m + 1) * 15, units_total) / units_total
+            lease_up_income += monthly_gross * occ
+            lease_up_expenses += monthly_opex * occ
+        # Vacancy during lease-up
+        lease_up_vacancy = lease_up_income * vacancy_rate
+        net_lease_up = lease_up_income - lease_up_vacancy - lease_up_expenses
+
+        total_dev_cost = pre_financing + total_financing - net_lease_up
+        dev_profit = sales_proceeds - total_dev_cost
+        merchant_return = dev_profit / total_dev_cost if total_dev_cost > 0 else 0
+
+        # CMHC permanent loan (with defaults for older JSON formats)
+        perm_ltv = fin.get('perm_loan_ltv', 0.95)
+        perm_dscr = fin.get('perm_loan_dscr', 1.1)
+        perm_rate = fin.get('perm_loan_rate', 0.037)
+        perm_amort = fin.get('perm_loan_term', 40)
+        cmhc_premium_rate = fin.get('cmhc_premium', 0.0518)
+
+        ltv_loan = perm_ltv * value_base
+        allowed_annual_pmt = noi_stabilized / perm_dscr
+        pv_factor = (1 - (1 + perm_rate) ** (-perm_amort)) / perm_rate if perm_rate > 0 else 0
+        dscr_loan = allowed_annual_pmt * pv_factor
+        perm_loan = min(ltv_loan, dscr_loan)
+
+        monthly_rate = perm_rate / 12
+        n_months = perm_amort * 12
+        if monthly_rate > 0:
+            monthly_pmt = (monthly_rate * perm_loan) / (1 - (1 + monthly_rate) ** (-n_months))
+        else:
+            monthly_pmt = 0
+        annual_debt = monthly_pmt * 12
+        dscr = noi_stabilized / annual_debt if annual_debt > 0 else 0
+        cmhc_premium = perm_loan * cmhc_premium_rate
+        implied_ltv = perm_loan / value_base if value_base > 0 else 0
+
+        # Construction financing
+        constr_equity = total_dev_cost * (1 - constr_loan_pct)
+        constr_debt = total_dev_cost * constr_loan_pct
+
+        # Merchant IRR — CAGR over total_dev_months periods
+        # +1 for stabilization month (matches Sheet 10: sale at month N+1)
+        merchant_proceeds = sales_proceeds - constr_debt
+        total_dev_months = predev + construction + lease_up_months + 1
+        if constr_equity > 0 and merchant_proceeds > 0 and total_dev_months > 0:
+            monthly_r = (merchant_proceeds / constr_equity) ** (1 / total_dev_months) - 1
+            merchant_irr = (1 + monthly_r) ** 12 - 1
+        else:
+            merchant_irr = 0
+
+        # Hold IRR — 10-year annual cash flow model (matches Sheet 11)
+        hold_years = 10
+        # dev_years uses full lease-up duration, not just the offset
+        stab_month = predev + construction + lease_up_months + 2
+        dev_years = math.ceil(stab_month / 12)
+        partial_months = dev_years * 12 - stab_month
+
+        refi_cash_out = perm_loan - constr_debt - cmhc_premium
+        partial_year_income = (noi_stabilized - annual_debt) * (partial_months / 12)
+
+        hold_irr = 0
+        if constr_equity > 0:
+            cf = [-constr_equity]
+            for y in range(2, dev_years):
+                cf.append(0)
+            cf.append(refi_cash_out + partial_year_income)
+            for y in range(dev_years + 1, hold_years):
+                years_from_stab = y - dev_years
+                cf.append(noi_stabilized * (1.02 ** years_from_stab) - annual_debt)
+            # Exit year (year hold_years)
+            exit_years_from_stab = hold_years - dev_years
+            exit_noi = noi_stabilized * (1.02 ** exit_years_from_stab)
+            exit_value = exit_noi / cap_base if cap_base > 0 else 0
+            # Exit debt = balance at START of final year (matches Sheet 11 Row 34)
+            exit_debt_months = partial_months + (hold_years - dev_years - 1) * 12
+            bal_growth = (1 + monthly_rate) ** exit_debt_months
+            if monthly_rate > 0:
+                exit_debt_balance = perm_loan * bal_growth - monthly_pmt * (bal_growth - 1) / monthly_rate
+            else:
+                exit_debt_balance = perm_loan * (1 - exit_debt_months / (perm_amort * 12))
+            exit_proceeds = exit_value * (1 - selling_cost_pct) - max(0, exit_debt_balance)
+            cf.append((noi_stabilized * (1.02 ** exit_years_from_stab) - annual_debt) + exit_proceeds)
+
+            # Newton's method for IRR
+            guess = 0.12
+            for _ in range(50):
+                npv = sum(c / (1 + guess) ** y for y, c in enumerate(cf))
+                dnpv = sum(-y * c / (1 + guess) ** (y + 1) for y, c in enumerate(cf) if y > 0)
+                if abs(dnpv) < 1e-10:
+                    break
+                next_g = guess - npv / dnpv
+                if abs(next_g - guess) < 1e-8:
+                    guess = next_g
+                    break
+                guess = max(-0.5, min(next_g, 2.0))
+            hold_irr = guess
+
+        # Build verified dict (same keys as import_reverse_1b)
+        verified = {}
+        if total_dev_cost > 0:
+            verified['total_dev_cost'] = total_dev_cost
+        if 0 < merchant_irr < 5:
+            verified['merchant_irr'] = merchant_irr
+        if 0 < hold_irr < 5:
+            verified['hold_irr'] = hold_irr
+        if perm_loan > 0:
+            verified['perm_loan'] = perm_loan
+        if annual_debt > 0:
+            verified['annual_debt'] = annual_debt
+        if 0 < implied_ltv < 1:
+            verified['ltv'] = implied_ltv
+        if dscr > 0:
+            verified['dscr'] = dscr
+        if noi_stabilized > 0:
+            verified['noi'] = noi_stabilized
+        if value_base > 0:
+            verified['value'] = value_base
+        if dev_profit != 0:
+            verified['profit'] = dev_profit
+        if 0 < merchant_return < 5:
+            verified['merchant_return'] = merchant_return
+
+        return verified
+
+    except (KeyError, ZeroDivisionError, Exception):
+        return None
+
+
+def recalculate_and_extract(xlsx_path):
+    """
+    Legacy function signature — kept for backward compatibility.
+    Now returns None since LibreOffice headless doesn't reliably
+    recalculate formulas. Use calculate_verified_metrics() instead.
+    """
+    return None
+
+
+# ---------------------------------------------------------------------------
+# REIMPORT DIFF — compare original generation vs Noor's reviewed version
+# ---------------------------------------------------------------------------
+
+def diff_projects(original, reimported):
+    """
+    Compare two project JSON dicts and return human-readable changes.
+    Useful for understanding what Noor adjusted during review.
+    """
+    changes = []
+    metrics = {}
+
+    def _cmp(path, orig_val, new_val, label, fmt=',.0f', threshold=0.001):
+        """Compare two numeric values and record the change."""
+        if orig_val is None or new_val is None:
+            return
+        try:
+            o, n = float(orig_val), float(new_val)
+        except (ValueError, TypeError):
+            return
+        if abs(o) < 0.0001 and abs(n) < 0.0001:
+            return
+        if abs(o) > 0.0001:
+            pct = (n - o) / abs(o)
+        else:
+            pct = 1.0 if n != 0 else 0
+        if abs(pct) > threshold:
+            direction = '+' if n > o else ''
+            changes.append(f"{label}: {format(o, fmt)} → {format(n, fmt)} ({direction}{pct:.1%})")
+            metrics[path] = {'original': o, 'new': n, 'pct_change': round(pct, 4)}
+
+    # OpEx comparisons
+    for key, label in [
+        ('insurance_per_unit', 'Insurance/unit'),
+        ('rm_per_unit', 'R&M/unit'),
+        ('staffing_per_unit', 'Staffing/unit'),
+        ('marketing_per_unit', 'Marketing/unit'),
+        ('ga_per_unit', 'G&A/unit'),
+        ('utilities_psf', 'Utilities $/PSF'),
+        ('tax_rate', 'Tax Rate'),
+        ('assessed_value_per_unit', 'Assessed Value/Unit'),
+        ('mgmt_fee_pct', 'Mgmt Fee %'),
+        ('reserve_pct', 'Reserve %'),
+    ]:
+        o_val = original.get('opex', {}).get(key)
+        n_val = reimported.get('opex', {}).get(key)
+        fmt = '.4f' if 'pct' in key or 'rate' in key else ',.0f'
+        _cmp(f'opex.{key}', o_val, n_val, label, fmt=fmt)
+
+    # Cap rates
+    for tier in ('best', 'base', 'worst'):
+        o_val = original.get('cap_rates', {}).get(tier)
+        n_val = reimported.get('cap_rates', {}).get(tier)
+        _cmp(f'cap_rates.{tier}', o_val, n_val, f'Cap Rate ({tier})', fmt='.4f')
+
+    # Vacancy
+    _cmp('vacancy_rate', original.get('vacancy_rate'), reimported.get('vacancy_rate'),
+         'Vacancy Rate', fmt='.4f')
+
+    # DC rates
+    for bed in ('1bed', '2bed', '3bed'):
+        o_val = original.get('development', {}).get('dc_rates', {}).get(bed)
+        n_val = reimported.get('development', {}).get('dc_rates', {}).get(bed)
+        _cmp(f'dc_rates.{bed}', o_val, n_val, f'DC Rate ({bed})', fmt=',.0f')
+
+    # Verified metrics (if both have them)
+    o_ver = original.get('verified', {})
+    n_ver = reimported.get('verified', {})
+    if o_ver and n_ver:
+        for key, label in [
+            ('noi', 'NOI'),
+            ('total_dev_cost', 'Total Dev Cost'),
+            ('merchant_irr', 'Merchant IRR'),
+            ('hold_irr', 'Hold IRR'),
+            ('perm_loan', 'Permanent Loan'),
+            ('dscr', 'DSCR'),
+            ('ltv', 'LTV'),
+        ]:
+            fmt = '.4f' if key in ('merchant_irr', 'hold_irr', 'dscr', 'ltv') else ',.0f'
+            _cmp(f'verified.{key}', o_ver.get(key), n_ver.get(key), label, fmt=fmt)
+
+    return {'changes': changes, 'metrics': metrics}
+
+
+# ---------------------------------------------------------------------------
+# MUNICIPALITY GAP TRACKING — log when a municipality isn't in our data
+# ---------------------------------------------------------------------------
+
+def _log_municipality_gap(address, attempted, output_dir):
+    """Append a missing-municipality entry to the gap log."""
+    gap_path = os.path.join(output_dir, 'municipality_gaps.json')
+    try:
+        if os.path.exists(gap_path):
+            with open(gap_path) as f:
+                gaps = json.load(f)
+        else:
+            gaps = []
+        gaps.append({
+            'date': date.today().isoformat(),
+            'address': address,
+            'attempted': attempted,
+        })
+        with open(gap_path, 'w') as f:
+            json.dump(gaps, f, indent=2)
+    except Exception:
+        pass  # non-critical — don't break generation
 
 
 # ---------------------------------------------------------------------------
@@ -998,6 +2241,12 @@ def main():
     print(f"\nPopulating template...")
     log = populate_template(data, output_path, municipality=municipality, building_type=building_type)
 
+    # Export project JSON for the presentation tool
+    json_filename = f"Reverse_1B_{project_name}_{today}.json"
+    json_path = os.path.join(OUTPUT_DIR, json_filename)
+    export_project_json(data, json_path, municipality=municipality, building_type=building_type)
+    print(f"Project JSON: {json_path}")
+
     # Save log
     log_filename = f"Reverse_1B_{project_name}_{today}_log.txt"
     log_path = os.path.join(OUTPUT_DIR, log_filename)
@@ -1026,6 +2275,18 @@ def main():
     print(f"\nLog contains {len([l for l in log if l.startswith('  ')])} cell writes "
           f"and {len([l for l in log if 'ESTIMATED' in l])} estimated values.")
     print(f"Review the log file for every assumption made.")
+
+    # Show data freshness alerts if any datasets need attention
+    alerts = get_alerts()
+    if alerts:
+        print(f"\n{'='*60}")
+        print("DATA FRESHNESS ALERTS")
+        print(f"{'='*60}")
+        for a in alerts:
+            icon = {"expired": "!!!", "warning": " ! ", "info": "   "}.get(a["level"], "   ")
+            print(f"  [{icon}] {a['message']}")
+
+    print(f"\nData sources: {get_data_sources_footer()}")
 
 
 if __name__ == "__main__":

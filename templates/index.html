@@ -4,28 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reverse 1B Generator — Rock Advisors</title>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Gothic+A1:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --black: #1a1a1a;
-  --dark: #232323;
-  --gold: #c8a84e;
-  --gold-hover: #b8973e;
-  --gold-light: rgba(200,168,78,0.08);
-  --text: #232323;
-  --text-light: #777777;
-  --bg: #f5f5f3;
-  --white: #ffffff;
-  --border: #e0ddd8;
-  --radius: 6px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+  --bg: #0F1218;
+  --card-bg: #161B24;
+  --card-border: #1E2530;
+  --gold: #C9993A;
+  --gold-hover: #B8882F;
+  --gold-glow: rgba(201,153,58,0.12);
+  --gold-glow-strong: rgba(201,153,58,0.25);
+  --text: #E8E6E1;
+  --dim: #8B8A87;
+  --green: #3DB06B;
+  --red: #D94F4F;
+  --radius: 8px;
+  --radius-lg: 12px;
 }
 
 body {
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -36,14 +36,14 @@ body {
 
 /* ── Header ──────────────────────────────── */
 .header {
-  background: var(--black);
-  padding: 0;
+  background: #0B0E14;
+  border-bottom: 1px solid var(--card-border);
 }
-.header-top {
+.header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 960px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 16px 24px;
 }
@@ -53,84 +53,92 @@ body {
   text-decoration: none;
 }
 .logo img {
-  height: 40px;
+  height: 36px;
   width: auto;
 }
 .header-badge {
-  font-size: 11px;
-  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   color: var(--gold);
-  border: 1px solid var(--gold);
+  border: 1px solid rgba(201,153,58,0.3);
   padding: 5px 14px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
-/* ── Gold accent bar ─────────────────────── */
-.accent-bar {
-  background: var(--gold);
-  height: 3px;
+/* ── Gold accent line ──────────────────────── */
+.accent-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
 }
 
 /* ── Main ────────────────────────────────── */
 .container {
   max-width: 720px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 48px 24px 40px;
   flex: 1;
   width: 100%;
 }
 
 h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--dark);
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text);
   margin-bottom: 8px;
 }
 .subtitle {
-  font-size: 16px;
-  color: var(--text-light);
-  margin-bottom: 32px;
+  font-size: 15px;
+  color: var(--dim);
+  margin-bottom: 36px;
+  font-weight: 300;
 }
 
 /* ── Flash messages ──────────────────────── */
 .flash {
-  background: #fef2f2;
-  border: 1px solid #fca5a5;
-  color: #991b1b;
+  background: rgba(217,79,79,0.1);
+  border: 1px solid rgba(217,79,79,0.3);
+  color: #F5A3A3;
   padding: 12px 16px;
   border-radius: var(--radius);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* ── Card ────────────────────────────────── */
 .card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 32px;
-  margin-bottom: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+.card:hover {
+  border-color: #2A3140;
 }
 
 .card-title {
-  font-size: 13px;
-  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--dark);
+  letter-spacing: 2.5px;
+  color: var(--gold);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 .card-title::before {
   content: '';
   width: 3px;
-  height: 16px;
+  height: 14px;
   background: var(--gold);
   border-radius: 2px;
 }
@@ -139,49 +147,57 @@ h1 {
 .form-group {
   margin-bottom: 20px;
 }
+.form-group:last-child {
+  margin-bottom: 0;
+}
 .form-group label {
   display: block;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .form-group .hint {
   font-size: 12px;
-  color: var(--text-light);
+  color: var(--dim);
   font-weight: 400;
-  margin-top: 6px;
+  margin-top: 8px;
+  line-height: 1.5;
 }
 
 select, input[type="text"] {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  font-size: 15px;
-  font-family: inherit;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
   color: var(--text);
-  background: var(--white);
+  background: #0F1218;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 select {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B8A87' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
 }
 select:focus, input[type="text"]:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(200,168,78,0.15);
+  box-shadow: 0 0 0 3px var(--gold-glow);
 }
 input[type="text"]::placeholder {
-  color: #bbb;
+  color: #4A4D52;
+}
+select option {
+  background: #161B24;
+  color: var(--text);
 }
 
-/* ── Inline field group (two fields side by side) ── */
+/* ── Inline field group ─────────────────── */
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -193,47 +209,57 @@ input[type="text"]::placeholder {
 
 /* ── File upload ─────────────────────────── */
 .upload-area {
-  border: 2px dashed var(--border);
-  border-radius: var(--radius);
-  padding: 40px 24px;
+  border: 2px dashed #2A3140;
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
   position: relative;
 }
 .upload-area:hover,
 .upload-area.dragover {
   border-color: var(--gold);
-  background: var(--gold-light);
+  background: var(--gold-glow);
+  box-shadow: inset 0 0 40px rgba(201,153,58,0.04);
 }
 .upload-area.has-file {
-  border-color: var(--dark);
-  background: rgba(35,35,35,0.02);
+  border-color: var(--green);
+  border-style: solid;
+  background: rgba(61,176,107,0.05);
 }
 .upload-icon {
-  font-size: 36px;
-  color: var(--dark);
-  margin-bottom: 12px;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  background: rgba(201,153,58,0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
 }
 .upload-text {
   font-size: 15px;
   color: var(--text);
-  font-weight: 600;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 .upload-hint {
   font-size: 13px;
-  color: var(--text-light);
-  margin-top: 4px;
+  color: var(--dim);
 }
 .upload-filename {
   display: none;
   margin-top: 12px;
-  padding: 8px 16px;
-  background: var(--bg);
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--dark);
+  padding: 8px 20px;
+  background: rgba(61,176,107,0.1);
+  border: 1px solid rgba(61,176,107,0.2);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green);
 }
 .upload-area.has-file .upload-filename {
   display: inline-block;
@@ -247,14 +273,55 @@ input[type="text"]::placeholder {
   content: 'Click to change file';
   display: block;
   font-size: 12px;
-  color: var(--text-light);
-  margin-top: 8px;
+  color: var(--dim);
+  margin-top: 10px;
 }
 .upload-area input[type="file"] {
   position: absolute;
   inset: 0;
   opacity: 0;
   cursor: pointer;
+}
+
+/* ── Preview card (auto-detected info) ──── */
+.preview-card {
+  display: none;
+  background: rgba(201,153,58,0.06);
+  border: 1px solid rgba(201,153,58,0.15);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+.preview-card.visible {
+  display: block;
+}
+.preview-card .preview-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+}
+.preview-item {
+  font-size: 13px;
+}
+.preview-label {
+  color: var(--dim);
+  font-size: 11px;
+  margin-bottom: 1px;
+}
+.preview-value {
+  color: var(--text);
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
 }
 
 /* ── Building type toggle ────────────────── */
@@ -272,65 +339,281 @@ input[type="text"]::placeholder {
 }
 .toggle-option label {
   display: block;
-  padding: 14px 16px;
-  border: 2px solid var(--border);
+  padding: 16px;
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
+  font-weight: 500;
+  color: var(--dim);
+  background: var(--bg);
 }
 .toggle-option label .label-sub {
   display: block;
   font-size: 12px;
   font-weight: 400;
-  color: var(--text-light);
-  margin-top: 2px;
+  color: #555;
+  margin-top: 3px;
 }
 .toggle-option input:checked + label {
-  border-color: var(--dark);
-  background: rgba(35,35,35,0.04);
-  color: var(--black);
+  border-color: var(--gold);
+  background: var(--gold-glow);
+  color: var(--text);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+.toggle-option input:checked + label .label-sub {
+  color: var(--dim);
 }
 
 /* ── Submit button ───────────────────────── */
 .btn-generate {
   display: block;
   width: 100%;
-  padding: 16px 24px;
-  background: var(--black);
-  color: var(--white);
+  padding: 18px 24px;
+  background: var(--gold);
+  color: #0F1218;
   border: none;
   border-radius: var(--radius);
-  font-family: 'Gothic A1', 'Open Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: var(--shadow);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 4px 20px rgba(201,153,58,0.2);
 }
 .btn-generate:hover {
-  background: #000000;
-  box-shadow: var(--shadow-lg);
+  background: #D4A43F;
+  box-shadow: 0 6px 28px rgba(201,153,58,0.3);
 }
 .btn-generate:active {
   transform: translateY(1px);
 }
 
-/* ── Loading state ───────────────────────── */
+/* ── Loading / processing state ──────────── */
 .btn-generate.loading {
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.6;
+}
+
+.processing-steps {
+  display: none;
+  margin-top: 24px;
+}
+.processing-steps.active {
+  display: block;
+}
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--dim);
+  transition: color 0.3s;
+}
+.step-item.active {
+  color: var(--text);
+}
+.step-item.done {
+  color: var(--green);
+}
+.step-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+.step-item.active .step-indicator {
+  border-color: var(--gold);
+  background: var(--gold-glow);
+}
+.step-item.done .step-indicator {
+  border-color: var(--green);
+  background: rgba(61,176,107,0.15);
+  color: var(--green);
+}
+/* Spinner for active step */
+.step-item.active .step-indicator::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+/* Checkmark for done step */
+.step-item.done .step-indicator::after {
+  content: '\2713';
+  font-weight: 700;
+  animation: checkPop 0.3s ease;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes checkPop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ── Present link (shown after generation success) ── */
+.present-link {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+}
+.present-link.visible {
+  display: block;
+}
+.present-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+}
+.present-link a:hover {
+  background: var(--gold-glow);
+  box-shadow: 0 0 20px rgba(201,153,58,0.1);
+}
+
+/* ── Freshness alerts ───────────────────── */
+.freshness-alert {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.freshness-alert.expired {
+  background: rgba(217,79,79,0.08);
+  border: 1px solid rgba(217,79,79,0.2);
+  color: #F5A3A3;
+}
+.freshness-alert.warning {
+  background: rgba(201,153,58,0.08);
+  border: 1px solid rgba(201,153,58,0.2);
+  color: #D4B567;
+}
+.freshness-alert.info {
+  background: rgba(100,149,237,0.08);
+  border: 1px solid rgba(100,149,237,0.2);
+  color: #93B5F0;
+}
+.freshness-alert .alert-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Data sources panel ─────────────────── */
+.data-sources {
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+.data-sources summary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--dim);
+  cursor: pointer;
+  padding: 10px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+.data-sources summary:hover {
+  color: var(--text);
+}
+.data-sources summary::before {
+  content: '\25B6';
+  font-size: 8px;
+  transition: transform 0.2s;
+  color: var(--gold);
+}
+.data-sources[open] summary::before {
+  transform: rotate(90deg);
+}
+.data-sources .ds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+@media (max-width: 600px) {
+  .data-sources .ds-grid { grid-template-columns: 1fr; }
+}
+.ds-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 12px;
+}
+.ds-item .ds-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.ds-item .ds-meta {
+  color: var(--dim);
+  line-height: 1.6;
+}
+.ds-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.ds-badge.current { background: rgba(61,176,107,0.15); color: var(--green); }
+.ds-badge.expiring { background: rgba(201,153,58,0.15); color: var(--gold); }
+.ds-badge.expired { background: rgba(217,79,79,0.15); color: var(--red); }
+.ds-badge.not-integrated { background: rgba(139,138,135,0.1); color: var(--dim); }
+.ds-pending-note {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--dim);
+  font-style: italic;
+  padding-left: 2px;
 }
 
 /* ── Footer ──────────────────────────────── */
 .footer {
-  background: var(--black);
-  color: rgba(255,255,255,0.4);
+  background: #0B0E14;
+  border-top: 1px solid var(--card-border);
+  color: rgba(139,138,135,0.5);
   text-align: center;
   padding: 24px;
   font-size: 12px;
@@ -340,21 +623,23 @@ input[type="text"]::placeholder {
   text-decoration: none;
 }
 .footer .tagline {
-  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.25);
+  letter-spacing: 3px;
+  color: rgba(139,138,135,0.3);
   margin-top: 6px;
 }
 
 /* ── Responsive ──────────────────────────── */
 @media (max-width: 600px) {
-  .container { padding: 24px 16px; }
-  .card { padding: 24px 20px; }
-  h1 { font-size: 22px; }
+  .container { padding: 28px 16px; }
+  .card { padding: 20px; }
+  h1 { font-size: 26px; }
   .toggle-group { grid-template-columns: 1fr; }
   .header-badge { display: none; }
-  .logo img { height: 32px; }
+  .logo img { height: 30px; }
+  .preview-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -362,19 +647,32 @@ input[type="text"]::placeholder {
 
 <!-- Header -->
 <header class="header">
-  <div class="header-top">
+  <div class="header-inner">
     <a href="/" class="logo">
-      <img src="{{ url_for('static', filename='logo-white.png') }}" alt="Rock Advisors">
+      <img src="/static/logo-white.png" alt="Rock Advisors" style="height: 36px;" />
     </a>
     <span class="header-badge">Reverse 1B Generator</span>
   </div>
 </header>
-<div class="accent-bar"></div>
+<div class="accent-line"></div>
 
 <main class="container">
 
   <h1>Generate Reverse 1B</h1>
-  <p class="subtitle">Upload a 1A proforma, select your parameters, and download a complete Reverse 1B financial model.</p>
+  <p class="subtitle">Upload a 1A proforma, configure parameters, and generate a complete Reverse 1B financial model.</p>
+  <p style="text-align:center; margin-top:-8px; margin-bottom:16px;"><a href="/reimport" style="color:#8B8A87; font-size:13px; text-decoration:none; border-bottom:1px solid rgba(139,138,135,0.3);">Or import a reviewed Reverse 1B &rarr;</a></p>
+
+  <!-- Data freshness alerts (only expired and expiring — not "info" level) -->
+  {% if freshness_alerts %}
+  {% for alert in freshness_alerts %}
+  {% if alert.level != 'info' %}
+  <div class="freshness-alert {{ alert.level }}">
+    <span class="alert-icon">&#9888;</span>
+    {{ alert.message }}
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
 
   <!-- Flash messages -->
   {% with messages = get_flashed_messages() %}
@@ -391,11 +689,33 @@ input[type="text"]::placeholder {
     <div class="card">
       <div class="card-title">1A Proforma File</div>
       <div class="upload-area" id="uploadArea">
-        <div class="upload-icon">&#128196;</div>
+        <div class="upload-icon">&#8593;</div>
         <div class="upload-text">Drag & drop your 1A file here</div>
-        <div class="upload-hint">or click to browse (.xlsx or .xls)</div>
+        <div class="upload-hint">or click to browse (supports .xlsx and .xls)</div>
         <div class="upload-filename" id="fileName"></div>
         <input type="file" name="proforma" id="proformaInput" accept=".xlsx,.xls" required>
+      </div>
+      <!-- Preview card: auto-detected project info -->
+      <div class="preview-card" id="previewCard">
+        <div class="preview-title">Auto-Detected</div>
+        <div class="preview-grid">
+          <div class="preview-item">
+            <div class="preview-label">Address</div>
+            <div class="preview-value" id="previewAddress">--</div>
+          </div>
+          <div class="preview-item">
+            <div class="preview-label">Total Units</div>
+            <div class="preview-value" id="previewUnits">--</div>
+          </div>
+          <div class="preview-item">
+            <div class="preview-label">Municipality</div>
+            <div class="preview-value" id="previewMuni">--</div>
+          </div>
+          <div class="preview-item">
+            <div class="preview-label">Building Type</div>
+            <div class="preview-value" id="previewType">--</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -410,7 +730,7 @@ input[type="text"]::placeholder {
           <option value="{{ loop.index0 }}" data-tax="{{ m.tax_rate or '' }}">{{ m.name }}{% if m.notes %} — {{ m.notes }}{% endif %}</option>
           {% endfor %}
         </select>
-        <div class="hint">DC rates will be applied based on your selection. Choose the correct zone if applicable.</div>
+        <div class="hint">Development charges are based on your selection. Some municipalities have multiple zones — verify the correct one applies.</div>
       </div>
     </div>
 
@@ -421,12 +741,12 @@ input[type="text"]::placeholder {
         <div class="form-group">
           <label for="tax_rate">Tax Rate</label>
           <input type="text" name="tax_rate" id="taxRate" placeholder="e.g. 0.0066">
-          <div class="hint">Annual municipal tax rate (decimal). Leave blank to use 1A value.</div>
+          <div class="hint">Annual municipal tax rate as a decimal (e.g. 0.0066). Auto-filled from your 1A; override if needed.</div>
         </div>
         <div class="form-group">
           <label for="assessed_value">Assessed Value per Unit ($)</label>
           <input type="text" name="assessed_value" id="assessedValue" placeholder="e.g. 350000">
-          <div class="hint">MPAC assessed value per unit. Leave blank to use 1A value.</div>
+          <div class="hint">Assessed property value per unit for tax calculation. Auto-filled from your 1A; override if needed.</div>
         </div>
       </div>
       <div class="hint" id="taxHint">Values will auto-fill after file upload. Override if needed.</div>
@@ -453,7 +773,7 @@ input[type="text"]::placeholder {
             </label>
           </div>
         </div>
-        <div class="hint" id="buildingTypeHint">Auto-detected after file upload. Override if needed.</div>
+        <div class="hint" id="buildingTypeHint">Based on total units. Verify and adjust if your building is different.</div>
       </div>
     </div>
 
@@ -462,7 +782,69 @@ input[type="text"]::placeholder {
       Generate Reverse 1B
     </button>
 
+    <!-- Processing steps animation -->
+    <div class="processing-steps" id="processingSteps">
+      <div class="step-item" id="step1">
+        <div class="step-indicator"></div>
+        <span>Reading 1A proforma</span>
+      </div>
+      <div class="step-item" id="step2">
+        <div class="step-indicator"></div>
+        <span>Confirming municipality &amp; building type</span>
+      </div>
+      <div class="step-item" id="step3">
+        <div class="step-indicator"></div>
+        <span>Applying development charge rates</span>
+      </div>
+      <div class="step-item" id="step4">
+        <div class="step-indicator"></div>
+        <span>Generating Reverse 1B model</span>
+      </div>
+    </div>
+
   </form>
+
+  <!-- Open in Presentation Mode (shown after recent generation) -->
+  <div class="present-link" id="presentLink">
+    <a href="/present" id="presentAnchor">
+      <span>&#9654;</span> Open in Presentation Mode
+    </a>
+  </div>
+
+  <!-- Data Sources Panel -->
+  {% if freshness_report %}
+  <details class="data-sources">
+    <summary>Reference Data Sources</summary>
+    <div class="ds-grid">
+      {% for ds in freshness_report %}
+      {% if ds.status != 'Not Integrated' %}
+      <div class="ds-item">
+        <div class="ds-name">
+          {{ ds.name }}
+          {% if ds.status == 'Current' %}
+          <span class="ds-badge current">Current</span>
+          {% elif ds.status == 'Expiring Soon' %}
+          <span class="ds-badge expiring">Update Soon</span>
+          {% elif ds.status == 'Expired' %}
+          <span class="ds-badge expired">Expired</span>
+          {% endif %}
+        </div>
+        <div class="ds-meta">
+          {{ ds.source }}
+          {% if ds.last_updated_display %}<br>Last updated {{ ds.last_updated_display }}{% endif %}
+          {% if ds.coverage_end_display %}<br>Valid through {{ ds.coverage_end_display }}{% endif %}
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% for ds in freshness_report %}
+    {% if ds.status == 'Not Integrated' %}
+    <div class="ds-pending-note">{{ ds.name }}: not yet integrated ({{ ds.source }})</div>
+    {% endif %}
+    {% endfor %}
+  </details>
+  {% endif %}
 
 </main>
 
@@ -477,6 +859,7 @@ var uploadArea = document.getElementById('uploadArea');
 var fileInput = document.getElementById('proformaInput');
 var fileName = document.getElementById('fileName');
 var buildingTypeHint = document.getElementById('buildingTypeHint');
+var previewCard = document.getElementById('previewCard');
 
 fileInput.addEventListener('change', function() {
   if (this.files.length > 0) {
@@ -485,6 +868,7 @@ fileInput.addEventListener('change', function() {
     previewFile(this.files[0]);
   } else {
     uploadArea.classList.remove('has-file');
+    previewCard.classList.remove('visible');
   }
 });
 
@@ -498,48 +882,63 @@ function previewFile(file) {
     .then(function(data) {
       if (data.error) {
         buildingTypeHint.textContent = 'Could not auto-detect. Please select manually.';
+        previewCard.classList.remove('visible');
         return;
       }
+
+      // Update building type radio
       if (data.building_type === 'mid-rise') {
         document.getElementById('midrise').checked = true;
       } else {
         document.getElementById('highrise').checked = true;
       }
+
       // Auto-select municipality if detected
       var muniSelect = document.getElementById('municipality');
       if (data.municipality_index !== null) {
         muniSelect.value = data.municipality_index;
-        muniSelect.style.borderColor = '#c8a84e';
+        muniSelect.style.borderColor = '#C9993A';
       }
+
       buildingTypeHint.textContent =
         data.address + ' \u2014 ' + data.total_units + ' units, ~' +
         data.est_floors + ' floors. Auto-selected ' + data.building_type +
         '. Override if needed.';
+
       // Update municipality hint
       var muniHint = document.querySelector('#municipality').parentNode.querySelector('.hint');
       if (data.municipality_name && data.municipality_index !== null) {
-        muniHint.textContent = 'Auto-detected: ' + data.municipality_name + '. Change if needed — verify the correct zone.';
+        muniHint.textContent = 'Auto-detected: ' + data.municipality_name + '. Change if needed \u2014 verify the correct zone.';
       }
+
       // Auto-fill property tax fields from 1A
       var taxHint = document.getElementById('taxHint');
       var taxRateInput = document.getElementById('taxRate');
       var assessedInput = document.getElementById('assessedValue');
       if (data.tax_rate && data.tax_rate > 0) {
         taxRateInput.value = data.tax_rate;
-        taxRateInput.style.borderColor = '#c8a84e';
+        taxRateInput.style.borderColor = '#C9993A';
       }
       if (data.assessed_value && data.assessed_value > 0) {
         assessedInput.value = Math.round(data.assessed_value);
-        assessedInput.style.borderColor = '#c8a84e';
+        assessedInput.style.borderColor = '#C9993A';
       }
       if ((data.tax_rate && data.tax_rate > 0) || (data.assessed_value && data.assessed_value > 0)) {
         taxHint.textContent = 'Auto-filled from 1A. Override if needed.';
       } else {
         taxHint.textContent = 'No property tax data found in 1A. Enter values manually if known.';
       }
+
+      // Show preview card with auto-detected info
+      document.getElementById('previewAddress').textContent = data.address || '--';
+      document.getElementById('previewUnits').textContent = data.total_units || '--';
+      document.getElementById('previewMuni').textContent = data.municipality_name || 'Not detected';
+      document.getElementById('previewType').textContent = data.building_type === 'mid-rise' ? 'Mid-Rise' : 'High-Rise';
+      previewCard.classList.add('visible');
     })
     .catch(function() {
       buildingTypeHint.textContent = 'Could not auto-detect. Please select manually.';
+      previewCard.classList.remove('visible');
     });
 }
 
@@ -570,16 +969,75 @@ document.getElementById('municipality').addEventListener('change', function() {
   var taxHint = document.getElementById('taxHint');
   if (taxRate && taxRate !== '') {
     taxRateInput.value = taxRate;
-    taxRateInput.style.borderColor = '#c8a84e';
-    taxHint.textContent = 'Tax rate set from ' + selected.textContent.trim().split(' —')[0] + '. Override if needed.';
+    taxRateInput.style.borderColor = '#C9993A';
+    taxHint.textContent = 'Tax rate set from ' + selected.textContent.trim().split(' \u2014')[0] + '. Override if needed.';
   }
 });
 
-// Loading state on submit
+// Processing animation + loading state on submit
 document.getElementById('generateForm').addEventListener('submit', function() {
   var btn = document.getElementById('submitBtn');
   btn.classList.add('loading');
   btn.textContent = 'GENERATING...';
+
+  // Show processing steps with staggered animation
+  var steps = document.getElementById('processingSteps');
+  steps.classList.add('active');
+
+  var stepEls = [
+    document.getElementById('step1'),
+    document.getElementById('step2'),
+    document.getElementById('step3'),
+    document.getElementById('step4')
+  ];
+
+  // Animate steps sequentially
+  var delay = 400;
+  stepEls.forEach(function(step, i) {
+    setTimeout(function() {
+      // Mark previous step as done
+      if (i > 0) stepEls[i - 1].classList.remove('active');
+      if (i > 0) stepEls[i - 1].classList.add('done');
+      step.classList.add('active');
+    }, delay * (i + 1));
+  });
+
+  // Mark last step as done after all delays
+  setTimeout(function() {
+    stepEls[3].classList.remove('active');
+    stepEls[3].classList.add('done');
+  }, delay * 5);
+});
+
+// Update "Open in Presentation Mode" link to the most recently generated project
+function updatePresentLink() {
+  fetch('/projects')
+    .then(function(r) { return r.json(); })
+    .then(function(projects) {
+      if (projects && projects.length > 0) {
+        var latest = projects[0];
+        var presentLink = document.getElementById('presentLink');
+        var presentAnchor = document.getElementById('presentAnchor');
+        var projectSlug = latest.filename.replace('.json', '');
+        presentAnchor.href = '/present/' + projectSlug;
+        presentAnchor.textContent = '\u2192 Open ' + latest.name + ' in Presentation Mode';
+        presentLink.classList.add('visible');
+      }
+    })
+    .catch(function() { /* silent */ });
+}
+
+// Run on page load
+updatePresentLink();
+
+// Re-check after form submit (file download takes a few seconds)
+document.getElementById('generateForm').addEventListener('submit', function() {
+  // Poll until a newer project appears (download triggers server-side generation)
+  var checkInterval = setInterval(function() {
+    updatePresentLink();
+  }, 3000);
+  // Stop polling after 30 seconds
+  setTimeout(function() { clearInterval(checkInterval); }, 30000);
 });
 </script>
 

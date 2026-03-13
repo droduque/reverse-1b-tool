@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ address }} — Ready to Present</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0F1218;
+  --card-bg: #161B24;
+  --card-border: #1E2530;
+  --gold: #C9993A;
+  --gold-hover: #B8882F;
+  --gold-glow: rgba(201,153,58,0.12);
+  --text: #E8E6E1;
+  --dim: #8B8A87;
+  --green: #3DB06B;
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header { background: #0B0E14; border-bottom: 1px solid var(--card-border); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 800px; margin: 0 auto; padding: 16px 24px;
+}
+.logo { display: flex; align-items: center; text-decoration: none; }
+.logo img { height: 36px; width: auto; }
+.header-badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 2.5px; color: var(--gold);
+  border: 1px solid rgba(201,153,58,0.3); padding: 5px 14px; border-radius: 4px;
+}
+.accent-line { height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.4; }
+
+.container {
+  max-width: 800px; margin: 0 auto; padding: 60px 24px; flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+
+.success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(61, 176, 107, 0.12); border: 2px solid var(--green);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px; animation: scaleIn 0.4s ease-out;
+}
+.success-icon svg { width: 36px; height: 36px; stroke: var(--green); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes scaleIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+.success-title { font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400; margin-bottom: 8px; text-align: center; }
+.success-subtitle { color: var(--dim); font-size: 15px; margin-bottom: 48px; text-align: center; }
+.success-subtitle strong { color: var(--text); }
+
+.actions { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 520px; }
+.action-card {
+  display: flex; align-items: center; gap: 20px; padding: 20px 24px;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg); text-decoration: none; color: var(--text); transition: all 0.2s ease;
+}
+.action-card:hover { border-color: var(--gold); box-shadow: 0 0 20px var(--gold-glow); transform: translateY(-1px); }
+.action-card.primary { border-color: rgba(201,153,58,0.3); background: linear-gradient(135deg, var(--card-bg), rgba(201,153,58,0.05)); }
+.action-card.primary .action-label { color: var(--gold); }
+
+.action-number {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--gold);
+  background: rgba(201,153,58,0.1); border: 1px solid rgba(201,153,58,0.2);
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.action-text { flex: 1; }
+.action-label { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+.action-desc { font-size: 13px; color: var(--dim); }
+.action-arrow { color: var(--dim); font-size: 18px; transition: transform 0.2s ease; }
+.action-card:hover .action-arrow { transform: translateX(4px); color: var(--gold); }
+
+.verified-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--green); margin-top: 8px; letter-spacing: 0.5px;
+}
+.verified-badge svg { width: 14px; height: 14px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+
+.back-link { margin-top: 40px; font-size: 14px; color: var(--dim); }
+.back-link a { color: var(--dim); text-decoration: none; border-bottom: 1px solid rgba(139,138,135,0.3); transition: color 0.2s; }
+.back-link a:hover { color: var(--gold); border-color: var(--gold); }
+
+.diff-section {
+  width: 100%; max-width: 520px; margin-top: 24px; padding: 16px 20px;
+  background: rgba(61, 176, 107, 0.06); border: 1px solid rgba(61, 176, 107, 0.2);
+  border-radius: 12px;
+}
+.diff-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 10px;
+}
+.diff-list { list-style: none; padding: 0; }
+.diff-list li {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--dim); padding: 4px 0;
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="{{ url_for('static', filename='logo-white.png') }}" alt="Rock Advisors">
+    </a>
+    <div class="header-badge">Reviewed</div>
+  </div>
+</header>
+<div class="accent-line"></div>
+
+<main class="container">
+  <div class="success-icon">
+    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+  </div>
+
+  <h1 class="success-title">Ready to Present</h1>
+  <p class="success-subtitle">
+    <strong>{{ address }}</strong>{% if units %} &mdash; {{ units }} units{% endif %}
+  </p>
+
+  <div class="actions">
+    <a href="{{ url_for('present', filename=present_slug) }}" class="action-card primary">
+      <div class="action-number">1</div>
+      <div class="action-text">
+        <div class="action-label">Open in Presentation Mode</div>
+        <div class="action-desc">Using reviewed numbers from the spreadsheet</div>
+      </div>
+      <div class="action-arrow">&rarr;</div>
+    </a>
+  </div>
+
+  <div class="verified-badge">
+    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+    READY &mdash; reviewed numbers loaded
+  </div>
+
+  {% if diff_changes %}
+  <div class="diff-section">
+    <div class="diff-title">Adjustments from Review</div>
+    <ul class="diff-list">
+      {% for change in diff_changes %}
+      <li>{{ change }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="back-link">
+    <a href="/">&larr; Back to upload tool</a> &nbsp;&middot;&nbsp;
+    <a href="{{ url_for('reimport_page') }}">Import another</a>
+  </div>
+</main>
+
+</body>
+</html>

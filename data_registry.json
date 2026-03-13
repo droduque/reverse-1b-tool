@@ -1,0 +1,88 @@
+{
+  "datasets": [
+    {
+      "id": "dc_rates",
+      "name": "Municipal Development Charges",
+      "source": "Kanen Smit (SVN Rock internal research)",
+      "file": "reference/Municipalities & DC's & Prop Taxes for Proforma Testing.xlsx",
+      "sheet": "2026 DC's",
+      "coverage_start": "2026-01-01",
+      "coverage_end": "2026-12-31",
+      "last_updated": "2026-03-09",
+      "next_release": "2027-01-15",
+      "notes": "51 municipalities. Rates are City + Region + School (all-in). Pending clarification: Toronto $33,497 vs $34,849; Mississauga waiver status."
+    },
+    {
+      "id": "property_tax_rates",
+      "name": "Municipal Property Tax Rates",
+      "source": "Kanen Smit (SVN Rock internal research)",
+      "file": "reference/Municipalities & DC's & Prop Taxes for Proforma Testing.xlsx",
+      "sheet": "Prop Tax Rates",
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-12-31",
+      "last_updated": "2026-03-09",
+      "next_release": "2027-01-15",
+      "notes": "46 municipalities. Uses New Multi-Residential (NT) rate preferred, then MT fallback. 5 municipalities missing tax data."
+    },
+    {
+      "id": "altus_cost_guide",
+      "name": "Altus Construction Cost Guide",
+      "source": "Altus Group — Private Sector Construction Cost Database",
+      "file": "reference/REVERSE_1B_Template.xlsx",
+      "sheet": "Altus Cost Guide 25 (Sheet 13)",
+      "coverage_start": "2025-01-31",
+      "coverage_end": "2026-06-30",
+      "last_updated": "2025-01-31",
+      "next_release": "2026-07-01",
+      "notes": "Embedded in template Sheet 13. Covers Vancouver, Calgary, GTA. Updated annually by Altus. When new guide arrives, Noor updates the template sheet."
+    },
+    {
+      "id": "reverse_1b_template",
+      "name": "Reverse 1B Template",
+      "source": "Noor (SVN Rock fractional CFO)",
+      "file": "reference/REVERSE_1B_Template.xlsx",
+      "sheet": "All 15 sheets",
+      "coverage_start": "2026-01-01",
+      "coverage_end": "2026-12-31",
+      "last_updated": "2026-03-04",
+      "next_release": null,
+      "notes": "15-sheet financial model. Noor is expanding unit mix from 3 to 14 rows (~March 2026). When updated, code must be adjusted to match new row layout."
+    },
+    {
+      "id": "opex_defaults",
+      "name": "Operating Expense Defaults",
+      "source": "Noor (confirmed March 2026)",
+      "file": "populate_reverse_1b.py",
+      "sheet": null,
+      "coverage_start": "2026-03-01",
+      "coverage_end": "2027-03-01",
+      "last_updated": "2026-03-09",
+      "next_release": null,
+      "notes": "Hardcoded defaults: R&M $1,050, Staffing $1,200, Insurance $450, Marketing $300, G&A $250, Utilities $11/PSF, Reserve 2%. Noor reviews annually."
+    },
+    {
+      "id": "area_estimation",
+      "name": "Building Area Estimation Rules",
+      "source": "Derived from Birchmount template (Noor reviewed)",
+      "file": "populate_reverse_1b.py",
+      "sheet": null,
+      "coverage_start": "2026-03-01",
+      "coverage_end": "2027-03-01",
+      "last_updated": "2026-03-04",
+      "next_release": null,
+      "notes": "GFA efficiency 0.88, amenity 22 SF/unit, parking 350 SF/space. Based on Birchmount proportions. Update if Noor provides better benchmarks."
+    },
+    {
+      "id": "cmhc_rental_market",
+      "name": "CMHC Rental Market Report",
+      "source": "Canada Mortgage and Housing Corporation",
+      "file": null,
+      "sheet": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "last_updated": null,
+      "next_release": "2026-10-01",
+      "notes": "NOT YET INTEGRATED. CMHC publishes annually (October). Rental data currently comes from the client's 1A proforma, not from CMHC directly. Placeholder for Phase 2."
+    }
+  ]
+}

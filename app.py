@@ -4,14 +4,19 @@ SVN Rock — Reverse 1B Web App
 Flask web app that wraps populate_reverse_1b.py in a browser interface.
 Users upload a 1A proforma, pick municipality + building type, and
 download a ready-to-review Reverse 1B Excel file.
+
+Also serves the client presentation / sensitivity tool.
 """
 
 import os
 import tempfile
 import re
+import json
+import glob
 from datetime import date
 
-from flask import Flask, render_template, request, send_file, redirect, url_for, flash
+from flask import (Flask, render_template, request, send_file,
+                   redirect, url_for, flash, jsonify)
 
 import math
 
@@ -19,11 +24,20 @@ from populate_reverse_1b import (
     parse_1a,
     load_dc_rates,
     populate_template,
+    export_project_json,
+    import_reverse_1b,
+    calculate_verified_metrics,
+    diff_projects,
+    _log_municipality_gap,
     HIGH_RISE_FLOOR_THRESHOLD,
 )
+from data_freshness import get_freshness_report, get_alerts
+from validate_output import validate_output, validate_financials
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+OUTPUT_DIR = os.path.join(os.path.dirname(__file__), 'output')
 
 # Load DC rates once at startup
 MUNICIPALITIES = load_dc_rates()
@@ -32,13 +46,16 @@ MUNICIPALITIES = load_dc_rates()
 @app.route('/', methods=['GET'])
 def index():
     """Main page — upload form with municipality and building type selectors."""
-    return render_template('index.html', municipalities=MUNICIPALITIES, current_year=date.today().year)
+    alerts = get_alerts()
+    freshness = get_freshness_report()
+    return render_template('index.html', municipalities=MUNICIPALITIES,
+                           current_year=date.today().year,
+                           freshness_alerts=alerts, freshness_report=freshness)
 
 
 @app.route('/preview', methods=['POST'])
 def preview():
     """Parse uploaded 1A and return project summary (for auto-detecting building type + municipality)."""
-    from flask import jsonify
 
     if 'proforma' not in request.files:
         return jsonify({'error': 'No file'}), 400
@@ -186,15 +203,24 @@ def generate():
         # Parse the 1A
         data = parse_1a(tmp_path)
 
+        # Collect parser warnings (Improvement #3)
+        parse_warnings = data.get('parse_warnings', [])
+
+        # Municipality gap tracking (Improvement #6)
+        if municipality is None and muni_idx != 'skip':
+            _log_municipality_gap(data.get('address', ''), 'auto-detect failed', OUTPUT_DIR)
+
         # Generate output filename
         project_name = data['address'].split(',')[0].strip().replace(' ', '_') or "project"
         project_name = re.sub(r'[^\w\-]', '', project_name)
         today = date.today().strftime("%Y%m%d")
         output_filename = f"Reverse_1B_{project_name}_{today}.xlsx"
 
-        # Generate to temp file
-        with tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False) as out_tmp:
-            output_path = out_tmp.name
+        # Ensure output directory exists
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+        # Generate Excel to output directory (persistent, for presentation tool)
+        output_path = os.path.join(OUTPUT_DIR, output_filename)
 
         # Apply property tax overrides if the user changed them
         if 'tax_rate' in tax_overrides:
@@ -202,15 +228,66 @@ def generate():
         if 'assessed_value' in tax_overrides:
             data['assessed_value'] = tax_overrides['assessed_value']
 
-        populate_template(data, output_path, municipality=municipality, building_type=building_type)
+        log = populate_template(data, output_path, municipality=municipality, building_type=building_type)
 
-        # Send file to browser for download
-        return send_file(
-            output_path,
-            as_attachment=True,
-            download_name=output_filename,
-            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        )
+        # Also export the project JSON for the presentation tool
+        json_filename = f"Reverse_1B_{project_name}_{today}.json"
+        json_path = os.path.join(OUTPUT_DIR, json_filename)
+        export_project_json(data, json_path, municipality=municipality, building_type=building_type)
+
+        # Save the generation log — documents every cell written, estimated,
+        # and skipped. Serves as an audit trail for Noor's review.
+        log_filename = f"Reverse_1B_{project_name}_{today}_log.txt"
+        log_path = os.path.join(OUTPUT_DIR, log_filename)
+        with open(log_path, 'w') as f:
+            f.write(f"SVN Rock — Reverse 1B Population Log\n")
+            f.write(f"Source: {file.filename}\n")
+            f.write(f"Output: {output_path}\n")
+            f.write(f"Municipality: {municipality['name'] if municipality else 'None selected'}\n")
+            f.write(f"Building Type: {building_type}\n")
+            f.write(f"Date: {date.today().isoformat()}\n\n")
+            f.write('\n'.join(log))
+
+        # Validate before delivering — catch #VALUE!, wrong types, stale data
+        validation = validate_output(output_path, data)
+        if not validation['passed']:
+            error_list = '; '.join(validation['errors'][:5])
+            flash(f'Generation failed validation ({len(validation["errors"])} errors): {error_list}')
+            os.unlink(output_path)  # don't leave a bad file around
+            if os.path.exists(json_path):
+                os.unlink(json_path)
+            return redirect(url_for('index'))
+
+        # Extract verified metrics — uses formulas library to evaluate real Excel
+        # formulas, falls back to Python calculation if library unavailable
+        with open(json_path) as f:
+            proj = json.load(f)
+        verified = calculate_verified_metrics(proj, xlsx_path=output_path)
+        if verified:
+            proj['verified'] = verified
+            proj['project']['source'] = 'auto-calc'
+            with open(json_path, 'w') as f:
+                json.dump(proj, f, indent=2)
+
+        # Financial sanity checks (Improvement #2 + #4)
+        with open(json_path) as f:
+            proj_data = json.load(f)
+        fin_check = validate_financials(proj_data, proj_data.get('verified'))
+        all_warnings = parse_warnings + fin_check.get('warnings', [])
+
+        # Municipality warning
+        if municipality is None and muni_idx != 'skip':
+            all_warnings.insert(0, f"Municipality not found for {data.get('address', 'this project')}. Using template defaults for DC rates.")
+
+        # Redirect to results page with THIS project's specific links.
+        # Pass warnings as pipe-separated query param (avoids session state issues).
+        present_slug = json_filename.replace('.json', '')
+        return redirect(url_for('results',
+                                download=output_filename,
+                                present=present_slug,
+                                address=data['address'],
+                                units=data['total_units'],
+                                warnings='|'.join(all_warnings) if all_warnings else ''))
 
     except Exception as e:
         flash(f'Error processing file: {str(e)}')
@@ -220,6 +297,381 @@ def generate():
         # Clean up temp upload
         if os.path.exists(tmp_path):
             os.unlink(tmp_path)
+
+
+# ---------------------------------------------------------------------------
+# RESULTS PAGE — shown after generation, with project-specific links
+# ---------------------------------------------------------------------------
+
+@app.route('/results')
+def results():
+    """
+    Post-generation results page. Shows download + presentation links
+    for the SPECIFIC project that was just generated. Each user lands on
+    their own results page, so 10 simultaneous users never cross wires.
+    """
+    download = request.args.get('download', '')
+    present = request.args.get('present', '')
+    address = request.args.get('address', 'Project')
+    units = request.args.get('units', '')
+    warnings_str = request.args.get('warnings', '')
+    warnings = [w for w in warnings_str.split('|') if w] if warnings_str else []
+    return render_template('results.html',
+                           download_filename=download,
+                           present_slug=present,
+                           address=address,
+                           units=units,
+                           warnings=warnings)
+
+
+@app.route('/download/<filename>')
+def download_file(filename):
+    """Serve a generated file from the output directory."""
+    safe_name = os.path.basename(filename)
+    file_path = os.path.join(OUTPUT_DIR, safe_name)
+    if not os.path.exists(file_path):
+        flash('File not found.')
+        return redirect(url_for('index'))
+    return send_file(
+        file_path,
+        as_attachment=True,
+        download_name=safe_name,
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
+
+
+# ---------------------------------------------------------------------------
+# PRESENTATION TOOL ROUTES
+# ---------------------------------------------------------------------------
+
+@app.route('/projects', methods=['GET'])
+def list_projects():
+    """List all generated projects (JSON files in output/)."""
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    # Sort by modification time (most recently generated first), not alphabetically
+    json_files = sorted(glob.glob(os.path.join(OUTPUT_DIR, '*.json')),
+                        key=lambda f: os.path.getmtime(f), reverse=True)
+    projects = []
+    for jf in json_files:
+        try:
+            with open(jf) as f:
+                proj = json.load(f)
+            projects.append({
+                'filename': os.path.basename(jf),
+                'name': proj['project']['name'],
+                'address': proj['project']['address'],
+                'municipality': proj['project']['municipality'],
+                'generated': proj['project']['generated'],
+                'units': proj['units']['total'],
+            })
+        except (json.JSONDecodeError, KeyError):
+            continue
+    return jsonify(projects)
+
+
+@app.route('/projects/<filename>', methods=['GET'])
+def get_project(filename):
+    """Return a specific project's JSON data."""
+    # Sanitize filename to prevent path traversal
+    safe_name = os.path.basename(filename)
+    if not safe_name.endswith('.json'):
+        safe_name += '.json'
+    filepath = os.path.join(OUTPUT_DIR, safe_name)
+    if not os.path.exists(filepath):
+        return jsonify({'error': 'Project not found'}), 404
+    with open(filepath) as f:
+        return jsonify(json.load(f))
+
+
+@app.route('/present/<filename>')
+def present(filename):
+    """Serve the presentation tool for a specific project.
+    We inject the filename via a small script tag to avoid Jinja/JSX conflicts."""
+    # Read the static presentation HTML and inject the project filename
+    html_path = os.path.join(os.path.dirname(__file__), 'templates', 'presentation.html')
+    with open(html_path) as f:
+        html = f.read()
+    # Replace the placeholder with the actual filename
+    html = html.replace('__PROJECT_FILENAME__', filename)
+    from flask import Response
+    return Response(html, mimetype='text/html')
+
+
+@app.route('/present')
+def present_latest():
+    """Serve the presentation tool with the most recent project."""
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    json_files = sorted(glob.glob(os.path.join(OUTPUT_DIR, '*.json')),
+                        key=lambda f: os.path.getmtime(f), reverse=True)
+    if not json_files:
+        flash('No projects generated yet. Upload a 1A first.')
+        return redirect(url_for('index'))
+    latest = os.path.basename(json_files[0])
+    return redirect(url_for('present', filename=latest.replace('.json', '')))
+
+
+def _project_json_to_data(proj):
+    """
+    Reconstruct the parse_1a()-style data dict from a project JSON.
+    populate_template() expects keys like 'unit_types', 'parking_underground',
+    'cap_rates' (list), 'mgmt_fee_pct', etc. The project JSON uses a different
+    structure (nested objects, cap_rates as dict), so we translate here.
+    """
+    data = {}
+    data['title'] = "Estimated Stabilized Value - " + proj['project']['address']
+    data['address'] = proj['project']['address']
+    data['unit_types'] = [
+        {'label': u['label'], 'sf': u['sf'], 'count': u['count'], 'rent': u['rent']}
+        for u in proj['units']['types']
+    ]
+    data['total_units'] = proj['units']['total']
+    data['total_rentable_sf'] = proj['areas']['total_rentable_sf']
+    data['gfa'] = proj['areas']['gfa']
+    data['amenity_sf'] = proj['areas']['amenity_sf']
+
+    data['parking_underground'] = proj['parking']['underground']
+    data['parking_visitor'] = proj['parking']['visitor']
+    data['parking_retail'] = proj['parking']['retail']
+    data['storage'] = proj['storage']
+
+    # Submetering can be a number or an object in the JSON
+    sub = proj.get('submetering', 0)
+    if isinstance(sub, dict):
+        data['submetering'] = sub
+    else:
+        data['submetering'] = {'count': proj['units']['total'], 'fee': 20}
+
+    data['commercial'] = {
+        'sf': proj['commercial']['sf'],
+        'rate': proj['commercial']['rate'],
+    }
+    data['commercial_vacancy'] = proj['commercial']['vacancy']
+    data['vacancy_rate'] = proj['vacancy_rate']
+
+    # cap_rates: populate_template expects a list [best, base, worst]
+    data['cap_rates'] = [
+        proj['cap_rates']['best'],
+        proj['cap_rates']['base'],
+        proj['cap_rates']['worst'],
+    ]
+
+    data['mgmt_fee_pct'] = proj['opex']['mgmt_fee_pct']
+    data['tax_rate'] = proj['opex']['tax_rate']
+    data['assessed_value'] = proj['opex']['assessed_value_per_unit']
+    data['reserve_pct'] = proj['opex']['reserve_pct']
+
+    # Expenses sub-dict — populate_template reads from data['expenses']
+    # for per-unit costs; if missing it uses defaults, so we populate them
+    data['expenses'] = {
+        'rm': proj['opex']['rm_per_unit'],
+        'staffing': proj['opex']['staffing_per_unit'],
+        'insurance': proj['opex']['insurance_per_unit'],
+        'marketing': proj['opex']['marketing_per_unit'],
+        'ga': proj['opex']['ga_per_unit'],
+    }
+
+    return data
+
+
+@app.route('/export-scenario', methods=['POST'])
+def export_scenario():
+    """
+    Re-generate a Reverse 1B Excel with adjusted sensitivity values.
+    Receives JSON with the project filename and slider overrides,
+    applies them to the original project data, and returns a new Excel.
+    """
+    payload = request.get_json()
+    if not payload:
+        return jsonify({'error': 'No JSON payload'}), 400
+
+    filename = payload.get('filename', '')
+    if not filename:
+        return jsonify({'error': 'Missing filename'}), 400
+
+    # Load the original project JSON
+    safe_name = os.path.basename(filename)
+    if not safe_name.endswith('.json'):
+        safe_name += '.json'
+    json_path = os.path.join(OUTPUT_DIR, safe_name)
+    if not os.path.exists(json_path):
+        return jsonify({'error': 'Project not found'}), 404
+
+    with open(json_path) as f:
+        proj = json.load(f)
+
+    # Reconstruct the data dict that populate_template() expects
+    data = _project_json_to_data(proj)
+
+    # Apply scenario overrides
+    rent_multiplier = payload.get('rentMultiplier', 1.0)
+    new_cap_rate = payload.get('capRate')
+    new_vacancy = payload.get('vacancyRate')
+    construction_psf = payload.get('constructionPsf')
+
+    # Adjust rents by multiplier
+    if rent_multiplier and rent_multiplier != 1.0:
+        for ut in data['unit_types']:
+            ut['rent'] = round(ut['rent'] * rent_multiplier, 2)
+
+    # Update cap rates — shift best/worst proportionally to base change
+    if new_cap_rate and len(data['cap_rates']) >= 3:
+        original_base = data['cap_rates'][1]
+        if original_base > 0:
+            shift = new_cap_rate - original_base
+            data['cap_rates'][0] = round(data['cap_rates'][0] + shift, 6)
+            data['cap_rates'][1] = round(new_cap_rate, 6)
+            data['cap_rates'][2] = round(data['cap_rates'][2] + shift, 6)
+
+    # Update vacancy rate
+    if new_vacancy is not None:
+        data['vacancy_rate'] = new_vacancy
+
+    # Log construction PSF override (it doesn't map directly to Excel cells)
+    if construction_psf:
+        app.logger.info(
+            f"Scenario export for {safe_name}: construction PSF override = ${construction_psf}/sf "
+            f"(not written to Excel — Altus guide reference only)"
+        )
+
+    # Resolve municipality for DC rates
+    municipality = None
+    muni_name = proj['project'].get('municipality', '')
+    if muni_name and muni_name != 'Not selected':
+        for m in MUNICIPALITIES:
+            if m['name'] == muni_name:
+                municipality = m
+                break
+
+    building_type = proj['project'].get('building_type', 'high-rise')
+
+    # Generate the scenario Excel
+    project_name = data['address'].split(',')[0].strip().replace(' ', '_') or "project"
+    project_name = re.sub(r'[^\w\-]', '', project_name)
+    today = date.today().strftime("%Y%m%d")
+    output_filename = f"Reverse_1B_{project_name}_{today}_scenario.xlsx"
+    output_path = os.path.join(OUTPUT_DIR, output_filename)
+
+    try:
+        populate_template(data, output_path, municipality=municipality, building_type=building_type)
+
+        # Validate before delivering
+        validation = validate_output(output_path, data)
+        if not validation['passed']:
+            error_list = '; '.join(validation['errors'][:5])
+            os.unlink(output_path)
+            return jsonify({'error': f'Validation failed: {error_list}'}), 500
+
+        return send_file(
+            output_path,
+            as_attachment=True,
+            download_name=output_filename,
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        )
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ---------------------------------------------------------------------------
+# REIMPORT — upload a Noor-reviewed Reverse 1B to update presentation data
+# ---------------------------------------------------------------------------
+
+@app.route('/reimport', methods=['GET'])
+def reimport_page():
+    """Show the reimport upload form."""
+    return render_template('reimport.html')
+
+
+@app.route('/reimport', methods=['POST'])
+def reimport():
+    """
+    Accept a reviewed Reverse 1B Excel, extract all data into JSON,
+    and redirect to the presentation tool with verified numbers.
+    """
+    if 'reverse1b' not in request.files:
+        flash('Please upload a Reverse 1B Excel file.')
+        return redirect(url_for('reimport_page'))
+
+    file = request.files['reverse1b']
+    if file.filename == '':
+        flash('Please select a file.')
+        return redirect(url_for('reimport_page'))
+
+    ext = os.path.splitext(file.filename)[1].lower()
+    if ext != '.xlsx':
+        flash('File must be .xlsx format (the Reverse 1B output).')
+        return redirect(url_for('reimport_page'))
+
+    # Save to temp
+    with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
+        file.save(tmp.name)
+        tmp_path = tmp.name
+
+    try:
+        # Extract data from the reviewed Reverse 1B
+        project = import_reverse_1b(tmp_path)
+
+        # Generate JSON filename
+        project_name = project['project']['name'].replace(' ', '_')
+        project_name = re.sub(r'[^\w\-]', '', project_name)
+        today = date.today().strftime("%Y%m%d")
+        json_filename = f"Reverse_1B_{project_name}_{today}_verified.json"
+        json_path = os.path.join(OUTPUT_DIR, json_filename)
+
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        with open(json_path, 'w') as f:
+            json.dump(project, f, indent=2)
+
+        # Diff against original generation (Improvement #5)
+        diff_changes = []
+        try:
+            # Find the original (non-verified, non-scenario) JSON by project name
+            for fn in os.listdir(OUTPUT_DIR):
+                if (fn.endswith('.json') and project_name in fn
+                        and '_verified' not in fn and '_scenario' not in fn):
+                    orig_path = os.path.join(OUTPUT_DIR, fn)
+                    with open(orig_path) as f:
+                        original = json.load(f)
+                    diff_result = diff_projects(original, project)
+                    diff_changes = diff_result.get('changes', [])
+                    # Save structured diff
+                    diff_path = os.path.join(OUTPUT_DIR,
+                                             json_filename.replace('.json', '_diff.json'))
+                    with open(diff_path, 'w') as f:
+                        json.dump(diff_result, f, indent=2)
+                    break
+        except Exception:
+            pass  # non-critical — don't break reimport
+
+        # Redirect to presentation tool
+        present_slug = json_filename.replace('.json', '')
+        return redirect(url_for('results_reimport',
+                                present=present_slug,
+                                address=project['project']['address'],
+                                units=project['units']['total'],
+                                diff='|'.join(diff_changes) if diff_changes else ''))
+
+    except Exception as e:
+        flash(f'Error reading Reverse 1B: {str(e)}')
+        return redirect(url_for('reimport_page'))
+
+    finally:
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+
+
+@app.route('/results-reimport')
+def results_reimport():
+    """Post-reimport results page — shows presentation link only (no Excel download)."""
+    present = request.args.get('present', '')
+    address = request.args.get('address', 'Project')
+    units = request.args.get('units', '')
+    diff_str = request.args.get('diff', '')
+    diff_changes = [d for d in diff_str.split('|') if d] if diff_str else []
+    return render_template('results_reimport.html',
+                           present_slug=present,
+                           address=address,
+                           units=units,
+                           diff_changes=diff_changes)
 
 
 if __name__ == '__main__':
