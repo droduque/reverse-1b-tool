@@ -608,6 +608,30 @@ def _parse_sheet(cell, max_row):
 
 
 # ---------------------------------------------------------------------------
+# IRR SOLVER — Newton-Raphson method (used by both verified and Python metrics)
+# ---------------------------------------------------------------------------
+
+def _solve_irr(cash_flows, initial_guess=0.12):
+    """
+    Solve for IRR using Newton-Raphson method on NPV(r) = 0.
+    Returns the rate as a decimal (0.12 = 12%), or the last guess if
+    convergence fails. Mirrors the JS version in presentation.html.
+    """
+    guess = initial_guess
+    for _ in range(50):
+        npv = sum(c / (1 + guess) ** y for y, c in enumerate(cash_flows))
+        dnpv = sum(-y * c / (1 + guess) ** (y + 1) for y, c in enumerate(cash_flows) if y > 0)
+        if abs(dnpv) < 1e-10:
+            break
+        next_g = guess - npv / dnpv
+        if abs(next_g - guess) < 1e-8:
+            guess = next_g
+            break
+        guess = max(-0.5, min(next_g, 2.0))
+    return guess
+
+
+# ---------------------------------------------------------------------------
 # UNIT MIX CONSOLIDATION — groups N unit types into 3 rows
 # ---------------------------------------------------------------------------
 
@@ -1659,7 +1683,7 @@ def calculate_verified_metrics(project, xlsx_path=None):
                 if k in excel:
                     py_metrics[k] = excel[k]
 
-            exact_keys = ['noi', 'value', 'dscr', 'ltv', 'perm_loan', 'annual_debt']
+            exact_keys = {'noi', 'value', 'dscr', 'ltv', 'perm_loan', 'annual_debt'}
 
             P = project
             fin = P.get('financing', {})
@@ -1672,7 +1696,7 @@ def calculate_verified_metrics(project, xlsx_path=None):
             if 'total_dev_cost' in excel:
                 total_dev_cost = excel['total_dev_cost']
                 py_metrics['total_dev_cost'] = total_dev_cost
-                exact_keys.append('total_dev_cost')
+                exact_keys.add('total_dev_cost')
             else:
                 total_dev_cost = py_metrics.get('total_dev_cost', 0)
 
@@ -1685,7 +1709,7 @@ def calculate_verified_metrics(project, xlsx_path=None):
                 py_metrics['merchant_return'] = py_metrics['profit'] / total_dev_cost
                 # Profit and return are pure arithmetic from exact TDC + exact Value
                 if 'total_dev_cost' in exact_keys:
-                    exact_keys.extend(['profit', 'merchant_return'])
+                    exact_keys.update(['profit', 'merchant_return'])
 
                 constr_loan_pct = fin.get('construction_loan_pct', 0.90)
                 constr_equity = total_dev_cost * (1 - constr_loan_pct)
@@ -1705,7 +1729,7 @@ def calculate_verified_metrics(project, xlsx_path=None):
                     if 0 < merchant_irr < 5:
                         py_metrics['merchant_irr'] = merchant_irr
                         if 'total_dev_cost' in exact_keys:
-                            exact_keys.append('merchant_irr')
+                            exact_keys.add('merchant_irr')
 
                 # Hold IRR — 10-year annual cash flow model (matches Sheet 11)
                 perm_rate = fin.get('perm_loan_rate', 0.037)
@@ -1756,24 +1780,13 @@ def calculate_verified_metrics(project, xlsx_path=None):
                     exit_proceeds = exit_value * (1 - selling_cost_pct) - max(0, exit_debt_balance)
                     cf.append((noi_stab * (1.02 ** exit_years_from_stab) - annual_debt) + exit_proceeds)
 
-                    # Newton's method for IRR
-                    guess = 0.12
-                    for _ in range(50):
-                        npv = sum(c / (1 + guess) ** y for y, c in enumerate(cf))
-                        dnpv = sum(-y * c / (1 + guess) ** (y + 1) for y, c in enumerate(cf) if y > 0)
-                        if abs(dnpv) < 1e-10:
-                            break
-                        next_g = guess - npv / dnpv
-                        if abs(next_g - guess) < 1e-8:
-                            guess = next_g
-                            break
-                        guess = max(-0.5, min(next_g, 2.0))
+                    guess = _solve_irr(cf)
                     if 0 < guess < 5:
                         py_metrics['hold_irr'] = guess
                         if 'total_dev_cost' in exact_keys:
-                            exact_keys.append('hold_irr')
+                            exact_keys.add('hold_irr')
 
-            py_metrics['exact_keys'] = exact_keys
+            py_metrics['exact_keys'] = list(exact_keys)
             return py_metrics
         elif excel:
             excel['exact_keys'] = list(excel.keys())
@@ -1907,7 +1920,6 @@ def _calculate_python_metrics(project):
         fin = P['financing']
         constr_loan_pct = fin.get('construction_loan_pct', 0.90)
         constr_rate = fin.get('construction_loan_rate', 0.0587)
-        total_dev_months = predev + construction
 
         # Monthly draw schedule for construction interest
         # Pre-dev: costs drawn evenly, construction: drawn evenly
@@ -2015,19 +2027,7 @@ def _calculate_python_metrics(project):
             exit_proceeds = exit_value * (1 - selling_cost_pct) - max(0, exit_debt_balance)
             cf.append((noi_stabilized * (1.02 ** exit_years_from_stab) - annual_debt) + exit_proceeds)
 
-            # Newton's method for IRR
-            guess = 0.12
-            for _ in range(50):
-                npv = sum(c / (1 + guess) ** y for y, c in enumerate(cf))
-                dnpv = sum(-y * c / (1 + guess) ** (y + 1) for y, c in enumerate(cf) if y > 0)
-                if abs(dnpv) < 1e-10:
-                    break
-                next_g = guess - npv / dnpv
-                if abs(next_g - guess) < 1e-8:
-                    guess = next_g
-                    break
-                guess = max(-0.5, min(next_g, 2.0))
-            hold_irr = guess
+            hold_irr = _solve_irr(cf)
 
         # Build verified dict (same keys as import_reverse_1b)
         verified = {}

@@ -270,9 +270,8 @@ def generate():
                 json.dump(proj, f, indent=2)
 
         # Financial sanity checks (Improvement #2 + #4)
-        with open(json_path) as f:
-            proj_data = json.load(f)
-        fin_check = validate_financials(proj_data, proj_data.get('verified'))
+        # Reuse proj dict from above — no need to re-read the JSON file
+        fin_check = validate_financials(proj, proj.get('verified'))
         all_warnings = parse_warnings + fin_check.get('warnings', [])
 
         # Municipality warning
