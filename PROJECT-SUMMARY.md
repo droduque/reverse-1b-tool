@@ -1,6 +1,6 @@
 # SVN Rock — Project Summary
 
-Last Updated: 2026-03-12
+Last Updated: 2026-03-16
 
 ## Phase 1: 1A to Reverse 1B Populator
 
@@ -80,6 +80,11 @@ Last Updated: 2026-03-12
 - [x] **Reimport flow** — Noor uploads reviewed Excel, tool extracts verified metrics
 - [x] **Results pages** — generation results + reimport results with warning banners
 - [x] **Verified metrics at baseline** — exact Excel values shown when sliders at default
+- [x] **Financing program selection** — dropdown in upload form (CMHC MLI Select, CMHC Standard, Conventional)
+- [x] **Sheet 6 D31-D35 written during generation** — financing parameters now flow into template (was never written before)
+- [x] **Interest rate slider exports to Excel** — slider value now flows through to exported Excel on /export-scenario (was silently discarded before)
+- [x] **All 5 projects tested across all 3 financing programs** — passes validation
+- [x] **Backward compatible with older JSON files** — auto-upgrades to CMHC MLI Select defaults
 
 ### IRR Accuracy (verified 2026-03-12 vs Excel Sheets 10 & 11)
 - **Merchant IRR: 27.96% vs 27.90% (0.06pt gap)** — was 0.82pt before fix

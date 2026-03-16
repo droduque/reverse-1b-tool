@@ -30,6 +30,7 @@ from populate_reverse_1b import (
     diff_projects,
     _log_municipality_gap,
     HIGH_RISE_FLOOR_THRESHOLD,
+    FINANCING_PROGRAMS,
 )
 from data_freshness import get_freshness_report, get_alerts
 from validate_output import validate_output, validate_financials
@@ -179,6 +180,10 @@ def generate():
     if building_type not in ('mid-rise', 'high-rise'):
         building_type = 'high-rise'
 
+    # Get financing program selection
+    fp_key = request.form.get('financing_program', 'cmhc_mli_select')
+    financing_program = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_select'])
+
     # Get property tax overrides (empty string = use 1A value, 0 = explicitly zero)
     tax_overrides = {}
     tax_rate_str = request.form.get('tax_rate', '').strip()
@@ -228,12 +233,12 @@ def generate():
         if 'assessed_value' in tax_overrides:
             data['assessed_value'] = tax_overrides['assessed_value']
 
-        log = populate_template(data, output_path, municipality=municipality, building_type=building_type)
+        log = populate_template(data, output_path, municipality=municipality, building_type=building_type, financing_program=financing_program)
 
         # Also export the project JSON for the presentation tool
         json_filename = f"Reverse_1B_{project_name}_{today}.json"
         json_path = os.path.join(OUTPUT_DIR, json_filename)
-        export_project_json(data, json_path, municipality=municipality, building_type=building_type)
+        export_project_json(data, json_path, municipality=municipality, building_type=building_type, financing_program=financing_program)
 
         # Save the generation log — documents every cell written, estimated,
         # and skipped. Serves as an audit trail for Noor's review.
@@ -506,6 +511,8 @@ def export_scenario():
     new_cap_rate = payload.get('capRate')
     new_vacancy = payload.get('vacancyRate')
     construction_psf = payload.get('constructionPsf')
+    new_interest_rate = payload.get('interestRate')
+    scenario_program_key = payload.get('programKey')
 
     # Adjust rents by multiplier
     if rent_multiplier and rent_multiplier != 1.0:
@@ -543,6 +550,12 @@ def export_scenario():
 
     building_type = proj['project'].get('building_type', 'high-rise')
 
+    # Resolve financing program — prefer payload key, fall back to original JSON
+    fp_key = scenario_program_key or proj.get('financing', {}).get('program_key', 'cmhc_mli_select')
+    financing_program = dict(FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_select']))
+    if new_interest_rate is not None:
+        financing_program['interest_rate'] = new_interest_rate
+
     # Generate the scenario Excel
     project_name = data['address'].split(',')[0].strip().replace(' ', '_') or "project"
     project_name = re.sub(r'[^\w\-]', '', project_name)
@@ -551,7 +564,7 @@ def export_scenario():
     output_path = os.path.join(OUTPUT_DIR, output_filename)
 
     try:
-        populate_template(data, output_path, municipality=municipality, building_type=building_type)
+        populate_template(data, output_path, municipality=municipality, building_type=building_type, financing_program=financing_program)
 
         # Validate before delivering
         validation = validate_output(output_path, data)

@@ -517,7 +517,9 @@ function App() {
     fetch('/projects/' + filename)
       .then(r => { if (!r.ok) throw new Error('Project not found'); return r.json(); })
       .then(data => {
-        // Ensure CMHC fields exist (backwards compat with older JSON files)
+        // Ensure financing fields exist (backwards compat with older JSON files)
+        if (!data.financing.program_label) data.financing.program_label = 'CMHC MLI Select';
+        if (!data.financing.program_key) data.financing.program_key = 'cmhc_mli_select';
         if (!data.financing.perm_loan_dscr) data.financing.perm_loan_dscr = 1.1;
         if (!data.financing.cmhc_premium) data.financing.cmhc_premium = 0.0518;
         if (data.financing.perm_loan_ltv < 0.9) {
@@ -632,6 +634,8 @@ function App() {
   // When verified & at baseline, use exact Excel values; otherwise use JS calculations.
   // Use != null instead of truthiness to handle legitimate zero/negative values (e.g. break-even profit).
   const vv = (key, fallback) => showVerified && V[key] != null ? V[key] : fallback;
+  // Dev cost breakdown — use verified Excel values at baseline, JS estimates otherwise
+  const dvb = showVerified && V?.dev_breakdown ? V.dev_breakdown : null;
   const D = {
     noi:             vv('noi',               R.noiStabilized),
     valueBase:       vv('value',             R.valueBase),
@@ -644,6 +648,15 @@ function App() {
     annualDebt:      vv('annual_debt',       R.annualDebt),
     dscr:            vv('dscr',              R.dscr),
     impliedLTV:      vv('ltv',              R.impliedLTV),
+    // Dev cost line items — exact from Sheet 9 at baseline
+    totalLand:       dvb ? dvb.land         : R.totalLand,
+    totalConstruction: dvb ? dvb.construction : R.totalConstruction,
+    profFees:        dvb ? dvb.prof_fees    : R.profFees,
+    devMgmt:         dvb ? dvb.dev_mgmt     : R.devMgmt,
+    totalPermits:    dvb ? dvb.permits      : R.totalPermits,
+    totalMarketing:  dvb ? dvb.marketing    : R.totalMarketing,
+    financingCost:   dvb ? dvb.financing    : R.financingCost,
+    netLeaseUp:      dvb ? dvb.lease_up     : R.netLeaseUp,
   };
 
   // Rent delta for the killer callout
@@ -748,18 +761,16 @@ function App() {
           <h2 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 400, marginBottom: 20 }}>Cost Breakdown</h2>
           {(() => {
             const items = [
-              { l: 'Land', v: R.totalLand, c: '#8B7355' },
-              { l: 'Construction', v: R.totalConstruction, c: C.gold },
-              { l: 'Professional Fees', v: R.profFees, c: C.blue },
-              { l: 'Dev Management', v: R.devMgmt, c: '#7BA4C9' },
-              { l: 'Permits & DC', v: R.totalPermits, c: '#9B7DD4' },
-              { l: 'Marketing & Leasing', v: R.totalMarketing, c: '#5BA88C' },
-              { l: 'Financing', v: R.financingCost, c: '#D4837D' },
-              { l: 'Lease-Up Income', v: -R.netLeaseUp, c: '#4CAF50' },
+              { l: 'Land', v: D.totalLand, c: '#8B7355' },
+              { l: 'Construction', v: D.totalConstruction, c: C.gold },
+              { l: 'Professional Fees', v: D.profFees, c: C.blue },
+              { l: 'Dev Management', v: D.devMgmt, c: '#7BA4C9' },
+              { l: 'Permits & DC', v: D.totalPermits, c: '#9B7DD4' },
+              { l: 'Marketing & Leasing', v: D.totalMarketing, c: '#5BA88C' },
+              { l: 'Financing', v: D.financingCost, c: '#D4837D' },
+              { l: 'Lease-Up Income', v: -D.netLeaseUp, c: '#4CAF50' },
             ];
-            // Use JS-calculated total for bar chart proportions (categories are JS-calc'd)
-            // The gold total card below shows verified total when available
-            const total = R.totalDevCost;
+            const total = D.totalDevCost;
             return (
               <div>
                 {/* Stacked bar */}
@@ -821,7 +832,7 @@ function App() {
               tooltip="IRR for a merchant build — develop and sell at stabilization." />
             <MetricCard label={'10-Year Hold IRR' + estLabel('hold_irr')} value={D.holdIRR} fmt="irr"
               sub="Build, hold 10 years, sell" highlight={D.holdIRR > 0.10}
-              tooltip="IRR for a 10-year hold with CMHC refinancing and 2% annual NOI growth." />
+              tooltip={"IRR for a 10-year hold with " + P.financing.program_label + " refinancing and 2% annual NOI growth."} />
           </div>
           <p style={{ color: C.dim, fontSize: 12, marginTop: 14, textAlign: 'center', fontStyle: 'italic' }}>
             {'Adjust assumptions below to stress-test returns.'}
@@ -889,11 +900,11 @@ function App() {
                 baseline={P.vacancy_rate}
                 tooltip="Percentage of residential income lost to vacancy. Well-managed purpose-built rentals in strong markets typically run 2-4%." />
 
-              <Slider label="CMHC Loan Rate" value={interestRate}
+              <Slider label="Loan Rate" value={interestRate}
                 min={0.025} max={0.065} step={0.0025}
                 onChange={setInterestRate} fmt="pct"
                 baseline={P.financing.perm_loan_rate}
-                tooltip="CMHC MLI Select permanent loan rate. Directly impacts debt service, DSCR, cash-on-cash, and hold IRR. Stress-test against rate changes to see the impact on returns." />
+                tooltip={P.financing.program_label + " permanent loan rate. Directly impacts debt service, DSCR, cash-on-cash, and hold IRR. Stress-test against rate changes to see the impact on returns."} />
             </div>
 
             {/* Right: Live Results */}
@@ -952,6 +963,7 @@ function App() {
                   constructionPsf,
                   vacancyRate,
                   interestRate,
+                  programKey: P.financing.program_key,
                 };
                 fetch('/export-scenario', {
                   method: 'POST',
@@ -1031,14 +1043,14 @@ function App() {
           <SectionLabel text="Debt Advisory" />
           <h2 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 400, marginBottom: 8 }}>Financing Preview</h2>
           <p style={{ color: C.dim, fontSize: 14, marginBottom: 8 }}>
-            CMHC MLI Select permanent take-out loan — our debt advisory team can walk through these in detail.
+            {P.financing.program_label} permanent take-out loan — our debt advisory team can walk through these in detail.
           </p>
           <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>
             {[
               { l: 'Max LTV', v: (P.financing.perm_loan_ltv * 100).toFixed(0) + '%' },
               { l: 'Min DSCR', v: P.financing.perm_loan_dscr.toFixed(1) + 'x' },
               { l: 'Amortization', v: P.financing.perm_loan_term + ' yr' },
-              { l: 'CMHC Premium', v: (P.financing.cmhc_premium * 100).toFixed(2) + '%' },
+              ...(P.financing.cmhc_premium > 0 ? [{ l: 'Insurance Premium', v: (P.financing.cmhc_premium * 100).toFixed(2) + '%' }] : []),
             ].map(({ l, v }) => (
               <div key={l} style={{
                 fontFamily: MONO, fontSize: 12, color: C.dim,
@@ -1053,13 +1065,13 @@ function App() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
             {[
               { l: 'Permanent Loan', v: fmtCurrency(D.permLoan), s: (D.impliedLTV * 100).toFixed(1) + '% LTV (DSCR-constrained)',
-                tip: 'CMHC MLI Select insured loan. Sized to the lesser of 95% LTV or 1.1x DSCR — in most cases DSCR is the binding constraint.' },
+                tip: P.financing.program_label + ' loan. Sized to the lesser of ' + (P.financing.perm_loan_ltv * 100).toFixed(0) + '% LTV or ' + P.financing.perm_loan_dscr.toFixed(1) + 'x DSCR — in most cases DSCR is the binding constraint.' },
               { l: 'Annual Debt Service', v: fmtCurrency(D.annualDebt), s: (R.permRate * 100).toFixed(2) + '% / ' + P.financing.perm_loan_term + 'yr amort',
-                tip: 'Annual mortgage payment (principal + interest) on the CMHC permanent loan. Rate adjustable in the sensitivity section above.' },
-              { l: 'Debt Service Coverage', v: D.dscr.toFixed(2) + 'x', s: D.dscr >= P.financing.perm_loan_dscr ? 'Meets CMHC minimum' : 'Below CMHC minimum',
-                tip: 'NOI divided by annual debt service. CMHC MLI Select requires minimum 1.10x coverage.' },
-              { l: 'CMHC Premium', v: fmtCurrency(R.cmhcPremium), s: (P.financing.cmhc_premium * 100).toFixed(2) + '% of loan',
-                tip: 'One-time insurance premium for the CMHC loan — the cost of accessing favorable terms (lower rate, longer amortization).' },
+                tip: 'Annual mortgage payment (principal + interest) on the ' + P.financing.program_label + ' permanent loan. Rate adjustable in the sensitivity section above.' },
+              { l: 'Debt Service Coverage', v: D.dscr.toFixed(2) + 'x', s: D.dscr >= P.financing.perm_loan_dscr ? 'Meets minimum' : 'Below minimum',
+                tip: 'NOI divided by annual debt service. ' + P.financing.program_label + ' requires minimum ' + P.financing.perm_loan_dscr.toFixed(1) + 'x coverage.' },
+              ...(P.financing.cmhc_premium > 0 ? [{ l: 'Insurance Premium', v: fmtCurrency(R.cmhcPremium), s: (P.financing.cmhc_premium * 100).toFixed(2) + '% of loan',
+                tip: 'One-time insurance premium — the cost of accessing favorable terms (lower rate, longer amortization).' }] : []),
               { l: 'Equity Requirement', v: R.equity > 0 ? fmtCurrency(R.equity) : '$0',
                 s: R.equity > 0 ? 'Total Dev Cost − Loan' : 'Fully financed by debt',
                 tip: 'The gap between total development cost and the permanent loan. When the loan exceeds dev costs, no equity is needed.' },
@@ -1090,7 +1102,7 @@ function App() {
             { l: 'Construction Costs', v: 'Altus Guide', d: 'Through Jun 2026' },
             { l: 'Development Charges', v: P.project.municipality, d: '2026 Rates' },
             { l: 'Property Taxes', v: P.project.municipality.split(',')[0], d: '2025-2026 Rates' },
-            { l: 'Permanent Financing', v: 'CMHC MLI Select', d: 'Current Terms' },
+            { l: 'Permanent Financing', v: P.financing.program_label, d: 'Current Terms' },
           ].map(({ l, v, d }) => (
             <div key={l} style={{ textAlign: 'center' }}>
               <span style={{ color: C.dim, fontSize: 13 }}>{l}: </span>

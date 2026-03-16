@@ -42,6 +42,35 @@ PARKING_SF_PER_SPACE = 350
 # High-rise threshold — 7+ storeys per Noor (2026-03-09)
 HIGH_RISE_FLOOR_THRESHOLD = 7
 
+# Financing programs — Sheet 6 D31:D35 (permanent take-out loan parameters)
+# Each program maps to the same 5 cells: LTV, DSCR, amortization, rate, premium
+FINANCING_PROGRAMS = {
+    'cmhc_mli_select': {
+        'label': 'CMHC MLI Select',
+        'max_ltv': 0.95,
+        'min_dscr': 1.1,
+        'amortization': 40,
+        'interest_rate': 0.037,
+        'cmhc_premium': 0.0518,
+    },
+    'cmhc_standard': {
+        'label': 'CMHC Standard',
+        'max_ltv': 0.95,
+        'min_dscr': 1.1,
+        'amortization': 50,
+        'interest_rate': 0.037,
+        'cmhc_premium': 0.05,
+    },
+    'conventional': {
+        'label': 'Conventional',
+        'max_ltv': 0.75,
+        'min_dscr': 1.2,
+        'amortization': 25,
+        'interest_rate': 0.055,
+        'cmhc_premium': 0,
+    },
+}
+
 # Unit type grouping patterns — match labels to 3 template rows
 # Order matters: checked top-to-bottom, first match wins
 UNIT_GROUP_PATTERNS = [
@@ -680,7 +709,7 @@ def consolidate_unit_mix(unit_types):
 # TEMPLATE WRITER — copies template and writes data to 3 sheets
 # ---------------------------------------------------------------------------
 
-def populate_template(data, output_path, municipality=None, building_type='high-rise'):
+def populate_template(data, output_path, municipality=None, building_type='high-rise', financing_program=None):
     """
     Copy the Reverse 1B template and write parsed 1A data into it.
     Uses the ZIP/XML writer to preserve all drawings, images, and formatting.
@@ -713,6 +742,11 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     sheet1_writes = {}
     sheet4_writes = {}
     sheet5_writes = {}
+    sheet6_writes = {}
+
+    # Resolve financing program — default to CMHC MLI Select
+    if financing_program is None:
+        financing_program = FINANCING_PROGRAMS['cmhc_mli_select']
 
     def queue_write(target, cell_ref, value, description="", force=False):
         """Queue a cell write for later application via XML writer."""
@@ -1019,6 +1053,22 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         log.append("      Noor should verify and update the Altus height category if needed.")
 
     # ===================================================================
+    # SHEET 6: Permanent Financing Parameters (D31:D35)
+    # ===================================================================
+    log.append("")
+    log.append("=" * 60)
+    log.append("SHEET 6: 6. Permanent Financing")
+    log.append("=" * 60)
+    fp_label = financing_program.get('label', 'CMHC MLI Select')
+    log.append(f"  Financing program: {fp_label}")
+
+    queue_write(sheet6_writes, 'D31', financing_program['max_ltv'], f"Max LTV ({fp_label})")
+    queue_write(sheet6_writes, 'D32', financing_program['min_dscr'], f"Min DSCR ({fp_label})")
+    queue_write(sheet6_writes, 'D33', financing_program['amortization'], f"Amortization years ({fp_label})")
+    queue_write(sheet6_writes, 'D34', financing_program['interest_rate'], f"Interest rate ({fp_label})")
+    queue_write(sheet6_writes, 'D35', financing_program['cmhc_premium'], f"CMHC premium ({fp_label})")
+
+    # ===================================================================
     # FLAGS FOR NOOR'S REVIEW
     # ===================================================================
     log.append("")
@@ -1066,6 +1116,8 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         sheet_modifications['xl/worksheets/sheet4.xml'] = _make_modifier(sheet4_writes)
     if sheet5_writes:
         sheet_modifications['xl/worksheets/sheet5.xml'] = _make_modifier(sheet5_writes)
+    if sheet6_writes:
+        sheet_modifications['xl/worksheets/sheet6.xml'] = _make_modifier(sheet6_writes)
 
     save_workbook(TEMPLATE_PATH, output_path, sheet_modifications, log)
 
@@ -1408,7 +1460,7 @@ def import_reverse_1b(xlsx_path):
 # PROJECT JSON EXPORT — for the presentation tool
 # ---------------------------------------------------------------------------
 
-def export_project_json(data, output_path, municipality=None, building_type='high-rise'):
+def export_project_json(data, output_path, municipality=None, building_type='high-rise', financing_program=None):
     """
     Export project data as a JSON file for the presentation/sensitivity tool.
     Contains all inputs needed to calculate revenue, costs, and valuation
@@ -1455,6 +1507,15 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
     # Construction cost per SF — derive from Altus guide baseline
     # The template has construction at ~$453/SF of GFA for high-rise in GTA
     construction_cost_psf = round(65_683_716 / 145_000) if building_type == 'high-rise' else round(45_000_000 / 145_000)
+
+    # Resolve financing program for JSON export
+    if financing_program and isinstance(financing_program, dict) and 'label' in financing_program:
+        fp = financing_program
+        # Find the key by matching the dict
+        fp_key = next((k for k, v in FINANCING_PROGRAMS.items() if v is fp), 'cmhc_mli_select')
+    else:
+        fp_key = financing_program if isinstance(financing_program, str) else 'cmhc_mli_select'
+        fp = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_select'])
 
     project = {
         'project': {
@@ -1528,12 +1589,14 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
             # Construction financing (Sheet 5 rows 67-71)
             'construction_loan_pct': 0.90,   # 90% debt / 10% equity
             'construction_loan_rate': 0.0587, # blended (15% mezz @ 7.95% + 75% bank @ 5.45%)
-            # CMHC MLI Select permanent take-out loan (Sheet 6 rows 27-35)
-            'perm_loan_ltv': 0.95,       # max LTV (DSCR usually binds first)
-            'perm_loan_dscr': 1.1,       # minimum NOI coverage
-            'perm_loan_rate': 0.037,     # CMHC insured rate
-            'perm_loan_term': 40,        # amortization years
-            'cmhc_premium': 0.0518,      # insurance premium on loan amount
+            # Permanent take-out loan (Sheet 6 rows 27-35) — from selected program
+            'program_key': fp_key,
+            'program_label': fp['label'],
+            'perm_loan_ltv': fp['max_ltv'],
+            'perm_loan_dscr': fp['min_dscr'],
+            'perm_loan_rate': fp['interest_rate'],
+            'perm_loan_term': fp['amortization'],
+            'cmhc_premium': fp['cmhc_premium'],
         },
         'schedule': {
             'land_months': 0,
@@ -1555,22 +1618,150 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
 
 def _extract_excel_metrics(xlsx_path):
     """
-    Evaluate formulas using the 'formulas' library. Extracts:
+    Extract verified metrics by recalculating the xlsx with LibreOffice
+    headless mode, then reading the cached formula results with openpyxl.
 
-    From Sheet 2 (Exec Summary) — exact:
-      NOI, Value, DSCR, LTV, Perm Loan, Annual Debt
+    This gives us EVERY value Excel would show — no estimation, no
+    proportional splits, no formulas library limitations. LibreOffice
+    evaluates the full Altus CHOOSE chain, TODAY()-based escalation,
+    construction interest draw schedules, and all other formulas that
+    the Python 'formulas' library can't handle.
 
-    From Sheet 9 (Development Costs) — exact where evaluable:
-      Land (H16), Permits (H59), Marketing (H66), Lease-up (H87),
-      Loan fees (H75), Financing contingency (H79)
-
-    From Sheet 5 (Key Assumptions) — exact:
-      Construction cost PSF (F48), Commissions (F61)
-
-    Construction, prof fees, dev mgmt, and construction interest
-    can't be evaluated (Altus/CHOOSE chain + wide SUM), but with
-    exact construction PSF from Sheet 5, we derive them precisely.
+    Falls back to the 'formulas' library if LibreOffice is unavailable.
     """
+    # Try LibreOffice recalculation first — gives ALL values exactly
+    recalc_result = _extract_via_libreoffice(xlsx_path)
+    if recalc_result:
+        return recalc_result
+
+    # Fallback: formulas library (partial — can't handle Altus CHOOSE chain)
+    return _extract_via_formulas_library(xlsx_path)
+
+
+def _extract_via_libreoffice(xlsx_path):
+    """Recalculate with LibreOffice headless and read all cached values."""
+    import subprocess
+    import tempfile
+    import shutil
+
+    # Find LibreOffice
+    soffice = None
+    for path in ['/Applications/LibreOffice.app/Contents/MacOS/soffice',
+                 '/opt/homebrew/bin/soffice', '/usr/bin/soffice',
+                 '/usr/local/bin/soffice']:
+        if os.path.exists(path):
+            soffice = path
+            break
+    if not soffice:
+        return None
+
+    try:
+        # Copy to temp dir for recalculation (don't modify the output file)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_xlsx = os.path.join(tmpdir, os.path.basename(xlsx_path))
+            shutil.copy2(xlsx_path, tmp_xlsx)
+
+            # Recalculate and re-export as xlsx
+            proc = subprocess.run(
+                [soffice, '--headless', '--calc', '--convert-to', 'xlsx',
+                 '--outdir', tmpdir, tmp_xlsx],
+                capture_output=True, timeout=30
+            )
+            if proc.returncode != 0:
+                return None
+
+            # Read recalculated values
+            import openpyxl
+            wb = openpyxl.load_workbook(tmp_xlsx, data_only=True)
+
+            def get_cell(sheet_name, cell_ref):
+                """Read a cell's cached value after recalculation."""
+                try:
+                    ws = wb[sheet_name]
+                    val = ws[cell_ref].value
+                    if val is not None and isinstance(val, (int, float)):
+                        return float(val)
+                except (KeyError, TypeError):
+                    pass
+                return None
+
+            # Find sheets by prefix — names vary slightly across template versions
+            sheet_names = wb.sheetnames
+            S2 = next((s for s in sheet_names if s.startswith('2.')), None)
+            S5 = next((s for s in sheet_names if s.startswith('5.')), None)
+            S9 = next((s for s in sheet_names if s.startswith('9.')), None)
+
+            if not all([S2, S5, S9]):
+                wb.close()
+                return None
+
+            noi = get_cell(S2, 'H9')
+            value = get_cell(S2, 'H11')
+            if not noi or not value:
+                wb.close()
+                return None
+
+            result = {'noi': noi, 'value': value}
+
+            # Sheet 2 — financing metrics (including construction loan/equity for IRR)
+            for key, cell in [('dscr', 'G58'), ('ltv', 'G57'),
+                              ('perm_loan', 'G59'), ('annual_debt', 'G60'),
+                              ('constr_loan', 'G52'), ('constr_equity', 'G53')]:
+                v = get_cell(S2, cell)
+                if v:
+                    result[key] = v
+
+            # Sheet 5 — TDC
+            tdc = get_cell(S5, 'F38')
+            if tdc and tdc > 0:
+                result['total_dev_cost'] = tdc
+            budget = get_cell(S5, 'F36')
+            if budget and budget > 0:
+                result['total_project_budget'] = budget
+
+            # Sheet 9 — ALL dev cost line items (exact after recalculation)
+            dev_items = {
+                'dev_land':         'H16',   # Total land costs
+                'dev_construction': 'H22',   # Total construction costs
+                'dev_prof_fees':    'H41',   # Total professional fees
+                'dev_mgmt':         'H46',   # Total dev management fee
+                'dev_permits':      'H59',   # Total permits & approvals
+                'dev_marketing':    'H66',   # Total marketing & leasing
+                'dev_financing':    'H80',   # Total financing & interest
+                'dev_lease_up':     'H87',   # Total lease-up income
+            }
+            for key, cell in dev_items.items():
+                v = get_cell(S9, cell)
+                if v is not None:
+                    result[key] = v
+
+            # TDC from Sheet 9 as cross-check
+            tdc_s9 = get_cell(S9, 'H89')
+            if tdc_s9:
+                result['total_dev_cost_s9'] = tdc_s9
+
+            # IRRs directly from Excel (exact, no approximation needed)
+            S10 = next((s for s in sheet_names if s.startswith('10.')), None)
+            S11 = next((s for s in sheet_names if s.startswith('11.')), None)
+            if S10:
+                mirr = get_cell(S10, 'G105')
+                if mirr and 0 < mirr < 5:
+                    result['merchant_irr_excel'] = mirr
+            if S11:
+                hirr = get_cell(S11, 'B67')
+                if hirr and 0 < hirr < 5:
+                    result['hold_irr_excel'] = hirr
+
+            wb.close()
+            return result
+
+    except Exception as e:
+        print(f"  [libreoffice] Warning: {e}")
+        return None
+
+
+def _extract_via_formulas_library(xlsx_path):
+    """Fallback: use Python formulas library (partial coverage)."""
     try:
         import formulas
         import numpy as np
@@ -1609,7 +1800,6 @@ def _extract_excel_metrics(xlsx_path):
 
         S2 = "EXEC SUMMARY"
         S5 = "KEY ASSUMPTION"
-        S9 = "DEVELOPMENT COST"
 
         noi = get_val(S2, "H9")
         value = get_val(S2, "H11")
@@ -1618,33 +1808,25 @@ def _extract_excel_metrics(xlsx_path):
 
         result = {'noi': noi, 'value': value}
 
-        # Sheet 2 — financing metrics
         for key, cell in [('dscr', 'G58'), ('ltv', 'G57'),
                           ('perm_loan', 'G59'), ('annual_debt', 'G60')]:
             v = get_val(S2, cell)
             if v:
                 result[key] = v
 
-        # Sheet 5 — total development cost (exact, formula-evaluated)
-        # F38 = TDC (92% of total project budget, remaining 8% = profit)
-        # F36 = total project budget (TDC + profit)
-        # F82 = net lease-up income (negative = reduces cost)
         tdc = get_val(S5, "F38")
         if tdc and tdc > 0:
             result['total_dev_cost'] = tdc
         budget = get_val(S5, "F36")
         if budget and budget > 0:
             result['total_project_budget'] = budget
-        lease_up = get_val(S5, "F82")
-        if lease_up:
-            result['net_lease_up'] = lease_up
 
         return result
 
     except ImportError:
         return None
     except Exception as e:
-        print(f"  [extract_excel] Warning: {e}")
+        print(f"  [formulas] Warning: {e}")
         return None
 
 
@@ -1690,17 +1872,42 @@ def calculate_verified_metrics(project, xlsx_path=None):
             sched = P.get('schedule', {})
             units_total = P['units']['total']
 
-            # ── TDC: exact from Sheet 5 F38 ──
-            # The formulas library evaluates the full Sheet 9 → Sheet 5 chain,
-            # including Altus construction costs, DCs, and all line items.
-            if 'total_dev_cost' in excel:
+            # ── TDC: prefer Sheet 9 H89 (bottom-up), fall back to Sheet 5 F38 ──
+            # Sheet 9 H89 sums all 8 cost categories and is the authoritative TDC.
+            # Sheet 5 F38 is a top-down formula that diverges for non-template projects.
+            if 'dev_construction' in excel:
+                # Dev breakdown available — use Sheet 9 H89 as TDC
+                breakdown = {
+                    'land':         excel.get('dev_land', 0),
+                    'construction': excel.get('dev_construction', 0),
+                    'prof_fees':    excel.get('dev_prof_fees', 0),
+                    'dev_mgmt':     excel.get('dev_mgmt', 0),
+                    'permits':      excel.get('dev_permits', 0),
+                    'marketing':    excel.get('dev_marketing', 0),
+                    'financing':    excel.get('dev_financing', 0),
+                    'lease_up':     excel.get('dev_lease_up', 0),
+                }
+                py_metrics['dev_breakdown'] = breakdown
+                exact_keys.add('dev_breakdown')
+                s9_total = excel.get('total_dev_cost_s9')
+                if s9_total and s9_total > 0:
+                    total_dev_cost = s9_total
+                    py_metrics['total_dev_cost'] = s9_total
+                    exact_keys.add('total_dev_cost')
+                elif 'total_dev_cost' in excel:
+                    total_dev_cost = excel['total_dev_cost']
+                    py_metrics['total_dev_cost'] = total_dev_cost
+                    exact_keys.add('total_dev_cost')
+                else:
+                    total_dev_cost = py_metrics.get('total_dev_cost', 0)
+            elif 'total_dev_cost' in excel:
                 total_dev_cost = excel['total_dev_cost']
                 py_metrics['total_dev_cost'] = total_dev_cost
                 exact_keys.add('total_dev_cost')
             else:
                 total_dev_cost = py_metrics.get('total_dev_cost', 0)
 
-            # ── Cascade: profit, returns, IRRs from hybrid TDC + exact value ──
+            # ── Cascade: profit, returns, IRRs from exact TDC + exact value ──
             selling_cost_pct = 0.01
             sales_proceeds = excel['value'] * (1 - selling_cost_pct)
 
@@ -1711,9 +1918,15 @@ def calculate_verified_metrics(project, xlsx_path=None):
                 if 'total_dev_cost' in exact_keys:
                     exact_keys.update(['profit', 'merchant_return'])
 
-                constr_loan_pct = fin.get('construction_loan_pct', 0.90)
-                constr_equity = total_dev_cost * (1 - constr_loan_pct)
-                constr_debt = total_dev_cost * constr_loan_pct
+                # Use actual construction loan/equity from Excel if available
+                # (the loan is sized by formula, NOT always 90% of TDC)
+                if 'constr_loan' in excel and 'constr_equity' in excel:
+                    constr_debt = excel['constr_loan']
+                    constr_equity = excel['constr_equity']
+                else:
+                    constr_loan_pct = fin.get('construction_loan_pct', 0.90)
+                    constr_equity = total_dev_cost * (1 - constr_loan_pct)
+                    constr_debt = total_dev_cost * constr_loan_pct
                 predev = sched.get('predev_months', 12)
                 construction_mo = sched.get('construction_months', 18)
                 lease_up_months = math.ceil(units_total / 15)
@@ -1785,6 +1998,15 @@ def calculate_verified_metrics(project, xlsx_path=None):
                         py_metrics['hold_irr'] = guess
                         if 'total_dev_cost' in exact_keys:
                             exact_keys.add('hold_irr')
+
+            # Override IRRs with exact Excel values when available
+            # (our JS approximation diverges for high-return projects)
+            if 'merchant_irr_excel' in excel:
+                py_metrics['merchant_irr'] = excel['merchant_irr_excel']
+                exact_keys.add('merchant_irr')
+            if 'hold_irr_excel' in excel:
+                py_metrics['hold_irr'] = excel['hold_irr_excel']
+                exact_keys.add('hold_irr')
 
             py_metrics['exact_keys'] = list(exact_keys)
             return py_metrics
