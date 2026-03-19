@@ -181,8 +181,8 @@ def generate():
         building_type = 'high-rise'
 
     # Get financing program selection
-    fp_key = request.form.get('financing_program', 'cmhc_mli_select')
-    financing_program = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_select'])
+    fp_key = request.form.get('financing_program', 'cmhc_mli_100')
+    financing_program = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_100'])
 
     # Get property tax overrides (empty string = use 1A value, 0 = explicitly zero)
     tax_overrides = {}
@@ -551,8 +551,8 @@ def export_scenario():
     building_type = proj['project'].get('building_type', 'high-rise')
 
     # Resolve financing program — prefer payload key, fall back to original JSON
-    fp_key = scenario_program_key or proj.get('financing', {}).get('program_key', 'cmhc_mli_select')
-    financing_program = dict(FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_select']))
+    fp_key = scenario_program_key or proj.get('financing', {}).get('program_key', 'cmhc_mli_100')
+    financing_program = dict(FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_100']))
     if new_interest_rate is not None:
         financing_program['interest_rate'] = new_interest_rate
 

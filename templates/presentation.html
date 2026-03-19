@@ -379,8 +379,8 @@ function calculate(P, overrides = {}) {
   // Sizing uses ANNUAL compounding PV; debt service uses MONTHLY compounding PMT
   const permLTV = P.financing.perm_loan_ltv;    // 0.95 max
   const permDSCR = P.financing.perm_loan_dscr;  // 1.1 minimum
-  const permAmort = P.financing.perm_loan_term;  // 40 years
-  const cmhcPremiumRate = P.financing.cmhc_premium; // 0.0518
+  const permAmort = P.financing.perm_loan_term;  // 50 years (100pts) or 40 years (50pts)
+  const cmhcPremiumRate = P.financing.cmhc_premium; // 0.05 (100pts) or 0.05175 (50pts)
 
   // (a) LTV-based loan
   const ltvLoan = permLTV * valueBase;
@@ -518,15 +518,15 @@ function App() {
       .then(r => { if (!r.ok) throw new Error('Project not found'); return r.json(); })
       .then(data => {
         // Ensure financing fields exist (backwards compat with older JSON files)
-        if (!data.financing.program_label) data.financing.program_label = 'CMHC MLI Select';
-        if (!data.financing.program_key) data.financing.program_key = 'cmhc_mli_select';
+        if (!data.financing.program_label) data.financing.program_label = 'CMHC MLI Select (100pts)';
+        if (!data.financing.program_key) data.financing.program_key = 'cmhc_mli_100';
         if (!data.financing.perm_loan_dscr) data.financing.perm_loan_dscr = 1.1;
-        if (!data.financing.cmhc_premium) data.financing.cmhc_premium = 0.0518;
+        if (!data.financing.cmhc_premium) data.financing.cmhc_premium = 0.05;
         if (data.financing.perm_loan_ltv < 0.9) {
-          // Old JSON had 0.75 LTV — upgrade to CMHC defaults
+          // Old JSON had 0.75 LTV — upgrade to CMHC defaults (100pts)
           data.financing.perm_loan_ltv = 0.95;
           data.financing.perm_loan_rate = 0.037;
-          data.financing.perm_loan_term = 40;
+          data.financing.perm_loan_term = 50;
         }
         setP(data);
         // Compute baseline avg rent $/sf for the slider

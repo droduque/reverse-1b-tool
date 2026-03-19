@@ -194,6 +194,47 @@ def _strip_external_formulas(sheet_root, log_entries):
     return count
 
 
+def _clear_formula_cached_values(sheet_root):
+    """
+    Remove cached <v> values from ALL cells that have formulas.
+
+    Why: the template's formula cells store Birchmount's cached results
+    (e.g. 170 units in F10). Even though fullCalcOnLoad forces Excel to
+    recalculate, other tools (PDF converters, preview apps, data_only
+    readers) may read stale cached values and show wrong numbers.
+    Clearing them guarantees no tool can ever read a stale value.
+    """
+    sheet_data = sheet_root.find(f'{{{NS}}}sheetData')
+    if sheet_data is None:
+        return 0
+
+    count = 0
+    for row_el in sheet_data.findall(f'{{{NS}}}row'):
+        for cell_el in row_el.findall(f'{{{NS}}}c'):
+            f_el = cell_el.find(f'{{{NS}}}f')
+            if f_el is not None:
+                v_el = cell_el.find(f'{{{NS}}}v')
+                if v_el is not None:
+                    cell_el.remove(v_el)
+                    count += 1
+    return count
+
+
+def _clear_formula_cached_values_regex(xml_text):
+    """
+    Regex version of _clear_formula_cached_values for sheets we don't
+    parse with ElementTree. Removes <v>...</v> and <v/> from any <c>
+    element that also contains <f> (any form: <f>, <f ...>, <f/>).
+    """
+    def _strip_v(match):
+        cell = match.group(0)
+        # Match any formula element: <f>, <f ...>, <f/>, <f .../>
+        if re.search(r'<f[\s>\/]', cell):
+            return re.sub(r'<v[^>]*>[^<]*</v>|<v\s*/>', '', cell)
+        return cell
+    return re.sub(r'<c\b[^>]*>.*?</c>', _strip_v, xml_text, flags=re.DOTALL)
+
+
 def write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, description="", force=False):
     """
     Write a value to a cell in the parsed sheet XML.
@@ -305,6 +346,13 @@ def save_workbook(template_path, output_path, sheet_modifications, log_entries):
                     # the formulas library. Cached values are preserved.
                     _strip_external_formulas(root, log_entries)
 
+                    # Clear stale cached values from formula cells so no tool
+                    # (PDF converter, preview, data_only reader) can ever show
+                    # template values instead of recalculated ones.
+                    cleared = _clear_formula_cached_values(root)
+                    if cleared:
+                        log_entries.append(f"  {name}: cleared {cleared} stale cached values from formula cells")
+
                     # Extract only the modified <sheetData> as a string
                     sheet_data = root.find(f'{{{NS}}}sheetData')
                     modified_sd = ET.tostring(sheet_data, encoding='unicode')
@@ -314,17 +362,24 @@ def save_workbook(template_path, output_path, sheet_modifications, log_entries):
                     z_out.writestr(name, patched_xml)
 
                 elif name.startswith('xl/worksheets/') and name.endswith('.xml'):
-                    # Non-modified sheets: strip external refs via regex
-                    # (avoids full ET parse, preserves everything else)
+                    # Non-modified sheets: strip external refs + clear stale
+                    # cached values from formula cells (avoids full ET parse)
                     raw = z_in.read(name)
                     xml_text = raw.decode('utf-8') if isinstance(raw, bytes) else raw
                     stripped, n = re.subn(r'<f>[^<]*\[[^\]]+\][^<]*</f>', '', xml_text)
                     if n > 0:
                         log_entries.append(f"  {name}: stripped {n} external formulas")
-                    z_out.writestr(name, stripped.encode('utf-8'))
+                    cleaned = _clear_formula_cached_values_regex(stripped)
+                    z_out.writestr(name, cleaned.encode('utf-8'))
 
                 elif name == 'xl/sharedStrings.xml':
                     pass  # handled after all sheets
+                elif name == 'xl/calcChain.xml':
+                    # Skip calcChain — it references the template's formula
+                    # layout which becomes stale after we modify cells and
+                    # strip external formulas. Excel rebuilds it on open
+                    # (fullCalcOnLoad forces a full recalculation).
+                    log_entries.append("  calcChain.xml: removed (Excel will rebuild on open)")
                 elif name == 'xl/workbook.xml':
                     # Force Excel to recalculate all formulas on open.
                     # Without this, formula cells show stale cached values

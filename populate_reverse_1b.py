@@ -44,22 +44,27 @@ HIGH_RISE_FLOOR_THRESHOLD = 7
 
 # Financing programs — Sheet 6 D31:D35 (permanent take-out loan parameters)
 # Each program maps to the same 5 cells: LTV, DSCR, amortization, rate, premium
+# Source: Joanna's proformas (2240 Birchmount Rd ProForma v3.12)
 FINANCING_PROGRAMS = {
-    'cmhc_mli_select': {
-        'label': 'CMHC MLI Select',
-        'max_ltv': 0.95,
-        'min_dscr': 1.1,
-        'amortization': 40,
-        'interest_rate': 0.037,
-        'cmhc_premium': 0.0518,
-    },
-    'cmhc_standard': {
-        'label': 'CMHC Standard',
+    'cmhc_mli_100': {
+        # MLI Select at 100 points — max flexibility tier
+        # Premium: 3.75% base + 1.25% amort surcharge (50yr) = 5.00%
+        'label': 'CMHC MLI Select (100pts)',
         'max_ltv': 0.95,
         'min_dscr': 1.1,
         'amortization': 50,
         'interest_rate': 0.037,
         'cmhc_premium': 0.05,
+    },
+    'cmhc_mli_50': {
+        # MLI Select Energy at 50 points — energy efficiency tier
+        # Premium: 5.00% base + 0.75% amort surcharge (40yr), 10% energy discount = 5.175%
+        'label': 'CMHC MLI Select Energy (50pts)',
+        'max_ltv': 0.95,
+        'min_dscr': 1.1,
+        'amortization': 40,
+        'interest_rate': 0.037,
+        'cmhc_premium': 0.05175,
     },
     'conventional': {
         'label': 'Conventional',
@@ -70,6 +75,9 @@ FINANCING_PROGRAMS = {
         'cmhc_premium': 0,
     },
 }
+# Backwards compat — old JSON files may reference these keys
+FINANCING_PROGRAMS['cmhc_mli_select'] = FINANCING_PROGRAMS['cmhc_mli_100']
+FINANCING_PROGRAMS['cmhc_standard'] = FINANCING_PROGRAMS['cmhc_mli_100']
 
 # Unit type grouping patterns — match labels to 3 template rows
 # Order matters: checked top-to-bottom, first match wins
@@ -744,9 +752,9 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     sheet5_writes = {}
     sheet6_writes = {}
 
-    # Resolve financing program — default to CMHC MLI Select
+    # Resolve financing program — default to CMHC MLI Select 100pts
     if financing_program is None:
-        financing_program = FINANCING_PROGRAMS['cmhc_mli_select']
+        financing_program = FINANCING_PROGRAMS['cmhc_mli_100']
 
     def queue_write(target, cell_ref, value, description="", force=False):
         """Queue a cell write for later application via XML writer."""
@@ -1271,20 +1279,21 @@ def import_reverse_1b(xlsx_path):
             construction_cost_psf = 453  # Birchmount baseline
 
     # --- Financing (Sheet 6 if it exists, otherwise defaults) ---
-    # CMHC MLI Select parameters in column D, rows 31-35
+    # Permanent loan parameters in column D, rows 31-35
+    # Defaults match CMHC MLI Select 100pts (Joanna's standard proforma)
     try:
         s6 = wb['6. Debt Stack & Financing']
         perm_ltv = num(s6, 'D31', 0.95)
         perm_dscr = num(s6, 'D32', 1.1)
         perm_rate = num(s6, 'D34', 0.037)
-        perm_term = int(num(s6, 'D33', 40))
-        cmhc_premium = num(s6, 'D35', 0.0518)
+        perm_term = int(num(s6, 'D33', 50))
+        cmhc_premium = num(s6, 'D35', 0.05)
     except (KeyError, Exception):
         perm_ltv = 0.95
         perm_dscr = 1.1
         perm_rate = 0.037
-        perm_term = 40
-        cmhc_premium = 0.0518
+        perm_term = 50
+        cmhc_premium = 0.05
 
     # --- Verified final metrics from the Excel's own formulas ---
     # These are the "real" numbers Noor reviewed, not our JS approximations.
@@ -1512,10 +1521,10 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
     if financing_program and isinstance(financing_program, dict) and 'label' in financing_program:
         fp = financing_program
         # Find the key by matching the dict
-        fp_key = next((k for k, v in FINANCING_PROGRAMS.items() if v is fp), 'cmhc_mli_select')
+        fp_key = next((k for k, v in FINANCING_PROGRAMS.items() if v is fp and k not in ('cmhc_mli_select', 'cmhc_standard')), 'cmhc_mli_100')
     else:
-        fp_key = financing_program if isinstance(financing_program, str) else 'cmhc_mli_select'
-        fp = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_select'])
+        fp_key = financing_program if isinstance(financing_program, str) else 'cmhc_mli_100'
+        fp = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_100'])
 
     project = {
         'project': {
@@ -1946,10 +1955,10 @@ def calculate_verified_metrics(project, xlsx_path=None):
 
                 # Hold IRR — 10-year annual cash flow model (matches Sheet 11)
                 perm_rate = fin.get('perm_loan_rate', 0.037)
-                perm_amort = fin.get('perm_loan_term', 40)
+                perm_amort = fin.get('perm_loan_term', 50)
                 perm_loan = py_metrics.get('perm_loan', 0)
                 annual_debt = py_metrics.get('annual_debt', 0)
-                cmhc_premium = perm_loan * fin.get('cmhc_premium', 0.0518)
+                cmhc_premium = perm_loan * fin.get('cmhc_premium', 0.05)
                 noi_stab = excel['noi']
                 cap_base = P['cap_rates']['base']
 
@@ -2182,8 +2191,8 @@ def _calculate_python_metrics(project):
         perm_ltv = fin.get('perm_loan_ltv', 0.95)
         perm_dscr = fin.get('perm_loan_dscr', 1.1)
         perm_rate = fin.get('perm_loan_rate', 0.037)
-        perm_amort = fin.get('perm_loan_term', 40)
-        cmhc_premium_rate = fin.get('cmhc_premium', 0.0518)
+        perm_amort = fin.get('perm_loan_term', 50)
+        cmhc_premium_rate = fin.get('cmhc_premium', 0.05)
 
         ltv_loan = perm_ltv * value_base
         allowed_annual_pmt = noi_stabilized / perm_dscr

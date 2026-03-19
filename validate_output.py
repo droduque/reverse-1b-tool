@@ -142,6 +142,38 @@ def validate_output(xlsx_path, parsed_data):
         check('fullCalcOnLoad' in wb_raw,
               "workbook.xml missing fullCalcOnLoad='1' — formulas won't recalculate on open")
 
+        # calcChain.xml must NOT be present — it references the template's
+        # formula layout and becomes stale after we modify cells, causing
+        # Excel to show a repair warning on open
+        check('xl/calcChain.xml' not in zf.namelist(),
+              "calcChain.xml present — will trigger Excel repair warning on open")
+
+        # Formula cells must NOT have cached <v> values (stale template data).
+        # fullCalcOnLoad makes Excel recalculate, but other tools (PDF export,
+        # preview, data_only readers) would show wrong numbers.
+        stale_count = 0
+        stale_examples = []
+        for sheet_name in zf.namelist():
+            if not (sheet_name.startswith('xl/worksheets/') and sheet_name.endswith('.xml')):
+                continue
+            sroot = ET.fromstring(zf.read(sheet_name))
+            sd = sroot.find(f'{{{NS}}}sheetData')
+            if sd is None:
+                continue
+            for row_el in sd.findall(f'{{{NS}}}row'):
+                for cell_el in row_el.findall(f'{{{NS}}}c'):
+                    f_el = cell_el.find(f'{{{NS}}}f')
+                    v_el = cell_el.find(f'{{{NS}}}v')
+                    if f_el is not None and v_el is not None:
+                        stale_count += 1
+                        if len(stale_examples) < 3:
+                            stale_examples.append(f"{sheet_name}:{cell_el.get('r','?')}={v_el.text}")
+        if stale_count > 0:
+            examples = ', '.join(stale_examples)
+            check(False, f"{stale_count} formula cells have stale cached values (e.g. {examples})")
+        else:
+            check(True, "No stale cached values in formula cells")
+
         # Shared strings XML well-formedness (already parsed above, but verify count)
         ss_raw = zf.read('xl/sharedStrings.xml')
         try:
@@ -467,6 +499,32 @@ def validate_financials(project_json, verified=None):
 
         _check_range(verified.get('dscr'), 1.0, 2.0, "DSCR", fmt='ratio')
         _check_range(verified.get('ltv'), 0.50, 0.98, "LTV", fmt='pct')
+
+        # Dev cost breakdown consistency — line items must sum to TDC
+        breakdown = verified.get('dev_breakdown')
+        if breakdown and v_dev_cost:
+            bd_sum = sum(breakdown.values())
+            gap_pct = abs(bd_sum - v_dev_cost) / v_dev_cost if v_dev_cost else 0
+            if gap_pct > 0.01:
+                errors.append(
+                    f"Dev cost breakdown sum (${bd_sum:,.0f}) differs from TDC "
+                    f"(${v_dev_cost:,.0f}) by {gap_pct:.1%}"
+                )
+            # Individual items sanity
+            for label, key, lo, hi in [
+                ('Land', 'land', 0.05, 0.25),
+                ('Construction', 'construction', 0.50, 0.85),
+                ('Permits', 'permits', 0.02, 0.15),
+                ('Marketing', 'marketing', 0.005, 0.05),
+                ('Lease-up', 'lease_up', -0.10, 0),
+            ]:
+                val = breakdown.get(key, 0)
+                ratio = val / v_dev_cost if v_dev_cost else 0
+                if not (lo <= ratio <= hi):
+                    warnings.append(
+                        f"Dev breakdown {label}: ${val:,.0f} = {ratio:.1%} of TDC "
+                        f"(expected {lo:.0%}–{hi:.0%})"
+                    )
 
     return {'warnings': warnings, 'errors': errors}
 

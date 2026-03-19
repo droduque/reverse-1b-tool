@@ -1,6 +1,6 @@
 # SVN Rock — Project Summary
 
-Last Updated: 2026-03-16
+Last Updated: 2026-03-19
 
 ## Phase 1: 1A to Reverse 1B Populator
 
@@ -72,7 +72,7 @@ Last Updated: 2026-03-16
 - [x] Legibility improvements (font sizes, spacing, dim text brightened)
 - [x] **CMHC MLI Select financing** — permanent loan matches Exec Summary to 0.007%
 - [x] Loan sizing: annual PV for amount, monthly PMT for debt service (matches Sheet 11 exactly)
-- [x] CMHC program badges in financing section (95% LTV, 1.1x DSCR, 40yr, 5.18% premium)
+- [x] CMHC program badges in financing section (dynamic per program selection)
 - [x] Interest rate slider relabeled "CMHC Loan Rate" (3.7% baseline, 2.5-6.5% range)
 - [x] CMHC Premium shown as cost line item in financing cards
 - [x] Implied LTV shown (e.g., "84.7% LTV (DSCR-constrained)") instead of max LTV
@@ -85,6 +85,13 @@ Last Updated: 2026-03-16
 - [x] **Interest rate slider exports to Excel** — slider value now flows through to exported Excel on /export-scenario (was silently discarded before)
 - [x] **All 5 projects tested across all 3 financing programs** — passes validation
 - [x] **Backward compatible with older JSON files** — auto-upgrades to CMHC MLI Select defaults
+- [x] **Financing programs updated to Joanna's v3.12 proformas** (2026-03-19):
+  - CMHC MLI Select (100pts): 95% LTV, 1.1x DSCR, 50yr amort, 3.70%, 5.00% premium
+  - CMHC MLI Select Energy (50pts): 95% LTV, 1.1x DSCR, 40yr amort, 3.70%, 5.175% premium
+  - Conventional: 75% LTV, 1.2x DSCR, 25yr amort, 5.50%, 0% premium
+  - Old keys (cmhc_mli_select, cmhc_standard) aliased for backwards compatibility
+- [x] **Stale cached value clearing** — formula cells stripped of template cached values across all 15 sheets
+- [x] **calcChain.xml removal** — prevents Excel repair warnings from stale formula chain
 
 ### IRR Accuracy (verified 2026-03-12 vs Excel Sheets 10 & 11)
 - **Merchant IRR: 27.96% vs 27.90% (0.06pt gap)** — was 0.82pt before fix
@@ -170,7 +177,8 @@ python3 validate_output.py
 ## Waiting On
 - **Noor:** Expanded template (3 → 14 unit rows) — away until ~2026-03-20
 - **Noor:** Affordable vacancy handling, financing sheet connection
-- **Fran/Joana:** Financing proposal sheet
+- **Joanna:** Confirm financing parameters still current; discuss auto-populating her proforma revenue side
+- **Joanna:** Decide if Debt Advisory section should show max capacity or her actual deal numbers
 
 ## Resolved
 - **Kanen:** Toronto DC rates confirmed ($33,497 / $48,299 / $45,280) — using these
@@ -179,4 +187,5 @@ python3 validate_output.py
 ## Future Phases
 - Phase 2B: Template row expansion 3 → 14 (waiting on Noor)
 - Phase 3: Deploy to Railway
-- Phase 4: Financing proposal integration (pending Fran/Joana)
+- Phase 4: Joanna's proforma auto-population (revenue side — pending her approval)
+- Phase 5: Pull Joanna's final deal numbers back into presentation tool
