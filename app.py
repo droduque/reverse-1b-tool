@@ -199,6 +199,15 @@ def generate():
         except ValueError:
             pass
 
+    # Get construction duration override (blank = auto from unit count)
+    construction_months = None
+    constr_str = request.form.get('construction_months', '').strip()
+    if constr_str != '':
+        try:
+            construction_months = int(constr_str)
+        except ValueError:
+            pass
+
     # Save uploaded file to temp location
     with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
         file.save(tmp.name)
@@ -233,7 +242,7 @@ def generate():
         if 'assessed_value' in tax_overrides:
             data['assessed_value'] = tax_overrides['assessed_value']
 
-        log = populate_template(data, output_path, municipality=municipality, building_type=building_type, financing_program=financing_program)
+        log = populate_template(data, output_path, municipality=municipality, building_type=building_type, financing_program=financing_program, construction_months=construction_months)
 
         # Also export the project JSON for the presentation tool
         json_filename = f"Reverse_1B_{project_name}_{today}.json"

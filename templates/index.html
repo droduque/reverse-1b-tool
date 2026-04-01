@@ -777,6 +777,16 @@ select option {
       </div>
     </div>
 
+    <!-- Construction Duration -->
+    <div class="card">
+      <div class="card-title">Construction Duration</div>
+      <div class="form-group">
+        <label for="construction_months">Months of construction</label>
+        <input type="number" name="construction_months" id="constructionMonths" placeholder="Auto" min="6" max="60" step="1">
+        <div class="hint" id="constructionHint">Leave blank for auto-estimate based on unit count (&le;200 units = 18mo, 200-400 = 24mo, 400+ = 30mo). Override for project-specific timelines.</div>
+      </div>
+    </div>
+
     <!-- Financing Program -->
     <div class="card">
       <div class="card-title">Financing Program</div>
@@ -941,6 +951,15 @@ function previewFile(file) {
         taxHint.textContent = 'Auto-filled from 1A. Override if needed.';
       } else {
         taxHint.textContent = 'No property tax data found in 1A. Enter values manually if known.';
+      }
+
+      // Auto-suggest construction duration based on unit count
+      var constrInput = document.getElementById('constructionMonths');
+      var constrHint = document.getElementById('constructionHint');
+      if (data.total_units) {
+        var suggested = data.total_units <= 200 ? 18 : (data.total_units <= 400 ? 24 : 30);
+        constrInput.placeholder = suggested + 'mo (auto)';
+        constrHint.textContent = data.total_units + ' units \u2192 ' + suggested + ' months suggested. Override if your project timeline differs.';
       }
 
       // Show preview card with auto-detected info

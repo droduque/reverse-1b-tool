@@ -717,7 +717,7 @@ def consolidate_unit_mix(unit_types):
 # TEMPLATE WRITER — copies template and writes data to 3 sheets
 # ---------------------------------------------------------------------------
 
-def populate_template(data, output_path, municipality=None, building_type='high-rise', financing_program=None):
+def populate_template(data, output_path, municipality=None, building_type='high-rise', financing_program=None, construction_months=None):
     """
     Copy the Reverse 1B template and write parsed 1A data into it.
     Uses the ZIP/XML writer to preserve all drawings, images, and formatting.
@@ -725,6 +725,7 @@ def populate_template(data, output_path, municipality=None, building_type='high-
 
     municipality: dict from load_dc_rates() with 'name' and 'rates' keys, or None
     building_type: 'mid-rise' or 'high-rise' — affects Altus cost guide row reference
+    construction_months: override for construction duration (default: auto from unit count)
     """
     from xml_writer import write_cell, save_workbook
 
@@ -869,7 +870,7 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     if utilities_per_unit:
         common_area = gfa - data['total_rentable_sf']
         if common_area > 0:
-            utilities_psf = round(utilities_per_unit * data['total_units'] / common_area)
+            utilities_psf = round(utilities_per_unit * data['total_units'] / common_area, 2)
         else:
             utilities_psf = DEFAULT_UTILITIES_PSF
         queue_write(sheet1_writes, 'E80', utilities_psf,
@@ -1035,7 +1036,21 @@ def populate_template(data, output_path, municipality=None, building_type='high-
 
     queue_write(sheet5_writes, 'E12', 0, "Land purchase duration (months)")
     queue_write(sheet5_writes, 'E13', 12, "Pre-development duration (months)")
-    queue_write(sheet5_writes, 'E14', 18, "Construction duration (months)")
+
+    # Construction duration: use override if provided, else auto-suggest from unit count
+    # Rule of thumb: <200 units = 18mo, 200-400 = 24mo, 400+ = 30mo
+    auto_construction = construction_months is None
+    if auto_construction:
+        total = data['total_units']
+        if total <= 200:
+            construction_months = 18
+        elif total <= 400:
+            construction_months = 24
+        else:
+            construction_months = 30
+    queue_write(sheet5_writes, 'E14', construction_months,
+                f"Construction duration ({construction_months}mo — {'auto from ' + str(data['total_units']) + ' units' if auto_construction else 'user override'})")
+
     queue_write(sheet5_writes, 'E16', 0, "Stabilized duration (months)")
     queue_write(sheet5_writes, 'F15', -3, "Lease-up offset (months)")
     queue_write(sheet5_writes, 'E37', 0.08, "Profit percentage (8%)")
