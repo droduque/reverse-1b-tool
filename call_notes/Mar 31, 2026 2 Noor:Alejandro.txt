@@ -1,0 +1,276 @@
+Mar 31, 2026
+Noor/Alejandro  - Transcript
+00:00:00
+ 
+Noor Khan: Hey.
+Alejandro Duque: Hey, Nor.
+Noor Khan: Hey. How are you?
+Alejandro Duque: Good. Good.
+Noor Khan: Okay.
+Alejandro Duque: Good. How's your day?
+Noor Khan: Yeah,
+Alejandro Duque: Good.
+Noor Khan: I've been actually into so many things. So that's okay because I'm on the other I'm in the other place today,
+Alejandro Duque: Yeah. Yeah. Yeah. I bet. Um,
+Noor Khan: right?
+Alejandro Duque: yeah. So, to go quickly. So, yeah. So I was reviewing right now and yeah so the template uh just to give you a full update. So the basic not a basic but the template that we had before France sent to
+Noor Khan: Actually
+Alejandro Duque: us that one did have only the three hard-coded rows for the unit mix. So that's why
+Noor Khan: unit mix is coming from the 1A. Leave it.
+Alejandro Duque: Yeah. But the whole spreadsheet references those three rows for the entire thing. So it uses kind of like those three unit types.
+ 
+ 
+00:01:33
+ 
+Alejandro Duque: So that's why at the end because I just like went back into it because I was thinking like what happened if we had at one point the affordable versus not. And right now it's a weighted average. But I just wanted to say that that was like the thing that that's why it does it that way which again it's a reverse 1B and I think it works but at one point I thought that maybe the the system wasn't picking it up but not that that's why it references that. So um then I'm not presenting but um yeah so if you want what I'll do is that so we have the full wait I think it's showing now is it yeah so so this tool what I can do
+Noor Khan: Yeah.
+Alejandro Duque: is that I'm going to have to again I'm going to do something simple so you can get access but before that so I had uh two other questions so the first one
+Noor Khan: Sure.
+Alejandro Duque: being should We use the model that France sent to us.
+Noor Khan: No, the model should be mine.
+ 
+ 
+00:02:37
+ 
+Alejandro Duque: Sorry, the uh the new template I
+Noor Khan: Yeah,
+Alejandro Duque: meant.
+Noor Khan: the only the template should be hers because in terms of there's no change in template that what she sent to you. The only change is in terms of uh uh the coloring coloring and the branding.
+Alejandro Duque: Okay.
+Noor Khan: That's the only because you see the three points I have here color scheme and the branding and input cells should be like you know blue that's the only thing she asked
+Alejandro Duque: Yeah. And again, the only other thing that I picked up,
+Noor Khan: me
+Alejandro Duque: I had the system right now run through all of it. It didn't find any other missing formulas or anything besides this thing that I told you that this one
+Noor Khan: this I think if you if you if you tell him that you know show me normal if you go to view. Go to view. Say show normal.
+Alejandro Duque: yeah.
+Noor Khan: Go to normal. Just last first one. Then it will not come.
+ 
+ 
+00:03:29
+ 
+Noor Khan: It comes. Okay.
+Alejandro Duque: No, and I'm saying that he ju he just deleted one of the columns,
+Noor Khan: Then
+Alejandro Duque: but it didn't affect anything. It was more I think in order to make it fit, but it's not a
+Noor Khan: yeah,
+Alejandro Duque: problem.
+Noor Khan: I don't think it because I saw it uh when I was looking at her file. I don't know why she put it in that kind of a presentation. page breakup kind of a thing. Uh it should be basically like you know in a printable version kind of a
+Alejandro Duque: Okay, sounds good. Uh because yeah,
+Noor Khan: thing.
+Alejandro Duque: I think that's it. I mean like uh they can get this and then based on that they'll uh I have to rerun this one because I don't know when he sent it to me like these things are are not showing.
+Noor Khan: only colors.
+Alejandro Duque: Uh
+Noor Khan: Yeah, because she's given us only colors. Other than that,
+Alejandro Duque: yeah.
+Noor Khan: all the formulas remain the same.
+ 
+ 
+00:04:19
+ 
+Noor Khan: Basically what we
+Alejandro Duque: Yeah. Okay.
+Noor Khan: have
+Alejandro Duque: Then as far as the because then the other question I had here as far as like the expanding into normal and affordable we don't have to worry about that like the weighted average is fine right
+Noor Khan: uh yeah fine just mention it that that is what for now we should be okay like we can it's
+Alejandro Duque: okay
+Noor Khan: a 1B anyway like it's a it's a basically free reverse 1B we are giving to somebody and
+Alejandro Duque: yeah then yeah then in the
+Noor Khan: 1 A has the details anyway in that sense
+Alejandro Duque: two should I remove the financing program all together. Should I keep this selection here?
+Noor Khan: No because this is required. No,
+Alejandro Duque: Yeah. But this for
+Noor Khan: this is if you go to the key assumptions, it's basically the part of the key assumptions that you are capturing here.
+Alejandro Duque: Yeah.
+Noor Khan: Otherwise, we key assumptions were showing all of that. Now, I don't know if the key assumptions uh how are you capturing how much he's basically going to finance
+ 
+ 
+00:05:06
+ 
+Alejandro Duque: Yeah.
+Noor Khan: in terms of like you know what is the debt stake? Did she give you dead stake thing? Because there are two uh steps of one is a construction financing, then is a kind of a takeout financing. Dead ST comes in the construction financing. So currently I think it should be taken from the model itself. Then that needs to be tweaked by the person who um downloads the model.
+Alejandro Duque: Okay.
+Noor Khan: That's why I want to run it so I can say how much of the work will be required because we we should not be I'm not expecting you to give us 100%.
+Alejandro Duque: Yeah.
+Noor Khan: everything because I'm expecting you to give us a like a 75% 80% model done then we can train the guys for the remainder of let's say 20% work and if there's a 5% additional check required then I can do on the side in case like you
+Alejandro Duque: Yeah. Okay, perfect. So, I'll do that.
+Noor Khan: know
+Alejandro Duque: Um, okay. So, we'll keep this financing programs in this presentation mode.
+ 
+ 
+00:06:09
+ 
+Alejandro Duque: Then, should I remove it from here? I should remove this
+Noor Khan: I don't think you need it here because That's something like you know it's a fancy presentation. It's something basically for for like you know it's it's not the time basically right like let's say if
+Alejandro Duque: Yeah,
+Noor Khan: John is showing it to somebody it's going to create discredit rather than credit friendly
+Alejandro Duque: confusing. Yeah,
+Noor Khan: speaking.
+Alejandro Duque: because I think that once they again and to Daryl's point, he just wanted to like go make the developer go through the pain of the Excel sheet and then have something pretty to do these things, which I think that's it. But okay, so that's that. Then how do you see the workflow? because I this was my other question. So because what I'll do from my end just so you know. So we're going to use uh I don't know like I don't want to go into details but it's called a railway develop um deployment tool that allows you to have JSON files that run kind of like the Excel and all of this in the background.
+ 
+ 
+00:07:06
+ 
+Alejandro Duque: So this is safe, it's secured and it's only like 10 bucks a month. Now is the plan that at the end we give the team
+Noor Khan: Yeah. Cool.
+Alejandro Duque: this this tool and then they upload 1B generate reverse
+Noor Khan: Yeah. Yeah. Yeah.
+Alejandro Duque: 1B.
+Noor Khan: I think what we will do once you give me the test environment because you have a meeting day after tomorrow
+Alejandro Duque: Yeah.
+Noor Khan: anyway, right?
+Alejandro Duque: Yeah.
+Noor Khan: So I will run few models tomorrow myself and I will get the output out and I'll give you my
+Alejandro Duque: Okay. Okay.
+Noor Khan: feedback because then I have to because actually I have to see that you know how much work after this splits out the model because I I'm not expecting it to split out a perfect
+Alejandro Duque: Exactly.
+Noor Khan: model because I know that the key assumptions need to be tweaked as as our
+Alejandro Duque: Perfect. Yeah.
+Noor Khan: miss is saying you know so that's what basically so we need to that's where basically we will have to work on what she was saying like highlighting those places because there will be some kind of a brain needed to like you know uh have those percentages adjusted in terms
+ 
+ 
+00:08:02
+ 
+Alejandro Duque: Yep.
+Noor Khan: of land uh allocating cost to the land because land is essentially like a residual in the model if you remember right and then the debt stake for the
+Alejandro Duque: Yeah. Yeah.
+Noor Khan: construction is also like a um an input that you have to give now if that
+Alejandro Duque: Yep.
+Noor Khan: input can be inputed like the other inputs you have there. That's one way to do it. You know, for example,
+Alejandro Duque: Yep.
+Noor Khan: that can be one improvement to your current work instead of uh like this is fine the current takeout financing you have got. But we might add another variable to it to say that dead stake assumption and that can be like you know how much uh is the equity, how much is the mezzanine financing and how much is the construction financing and what kind of interest rates are we talking about and boom. So that way at least that comes out straight like you know so you don't have to work on Excel for
+Alejandro Duque: Exactly.
+Noor Khan: that.
+ 
+ 
+00:09:00
+ 
+Alejandro Duque: And that's how I want you to see it that what I told Daryl and I and I think I told you last time.
+Noor Khan: Yeah.
+Alejandro Duque: So what I'll do is that I'm going to get this live and then just give me all that feedback because then we can have that when they put in the 1A they add the input. So the checks I have is because I think those are very important like they change the model a lot but then everything else that you think would be helpful we just add it.
+Noor Khan: Just
+Alejandro Duque: So that's inputed into the reverse 1B. Then they have that sensitivity tool that they can show and then based on that sensitivity they can generate another reverse 1B or they can do whatever or they don't even need to show it. The idea is to get from 1 A to reverse 1B really fast and then the financing program then we
+Noor Khan: that's it.
+Alejandro Duque: can work with Joanna separately that from that information you create a construction and a and a 1B like whatever like then then exactly
+ 
+ 
+00:09:52
+ 
+Noor Khan: construction as a takeout financing proposal kind of like you know proposition kind of something to uh to discuss with the client while he's reviewing it because you know as I was saying like when you have a call with Derek give him the feedback as well because what we need to understand is basically this is mostly required by the people who are financing already you are with the bank the bank
+Alejandro Duque: Exactly. Yeah.
+Noor Khan: says give me a visibility so so that means you are already like you know in discussion with the bank there will be very few people who will come to you without like you know having discussed with the bank like you know generally speaking because people do back of the envelope
+Alejandro Duque: Exactly. Yeah.
+Noor Khan: anyway and secondly people generally come to us for uh
+Alejandro Duque: Yeah. Yeah. Yeah. And I think
+Noor Khan: what do you call it uh rental uh basically like you know rental analysis like you know the rental rates is to like if I'm the developer and I'm developing in area
+ 
+ 
+00:10:41
+ 
+Alejandro Duque: Yep.
+Noor Khan: x of a municipality like because there are different areas command different rents right because of the geography and demographics and like you know income levels so and I have got like for
+Alejandro Duque: Yeah.
+Noor Khan: example in my mind that this place will command one bedroom I'll be able to lease for two and a half thousand and two bedroom for three and a half thousand and like you know and and threebedroom for let's say 4,000 if I have this kind of assumption so I need a third party to validate that so basically our val our feasibility that we do because that's something I know is basically you know we should never
+Alejandro Duque: Yeah.
+Noor Khan: forget what is fundamental. Okay. Everything else is just like you know later. So people don't come to us for anything else.
+Alejandro Duque: Yeah.
+Noor Khan: Like when they come for visibility they are asking us to validate the rental assumptions.
+Alejandro Duque: Exactly.
+Noor Khan: That's what we do. They need a full market analysis in terms of what is comparable what other people are like you know taking what is the market able to sustain and that this is the purpose of the physibility study the one a that we do.
+ 
+ 
+00:11:45
+ 
+Noor Khan: So what we do basically is in fact just so you know as an additional kind of service is the one a they don't come to us for one a just so you
+Alejandro Duque: Got
+Noor Khan: know if you see them if you read the whole PDF
+Alejandro Duque: it.
+Noor Khan: document it is basically about the rental
+Alejandro Duque: Yeah, of course. Yeah.
+Noor Khan: market.
+Alejandro Duque: No, I mean and and and Yeah, and I think that helps with financing if you if you're raising equity to
+Noor Khan: Yeah. Yeah. Yeah.
+Alejandro Duque: get
+Noor Khan: Because when you go to the bank they says boss if you are saying your project project is going to generate this much revenue I need a third party to validate that and the vacancy so they go up to this rental and the vacancy
+Alejandro Duque: Exactly.
+Noor Khan: that's your job finishes because after that they say the operating cost we put we give the 1A to them to do a perform which is not like you know required in the uh thing but we give that but then the CHC has their own standards for operating costs another may have
+ 
+ 
+00:12:38
+ 
+Alejandro Duque: Yeah.
+Noor Khan: another this thing And again as as we know this basically goes to the future. So so 1 A is already an additional component that we give to the client. So reverse 1B is basically an additional service which is free
+Alejandro Duque: Got it.
+Noor Khan: right
+Alejandro Duque: Yeah. Okay. Yeah.
+Noor Khan: inense.
+Alejandro Duque: Then um so I'm going so two things. Then I'm going to have the new template uh with the new design logo, all of that. You upload it. I'll run some tests. Then I'll send it to you by tonight. So tomorrow you you can run tests that you have. And I'm going to send it to you just a basic URL. It's not going to have any login.
+Noor Khan: Yeah,
+Alejandro Duque: We can add login later,
+Noor Khan: that's fine.
+Alejandro Duque: but it's just very basic.
+Noor Khan: That's fine.
+Alejandro Duque: So you can run test and and then please like any feedback that you have and maybe even if we need
+ 
+ 
+00:13:25
+ 
+Noor Khan: Yeah.
+Alejandro Duque: more time, I will push with the team because again sometimes when I was replying all I wasn't sure
+Noor Khan: No,
+Alejandro Duque: if
+Noor Khan: I don't think see if you if the model is not ready if you are going to take because I don't think you'll be able to even ready for that. If that is the case,
+Alejandro Duque: Yeah.
+Noor Khan: we can push it because we can agree among us.
+Alejandro Duque: Yeah.
+Noor Khan: So, we do a one basically like you know one short presentation of the final product. If we take them through something then they say this is what it is.
+Alejandro Duque: Exactly.
+Noor Khan: So, we like I don't mind like you know pushing it to next week because it's already long weekend
+Alejandro Duque: Yeah.
+Noor Khan: now.
+Alejandro Duque: Yeah.
+Noor Khan: There's a good Friday, right? Which is a weekend. Then the Monday is also like,
+Alejandro Duque: Yeah.
+Noor Khan: you know, Easter holiday.
+Alejandro Duque: Yeah.
+Noor Khan: So, by the way, happy Easter to you in the meantime.
+ 
+ 
+00:14:10
+ 
+Alejandro Duque: Thank you. Thank you.
+Noor Khan: So,
+Alejandro Duque: Yeah. No, absolutely.
+Noor Khan: we don't want people to be working this like just take it easy.
+Alejandro Duque: Yeah. Absolutely.
+Noor Khan: It's it's like a R&D project for us anyway. It's not something we are dying for it like you know generally
+Alejandro Duque: Yeah. And then when you see it again,
+Noor Khan: speaking.
+Alejandro Duque: please go through it. Any feedback, anything like please add it and then Yeah. And then we'll we'll do
+Noor Khan: Okay. Okay.
+Alejandro Duque: that.
+Noor Khan: And if you are ready, everything is done, then we present. Otherwise, we like I will leave it to you.
+Alejandro Duque: Okay.
+Noor Khan: You you you take that call.
+Alejandro Duque: Okay. Yeah. Once So,
+Noor Khan: Okay.
+Alejandro Duque: I'm going to upload the new template which is going to take me because I want to run a few things in some things. I want to make sure that it's working. I'll compare it to what I currently have.
+ 
+ 
+00:14:46
+ 
+Alejandro Duque: Once those things check out,
+Noor Khan: Okay.
+Alejandro Duque: then I'll send it to you. You run your test as well, and then you give me feedback. We'll try to incorporate it. And if so, then we can do it. If not, we'll push it.
+Noor Khan: And uh did did she make the payment to your invoice? I asked her to do that.
+Alejandro Duque: I'm not sure. I haven't checked. So, I don't know if she had I
+Noor Khan: Give me send me an email.
+Alejandro Duque: don't
+Noor Khan: Send me an email and to the other girl also Tatiana saying uh if the payment is not made you can say that you know where is my why why my payment is not made then I I'll ask her.
+Alejandro Duque: Okay,
+Noor Khan: She works with me but like a little bit like you know even I have to push her.
+Alejandro Duque: so I just got an email that there is a payment coming in. So, I'm pretty sure it's that one then. Yeah. Yeah. Yeah. So, I'll wait for that. But I think it came in today. So, thank you so much. Yeah. Appreciate it. All right. Nor. Thank you so much, man.
+ 
+ 
+Transcription ended after 00:15:44
+
+This editable transcript was computer generated and might contain errors. People can also change the text after it was created.

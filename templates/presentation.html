@@ -622,8 +622,7 @@ function App() {
     && Math.abs((rentPsf || 0) - initRentPsf) < 0.001
     && Math.abs((capRate || 0) - P.cap_rates.base) < 0.0001
     && Math.abs((constructionPsf || 0) - P.development.construction_cost_psf) < 1
-    && Math.abs((vacancyRate || 0) - P.vacancy_rate) < 0.0001
-    && Math.abs((interestRate || 0) - P.financing.perm_loan_rate) < 0.0001;
+    && Math.abs((vacancyRate || 0) - P.vacancy_rate) < 0.0001;
   const showVerified = hasVerified && slidersAtBaseline;
   // exact_keys lists metrics that came from Excel formula evaluation (exact).
   // Everything else (dev cost, IRRs) is a Python screening estimate.
@@ -670,7 +669,7 @@ function App() {
     ? (calculate(P, { rentPsf: rentPsfBase + 0.10 }).valueBase - base.valueBase)
     : 0;
 
-  const sections = ['Overview', 'Revenue', 'Costs', 'Metrics', 'Sensitivity', 'Financing'];
+  const sections = ['Overview', 'Revenue', 'Costs', 'Metrics', 'Sensitivity'];
 
   return (
     <div style={{ background: C.bg, color: C.text, minHeight: '100vh', fontFamily: SANS }}>
@@ -832,7 +831,7 @@ function App() {
               tooltip="IRR for a merchant build — develop and sell at stabilization." />
             <MetricCard label={'10-Year Hold IRR' + estLabel('hold_irr')} value={D.holdIRR} fmt="irr"
               sub="Build, hold 10 years, sell" highlight={D.holdIRR > 0.10}
-              tooltip={"IRR for a 10-year hold with " + P.financing.program_label + " refinancing and 2% annual NOI growth."} />
+              tooltip="IRR for a 10-year hold with CMHC refinancing and 2% annual NOI growth." />
           </div>
           <p style={{ color: C.dim, fontSize: 12, marginTop: 14, textAlign: 'center', fontStyle: 'italic' }}>
             {'Adjust assumptions below to stress-test returns.'}
@@ -900,11 +899,7 @@ function App() {
                 baseline={P.vacancy_rate}
                 tooltip="Percentage of residential income lost to vacancy. Well-managed purpose-built rentals in strong markets typically run 2-4%." />
 
-              <Slider label="Loan Rate" value={interestRate}
-                min={0.025} max={0.065} step={0.0025}
-                onChange={setInterestRate} fmt="pct"
-                baseline={P.financing.perm_loan_rate}
-                tooltip={P.financing.program_label + " permanent loan rate. Directly impacts debt service, DSCR, cash-on-cash, and hold IRR. Stress-test against rate changes to see the impact on returns."} />
+              {/* Loan Rate slider removed — financing preview not shown to clients (Noor feedback 2026-03-31) */}
             </div>
 
             {/* Right: Live Results */}
@@ -1016,7 +1011,6 @@ function App() {
                 setCapRate(P.cap_rates.base);
                 setConstructionPsf(P.development.construction_cost_psf);
                 setVacancyRate(P.vacancy_rate);
-                setInterestRate(P.financing.perm_loan_rate);
               }}
               style={{
                 background: 'transparent',
@@ -1038,60 +1032,7 @@ function App() {
           </div>
         </div>
 
-        {/* ═══ SECTION 5: FINANCING ═══ */}
-        <div id="section-5" className="fade-in" style={{ marginBottom: 40 }}>
-          <SectionLabel text="Debt Advisory" />
-          <h2 style={{ fontFamily: SERIF, fontSize: 36, fontWeight: 400, marginBottom: 8 }}>Financing Preview</h2>
-          <p style={{ color: C.dim, fontSize: 14, marginBottom: 8 }}>
-            {P.financing.program_label} permanent take-out loan — our debt advisory team can walk through these in detail.
-          </p>
-          <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>
-            {[
-              { l: 'Max LTV', v: (P.financing.perm_loan_ltv * 100).toFixed(0) + '%' },
-              { l: 'Min DSCR', v: P.financing.perm_loan_dscr.toFixed(1) + 'x' },
-              { l: 'Amortization', v: P.financing.perm_loan_term + ' yr' },
-              ...(P.financing.cmhc_premium > 0 ? [{ l: 'Insurance Premium', v: (P.financing.cmhc_premium * 100).toFixed(2) + '%' }] : []),
-            ].map(({ l, v }) => (
-              <div key={l} style={{
-                fontFamily: MONO, fontSize: 12, color: C.dim,
-                border: `1px solid ${C.border}`, borderRadius: 6,
-                padding: '6px 12px', background: C.bg,
-              }}>
-                <span style={{ color: '#9B9A97' }}>{l}: </span>
-                <span style={{ color: C.gold }}>{v}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
-            {[
-              { l: 'Permanent Loan', v: fmtCurrency(D.permLoan), s: (D.impliedLTV * 100).toFixed(1) + '% LTV (DSCR-constrained)',
-                tip: P.financing.program_label + ' loan. Sized to the lesser of ' + (P.financing.perm_loan_ltv * 100).toFixed(0) + '% LTV or ' + P.financing.perm_loan_dscr.toFixed(1) + 'x DSCR — in most cases DSCR is the binding constraint.' },
-              { l: 'Annual Debt Service', v: fmtCurrency(D.annualDebt), s: (R.permRate * 100).toFixed(2) + '% / ' + P.financing.perm_loan_term + 'yr amort',
-                tip: 'Annual mortgage payment (principal + interest) on the ' + P.financing.program_label + ' permanent loan. Rate adjustable in the sensitivity section above.' },
-              { l: 'Debt Service Coverage', v: D.dscr.toFixed(2) + 'x', s: D.dscr >= P.financing.perm_loan_dscr ? 'Meets minimum' : 'Below minimum',
-                tip: 'NOI divided by annual debt service. ' + P.financing.program_label + ' requires minimum ' + P.financing.perm_loan_dscr.toFixed(1) + 'x coverage.' },
-              ...(P.financing.cmhc_premium > 0 ? [{ l: 'Insurance Premium', v: fmtCurrency(R.cmhcPremium), s: (P.financing.cmhc_premium * 100).toFixed(2) + '% of loan',
-                tip: 'One-time insurance premium — the cost of accessing favorable terms (lower rate, longer amortization).' }] : []),
-              { l: 'Equity Requirement', v: R.equity > 0 ? fmtCurrency(R.equity) : '$0',
-                s: R.equity > 0 ? 'Total Dev Cost − Loan' : 'Fully financed by debt',
-                tip: 'The gap between total development cost and the permanent loan. When the loan exceeds dev costs, no equity is needed.' },
-              { l: 'Cash-on-Cash Return', v: R.cashOnCash > 0 ? fmtPct(R.cashOnCash) : (R.equity <= 0 ? 'N/A' : fmtPct(R.cashOnCash)),
-                s: R.equity <= 0 ? 'No equity required' : '(NOI − Debt) / Equity',
-                tip: R.equity <= 0
-                  ? 'The loan covers all development costs — no equity required. This metric does not apply.'
-                  : 'Annual cash return on invested equity after debt service. A key metric for equity investors.' },
-            ].map(({ l, v, s, tip }) => (
-              <div key={l} className="card-hover" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: '18px 20px' }}>
-                <div className="tooltip-trigger" style={{ color: '#9B9A97', fontSize: 13, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>
-                  {l}
-                  <span className="tooltip-text">{tip}</span>
-                </div>
-                <div style={{ fontSize: 24, fontWeight: 600, fontFamily: MONO }}>{v}</div>
-                {s && <div style={{ color: C.dim, fontSize: 13, marginTop: 4 }}>{s}</div>}
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Financing section removed — not shown to clients (Noor feedback 2026-03-31) */}
 
         {/* ═══ DATA SOURCES FOOTER ═══ */}
         <div style={{
@@ -1102,7 +1043,7 @@ function App() {
             { l: 'Construction Costs', v: 'Altus Guide', d: 'Through Jun 2026' },
             { l: 'Development Charges', v: P.project.municipality, d: '2026 Rates' },
             { l: 'Property Taxes', v: P.project.municipality.split(',')[0], d: '2025-2026 Rates' },
-            { l: 'Permanent Financing', v: P.financing.program_label, d: 'Current Terms' },
+            /* Permanent Financing removed — not shown to clients */
           ].map(({ l, v, d }) => (
             <div key={l} style={{ textAlign: 'center' }}>
               <span style={{ color: C.dim, fontSize: 13 }}>{l}: </span>

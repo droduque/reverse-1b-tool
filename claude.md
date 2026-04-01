@@ -249,3 +249,25 @@ Phase 1 is done when:
 4. Key Assumptions (Sheet 5) updated with correct project-specific values
 5. Downstream sheets (2-15) recalculate correctly when opened in Excel
 6. Works for both Project A (Birchmount, 3 unit types) and Project B (490 St Clair, 9 unit types consolidated into 3)
+
+---
+
+## Self-Improvement Protocol
+
+### When corrected
+Write the correction as a permanent rule in `.claude/rules/`.
+Include what was wrong, what is right, and the date learned.
+
+### When a new procedure is established
+Write it as a rule in `.claude/rules/`.
+
+### When a mistake leads to a fix
+Document BOTH the mistake AND the fix as a rule. Title it clearly.
+
+### When a task is requested more than twice
+Propose creating a slash command in `.claude/commands/`.
+Create it after receiving approval.
+
+### When to update claude.md
+NEVER auto-modify claude.md. Only update when Alejandro explicitly asks.
+All learned patterns go to `.claude/rules/`.

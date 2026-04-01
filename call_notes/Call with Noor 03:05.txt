@@ -1,0 +1,472 @@
+Mar 5, 2026
+Noor/Alejandro  - Transcript
+00:00:00
+ 
+Alejandro Duque: That's it. Hello. 4160. Hello, General. Hey, Noah. How's it going? I'm good. I'm getting your call. Cannot see you. Oh, there you go. Okay, perfect. Why? Hey, can you hear me here? You're muted right now. I think you're still muted. Does it give you the option to unmute?
+Noor Khan: Yeah,
+Alejandro Duque: Oh,
+Noor Khan: it's giving me it's better now.
+Alejandro Duque: there you go.
+Noor Khan: Yeah. So,
+Alejandro Duque: Yeah.
+Noor Khan: I logged into the thing and then I was working on the file and actually I just thought you'll get me into the meeting and I forgot actually.
+Alejandro Duque: Yeah. Yeah.
+Noor Khan: That's right.
+Alejandro Duque: Yeah. All right. Cool. So, yeah.
+Noor Khan: Okay.
+Alejandro Duque: So I mean so so to give you an update pretty much what what I was trying to do is what we talked about la last week it's we I haven't published it anywhere but it's a a tool that reads any 1A performer and generates the reverse 1B automatically.
+ 
+ 
+00:04:08
+ 
+Alejandro Duque: So, and I sent you some of the details, but I ran it for Birchmont since we have pretty much something to compare apples
+Noor Khan: Yeah.
+Alejandro Duque: to apples.
+Noor Khan: Yes.
+Alejandro Duque: And then I also ran it for 490 St.
+Noor Khan: Yes.
+Alejandro Duque: Clair, which is the one that um that I forget her name, but that they shared with us.
+Noor Khan: Canon canon. Canon ch.
+Alejandro Duque: Yeah, exactly. And pretty much I think again you'll know better the
+Noor Khan: Yeah.
+Alejandro Duque: entire detail of the spreadsheet but it was able to pick up on pretty much I went through a lot of iterations but I think at this point anything that's in the 18 that's relevant. It's automatically populated. It's um it's also smart enough to start thinking about weighted averages for some things and
+Noor Khan: Good.
+Alejandro Duque: I'm happy to present the email I sent you so we can look through the notes. Um but and then it also I I added a log that I didn't send it to you but it logs what it does so we can compare.
+ 
+ 
+00:05:06
+ 
+Noor Khan: Good.
+Alejandro Duque: But um but yeah I mean again I don't know if this is a good start because then from here like you can start
+Noor Khan: I think it's a good start.
+Alejandro Duque: building
+Noor Khan: I think it's a good start because um I was looking at the file right I was just reviewing the file and comparing it to my file too but I'm not too sure because I there are two things you are saying one is the consolidation of the area into the averages right three types of units that right so I I don't think that's a big
+Alejandro Duque: Yeah.
+Noor Khan: issue because you know we have the break up anyway in a typical 1A that Canon has done in terms of like you How many are affordable? It's basically affordable units which are creating dual types of unit types you know because of the rent disparity.
+Alejandro Duque: Yeah.
+Noor Khan: So that's not a big deal as far as the total numbers are intact like total revenue is intact and as far as the total uh averages are okay like in terms of uh unit
+ 
+ 
+00:06:01
+ 
+Alejandro Duque: Yeah.
+Noor Khan: count and the average rent per square foot and average rent by unit type by month and the revenue and the overall breakdown of the like you know type of revenue and the operating cost as far as door those are all in intact and NOI is intact so I don't think that average matters that much. That's one. The second point you said that it was picking up from Ottawa, right? The high and low the cost.
+Alejandro Duque: Uh,
+Noor Khan: So I checked my model itself. I think it was a mistake in the original model. The original model was not having the right reference.
+Alejandro Duque: okay.
+Noor Khan: It should have had a reference to a cell F and G. Instead of that it had reference to H and I. So I fixed in my model when we do this.
+Alejandro Duque: Okay.
+Noor Khan: This this is not to do with your this thing. It's it's basically original error in what we did actually.
+Alejandro Duque: Got it. Yeah. And that was more of a basic question.
+ 
+ 
+00:06:57
+ 
+Alejandro Duque: I had it in my notes because when I looked at I just trying to understand how the model works. But um but yeah, I mean I think that if this works uh because again what I'm thinking is that we do baby steps, right? Like it's like how can we improve the workflow? So instead of having to this go manually like now at least for for the first one for Birchmount and and I think I share with you uh the results but if
+Noor Khan: Yeah.
+Alejandro Duque: you look through uh kind of like the things that because then I went back and I had like check what was different and pretty much is in the sheet for the area schedule these values but it was pretty close like I mean I think the elevator lobbies that was the one But that if
+Noor Khan: this uh this area calculated by itself. You mean the
+Alejandro Duque: Yeah. Yeah. That that the tool grabbed from 1 A and dumped it into 1B. And here's where it made some assumptions.
+ 
+ 
+00:07:49
+ 
+Noor Khan: uh
+Alejandro Duque: This is the last model that I that I did, which I think is fairly accurate. But again, I don't know if this is where we're getting at,
+Noor Khan: it's
+Alejandro Duque: but hopefully this gets from inputting to now
+Noor Khan: okay.
+Alejandro Duque: reviewing. And it just gets one a.
+Noor Khan: Yes.
+Alejandro Duque: So what the system is doing just so you know right now is a Python script. So it's just grabbing all everything from 1A. It goes to your template. It creates a new file all of that and it creates an output that matches as much information as proper not touching any formulas or anything.
+Noor Khan: Good.
+Alejandro Duque: So that's something that I was very careful with the tools so everything can run properly. It it still gives me some errors because of some macros that things and I'm using a MacBook so that might be why. Overall, I think it's pretty much almost identified and that these are review things like this is like
+Noor Khan: Can we Yeah.
+Alejandro Duque: the manual piece of it
+ 
+ 
+00:08:47
+ 
+Noor Khan: Yeah. Can we Can we run it now?
+Alejandro Duque: that
+Noor Khan: Let's Let's run it like you know for uh the first one so I can see how it is doing basically like you know the tool that you built.
+Alejandro Duque: Yeah.
+Noor Khan: Can we see that?
+Alejandro Duque: So, right now I have it on my laptop. I I can show you exactly how just so you know kind of like how
+Noor Khan: Actually,
+Alejandro Duque: the tool works because right now it's pretty what was
+Noor Khan: I I want to see it.
+Alejandro Duque: that
+Noor Khan: I was very impressed when you said you could do that. I was saying, "Oh my god, I want to see it how you did it and how do
+Alejandro Duque: of course so so yeah I'm just using uh let me
+Noor Khan: you
+Alejandro Duque: present this uh let me present so you can see the full screen So, so we have uh Okay. So, we have pretty much I have a local folder that I just named SVN Rock and then I started from scratch.
+ 
+ 
+00:09:41
+ 
+Noor Khan: Okay.
+Alejandro Duque: I went on on cloud. So, I have cloud the system that I told you.
+Noor Khan: Wait.
+Alejandro Duque: I have it running on my terminal. So, I have it go to a specific folder and I just uh I have it installed in my laptop.
+Noor Khan: Okay.
+Alejandro Duque: So, it's going to come up, right? And then here, I pretty much described everything that we're trying to do. And long story short, after all these hours, what it did is that it's giving me, it told me, hey, create a reference folder where you upload the model 1B, the reverse 1B template,
+Noor Khan: H.
+Alejandro Duque: these things, and then give me uh oh, sorry, and then give me the one a for those two projects. I had it then go and we went back and forth a lot. Like I don't have the full history here, but once we did that,
+Noor Khan: Sure.
+Alejandro Duque: I just said, "Hey, I want to get from 1 A to reverse 1B as close to it as possible." And this was
+ 
+ 
+00:10:45
+ 
+Alejandro Duque: telling me everything that that that I wanted to do. So I just started like, for instance,
+Noor Khan: Sure.
+Alejandro Duque: if I go if I ask it right now, I'm going to say like, "Hey, um, what else is needed for, uh, for for the the tool to work better?" um what information do we need from nor and then this is going to think read through all the files and everything that it's built and it's going to start giving me information and then so right now if you look at it it's just a local Python script right here that what what I'm telling it is that anytime I upload a new
+Noor Khan: This is you're
+Alejandro Duque: one locally I'm running on my laptop
+Noor Khan: coming.
+Alejandro Duque: with Claude helping me build it. Now once we get to a good place like see like now it understands a lot of things. So now it's going to say and I don't know if you can see it properly. Let me just make it a little bit larger. But now it's going to say saying like based on the project memory and cloud here's what we're missing.
+ 
+ 
+00:11:50
+ 
+Alejandro Duque: What the tool does well now it read the one a performer. It populates sheet one of the reverse 1B template consolidates the n units. It goes on and on. Where are the gaps? The tool is estimates building areas but these are not in the 1A pro format. Right now we're using rules rough rules of thumb for example 2 two and a half% of
+Noor Khan: Yeah.
+Alejandro Duque: GFA for amenity. Then here are some questions he has for you right then is like development charges we're using Toronto rate every
+Noor Khan: H
+Alejandro Duque: municipality is different. I've already informed it of that.
+Noor Khan: yeah yeah
+Alejandro Duque: So it's like what are the municipalities that we use more often?
+Noor Khan: yeah
+Alejandro Duque: So so this is what I'm doing. I'm not doing any magic. I'm just asking the tool, hey,
+Noor Khan: good
+Alejandro Duque: help me get from here to there. This is where I think AI is very capable.
+Noor Khan: yeah good
+Alejandro Duque: The online cloud AI and the website is nowhere near as good as this because this is running locally and just pulling data as needed versus online that is going to try to upload the entire file, read through all of it, like
+ 
+ 
+00:12:53
+ 
+Noor Khan: What do you mean when you say when you say running locally that means what? And otherwise I'm a little bit confused about
+Alejandro Duque: So when it's going through the Excel sheet,
+Noor Khan: that.
+Alejandro Duque: it runs the program runs locally on my laptop first to understand all of it and then grabs the essence and then goes online to to apply some logic to it.
+Noor Khan: So I I also have cloud on on my laptop.
+Alejandro Duque: So,
+Noor Khan: No, but I go through the online version. I don't know. I'm not sure about that what you are
+Alejandro Duque: yeah. So, so this is the version that I I've downloaded.
+Noor Khan: saying.
+Alejandro Duque: It is cloud code with the $20 per month. You can access it and you just
+Noor Khan: I can download it. I I'm already subscribed to it.
+Alejandro Duque: Yeah.
+Noor Khan: I'm subscribed to like you know the pro version.
+Alejandro Duque: Yeah.
+Noor Khan: Can I download it from my laptop also?
+Alejandro Duque: Yeah. Yeah. You can uh anyone can download it and it just it runs on your ter terminal though.
+ 
+ 
+00:13:49
+ 
+Alejandro Duque: So you have to get a little bit used to running stuff on your terminal. But I'm not coding. I'm just asking it questions and going and it's telling me like hey like here's what again I created this very big prompt at at the beginning based on what we talked about and I was telling it like hey can you help me get from here to here based on this conversation. So, but
+Noor Khan: So, so because it is on your laptop,
+Alejandro Duque: um
+Noor Khan: it's basically saving memory also because of that because online it doesn't save the
+Alejandro Duque: yeah, exactly. Sorry, this guy is calling me.
+Noor Khan: memory.
+Alejandro Duque: Let me let me just reply back. So, so yeah. So, it's it's a tool that allows you to build in your laptop. So, what I was showing you before is that I'm building everything in this internal folder before I go out and I do it uh online because I want to make sure that I get this right before I go and I build an HTML file or anything like that because we just want to make sure that it works.
+ 
+ 
+00:14:47
+ 
+Noor Khan: Good.
+Alejandro Duque: So, that's pretty much everything that I'm doing and I can kind of like show it to you.
+Noor Khan: Good.
+Alejandro Duque: Uh so so it's just uh cloud code. I don't know if you can see it now, but it has documentation all of it.
+Noor Khan: Okay.
+Alejandro Duque: But you can either do it on the web or you can do it uh on your laptop. I would recommend using your laptop. So you can uh cloud
+Noor Khan: This
+Alejandro Duque: code. Yeah. what this is, it's a system that helps you build tools on your laptop that you can then publish online because that was
+Noor Khan: code.
+Alejandro Duque: one one of my questions like, hey, is this good enough that then we start thinking about I don't know like I wrote down some questions. Let me see if I find them. But I had some questions for you like about the municipalities that we
+Noor Khan: Yeah.
+Alejandro Duque: use more often because then on this tool what we could do is that we throw all that data in and it pulls
+ 
+ 
+00:15:49
+ 
+Noor Khan: Yeah.
+Alejandro Duque: from the 1A all the information it needs for the reverse 1B. Then from the cost from each municipality specifically,
+Noor Khan: Yeah.
+Alejandro Duque: it goes in instead of everything being in one spreadsheet, it starts picking from those things and then bringing them into your model where I
+Noor Khan: Yeah. Yeah.
+Alejandro Duque: think again the secret sauce that you guys have is the power the encyclopedic knowledge that you guys have. We're not touching that. We're just improving the workflow as the data flows into the model because then I mean that you can do it. The system is now good enough that if you give me another 1A, in 10 seconds, we're gonna have a reverse 1B created. Right now, it's running on my Yeah,
+Noor Khan: Oh,
+Alejandro Duque: it's 10 to 15 seconds for the system to do
+Noor Khan: that will be and it will be same template.
+Alejandro Duque: it.
+Noor Khan: Our own templates will be
+Alejandro Duque: Yes, that's Yeah,
+Noor Khan: intact.
+Alejandro Duque: I checked it didn't touch anything because I was very I was
+ 
+ 
+00:16:46
+ 
+Noor Khan: Yeah, that will be perfect. Yeah. Okay, that will be good.
+Alejandro Duque: I was very careful in that initially I had some issues like it created like some random stuff. it hallucinated. I was like just operate within these parameters then we build because yeah I mean AI could do some crazy stuff but but yeah so it's
+Noor Khan: Yeah. Yeah.
+Alejandro Duque: is that something that could like should we start building
+Noor Khan: Yeah. Yeah. Yeah.
+Alejandro Duque: okay
+Noor Khan: That's exactly what we wanted anyway because you know I was stuck with that because I think I was I was losing the template like you know when I was using the online version in that thing.
+Alejandro Duque: Yeah.
+Noor Khan: So I think what you are saying you have basically properly done it the way it should be like as you calling a tool right. So I don't know now we have to so all of us have to subscribe to like
+Alejandro Duque: No, no,
+Noor Khan: myself already subscribed but somebody else will also have to subscribe
+ 
+ 
+00:17:37
+ 
+Alejandro Duque: no, no. So, no. So we can it's like think of it as you and I we
+Noor Khan: right
+Alejandro Duque: build the tool the team just sees an interface they don't have to use it they can then subscribe
+Noor Khan: Yeah.
+Alejandro Duque: to cloud if they have questions but for us for you and me is like we
+Noor Khan: Yeah.
+Alejandro Duque: build the exact tool we give them a website or a login and then they just go there they upload the file and maybe they start selecting because that's what I'm thinking about next stages is that I don't know let me look at my notes, but it's a simple kind of like UI like drag and drop like you grab this, you grab the one a put it in, then we start thinking about what are the municipalities and we already have that data
+Noor Khan: Yeah.
+Alejandro Duque: and we just have the user select,
+Noor Khan: Yeah.
+Alejandro Duque: hey, where's the property located? The system can pick it up on its own as well because it has the address.
+ 
+ 
+00:18:31
+ 
+Noor Khan: Yeah.
+Alejandro Duque: So, it can be as hard as doing it. But you and I can build the tool. Then the team and again this is like first phase to get from 1 A to reverse 1B.
+Noor Khan: Good.
+Alejandro Duque: Then the team what I would I was suggesting to Derek is that if they pay those $20 a month then they can
+Noor Khan: Yeah.
+Alejandro Duque: ask basic question within the spreadsheet that is created within your model. So they don't have to call you.
+Noor Khan: Yeah. Yeah.
+Alejandro Duque: It's like hey what's I don't know like how is this calculated?
+Noor Khan: Yeah.
+Alejandro Duque: Simple questions like that is fantastic.
+Noor Khan: Yeah.
+Alejandro Duque: now to change edit it's not so good I mean and you saw it but uh I'm thinking that that I mean if this is a good start um we can start
+Noor Khan: I think it's a very good start. I'm very impressed actually.
+Alejandro Duque: okay thank you and yeah and I mean and I and I wanted you like that was one of my questions
+ 
+ 
+00:19:15
+ 
+Noor Khan: I am.
+Alejandro Duque: that I wanted you to go through the other uh to the CLA west I'm calling it that but through those results because that one I didn't touch it like that one I was like here's the 1A give me the
+Noor Khan: Yeah.
+Alejandro Duque: reverse 1B as best as you think and then it gives exactly and then
+Noor Khan: It's replicated all the everything was replicated just like
+Alejandro Duque: what I asked it is like give me everything that you didn't guess so what came straight from the
+Noor Khan: that.
+Alejandro Duque: 1A and then what I had to estimate because then we can you can tell the team hey this is the manual work that you do you put in the 1A it precreates in one second the reverse 1B now check on this assump assumptions that the system made and then I asked it let's make sure we explain how we got it. So, and then they have it. I mean,
+Noor Khan: Yeah.
+Alejandro Duque: it's uh and and we're if this works, all I wanted to say is that that that then you can start saying like, hey, now let's add I don't know the right now we have one municipality.
+ 
+ 
+00:20:22
+ 
+Alejandro Duque: Let's pull up all the data for all of it. Then I tell the tool, here's the data. I'm going to upload this one A from this municipality. then it's gonna be smart enough to like pull it all together into one reverse oneb that that the team then manually checks again.
+Noor Khan: Good.
+Alejandro Duque: It goes from like two to three hours inputting all of that information into just doing
+Noor Khan: Yeah,
+Alejandro Duque: it.
+Noor Khan: sure. Yeah,
+Alejandro Duque: So, if that works, I think that I had some questions,
+Noor Khan: perfect.
+Alejandro Duque: but uh I'll send them to you. But I think that if this works, then the phase two, so like development charges by municipality. So, it's like pulling the top 10, five, 10 cities that SVN works with the most. I don't know if that's the case, but and then for the altus uh cause guide, um it's already embedded in the template,
+Noor Khan: Yeah.
+Alejandro Duque: right? Yeah, I think it's like sheet 13 or something like that, but right now the tool is using whatever is
+ 
+ 
+00:21:29
+ 
+Noor Khan: So, Elus course guide changes every year.
+Alejandro Duque: Okay.
+Noor Khan: Right now, they have a 2025 version available online.
+Alejandro Duque: Okay.
+Noor Khan: It will change to 26 I think end of March or early April. So, I just took it from there and put it there in that sense. Um,
+Alejandro Duque: Okay.
+Noor Khan: it's basically like you know it can be like updated once a year. We don't need to update it all the time.
+Alejandro Duque: Okay. Perfect. Yeah.
+Noor Khan: So far as it know there is within those like GTA and this and that so far as
+Alejandro Duque: So,
+Noor Khan: it chooses from there then we're
+Alejandro Duque: yeah. Okay. Because Yeah. Sorry. Let me stop presenting because I was looking at my screen. But um but yeah,
+Noor Khan: good.
+Alejandro Duque: I mean if that's the case then yeah I mean if this works because I don't think so let me step back to answer one of your questions. We'll build the tool.
+ 
+ 
+00:22:19
+ 
+Alejandro Duque: The team just has to implement it and sell it. You build you build the models.
+Noor Khan: Good.
+Alejandro Duque: What we're doing is improving the flow of data into and out of the models as quickly and as
+Noor Khan: Yeah.
+Alejandro Duque: best as we can with always some human. This will get you 95%.
+Noor Khan: Yeah,
+Alejandro Duque: Now the team just needs to check that.
+Noor Khan: that's
+Alejandro Duque: So they don't have to call you.
+Noor Khan: good.
+Alejandro Duque: They don't mess up the formula, nothing.
+Noor Khan: Yeah, that will be perfect.
+Alejandro Duque: Okay.
+Noor Khan: That's what we want anyway because we don't want people to spend hours and hours to do that. It's perfect.
+Alejandro Duque: Okay. And then yeah so they don't need to again for them nothing changes like they create the 1A they upload it to they drop it into whatever like we can host it within the SVM website or whatever site they want that it's secure then once they have the 1A data it's going to spit out within a minute the reverse 1B it can tell them assumptions it made and then they can just go and check those assumptions change them and then it can have it pull the municipality data based on the data that we have that that's all.
+ 
+ 
+00:23:27
+ 
+Noor Khan: Okay, very good. So the the web so you're talking about a sub website will be created for
+Alejandro Duque: Yeah,
+Noor Khan: this.
+Alejandro Duque: I'm thinking so it doesn't have because if it's local it gets confusing. I think the easiest way like how I've done it let's say with my partners is that it's an internal website that it has a either a passcode or a logging and then they can go in and then for them it's just like a website because once you tell them to Exactly.
+Noor Khan: like it's an internet internal internet like
+Alejandro Duque: And the tool already has the Python code.
+Noor Khan: that.
+Alejandro Duque: So it's not running wild building anything like it's already there like all of it.
+Noor Khan: So codes came from uh cloud
+Alejandro Duque: Yeah.
+Noor Khan: basically
+Alejandro Duque: Yeah. It took me like six hours to build it properly, but it was a but exactly.
+Noor Khan: basically You built a model essentially. You built a Python model
+Alejandro Duque: And I don't know how to write Python.
+Noor Khan: essentially.
+ 
+ 
+00:24:19
+ 
+Alejandro Duque: Like it was all just texting back and forth. Then you'll see like it's like now like if you saw my interaction with the tool I wasn't planning anything like I just said like hey what what do we need to know
+Noor Khan: Yeah.
+Alejandro Duque: from uh sorry let me present the right screen but I was just asking the tool hey how can we what do we need to ask um nor and then it just started saying like hey we need this information like if you saw just started the text. What else is needed? What information do we need from norm and I gave it a context that you're their CFO? You've built these models.
+Noor Khan: Yeah.
+Alejandro Duque: So, and then he just started saying like, hey,
+Noor Khan: Yeah.
+Alejandro Duque: we need to ask him about this then about development charges, which municipalities, construction cost, is it per project, how often do this change? I'm happy to send you this because this is what we do.
+Noor Khan: Yeah, you sent me you sent me some part of it anyway.
+ 
+ 
+00:25:22
+ 
+Noor Khan: It's there in your email.
+Alejandro Duque: Yeah,
+Noor Khan: Some of
+Alejandro Duque: I sent you the two kind of like ones he created the reverse one
+Noor Khan: it.
+Alejandro Duque: bees the report he gave me but I haven't sent you these questions
+Noor Khan: Yeah.
+Alejandro Duque: so so yeah so right now it's like
+Noor Khan: Okay. Yeah, sure. No
+Alejandro Duque: uh a walkthrough of how he builds the the area schedule from
+Noor Khan: problem.
+Alejandro Duque: scratch because that's where most of the guest work lives right Hey now.
+Noor Khan: The area schedule I asked it to do and it did it like you know the cloud itself uh very easily when I as I asked it to do that.
+Alejandro Duque: Okay. Okay.
+Noor Khan: there was no like you know this thing I can show you the what I asked it to do you can see that you know my command or my prompt basically for that I can show you that let me go
+Alejandro Duque: Okay.
+Noor Khan: there
+Alejandro Duque: So, yeah. So if you want I'll send you these questions and then the end
+ 
+ 
+00:26:24
+ 
+Noor Khan: yeah
+Alejandro Duque: goal is that we have a tool build where agents upload the reverse 1A and they get a 97% completed
+Noor Khan: Good.
+Alejandro Duque: reverse 1B in 60 seconds and then we can build from there because then
+Noor Khan: Good.
+Alejandro Duque: we can start tweaking. And I mean if you find mistakes like if you're like oh it didn't it did this wrong.
+Noor Khan: Yeah.
+Alejandro Duque: I don't know like the sky is the limit from there. But I always thought Derek like you start very basic with one task that is very
+Noor Khan: Yeah.
+Alejandro Duque: manual and then you you build and when are you doing sorry when are you going on your
+Noor Khan: See, see I can Yeah. Let me show you.
+Alejandro Duque: trip?
+Noor Khan: I'm going uh Monday Monday evening.
+Alejandro Duque: Cool. Nice.
+Noor Khan: Yeah, Monday evening. It's not a trip actually. It's a I'm going to be like, you know, uh kind of um in a you know, it's a Ramadan going on, right? The fasting month.
+ 
+ 
+00:27:25
+ 
+Noor Khan: So I'll be basically like you know Yeah.
+Alejandro Duque: Yeah.
+Noor Khan: So I'll be in the uh what do you call it like you know you'll be in the mosque sitting for like you know um how many days you'll be sitting there for 10 nights actually.
+Alejandro Duque: Wow.
+Noor Khan: So it's 10 nights of sitting in the most like you know praying and learning something new like every every day. It's like a kind of a it's like a retreat.
+Alejandro Duque: Yeah. Yeah.
+Noor Khan: What do I say?
+Alejandro Duque: Yeah.
+Noor Khan: It's like a retreat to just like you know rejuvenate yourself like you know into spiritually that's the
+Alejandro Duque: Yeah. That's
+Noor Khan: easy way to say yeah so this yeah so this is what I did here see can you
+Alejandro Duque: awesome.
+Noor Khan: get me a typical area schedule for the proposed building in the above file
+Alejandro Duque: Okay. Got it.
+Noor Khan: for a purpose-built apartment building with a with the unit mix other areas amenities and parking as per the file then it gave me that thing that was my prompt for
+ 
+ 
+00:28:18
+ 
+Alejandro Duque: Got it. Got it. Okay. No, that's good to know. Um Yeah.
+Noor Khan: Yeah.
+Alejandro Duque: And then so I'll send you the questions.
+Noor Khan: Yeah.
+Alejandro Duque: It's more about municipality and and then when you reply back then,
+Noor Khan: Tell me. No problem.
+Alejandro Duque: yeah, then it's just about testing the tool. Look through the results. I know I send them like right before the call.
+Noor Khan: Yeah.
+Alejandro Duque: So please, I play with them. And as we find stuff, let me know.
+Noor Khan: Yeah.
+Alejandro Duque: But I think this is a a first step, which is like from 1 A to reverse 1B,
+Noor Khan: Very
+Alejandro Duque: 95% of the way there in 60 seconds. That's how I would pitch it.
+Noor Khan: good. No way.
+Alejandro Duque: Yeah.
+Noor Khan: Like I I'm very impressed
+Alejandro Duque: Yeah. I know. And and and I'm telling you like th this is where it gets in my opinion useful.
+Noor Khan: with
+Alejandro Duque: It's not replacing people, nothing.
+ 
+ 
+00:29:08
+ 
+Alejandro Duque: It's just like, hey, you remove you're removing people that if you have if you're paying a VA to input this data manually, that's what you're replacing. But again, like the model that you've built,
+Noor Khan: Yeah.
+Alejandro Duque: like I've played with it and I was like that was the one mistake I not mistake but that that I wanted to ask you for clarification because everything else is just incredible.
+Noor Khan: Yeah.
+Alejandro Duque: So my goodness.
+Noor Khan: Yeah. It's a lot of work. Of course. Yeah. Lot of
+Alejandro Duque: Yeah, man.
+Noor Khan: work.
+Alejandro Duque: It was just like and that's why I was so careful in the buildout process to ensure that it's as concentrated on just input fields and not messing up anything. So yeah, look through it. I'll send you the questions and then we'll we'll build from there.
+Noor Khan: Okay. So, I will have a I'm working like tomorrow we have a meeting. So, I'll be going there for the like SPN meeting. But if you want me to have another meeting with you on Monday, Monday morning sometime stuff like that.
+ 
+ 
+00:29:59
+ 
+Alejandro Duque: Okay.
+Noor Khan: Like if you want to run through something, I can do that as well. Monday and then then I'll be like, you know,
+Alejandro Duque: Yeah,
+Noor Khan: for two weeks from there then like no not that Friday but the Friday after I can
+Alejandro Duque: I know.
+Noor Khan: be then after that.
+Alejandro Duque: Okay, I'll send you a list of questions in the next five minutes then and then we'll plan for Monday and then and then Yeah. and then look through the other reverse 1B and see how how it did for the other
+Noor Khan: Yeah. And then then maybe we can ask uh we can ask Kenan to send you another one B 1A also for another project.
+Alejandro Duque: Yep. Yeah.
+Noor Khan: Do you want to do that?
+Alejandro Duque: Yeah, please. And a couple more like the more the more the better. And then we'll start testing on on the tool. The Excel for now. Yes. For this tool is just using Excel then. Yeah. So just the Excel.
+ 
+ 
+Transcription ended after 00:31:04
+
+This editable transcript was computer generated and might contain errors. People can also change the text after it was created.

@@ -346,9 +346,9 @@ def save_workbook(template_path, output_path, sheet_modifications, log_entries):
                     # the formulas library. Cached values are preserved.
                     _strip_external_formulas(root, log_entries)
 
-                    # Clear stale cached values from formula cells so no tool
-                    # (PDF converter, preview, data_only reader) can ever show
-                    # template values instead of recalculated ones.
+                    # Clear stale cached values from formula cells on modified
+                    # sheets so no tool shows template values instead of
+                    # recalculated ones. fullCalcOnLoad forces Excel to recalc.
                     cleared = _clear_formula_cached_values(root)
                     if cleared:
                         log_entries.append(f"  {name}: cleared {cleared} stale cached values from formula cells")

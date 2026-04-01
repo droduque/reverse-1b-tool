@@ -767,9 +767,9 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("SHEET 1: 1. 1A Proforma")
     log.append("=" * 60)
 
-    # Title and address
-    queue_write(sheet1_writes, 'F2', "Estimated Stabilized Value - Today", "Title")
-    queue_write(sheet1_writes, 'F3', data['address'], "Address from 1A title")
+    # Title and address (Fran V2 template: columns shifted left by 1)
+    queue_write(sheet1_writes, 'E2', "Estimated Stabilized Value - Today", "Title")
+    queue_write(sheet1_writes, 'E3', data['address'], "Address from 1A title")
 
     # Unit mix — rows 7, 8, 9
     # If a group has 0 units (e.g., Bayview has no 1-beds), clear old template
@@ -778,44 +778,44 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         row = 7 + i
         if unit['count'] == 0:
             # Write zeros for numeric cells so formulas (H7=E7*F7 etc.) don't #VALUE!
-            queue_write(sheet1_writes, f'D{row}', '', f"Unit type {i+1} label (empty — no units)")
-            queue_write(sheet1_writes, f'E{row}', 0, f"Unit type {i+1} avg SF (zero — no units)")
-            queue_write(sheet1_writes, f'F{row}', 0, f"Unit type {i+1} count (zero)")
-            queue_write(sheet1_writes, f'I{row}', 0, f"Unit type {i+1} monthly rent (zero — no units)")
+            queue_write(sheet1_writes, f'C{row}', '', f"Unit type {i+1} label (empty — no units)")
+            queue_write(sheet1_writes, f'D{row}', 0, f"Unit type {i+1} avg SF (zero — no units)")
+            queue_write(sheet1_writes, f'E{row}', 0, f"Unit type {i+1} count (zero)")
+            queue_write(sheet1_writes, f'H{row}', 0, f"Unit type {i+1} monthly rent (zero — no units)")
         else:
-            queue_write(sheet1_writes, f'D{row}', unit['label'], f"Unit type {i+1} label")
-            queue_write(sheet1_writes, f'E{row}', unit['sf'], f"Unit type {i+1} avg SF")
-            queue_write(sheet1_writes, f'F{row}', unit['count'], f"Unit type {i+1} count")
-            queue_write(sheet1_writes, f'I{row}', unit['rent'], f"Unit type {i+1} monthly rent")
+            queue_write(sheet1_writes, f'C{row}', unit['label'], f"Unit type {i+1} label")
+            queue_write(sheet1_writes, f'D{row}', unit['sf'], f"Unit type {i+1} avg SF")
+            queue_write(sheet1_writes, f'E{row}', unit['count'], f"Unit type {i+1} count")
+            queue_write(sheet1_writes, f'H{row}', unit['rent'], f"Unit type {i+1} monthly rent")
 
     # Operating revenues
-    queue_write(sheet1_writes, 'F18', data['parking_underground']['spaces'], "Underground parking spaces")
-    queue_write(sheet1_writes, 'G18', data['parking_underground']['fee'], "Underground parking monthly fee")
-    queue_write(sheet1_writes, 'F19', data['parking_visitor']['spaces'], "Visitor parking spaces")
-    queue_write(sheet1_writes, 'G19', data['parking_visitor']['fee'], "Visitor parking monthly fee")
-    queue_write(sheet1_writes, 'F20', data['parking_retail']['spaces'], "Retail parking spaces")
-    queue_write(sheet1_writes, 'G20', data['parking_retail']['fee'], "Retail parking monthly fee")
-    queue_write(sheet1_writes, 'F21', data['storage']['count'], "Storage locker count")
-    queue_write(sheet1_writes, 'G21', data['storage']['fee'], "Storage locker monthly fee")
+    queue_write(sheet1_writes, 'E18', data['parking_underground']['spaces'], "Underground parking spaces")
+    queue_write(sheet1_writes, 'F18', data['parking_underground']['fee'], "Underground parking monthly fee")
+    queue_write(sheet1_writes, 'E19', data['parking_visitor']['spaces'], "Visitor parking spaces")
+    queue_write(sheet1_writes, 'F19', data['parking_visitor']['fee'], "Visitor parking monthly fee")
+    queue_write(sheet1_writes, 'E20', data['parking_retail']['spaces'], "Retail parking spaces")
+    queue_write(sheet1_writes, 'F20', data['parking_retail']['fee'], "Retail parking monthly fee")
+    queue_write(sheet1_writes, 'E21', data['storage']['count'], "Storage locker count")
+    queue_write(sheet1_writes, 'F21', data['storage']['fee'], "Storage locker monthly fee")
 
-    # Submetering — G22 has an external workbook ref formula, force overwrite
-    queue_write(sheet1_writes, 'G22', data['submetering']['fee'], "Submetering monthly fee — replaced external ref", force=True)
+    # Submetering — F22 has an external workbook ref formula, force overwrite
+    queue_write(sheet1_writes, 'F22', data['submetering']['fee'], "Submetering monthly fee — replaced external ref", force=True)
 
-    queue_write(sheet1_writes, 'F24', data['vacancy_rate'], "Residential vacancy rate")
-    queue_write(sheet1_writes, 'F26', data['commercial']['sf'], "Commercial retail SF")
-    queue_write(sheet1_writes, 'G26', data['commercial']['rate'], "Commercial retail $/SF rate")
-    queue_write(sheet1_writes, 'F27', data['commercial_vacancy'], "Commercial vacancy rate")
+    queue_write(sheet1_writes, 'E24', data['vacancy_rate'], "Residential vacancy rate")
+    queue_write(sheet1_writes, 'E26', data['commercial']['sf'], "Commercial retail SF")
+    queue_write(sheet1_writes, 'F26', data['commercial']['rate'], "Commercial retail $/SF rate")
+    queue_write(sheet1_writes, 'E27', data['commercial_vacancy'], "Commercial vacancy rate")
 
     # Operating expenses
-    queue_write(sheet1_writes, 'G37', data['mgmt_fee_pct'], "Management fee %")
-    queue_write(sheet1_writes, 'F38', data['tax_rate'], "Property tax rate")
-    queue_write(sheet1_writes, 'G38', data['assessed_value'], "Assessed value per unit")
+    queue_write(sheet1_writes, 'F37', data['mgmt_fee_pct'], "Management fee %")
+    queue_write(sheet1_writes, 'E38', data['tax_rate'], "Property tax rate")
+    queue_write(sheet1_writes, 'F38', data['assessed_value'], "Assessed value per unit")
 
     # Cap rates
     if len(data['cap_rates']) >= 3:
-        queue_write(sheet1_writes, 'H46', data['cap_rates'][0], "Best case cap rate")
-        queue_write(sheet1_writes, 'H47', data['cap_rates'][1], "Base case cap rate")
-        queue_write(sheet1_writes, 'H48', data['cap_rates'][2], "Worst case cap rate")
+        queue_write(sheet1_writes, 'G46', data['cap_rates'][0], "Best case cap rate")
+        queue_write(sheet1_writes, 'G47', data['cap_rates'][1], "Base case cap rate")
+        queue_write(sheet1_writes, 'G48', data['cap_rates'][2], "Worst case cap rate")
 
     # --- Internal operating assumptions (rows 58+) ---
     log.append("")
@@ -824,43 +824,43 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     # GFA — from 1A if available, else estimate from net rentable / efficiency
     gfa = data.get('gfa')
     if gfa:
-        queue_write(sheet1_writes, 'F62', gfa, "Building GFA (from 1A internal section)")
+        queue_write(sheet1_writes, 'E62', gfa, "Building GFA (from 1A internal section)")
     else:
         gfa = round(data['total_rentable_sf'] / GFA_EFFICIENCY)
-        queue_write(sheet1_writes, 'F62', gfa,
+        queue_write(sheet1_writes, 'E62', gfa,
                     f"ESTIMATED: net rentable {data['total_rentable_sf']:.0f} / {GFA_EFFICIENCY} efficiency")
 
     # Amenity space — from 1A if available, else estimate
     amenity_sf = data.get('amenity_sf')
     if amenity_sf:
-        queue_write(sheet1_writes, 'F64', amenity_sf, "Amenity space (from 1A)")
+        queue_write(sheet1_writes, 'E64', amenity_sf, "Amenity space (from 1A)")
     else:
         amenity_sf = round(data['total_units'] * AMENITY_SF_PER_UNIT, -2)  # round to 100
-        queue_write(sheet1_writes, 'F64', amenity_sf,
+        queue_write(sheet1_writes, 'E64', amenity_sf,
                     f"ESTIMATED: {data['total_units']} units x {AMENITY_SF_PER_UNIT} SF/unit, rounded to 100")
 
     # Per-unit operating costs — use 1A values if available, else defaults
     rm = data['expenses'].get('rm') or DEFAULT_RM_PER_UNIT
-    queue_write(sheet1_writes, 'I93', rm,
+    queue_write(sheet1_writes, 'H93', rm,
                 f"R&M per unit ({'from 1A' if data['expenses'].get('rm') else 'DEFAULT'})")
 
     staffing = data['expenses'].get('staffing') or DEFAULT_STAFFING_PER_UNIT
-    queue_write(sheet1_writes, 'I109', staffing,
+    queue_write(sheet1_writes, 'H109', staffing,
                 f"Staffing per unit ({'from 1A' if data['expenses'].get('staffing') else 'DEFAULT'})")
 
     insurance = data['expenses'].get('insurance') or DEFAULT_INSURANCE_PER_UNIT
-    queue_write(sheet1_writes, 'F117', insurance,
+    queue_write(sheet1_writes, 'E117', insurance,
                 f"Insurance per unit ({'from 1A' if data['expenses'].get('insurance') else 'DEFAULT'})")
 
     marketing = data['expenses'].get('marketing') or DEFAULT_MARKETING_PER_UNIT
-    queue_write(sheet1_writes, 'F122', marketing,
+    queue_write(sheet1_writes, 'E122', marketing,
                 f"Marketing per unit ({'from 1A' if data['expenses'].get('marketing') else 'DEFAULT'})")
 
     ga = data['expenses'].get('ga') or DEFAULT_GA_PER_UNIT
-    queue_write(sheet1_writes, 'F127', ga,
+    queue_write(sheet1_writes, 'E127', ga,
                 f"G&A per unit ({'from 1A' if data['expenses'].get('ga') else 'DEFAULT'})")
 
-    queue_write(sheet1_writes, 'I137', data['reserve_pct'], "Reserve for replacement %")
+    queue_write(sheet1_writes, 'H137', data['reserve_pct'], "Reserve for replacement %")
 
     # Utilities — back-calculate PSF from per-unit value
     # Formula chain: F80 ($/PSF) -> F81 (=F80*common_area) -> H80 (=ROUND(F81/units,-1))
@@ -872,12 +872,12 @@ def populate_template(data, output_path, municipality=None, building_type='high-
             utilities_psf = round(utilities_per_unit * data['total_units'] / common_area)
         else:
             utilities_psf = DEFAULT_UTILITIES_PSF
-        queue_write(sheet1_writes, 'F80', utilities_psf,
+        queue_write(sheet1_writes, 'E80', utilities_psf,
                     f"BACK-CALCULATED: ${utilities_per_unit}/unit x {data['total_units']} units "
                     f"/ {common_area:.0f} SF common area = ${utilities_psf}/PSF")
     else:
         utilities_psf = DEFAULT_UTILITIES_PSF
-        queue_write(sheet1_writes, 'F80', utilities_psf, "Utilities $/PSF (DEFAULT)")
+        queue_write(sheet1_writes, 'E80', utilities_psf, "Utilities $/PSF (DEFAULT)")
     # Store all computed values back to data dict so export_project_json()
     # uses the exact same inputs written to Excel — not stale defaults.
     data['utilities_psf'] = utilities_psf
@@ -1040,6 +1040,16 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     queue_write(sheet5_writes, 'F15', -3, "Lease-up offset (months)")
     queue_write(sheet5_writes, 'E37', 0.08, "Profit percentage (8%)")
 
+    # Project start date — replace =TODAY() with 1st of current month.
+    # EDATE from month-end dates (29/30/31) gets clamped by short months
+    # (e.g., Feb 28), permanently breaking the date chain in Sheet 10.
+    # Using the 1st avoids this because every month has a 1st.
+    today = date.today()
+    start_date = date(today.year, today.month, 1)
+    # Excel date serial: days since 1899-12-30
+    excel_serial = (start_date - date(1899, 12, 30)).days
+    queue_write(sheet5_writes, 'G10', excel_serial, f"Project start date ({start_date.isoformat()}) — forces 1st of month to avoid EDATE clamping", force=True)
+
     # Development charges — from selected municipality or skip
     if municipality:
         dc = municipality['rates']
@@ -1061,7 +1071,7 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         log.append("      Noor should verify and update the Altus height category if needed.")
 
     # ===================================================================
-    # SHEET 6: Permanent Financing Parameters (D31:D35)
+    # SHEET 6: Permanent Financing Parameters (C31:C35, Fran V2 shifted left)
     # ===================================================================
     log.append("")
     log.append("=" * 60)
@@ -1070,11 +1080,11 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     fp_label = financing_program.get('label', 'CMHC MLI Select')
     log.append(f"  Financing program: {fp_label}")
 
-    queue_write(sheet6_writes, 'D31', financing_program['max_ltv'], f"Max LTV ({fp_label})")
-    queue_write(sheet6_writes, 'D32', financing_program['min_dscr'], f"Min DSCR ({fp_label})")
-    queue_write(sheet6_writes, 'D33', financing_program['amortization'], f"Amortization years ({fp_label})")
-    queue_write(sheet6_writes, 'D34', financing_program['interest_rate'], f"Interest rate ({fp_label})")
-    queue_write(sheet6_writes, 'D35', financing_program['cmhc_premium'], f"CMHC premium ({fp_label})")
+    queue_write(sheet6_writes, 'C31', financing_program['max_ltv'], f"Max LTV ({fp_label})")
+    queue_write(sheet6_writes, 'C32', financing_program['min_dscr'], f"Min DSCR ({fp_label})")
+    queue_write(sheet6_writes, 'C33', financing_program['amortization'], f"Amortization years ({fp_label})")
+    queue_write(sheet6_writes, 'C34', financing_program['interest_rate'], f"Interest rate ({fp_label})")
+    queue_write(sheet6_writes, 'C35', financing_program['cmhc_premium'], f"CMHC premium ({fp_label})")
 
     # ===================================================================
     # FLAGS FOR NOOR'S REVIEW
@@ -1168,20 +1178,20 @@ def import_reverse_1b(xlsx_path):
         except (ValueError, TypeError):
             return default
 
-    # --- Project info (Sheet 1) ---
-    title = str(val(s1, 'F2', ''))
-    address = str(val(s1, 'F3', ''))
-    # If F3 is empty, try to extract from title
+    # --- Project info (Sheet 1, Fran V2: columns shifted left by 1) ---
+    title = str(val(s1, 'E2', ''))
+    address = str(val(s1, 'E3', ''))
+    # If E3 is empty, try to extract from title
     if not address.strip() and title:
         address = title.replace('Estimated Stabilized Value -', '').replace('Estimated Stabilized Value–', '').strip()
 
     # --- Unit mix (Sheet 1, rows 7-9) ---
     unit_types = []
     for row in range(7, 10):
-        label = val(s1, f'D{row}', '')
-        count = num(s1, f'F{row}')
-        sf = num(s1, f'E{row}')
-        rent = num(s1, f'I{row}')
+        label = val(s1, f'C{row}', '')
+        count = num(s1, f'E{row}')
+        sf = num(s1, f'D{row}')
+        rent = num(s1, f'H{row}')
         if label and count > 0:
             unit_types.append({
                 'label': str(label).strip(),
@@ -1195,52 +1205,52 @@ def import_reverse_1b(xlsx_path):
     est_floors = math.ceil(total_units / 12) if total_units > 0 else 1
 
     # --- Areas (Sheet 1 + Sheet 4) ---
-    gfa = num(s1, 'F62')
-    amenity_sf = num(s1, 'F64')
+    gfa = num(s1, 'E62')
+    amenity_sf = num(s1, 'E64')
     common_area_sf = max(0, gfa - total_rentable_sf) if gfa > 0 else 0
 
     # Parking SF
-    pkg_underground = int(num(s1, 'F18'))
-    pkg_visitor = int(num(s1, 'F19'))
-    pkg_retail = int(num(s1, 'F20'))
+    pkg_underground = int(num(s1, 'E18'))
+    pkg_visitor = int(num(s1, 'E19'))
+    pkg_retail = int(num(s1, 'E20'))
     parking_sf = (pkg_underground + pkg_visitor + pkg_retail) * PARKING_SF_PER_SPACE
 
     # --- Parking fees ---
-    pkg_underground_fee = num(s1, 'G18')
-    pkg_visitor_fee = num(s1, 'G19')
-    pkg_retail_fee = num(s1, 'G20')
+    pkg_underground_fee = num(s1, 'F18')
+    pkg_visitor_fee = num(s1, 'F19')
+    pkg_retail_fee = num(s1, 'F20')
 
     # --- Storage ---
-    storage_count = int(num(s1, 'F21'))
-    storage_fee = num(s1, 'G21')
+    storage_count = int(num(s1, 'E21'))
+    storage_fee = num(s1, 'F21')
 
     # --- Submetering ---
-    submetering_fee = num(s1, 'G22', 20)
+    submetering_fee = num(s1, 'F22', 20)
 
     # --- Commercial ---
-    commercial_sf = num(s1, 'F26')
-    commercial_rate = num(s1, 'G26')
-    commercial_vacancy = num(s1, 'F27')
+    commercial_sf = num(s1, 'E26')
+    commercial_rate = num(s1, 'F26')
+    commercial_vacancy = num(s1, 'E27')
 
     # --- Vacancy ---
-    vacancy_rate = num(s1, 'F24')
+    vacancy_rate = num(s1, 'E24')
 
-    # --- Cap rates (Sheet 1, H46:H48) ---
-    cap_best = num(s1, 'H46', 0.0425)
-    cap_base = num(s1, 'H47', 0.045)
-    cap_worst = num(s1, 'H48', 0.0475)
+    # --- Cap rates (Sheet 1, G46:G48, Fran V2 shifted) ---
+    cap_best = num(s1, 'G46', 0.0425)
+    cap_base = num(s1, 'G47', 0.045)
+    cap_worst = num(s1, 'G48', 0.0475)
 
-    # --- OpEx (Sheet 1) ---
-    mgmt_fee = num(s1, 'G37', 0.0425)
-    tax_rate = num(s1, 'F38')
-    assessed_value = num(s1, 'G38')
-    utilities_psf = num(s1, 'F80', DEFAULT_UTILITIES_PSF)
-    rm_per_unit = num(s1, 'I93', DEFAULT_RM_PER_UNIT)
-    staffing_per_unit = num(s1, 'I109', DEFAULT_STAFFING_PER_UNIT)
-    insurance_per_unit = num(s1, 'F117', DEFAULT_INSURANCE_PER_UNIT)
-    marketing_per_unit = num(s1, 'F122', DEFAULT_MARKETING_PER_UNIT)
-    ga_per_unit = num(s1, 'F127', DEFAULT_GA_PER_UNIT)
-    reserve_pct = num(s1, 'I137', DEFAULT_RESERVE_PCT)
+    # --- OpEx (Sheet 1, Fran V2 shifted) ---
+    mgmt_fee = num(s1, 'F37', 0.0425)
+    tax_rate = num(s1, 'E38')
+    assessed_value = num(s1, 'F38')
+    utilities_psf = num(s1, 'E80', DEFAULT_UTILITIES_PSF)
+    rm_per_unit = num(s1, 'H93', DEFAULT_RM_PER_UNIT)
+    staffing_per_unit = num(s1, 'H109', DEFAULT_STAFFING_PER_UNIT)
+    insurance_per_unit = num(s1, 'E117', DEFAULT_INSURANCE_PER_UNIT)
+    marketing_per_unit = num(s1, 'E122', DEFAULT_MARKETING_PER_UNIT)
+    ga_per_unit = num(s1, 'E127', DEFAULT_GA_PER_UNIT)
+    reserve_pct = num(s1, 'H137', DEFAULT_RESERVE_PCT)
 
     # --- Schedule (Sheet 5) ---
     land_months = int(num(s5, 'E12'))
@@ -1279,15 +1289,15 @@ def import_reverse_1b(xlsx_path):
             construction_cost_psf = 453  # Birchmount baseline
 
     # --- Financing (Sheet 6 if it exists, otherwise defaults) ---
-    # Permanent loan parameters in column D, rows 31-35
+    # Permanent loan parameters in column C, rows 31-35 (Fran V2 shifted)
     # Defaults match CMHC MLI Select 100pts (Joanna's standard proforma)
     try:
         s6 = wb['6. Debt Stack & Financing']
-        perm_ltv = num(s6, 'D31', 0.95)
-        perm_dscr = num(s6, 'D32', 1.1)
-        perm_rate = num(s6, 'D34', 0.037)
-        perm_term = int(num(s6, 'D33', 50))
-        cmhc_premium = num(s6, 'D35', 0.05)
+        perm_ltv = num(s6, 'C31', 0.95)
+        perm_dscr = num(s6, 'C32', 1.1)
+        perm_rate = num(s6, 'C34', 0.037)
+        perm_term = int(num(s6, 'C33', 50))
+        cmhc_premium = num(s6, 'C35', 0.05)
     except (KeyError, Exception):
         perm_ltv = 0.95
         perm_dscr = 1.1

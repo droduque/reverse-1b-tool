@@ -195,28 +195,28 @@ def validate_output(xlsx_path, parsed_data):
         # Unit mix rows 7-9
         for row in (7, 8, 9):
             numeric_cells_sheet1.extend([
-                (f'E{row}', 'unit SF'),
-                (f'F{row}', 'unit count'),
-                (f'I{row}', 'monthly rent'),
+                (f'D{row}', 'unit SF'),
+                (f'E{row}', 'unit count'),
+                (f'H{row}', 'monthly rent'),
             ])
 
         # Parking and storage
         for row in (18, 19, 20, 21):
             numeric_cells_sheet1.extend([
-                (f'F{row}', 'parking/storage count'),
-                (f'G{row}', 'parking/storage fee'),
+                (f'E{row}', 'parking/storage count'),
+                (f'F{row}', 'parking/storage fee'),
             ])
 
-        # Other numeric cells
+        # Other numeric cells (Fran V2: columns shifted left by 1)
         numeric_cells_sheet1.extend([
-            ('F24', 'vacancy rate'),
-            ('G37', 'management fee %'),
-            ('F38', 'tax rate'),
-            ('G38', 'assessed value per unit'),
-            ('H46', 'cap rate best'),
-            ('H47', 'cap rate base'),
-            ('H48', 'cap rate worst'),
-            ('F62', 'building GFA'),
+            ('E24', 'vacancy rate'),
+            ('F37', 'management fee %'),
+            ('E38', 'tax rate'),
+            ('F38', 'assessed value per unit'),
+            ('G46', 'cap rate best'),
+            ('G47', 'cap rate base'),
+            ('G48', 'cap rate worst'),
+            ('E62', 'building GFA'),
         ])
 
         for cell_ref, desc in numeric_cells_sheet1:
@@ -233,8 +233,8 @@ def validate_output(xlsx_path, parsed_data):
         # SHEET 1: FORMULA INTEGRITY — rows 7-9 formula columns
         # ===================================================================
 
-        # Columns G, H, J, K, L in rows 7-9 should still have formulas
-        formula_cols = ['G', 'H', 'J', 'K', 'L']
+        # Columns F, G, I, J, K in rows 7-9 should still have formulas (Fran V2 shifted)
+        formula_cols = ['F', 'G', 'I', 'J', 'K']
         for row in (7, 8, 9):
             for col in formula_cols:
                 ref = f'{col}{row}'
@@ -244,7 +244,7 @@ def validate_output(xlsx_path, parsed_data):
                       is_error=True)
 
         # Row 10 TOTAL row — key formulas must still exist
-        total_formula_cells = ['F10', 'H10', 'K10', 'L10']
+        total_formula_cells = ['E10', 'G10', 'J10', 'K10']
         for ref in total_formula_cells:
             _, _, _, has_formula = _get_cell(sheet1_root, ref)
             check(has_formula,
@@ -253,15 +253,15 @@ def validate_output(xlsx_path, parsed_data):
 
         # Division-by-zero risk: if E{row}=0 and formulas reference it
         for row in (7, 8, 9):
+            _, d_val, d_type, _ = _get_cell(sheet1_root, f'D{row}')
+            d_numeric = _resolve_value(d_val, d_type, shared_strings)
             _, e_val, e_type, _ = _get_cell(sheet1_root, f'E{row}')
             e_numeric = _resolve_value(e_val, e_type, shared_strings)
-            _, f_val, f_type, _ = _get_cell(sheet1_root, f'F{row}')
-            f_numeric = _resolve_value(f_val, f_type, shared_strings)
-            if isinstance(e_numeric, (int, float)) and e_numeric == 0:
-                if isinstance(f_numeric, (int, float)) and f_numeric > 0:
-                    # Units exist but SF is zero — J column ($/SF) will divide by zero
+            if isinstance(d_numeric, (int, float)) and d_numeric == 0:
+                if isinstance(e_numeric, (int, float)) and e_numeric > 0:
+                    # Units exist but SF is zero — I column ($/SF) will divide by zero
                     check(False,
-                          f"Sheet 1 E{row}=0 but F{row}={f_numeric}: $/SF formula (J{row}) will divide by zero",
+                          f"Sheet 1 D{row}=0 but E{row}={e_numeric}: $/SF formula (I{row}) will divide by zero",
                           is_error=True)
                 else:
                     # Both zero — no units in this row, formulas will produce 0/0
@@ -272,27 +272,27 @@ def validate_output(xlsx_path, parsed_data):
         # SHEET 1: DATA ACCURACY — cross-check against parsed data
         # ===================================================================
 
-        # Total units: F7+F8+F9 must equal parsed total
+        # Total units: E7+E8+E9 must equal parsed total (Fran V2 shifted)
         unit_sum = 0
         for row in (7, 8, 9):
-            _, val, ctype, _ = _get_cell(sheet1_root, f'F{row}')
+            _, val, ctype, _ = _get_cell(sheet1_root, f'E{row}')
             resolved = _resolve_value(val, ctype, shared_strings)
             if isinstance(resolved, (int, float)):
                 unit_sum += resolved
         check(unit_sum == parsed_data['total_units'],
-              f"Sheet 1 unit count mismatch: F7+F8+F9 = {unit_sum}, "
+              f"Sheet 1 unit count mismatch: E7+E8+E9 = {unit_sum}, "
               f"parsed total = {parsed_data['total_units']}")
 
         # Vacancy rate
-        _, vac_val, vac_type, _ = _get_cell(sheet1_root, 'F24')
+        _, vac_val, vac_type, _ = _get_cell(sheet1_root, 'E24')
         vac_resolved = _resolve_value(vac_val, vac_type, shared_strings)
         if isinstance(vac_resolved, (int, float)):
             check(abs(vac_resolved - parsed_data['vacancy_rate']) < 0.001,
-                  f"Sheet 1 F24 vacancy rate: {vac_resolved} vs parsed {parsed_data['vacancy_rate']}")
+                  f"Sheet 1 E24 vacancy rate: {vac_resolved} vs parsed {parsed_data['vacancy_rate']}")
 
         # Cap rates
         if len(parsed_data.get('cap_rates', [])) >= 3:
-            for i, ref in enumerate(['H46', 'H47', 'H48']):
+            for i, ref in enumerate(['G46', 'G47', 'G48']):
                 _, cap_val, cap_type, _ = _get_cell(sheet1_root, ref)
                 cap_resolved = _resolve_value(cap_val, cap_type, shared_strings)
                 if isinstance(cap_resolved, (int, float)):
@@ -301,10 +301,10 @@ def validate_output(xlsx_path, parsed_data):
 
         # Zero-count unit groups: E and I should be numeric 0, not strings
         for row in (7, 8, 9):
-            _, f_val, f_type, _ = _get_cell(sheet1_root, f'F{row}')
+            _, f_val, f_type, _ = _get_cell(sheet1_root, f'E{row}')
             f_resolved = _resolve_value(f_val, f_type, shared_strings)
             if isinstance(f_resolved, (int, float)) and f_resolved == 0:
-                for col, desc in [('E', 'SF'), ('I', 'rent')]:
+                for col, desc in [('D', 'SF'), ('H', 'rent')]:
                     ref = f'{col}{row}'
                     _, val, ctype, has_f = _get_cell(sheet1_root, ref)
                     if has_f:
@@ -323,8 +323,8 @@ def validate_output(xlsx_path, parsed_data):
         # Only flag if this ISN'T the Birchmount project itself
         is_birchmount = parsed_data['total_units'] == 170
         if not is_birchmount:
-            # F10 cached value should match sum of F7:F9
-            _, f10_val, f10_type, f10_has_f = _get_cell(sheet1_root, 'F10')
+            # E10 cached value should match sum of E7:E9 (Fran V2 shifted)
+            _, f10_val, f10_type, f10_has_f = _get_cell(sheet1_root, 'E10')
             f10_resolved = _resolve_value(f10_val, f10_type, shared_strings)
             if f10_has_f and isinstance(f10_resolved, (int, float)):
                 check(f10_resolved != 170,
@@ -351,10 +351,11 @@ def validate_output(xlsx_path, parsed_data):
         # ===================================================================
 
         # C7-C9 (unit counts) and D7-D9 (unit SF) must be numeric and match Sheet 1
+        # Fran V2: Sheet 1 unit count = col E, unit SF = col D
         for row in (7, 8, 9):
-            # Unit count: Sheet 4 C{row} vs Sheet 1 F{row}
+            # Unit count: Sheet 4 C{row} vs Sheet 1 E{row}
             _, s4c_val, s4c_type, s4c_f = _get_cell(sheet4_root, f'C{row}')
-            _, s1f_val, s1f_type, _ = _get_cell(sheet1_root, f'F{row}')
+            _, s1e_val, s1e_type, _ = _get_cell(sheet1_root, f'E{row}')
 
             if not s4c_f:  # only check if not a formula
                 check(s4c_type != 's',
@@ -362,14 +363,14 @@ def validate_output(xlsx_path, parsed_data):
                       is_error=True)
 
                 s4c_resolved = _resolve_value(s4c_val, s4c_type, shared_strings)
-                s1f_resolved = _resolve_value(s1f_val, s1f_type, shared_strings)
-                if isinstance(s4c_resolved, (int, float)) and isinstance(s1f_resolved, (int, float)):
-                    check(s4c_resolved == s1f_resolved,
-                          f"Sheet 4 C{row}={s4c_resolved} doesn't match Sheet 1 F{row}={s1f_resolved}")
+                s1e_resolved = _resolve_value(s1e_val, s1e_type, shared_strings)
+                if isinstance(s4c_resolved, (int, float)) and isinstance(s1e_resolved, (int, float)):
+                    check(s4c_resolved == s1e_resolved,
+                          f"Sheet 4 C{row}={s4c_resolved} doesn't match Sheet 1 E{row}={s1e_resolved}")
 
-            # Unit SF: Sheet 4 D{row} vs Sheet 1 E{row}
+            # Unit SF: Sheet 4 D{row} vs Sheet 1 D{row}
             _, s4d_val, s4d_type, s4d_f = _get_cell(sheet4_root, f'D{row}')
-            _, s1e_val, s1e_type, _ = _get_cell(sheet1_root, f'E{row}')
+            _, s1d_val, s1d_type, _ = _get_cell(sheet1_root, f'D{row}')
 
             if not s4d_f:
                 check(s4d_type != 's',
@@ -377,12 +378,12 @@ def validate_output(xlsx_path, parsed_data):
                       is_error=True)
 
                 s4d_resolved = _resolve_value(s4d_val, s4d_type, shared_strings)
-                s1e_resolved = _resolve_value(s1e_val, s1e_type, shared_strings)
-                if isinstance(s4d_resolved, (int, float)) and isinstance(s1e_resolved, (int, float)):
+                s1d_resolved = _resolve_value(s1d_val, s1d_type, shared_strings)
+                if isinstance(s4d_resolved, (int, float)) and isinstance(s1d_resolved, (int, float)):
                     # Sheet 4 rounds SF to integer, Sheet 1 keeps decimals — allow rounding
-                    check(abs(s4d_resolved - round(s1e_resolved)) <= 1,
-                          f"Sheet 4 D{row}={s4d_resolved} doesn't match Sheet 1 E{row}={s1e_resolved} "
-                          f"(rounded: {round(s1e_resolved)})")
+                    check(abs(s4d_resolved - round(s1d_resolved)) <= 1,
+                          f"Sheet 4 D{row}={s4d_resolved} doesn't match Sheet 1 D{row}={s1d_resolved} "
+                          f"(rounded: {round(s1d_resolved)})")
 
     # ===================================================================
     # RESULT

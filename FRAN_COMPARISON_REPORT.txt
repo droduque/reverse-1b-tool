@@ -1,0 +1,1804 @@
+
+================================================================================
+SHEET: 1. 1A Proforma
+================================================================================
+  Our dimensions: A1:IU150
+  Fran dimensions: A1:IU150
+
+  PRINT SETUP differences:
+    scale: OURS=38 → FRAN=63
+
+  COLUMN WIDTH differences (1025):
+    Col A: OURS=5.140625 → FRAN=5.1796875
+    Col ACJ: OURS=20.5703125 → FRAN=20.54296875
+    Col ACO: OURS=5.140625 → FRAN=5.1796875
+    Col ACP: OURS=19.85546875 → FRAN=19.81640625
+    Col ACQ: OURS=22.42578125 → FRAN=22.453125
+    Col ACR: OURS=33.5703125 → FRAN=33.54296875
+    Col ACS: OURS=56.85546875 → FRAN=56.81640625
+    Col ACT: OURS=24.5703125 → FRAN=24.54296875
+    Col ACU: OURS=29.42578125 → FRAN=29.453125
+    Col ACV: OURS=26.42578125 → FRAN=26.453125
+    Col ACW: OURS=22.5703125 → FRAN=22.54296875
+    Col ACZ: OURS=29.85546875 → FRAN=29.81640625
+    Col ADA: OURS=13.42578125 → FRAN=13.453125
+    Col ADB: OURS=9.140625 → FRAN=9.1796875
+    Col ADD: OURS=9.85546875 → FRAN=9.81640625
+    Col ADE: OURS=11.42578125 → FRAN=11.453125
+    Col ADF: OURS=9.140625 → FRAN=9.1796875
+    Col AMF: OURS=20.5703125 → FRAN=20.54296875
+    Col AMK: OURS=5.140625 → FRAN=5.1796875
+    Col AML: OURS=19.85546875 → FRAN=19.81640625
+    ... and 1005 more
+
+  ROW HEIGHT differences (29):
+    Row 3: OURS=69.6 → FRAN=69.65
+    Row 6: OURS=20.45 → FRAN=20.5
+    Row 7: OURS=17.45 → FRAN=17.5
+    Row 8: OURS=17.45 → FRAN=17.5
+    Row 9: OURS=17.45 → FRAN=17.5
+    Row 10: OURS=17.45 → FRAN=17.5
+    Row 11: OURS=18.75 → FRAN=19.5
+    Row 28: OURS=14.45 → FRAN=14.5
+    Row 29: OURS=18.75 → FRAN=19.5
+    Row 31: OURS=17.1 → FRAN=17.15
+    Row 32: OURS=15.6 → FRAN=15.65
+    Row 33: OURS=15.6 → FRAN=15.65
+    Row 34: OURS=26.45 → FRAN=26.5
+    Row 35: OURS=18.75 → FRAN=19.5
+    Row 36: OURS=21.6 → FRAN=21.65
+    Row 37: OURS=18.75 → FRAN=19.5
+    Row 38: OURS=18.75 → FRAN=19.5
+    Row 39: OURS=18.75 → FRAN=19.5
+    Row 40: OURS=18.75 → FRAN=19.5
+    Row 41: OURS=18.75 → FRAN=19.5
+    ... and 9 more
+
+  DATA/VALUE differences (1):
+    E52: "Appropriate property tax rate should be confirmed by a specialist. SVN's property tax calculations are estimates only." → "Appropriate property tax rate should be confirmed by a specialist. RA's property tax calculations are estimates only."
+
+  BOLD BLUE cells (consultant input markers) (30):
+    F62: value=325000, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    F64: value=7382.76, font=(name=Open Sans, size=10.0, BOLD, color=theme:4, underline=single)
+    E80: value='Input Estimate $ PSF Common Area', font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    F80: value=5, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    I80: value='Subject Per Unit (Rounded) Input for Proforma', font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    I93: value=975, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    F100: value=0.5, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G100: value=30, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F101: value=1, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G101: value=30, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F102: value=1, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G102: value=30, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F103: value=0, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G103: value=32, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F104: value=1, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G104: value=70000, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F105: value=0, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G105: value=50000, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    I109: value=1170, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    F117: value=450, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    L119: value=0.01, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    F120: value=100, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F122: value=300, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    F127: value=140, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+    F133: value=75, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G133: value=5, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F134: value=200, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G134: value=1, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    F135: value=350, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+    G135: value=1, font=(name=Open Sans, size=10.0, BOLD, color=theme:4)
+
+  FORMATTING changes (50):
+    F2: font: [name=Open Sans, size=24.0, BOLD, color=theme:1] → [name=Open Sans, size=24.0, BOLD, color=FF335572]
+    F3: font: [name=Open Sans, size=24.0, BOLD, color=theme:1] → [name=Open Sans, size=24.0, BOLD, color=FF335572]
+    D5: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    G5: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    D6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    E6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    F6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    H6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    I6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    J6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    K6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    L6: fill: [fg=theme:0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    J13: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    J14: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    E16: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    F16: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    G16: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    H16: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    I16: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    J16: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    K16: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    E30: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    H30: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    I30: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    J30: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    K30: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    L30: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    G38: font: [name=Open Sans, size=13.0, color=theme:4] → [name=Open Sans, size=13.0, color=FF335572]
+    E42: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    H42: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    I42: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    J42: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    K42: font: [name=Open Sans, size=13.0, BOLD] → [name=Open Sans, size=13.0, BOLD, color=FF335572]
+    G45: fill: [fg=theme:0, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    H45: fill: [fg=theme:0, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    I45: fill: [fg=theme:0, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    J45: fill: [fg=theme:0, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    K45: fill: [fg=theme:0, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    G47: fill: [fg=theme:4, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    H47: fill: [fg=theme:4, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    I47: fill: [fg=theme:4, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    J47: fill: [fg=theme:4, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    K47: fill: [fg=theme:4, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    M136: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    M137: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    M138: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    M139: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    M140: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    M141: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    M142: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+
+================================================================================
+SHEET: 2. Rev 1B Exec Summary
+================================================================================
+  Our dimensions: A1:M175
+  Fran dimensions: A1:M175
+
+  COLUMN WIDTH differences (9):
+    Col A: OURS=5.5703125 → FRAN=5.54296875
+    Col B: OURS=7.85546875 → FRAN=7.81640625
+    Col C: OURS=8.42578125 → FRAN=8.453125
+    Col E: OURS=11.85546875 → FRAN=11.81640625
+    Col F: OURS=6.85546875 → FRAN=6.81640625
+    Col G: OURS=11.140625 → FRAN=13.54296875
+    Col J: OURS=None → FRAN=8.81640625
+    Col L: OURS=9.42578125 → FRAN=9.453125
+    Col M: OURS=None → FRAN=8.81640625
+
+  ROW HEIGHT differences (51):
+    Row 1: OURS=8.85 → FRAN=8.9
+    Row 4: OURS=11.85 → FRAN=11.9
+    Row 6: OURS=3.6 → FRAN=3.65
+    Row 7: OURS=4.35 → FRAN=4.4
+    Row 8: OURS=14.85 → FRAN=14.9
+    Row 9: OURS=12.0 → FRAN=13.0
+    Row 10: OURS=12.0 → FRAN=13.0
+    Row 11: OURS=12.0 → FRAN=13.0
+    Row 12: OURS=12.0 → FRAN=13.0
+    Row 13: OURS=12.0 → FRAN=13.0
+    Row 14: OURS=12.0 → FRAN=13.0
+    Row 15: OURS=12.0 → FRAN=13.0
+    Row 17: OURS=12.0 → FRAN=13.0
+    Row 18: OURS=12.0 → FRAN=13.0
+    Row 19: OURS=12.0 → FRAN=13.0
+    Row 20: OURS=3.6 → FRAN=3.65
+    Row 21: OURS=14.85 → FRAN=14.9
+    Row 22: OURS=12.0 → FRAN=13.0
+    Row 23: OURS=12.0 → FRAN=13.0
+    Row 24: OURS=12.0 → FRAN=13.0
+    ... and 31 more
+
+  DATA/VALUE differences (3):
+    B3: FORMULA CHANGED: ='3. Headline #s'!A10 → ='3. Headline #s'!A8
+    B4: FORMULA CHANGED: ='3. Headline #s'!A12 → ='3. Headline #s'!A10
+    B59: 'Princpal Loan Value' → 'Principal Loan Value'
+
+  FORMATTING changes (181):
+    J1: font: [name=Calibri, size=8.0, BOLD, color=theme:1] → [name=Open Sans, size=8.0, BOLD, color=theme:1]
+    B3: font: [name=Calibri, size=10.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B4: font: [name=Calibri, size=10.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B5: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    A8: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    G8: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    H8: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    I8: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B9: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    G9: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    H9: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I9: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B10: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    G10: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    H10: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    I10: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B11: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    D11: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-"$"* #,##0.00_-;\-"$"* #,##0.00_-;_-"$"* "-"??_-;_-@_-] → ["$"#,##0.00]
+    E11: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    G11: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    H11: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I11: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B12: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    D12: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    G12: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    H12: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    I12: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    B13: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    G13: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    H13: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I13: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B14: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    G14: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    H14: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    I14: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    B15: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    G15: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    H15: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I15: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B17: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]
+    G17: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]
+    H17: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]
+    I17: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]
+    B18: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    H18: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    B19: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    H19: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    A21: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    G22: font: [name=Calibri, size=9.0, color=theme:1, underline=single] → [name=Open Sans, size=9.0, color=theme:1, underline=single]
+    H22: font: [name=Calibri, size=9.0, color=theme:1, underline=single] → [name=Open Sans, size=9.0, color=theme:1, underline=single]
+    ... and 131 more formatting changes
+
+================================================================================
+SHEET: 3. Headline #s
+================================================================================
+  Our dimensions: A5:J58
+  Fran dimensions: A5:J55
+
+  MERGED CELLS added by Fran: ['A19:J19', 'A46:J46', 'A50:J50', 'A52:J52', 'A54:J54', 'A8:J8', 'C23:G23']
+
+  MERGED CELLS removed by Fran: ['A20:J20', 'A22:J22', 'A49:J49', 'A53:J53', 'A57:J57', 'A58:J58', 'C26:G26']
+
+  PRINT SETUP differences:
+    scale: OURS=85 → FRAN=62
+    print_area: OURS='3. Headline #s'!$A$1:$J$61 → FRAN='3. Headline #s'!$A$1:$J$58
+
+  ROW BREAKS: OURS=['<openpyxl.worksheet.pagebreak.Break object>\nParameters:\nid=47, min=0, max=9, man=True, pt=None'] → FRAN=['<openpyxl.worksheet.pagebreak.Break object>\nParameters:\nid=44, min=0, max=9, man=True, pt=None']
+
+  COLUMN WIDTH differences (7):
+    Col A: OURS=None → FRAN=8.81640625
+    Col B: OURS=15.5703125 → FRAN=15.54296875
+    Col C: OURS=None → FRAN=8.81640625
+    Col F: OURS=17.85546875 → FRAN=17.81640625
+    Col G: OURS=15.140625 → FRAN=15.1796875
+    Col H: OURS=7.140625 → FRAN=7.1796875
+    Col I: OURS=None → FRAN=8.81640625
+
+  ROW HEIGHT differences (16):
+    Row 5: OURS=14.85 → FRAN=14.9
+    Row 7: OURS=None → FRAN=26.5
+    Row 8: OURS=None → FRAN=26.5
+    Row 9: OURS=1.5 → FRAN=None
+    Row 10: OURS=69.75 → FRAN=22.0
+    Row 12: OURS=14.85 → FRAN=None
+    Row 23: OURS=None → FRAN=18.0
+    Row 26: OURS=15.75 → FRAN=None
+    Row 46: OURS=None → FRAN=72.75
+    Row 49: OURS=72.75 → FRAN=None
+    Row 50: OURS=None → FRAN=27.0
+    Row 52: OURS=None → FRAN=33.0
+    Row 53: OURS=27.0 → FRAN=None
+    Row 54: OURS=None → FRAN=57.0
+    Row 55: OURS=33.0 → FRAN=None
+    Row 57: OURS=57.0 → FRAN=None
+
+  *** FORMULA INTEGRITY ISSUES (2) ***
+    A14: FORMULA OVERWRITTEN! Was: ='2. Rev 1B Exec Summary'!F34&" Units" → Now static: Apartment Pro-forma
+    C40: FORMULA OVERWRITTEN! Was: ="Equity IRR "&'11. 10-Yr Cash Flow IRR'!A66&"-Year" → Now static: Construction Costs per sqft
+
+  DATA/VALUE differences (69):
+    A8: NEW VALUE: Apartment Development Model 
+   
+Reverse 1B
+    A10: 'Apartment Development Model \n   \nReverse 1B' → "='1. 1A Proforma'!F3"
+    A12: FORMULA CHANGED: ='1. 1A Proforma'!F3 → ='2. Rev 1B Exec Summary'!F34&" Units"
+    A17: 'Apartment Pro-forma' → 'Prepared by:'
+    A19: NEW VALUE: Rock Advisors Inc.
+    A20: VALUE REMOVED (was: Prepared by:)
+    A22: VALUE REMOVED (was: SVN Rock Advisors Inc.)
+    C23: NEW VALUE: HEADLINE NUMBERS
+    C25: NEW VALUE: NOI at stabilization after completion
+    G25: NEW VALUE: ='2. Rev 1B Exec Summary'!H9
+    C26: 'HEADLINE NUMBERS' → 'Capitalization Rate'
+    G26: NEW VALUE: ='2. Rev 1B Exec Summary'!H10
+    C27: NEW VALUE: Valuation
+    D27: NEW VALUE: @
+    E27: NEW VALUE: ='2. Rev 1B Exec Summary'!D11
+    F27: NEW VALUE: per sqft avg revenue
+    G27: NEW VALUE: ='2. Rev 1B Exec Summary'!H11
+    C28: 'NOI at stabilization after completion' → 'Less: Selling costs'
+    G28: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H9 → ='2. Rev 1B Exec Summary'!H12
+    C29: 'Capitalization Rate' → 'Sales Proceeds'
+    G29: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H10 → ='2. Rev 1B Exec Summary'!H13
+    C30: 'Valuation' → 'Total Cost'
+    D30: VALUE REMOVED (was: @)
+    E30: VALUE REMOVED (was: ='2. Rev 1B Exec Summary'!D11)
+    F30: VALUE REMOVED (was: per sqft avg revenue)
+    G30: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H11 → ='2. Rev 1B Exec Summary'!H14
+    C31: 'Less: Selling costs' → 'Profit before taxes if sold at stabilization'
+    G31: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H12 → ='2. Rev 1B Exec Summary'!H15
+    C32: VALUE REMOVED (was: Sales Proceeds)
+    G32: VALUE REMOVED (was: ='2. Rev 1B Exec Summary'!H13)
+    C33: 'Total Cost' → 'Return on cost'
+    G33: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H14 → ='2. Rev 1B Exec Summary'!H17
+    C34: 'Profit before taxes if sold at stabilization' → 'Development Yield'
+    G34: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H15 → =G25/(-G30)
+    A36: NEW VALUE: Merchant Builder 
+    C36: 'Return on cost' → 'Equity IRR, if sold upon stabilization'
+    G36: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H17 → ='2. Rev 1B Exec Summary'!H18
+    A37: NEW VALUE: Investment Hold
+    C37: 'Development Yield' → '="Equity IRR "&\'11. 10-Yr Cash Flow IRR\'!A66&"-Year"'
+    G37: FORMULA CHANGED: =G28/(-G33) → ='2. Rev 1B Exec Summary'!H19
+    A39: VALUE REMOVED (was: Merchant Builder )
+    C39: 'Equity IRR, if sold upon stabilization' → 'Construction Costs per unit'
+    G39: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H18 → ='9. Development Costs'!I89
+    A40: VALUE REMOVED (was: Investment Hold)
+    G40: FORMULA CHANGED: ='2. Rev 1B Exec Summary'!H19 → ='9. Development Costs'!J89
+    C41: NEW VALUE: Value per unit at stabilization
+    G41: NEW VALUE: =G27/'7. Op Rev and Exp'!E20
+    C42: 'Construction Costs per unit' → 'Value per sqft at stabilization'
+    G42: FORMULA CHANGED: ='9. Development Costs'!I89 → =G27/'9. Development Costs'!I10
+    C43: VALUE REMOVED (was: Construction Costs per sqft)
+    G43: VALUE REMOVED (was: ='9. Development Costs'!J89)
+    C44: VALUE REMOVED (was: Value per unit at stabilization)
+    G44: VALUE REMOVED (was: =G30/'7. Op Rev and Exp'!E20)
+    A45: NEW VALUE: Disclaimer: RE: Use of the New Apartment Construction Financial Model
+    C45: VALUE REMOVED (was: Value per sqft at stabilization)
+    G45: VALUE REMOVED (was: =G30/'9. Development Costs'!I10)
+    A46: NEW VALUE: Rock Advisors Inc. Brokerage, Derek A. Lobo & Associates (DALA) (herein described as "the Consultant") has developed the New Apartment Construction Financial Model (herein described as "the model") as a general guide to help a user understand the high level profitability of rental apartment construction development on a given site. The Model is developed in Microsoft Excel, and it is expected by the consultant, that the user of the model is proficient in Excel. Any accidental deletion of a cell may corrupt the entire file and/or show inaccurate results that the Consultant is not responsible for. The model is intended to provide a high level understanding of the profitability, and does not assure and/or guarantee success of a project in any way.
+    A47: NEW VALUE: Confidentiality Policy
+    A48: 'Disclaimer: RE: Use of the New Apartment Construction Financial Model' → 'Intellecutal rights on this file remain with the Consultant'
+    A49: 'SVN Rock Advisors Inc. Brokerage, Derek A. Lobo & Associates (DALA) and/or SVN Canada Inc. (herein described as "the Consultant") has developed the New Apartment Construction Financial Model (herein described as "the model") as a general guide to help a user understand the high level profitability of rental apartment construction development on a given site. The Model is developed in Microsoft Excel, and it is expected by the consultant, that the user of the model is proficient in Excel. Any accidental deletion of a cell may corrupt the entire file and/or show inaccurate results that the Consultant is not responsible for. The model is intended to provide a high level understanding of the profitability, and does not assure and/or guarantee success of a project in any way.' → 'Disclaimers:'
+    A50: 'Confidentiality Policy' → 'We make no guarantees and do not undertake to confirm independently that the information, result and or data provided is accurate or comprehensive. We recommend the client independently review data sources and periodically update and confirm the data used in the excel file.'
+    A51: 'Intellecutal rights on this file remain with the Consultant' → "The consultant's principals, management, staff, contractors and associates are real estate consultants only."
+    A52: 'Disclaimers:' → "The Consultant makes no guarantees, written or otherwise, that if the client adopts or acts on the excel model's observations, findings, analysis or recommendations in the report that the client's project will be successful, nor do we, as real estate consultants, accept any legal or financial responsibility or liability for failure, under-performance, or termination of the client's project."
+    A53: 'We make no guarantees and do not undertake to confirm independently that the information, result and or data provided is accurate or comprehensive. We recommend the client independently review data sources and periodically update and confirm the data used in the excel file.' → 'Limitation of Liability:'
+    A54: "The consultant's principals, management, staff, contractors and associates are real estate consultants only." → 'To the fullest extent permitted by applicable law, in no event shall the consultant be liable to the client or any other user for any direct, indirect, incidental, special, punitive, or consequential damages whatsoever resulting from any (i) use of the excel file, (ii) errors, mistakes, or inaccuracies of content, (iii) any bugs, viruses, or like, which may be transmitted to or through the excel file to or by any party, (iv) any loss of your data or content, (v) any errors or omissions in any content or for any loss or damage of any kind incurred as a result of your use of the file, whether based on warranty, contract, tort, or any other legal theory, and whether or not  the client/users are advised of the possibility of such damanges, and/or (vi) the disclosure of information pursuant to these terms of use or a privacy policy.'
+    A55: "The Consultant makes no guarantees, written or otherwise, that if the client adopts or acts on the excel model's observations, findings, analysis or recommendations in the report that the client's project will be successful, nor do we, as real estate consultants, accept any legal or financial responsibility or liability for failure, under-performance, or termination of the client's project." → 'Despite the above, our total liability to you for any cause of action you take against us will at all times be limited to no more than $100/ - (one hundred dollars)'
+    A56: VALUE REMOVED (was: Limitation of Liability:)
+    A57: VALUE REMOVED (was: To the fullest extent permitted by applicable law, in no event shall the consultant be liable to the client or any other user for any direct, indirect, incidental, special, punitive, or consequential damages whatsoever resulting from any (i) use of the excel file, (ii) errors, mistakes, or inaccuracies of content, (iii) any bugs, viruses, or like, which may be transmitted to or through the excel file to or by any party, (iv) any loss of your data or content, (v) any errors or omissions in any content or for any loss or damage of any kind incurred as a result of your use of the file, whether based on warranty, contract, tort, or any other legal theory, and whether or not  the client/users are advised of the possibility of such damanges, and/or (vi) the disclosure of information pursuant to these terms of use or a privacy policy.)
+    A58: VALUE REMOVED (was: Despite the above, our total liability to you for any cause of action you take against us will at all times be limited to no more than $100/ - (one hundred dollars))
+
+  FORMATTING changes (67):
+    A5: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    A8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=18.0, BOLD, color=FF335572]
+    A10: font: [name=Calibri, size=18.0, BOLD, color=theme:4] → [name=Open Sans, size=12.0, BOLD, color=FF335572]
+    A12: font: [name=Calibri, size=11.0, color=theme:4] → [name=Open Sans, size=11.0, color=theme:1]
+    A14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    A17: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    A19: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=FF335572]
+    A22: font: [name=Calibri, size=11.0, color=theme:4] → [name=Calibri, size=11.0, color=theme:1]
+    C23: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=12.0, BOLD, color=theme:0]; fill: [None] → [fg=FF335572, pattern=solid]
+    C25: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G25: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [General] → ["$"#,##0]
+    C26: font: [name=Calibri, size=12.0, BOLD, color=theme:0] → [name=Open Sans, size=11.0, color=theme:1]; fill: [fg=FF0070C0, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    G26: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [None] → [fg=FFEDB426, pattern=solid]; numfmt: [General] → [0.00%]
+    C27: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    D27: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, italic, color=theme:1]
+    E27: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, italic, color=theme:1]; numfmt: [General] → [_-"$"* #,##0.00_-;\-"$"* #,##0.00_-;_-"$"* "-"??_-;_-@_-]
+    F27: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, italic, color=theme:1]
+    G27: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [General] → ["$"#,##0]
+    C28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    C29: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [None]
+    G29: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [None]; numfmt: [0.00%] → ["$"#,##0]
+    C30: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    D30: font: [name=Calibri, size=11.0, italic, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    E30: font: [name=Calibri, size=11.0, italic, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [_-"$"* #,##0.00_-;\-"$"* #,##0.00_-;_-"$"* "-"??_-;_-@_-] → [General]
+    F30: font: [name=Calibri, size=11.0, italic, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G30: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    C31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    G32: numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → [General]
+    C33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → [0.0%]
+    C34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [None] → [fg=FFEDB426, pattern=solid]
+    G34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [None] → [fg=FFEDB426, pattern=solid]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → [0.0%]
+    A36: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    C36: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G36: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    A37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    C37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [None]
+    G37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [None]
+    C39: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G39: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [0.0%] → ["$"#,##0]
+    C40: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [None] → [fg=FFEDB426, pattern=solid]
+    G40: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [None] → [fg=FFEDB426, pattern=solid]; numfmt: [0.0%] → ["$"#,##0]
+    C41: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]
+    G41: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; numfmt: [General] → ["$"#,##0]
+    C42: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [None] → [fg=FFEDB426, pattern=solid]
+    G42: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [None] → [fg=FFEDB426, pattern=solid]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    C43: fill: [fg=FFFFFF00, pattern=solid] → [None]
+    G43: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [None]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → [_(* #,##0.00_);_(* \(#,##0.00\);_(* "-"??_);_(@_)]
+    ... and 17 more formatting changes
+
+================================================================================
+SHEET: 4. Area Schedule
+================================================================================
+  Our dimensions: A1:F66
+  Fran dimensions: A2:F67
+
+  MERGED CELLS added by Fran: ['A3:F3']
+
+  MERGED CELLS removed by Fran: ['A1:F1']
+
+  PRINT SETUP differences:
+    paperSize: OURS=9 → FRAN=None
+    scale: OURS=None → FRAN=62
+    margin.left: OURS=0.75 → FRAN=0.7480314960629921
+    margin.right: OURS=0.75 → FRAN=0.7480314960629921
+    margin.top: OURS=1.0 → FRAN=0.984251968503937
+    margin.bottom: OURS=1.0 → FRAN=0.984251968503937
+    margin.header: OURS=0.511811023622047 → FRAN=0.5118110236220472
+    margin.footer: OURS=0.511811023622047 → FRAN=0.5118110236220472
+    print_area: OURS= → FRAN='4. Area Schedule'!$A$1:$F$67
+
+  COLUMN WIDTH differences (2):
+    Col F: OURS=22.42578125 → FRAN=22.453125
+    Col G: OURS=8.7109375 → FRAN=8.7265625
+
+  ROW HEIGHT differences (19):
+    Row 1: OURS=17.25 → FRAN=None
+    Row 2: OURS=15.0 → FRAN=47.0
+    Row 3: OURS=None → FRAN=15.0
+    Row 4: OURS=15.0 → FRAN=None
+    Row 11: OURS=None → FRAN=15.0
+    Row 12: OURS=15.0 → FRAN=None
+    Row 20: OURS=None → FRAN=15.0
+    Row 21: OURS=15.0 → FRAN=None
+    Row 33: OURS=None → FRAN=15.0
+    Row 34: OURS=15.0 → FRAN=None
+    Row 36: OURS=None → FRAN=15.0
+    Row 37: OURS=15.0 → FRAN=None
+    Row 43: OURS=None → FRAN=15.0
+    Row 44: OURS=15.0 → FRAN=None
+    Row 51: OURS=None → FRAN=15.0
+    Row 53: OURS=15.0 → FRAN=None
+    Row 61: OURS=None → FRAN=15.0
+    Row 63: OURS=15.0 → FRAN=None
+    Row 67: OURS=None → FRAN=15.0
+
+  *** FORMULA INTEGRITY ISSUES (4) ***
+    E7: FORMULA OVERWRITTEN! Was: =C7*D7 → Now static: SF
+    C10: FORMULA OVERWRITTEN! Was: =SUM(C7:C9) → Now static: 50
+    D10: FORMULA OVERWRITTEN! Was: =SUMPRODUCT(C7:C9,D7:D9)/C10 → Now static: 996
+    C42: FORMULA OVERWRITTEN! Was: =SUM(C39:C41) → Now static: 0
+
+  DATA/VALUE differences (229):
+    A1: VALUE REMOVED (was: AREA SCHEDULE)
+    A2: '490 St Clair West, Toronto, ON' → 'AREA SCHEDULE'
+    A3: NEW VALUE: 490 St Clair West, Toronto, ON
+    A4: VALUE REMOVED (was: #)
+    B4: VALUE REMOVED (was: Description)
+    C4: VALUE REMOVED (was: Quantity)
+    D4: VALUE REMOVED (was: Unit Area (SF))
+    E4: VALUE REMOVED (was: Total Area (SF))
+    F4: VALUE REMOVED (was: Notes)
+    A5: '1' → '#'
+    B5: 'RESIDENTIAL AREAS' → 'Description'
+    C5: NEW VALUE: Quantity
+    D5: NEW VALUE: Unit Area (SF)
+    E5: NEW VALUE: Total Area (SF)
+    F5: NEW VALUE: Notes
+    A6: '1.1' → '1'
+    B6: 'Residential Units' → 'RESIDENTIAL AREAS'
+    A7: NEW VALUE: 1.1
+    B7: '  1 Bedroom Units' → 'Residential Units'
+    C7: 202 → '#'
+    D7: 611 → 'Avg'
+    F7: '54% of total units' → '% '
+    B8: '  2 Bedroom Units' → '  1 Bedroom Units'
+    C8: 120 → 202
+    D8: 809 → 611
+    F8: '32% of total units' → '=+C8/C11'
+    B9: '  3 Bedroom Units' → '  2 Bedroom Units'
+    C9: 50 → 120
+    D9: 996 → 809
+    F9: '13% of total units' → '=+C9/C11'
+    B10: '  Total Residential Units' → '  3 Bedroom Units'
+    E10: FORMULA CHANGED: =SUM(E7:E9) → =C10*D10
+    F10: 'Net Rentable Area' → '=+C10/C11'
+    B11: NEW VALUE:   Total Residential Units
+    C11: NEW VALUE: =SUM(C8:C10)
+    D11: NEW VALUE: =SUMPRODUCT(C8:C10,D8:D10)/C11
+    E11: NEW VALUE: =SUM(E8:E10)
+    F11: NEW VALUE: Net Rentable Area
+    A12: VALUE REMOVED (was: 2)
+    B12: VALUE REMOVED (was: AMENITY & COMMON AREAS)
+    A13: '2.1' → '2'
+    B13: 'Resident Amenities' → 'AMENITY & COMMON AREAS'
+    A14: NEW VALUE: 2.1
+    B14: '  Fitness Centre' → 'Resident Amenities'
+    C14: VALUE REMOVED (was: 1)
+    D14: VALUE REMOVED (was: 2360)
+    E14: VALUE REMOVED (was: 2360)
+    F14: VALUE REMOVED (was: Cardio & weights)
+    B15: '  Multi-Purpose/Party Room' → '  Fitness Centre'
+    D15: 1990 → 2360
+    E15: 1990 → '=+C15*D15'
+    F15: 'Events & gatherings' → 'Cardio & weights'
+    B16: '  Co-Working Space' → '  Multi-Purpose/Party Room'
+    D16: 1180 → 1990
+    E16: 1180 → '=+C16*D16'
+    F16: 'Work from home area' → 'Events & gatherings'
+    B17: '  Games/Lounge Area' → '  Co-Working Space'
+    D17: 1030 → 1180
+    E17: 1030 → '=+C17*D17'
+    F17: 'Recreation space' → 'Work from home area'
+    B18: '  Outdoor Terrace/BBQ Area' → '  Games/Lounge Area'
+    D18: 810 → 1030
+    E18: 810 → '=+C18*D18'
+    F18: 'Rooftop or ground level' → 'Recreation space'
+    B19: '  Total Amenity Space' → '  Outdoor Terrace/BBQ Area'
+    C19: NEW VALUE: 1
+    D19: NEW VALUE: 810
+    E19: FORMULA CHANGED: =SUM(E14:E18) → =+C19*D19
+    F19: 'As per proforma' → 'Rooftop or ground level'
+    B20: NEW VALUE:   Total Amenity Space
+    E20: NEW VALUE: =SUM(E15:E19)
+    F20: NEW VALUE: As per proforma
+    A21: VALUE REMOVED (was: 2.2)
+    B21: VALUE REMOVED (was: Building Common Areas)
+    A22: NEW VALUE: 2.2
+    B22: '  Main Lobby' → 'Building Common Areas'
+    C22: VALUE REMOVED (was: 1)
+    D22: VALUE REMOVED (was: 800)
+    E22: VALUE REMOVED (was: 800)
+    F22: VALUE REMOVED (was: With concierge desk)
+    B23: '  Corridors & Hallways' → '  Main Lobby'
+    C23: 372 → 1
+    D23: 25 → 800
+    E23: FORMULA CHANGED: =C23*D23 → =+C23*D23
+    F23: 'Per unit average' → 'With concierge desk'
+    B24: '  Elevator Lobbies' → '  Corridors & Hallways'
+    C24: 31 → 372
+    D24: 60 → 25
+    F24: 'Per floor (15 floors)' → 'Per unit average'
+    B25: '  Stairwells (2)' → '  Elevator Lobbies'
+    C25: 2 → 31
+    D25: 600 → 60
+    F25: 'Exit stairs' → 'Per floor (15 floors)'
+    B26: '  Elevators (3)' → '  Stairwells (2)'
+    C26: 4 → 2
+    D26: 60 → 600
+    F26: 'Passenger elevators' → 'Exit stairs'
+    B27: '  Mail/Parcel Room' → '  Elevators (3)'
+    C27: 1 → 4
+    D27: 300 → 60
+    E27: 300 → '=C27*D27'
+    F27: 'Package lockers' → 'Passenger elevators'
+    B28: '  Garbage/Recycling Rooms' → '  Mail/Parcel Room'
+    C28: 7 → 1
+    D28: 200 → 300
+    E28: FORMULA CHANGED: =C28*D28 → =+C28*D28
+    F28: 'Per floor grouping' → 'Package lockers'
+    B29: '  Electrical/Mechanical Rooms' → '  Garbage/Recycling Rooms'
+    C29: 2 → 7
+    F29: 'Service rooms' → 'Per floor grouping'
+    B30: '  Storage Lockers' → '  Electrical/Mechanical Rooms'
+    C30: 186 → 2
+    D30: 25 → 200
+    F30: 'Resident storage' → 'Service rooms'
+    B31: '  Janitor/Housekeeping Closets' → '  Storage Lockers'
+    C31: 6 → 186
+    D31: 40 → 25
+    F31: 'Per floor grouping' → 'Resident storage'
+    B32: '  Total Common Areas' → '  Janitor/Housekeeping Closets'
+    C32: NEW VALUE: 6
+    D32: NEW VALUE: 40
+    E32: FORMULA CHANGED: =SUM(E22:E31) → =C32*D32
+    F32: NEW VALUE: Per floor grouping
+    B33: NEW VALUE:   Total Common Areas
+    E33: NEW VALUE: =SUM(E23:E32)
+    A34: VALUE REMOVED (was: 3)
+    B34: VALUE REMOVED (was: COMMERCIAL AREAS)
+    A35: NEW VALUE: 3
+    B35: '  Ground Floor Retail' → 'COMMERCIAL AREAS'
+    C35: VALUE REMOVED (was: 0)
+    D35: VALUE REMOVED (was: 0)
+    E35: VALUE REMOVED (was: 0)
+    F35: VALUE REMOVED (was: Net leasable area)
+    B36: NEW VALUE:   Ground Floor Retail
+    C36: NEW VALUE: 0
+    D36: NEW VALUE: 0
+    E36: NEW VALUE: =+C36*D36
+    F36: NEW VALUE: Net leasable area
+    A37: VALUE REMOVED (was: 4)
+    B37: VALUE REMOVED (was: PARKING & BACK OF HOUSE)
+    A38: '4.1' → '4'
+    B38: 'Parking' → 'PARKING & BACK OF HOUSE'
+    A39: NEW VALUE: 4.1
+    B39: '  Underground Parking' → 'Parking'
+    C39: VALUE REMOVED (was: 158)
+    D39: VALUE REMOVED (was: 350)
+    E39: VALUE REMOVED (was: =C39*D39)
+    F39: VALUE REMOVED (was: Resident parking)
+    B40: '  Visitor Parking' → '  Underground Parking'
+    C40: 19 → 158
+    F40: 'Surface/underground' → 'Resident parking'
+    B41: '  Retail Parking' → '  Visitor Parking'
+    C41: 0 → 19
+    F41: 'Dedicated retail' → 'Surface/underground'
+    B42: '  Total Parking Area' → '  Retail Parking'
+    D42: NEW VALUE: 350
+    E42: FORMULA CHANGED: =SUM(E39:E41) → =C42*D42
+    F42: NEW VALUE: Dedicated retail
+    B43: NEW VALUE:   Total Parking Area
+    C43: NEW VALUE: =SUM(C40:C42)
+    E43: NEW VALUE: =SUM(E40:E42)
+    A44: VALUE REMOVED (was: 4.2)
+    B44: VALUE REMOVED (was: Back of House)
+    A45: NEW VALUE: 4.2
+    B45: '  Loading Dock' → 'Back of House'
+    C45: VALUE REMOVED (was: 1)
+    D45: VALUE REMOVED (was: 500)
+    E45: VALUE REMOVED (was: 500)
+    F45: VALUE REMOVED (was: Service area)
+    B46: '  Building Management Office' → '  Loading Dock'
+    D46: 200 → 500
+    E46: 200 → '=+C46*D46'
+    F46: 'Admin space' → 'Service area'
+    B47: '  Security Office' → '  Building Management Office'
+    D47: 150 → 200
+    E47: 150 → '=+C47*D47'
+    F47: 'Monitoring station' → 'Admin space'
+    B48: '  Maintenance Workshop' → '  Security Office'
+    D48: 300 → 150
+    E48: 300 → '=+C48*D48'
+    F48: 'Tools & supplies' → 'Monitoring station'
+    B49: '  Mechanical Penthouse' → '  Maintenance Workshop'
+    D49: 4500 → 300
+    E49: 4500 → '=+C49*D49'
+    F49: 'HVAC equipment' → 'Tools & supplies'
+    B50: '  Total Back of House' → '  Mechanical Penthouse'
+    C50: NEW VALUE: 1
+    D50: NEW VALUE: 4500
+    E50: FORMULA CHANGED: =SUM(E45:E49) → =+C50*D50
+    F50: NEW VALUE: HVAC equipment
+    B51: NEW VALUE:   Total Back of House
+    E51: NEW VALUE: =SUM(E46:E50)
+    B53: VALUE REMOVED (was: BUILDING SUMMARY)
+    B54: '  Net Residential Area' → 'BUILDING SUMMARY'
+    E54: VALUE REMOVED (was: =E10)
+    F54: VALUE REMOVED (was: From proforma)
+    B55: '  Total Amenity Space' → '  Net Residential Area'
+    E55: FORMULA CHANGED: =E19 → =E11
+    B56: '  Total Common Areas' → '  Total Amenity Space'
+    E56: FORMULA CHANGED: =E32 → =E20
+    F56: 'Calculated to match GFA' → 'From proforma'
+    B57: '  Commercial/Retail Area' → '  Total Common Areas'
+    E57: FORMULA CHANGED: =E35 → =E33
+    F57: 'From proforma' → 'Calculated to match GFA'
+    B58: '  Parking Area (below grade)' → '  Commercial/Retail Area'
+    E58: FORMULA CHANGED: =E42 → =E36
+    F58: 'Not included in GFA' → 'From proforma'
+    B59: '  Back of House Area' → '  Parking Area (below grade)'
+    E59: FORMULA CHANGED: =E50 → =E43
+    F59: 'Calculated to match GFA' → 'Not included in GFA'
+    B60: '  TOTAL GROSS FLOOR AREA (GFA)' → '  Back of House Area'
+    E60: FORMULA CHANGED: =E54+E55+E56+E57+E59 → =E51
+    F60: 'Calculated total' → 'Calculated to match GFA'
+    B61: NEW VALUE:   TOTAL GROSS FLOOR AREA (GFA)
+    E61: NEW VALUE: =E55+E56+E57+E58+E60
+    F61: NEW VALUE: Calculated total
+    B63: VALUE REMOVED (was: VERIFICATION)
+    B64: '  Target GFA (from proforma)' → 'VERIFICATION'
+    E64: VALUE REMOVED (was: 325000)
+    F64: VALUE REMOVED (was: Reference)
+    B65: '  Calculated GFA' → '  Target GFA (from proforma)'
+    E65: FORMULA CHANGED: =E60 → =+'1. 1A Proforma'!$F$62
+    F65: 'From schedule above' → 'Reference'
+    B66: '  Variance' → '  Calculated GFA'
+    E66: FORMULA CHANGED: =E65-E64 → =E61
+    F66: 'Should be minimal' → 'From schedule above'
+    B67: NEW VALUE:   Variance
+    E67: NEW VALUE: =E66-E65
+    F67: NEW VALUE: Should be minimal
+
+  FORMATTING changes (255):
+    A1: font: [name=Arial, size=14.0, BOLD] → [name=Calibri, size=11.0, color=theme:1]
+    A2: font: [name=Arial, size=11.0, BOLD] → [name=Open Sans, size=14.0, BOLD, color=FF335572]
+    A3: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, BOLD, color=FF335572]
+    A4: font: [name=Arial, size=11.0, BOLD, color=FFFFFFFF] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FF366092, pattern=solid] → [None]
+    B4: font: [name=Arial, size=11.0, BOLD, color=FFFFFFFF] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FF366092, pattern=solid] → [None]
+    C4: font: [name=Arial, size=11.0, BOLD, color=FFFFFFFF] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FF366092, pattern=solid] → [None]
+    D4: font: [name=Arial, size=11.0, BOLD, color=FFFFFFFF] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FF366092, pattern=solid] → [None]
+    E4: font: [name=Arial, size=11.0, BOLD, color=FFFFFFFF] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FF366092, pattern=solid] → [None]
+    F4: font: [name=Arial, size=11.0, BOLD, color=FFFFFFFF] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FF366092, pattern=solid] → [None]
+    A5: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=11.0, BOLD, color=FFFFFFFF]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FF335572, pattern=solid]
+    B5: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=11.0, BOLD, color=FFFFFFFF]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FF335572, pattern=solid]
+    C5: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=11.0, BOLD, color=FFFFFFFF]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FF335572, pattern=solid]
+    D5: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=11.0, BOLD, color=FFFFFFFF]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FF335572, pattern=solid]
+    E5: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=11.0, BOLD, color=FFFFFFFF]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FF335572, pattern=solid]
+    F5: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=11.0, BOLD, color=FFFFFFFF]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FF335572, pattern=solid]
+    A6: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    B6: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    A7: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]
+    B7: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]
+    C7: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]; numfmt: [#,##0] → [General]
+    D7: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]; numfmt: [#,##0] → [General]
+    E7: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]; numfmt: [#,##0] → [General]
+    F7: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]
+    B8: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    C8: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    D8: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    E8: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F8: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]; numfmt: [General] → [0%]
+    B9: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    C9: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    D9: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    E9: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F9: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]; numfmt: [General] → [0%]
+    B10: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0]; fill: [fg=FFFFF2CC, pattern=solid] → [None]
+    C10: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD, color=FF335572]; fill: [fg=FFFFF2CC, pattern=solid] → [None]
+    D10: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD, color=FF335572]; fill: [fg=FFFFF2CC, pattern=solid] → [None]
+    E10: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0]; fill: [fg=FFFFF2CC, pattern=solid] → [None]
+    F10: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0]; fill: [fg=FFFFF2CC, pattern=solid] → [None]; numfmt: [General] → [0%]
+    B11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFEDB426, pattern=solid]
+    C11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFEDB426, pattern=solid]; numfmt: [General] → [#,##0]
+    D11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFEDB426, pattern=solid]; numfmt: [General] → [#,##0]
+    E11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFEDB426, pattern=solid]; numfmt: [General] → [#,##0]
+    F11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFEDB426, pattern=solid]
+    A12: font: [name=Arial, size=10.0, BOLD] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FFD9E1F2, pattern=solid] → [None]
+    B12: font: [name=Arial, size=10.0, BOLD] → [name=Calibri, size=11.0, color=theme:1]; fill: [fg=FFD9E1F2, pattern=solid] → [None]
+    A13: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    B13: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD]; fill: [fg=FFD9E1F2, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    A14: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]
+    B14: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]
+    C14: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0, BOLD]; fill: [None] → [fg=FFE0E7ED, pattern=solid]; numfmt: [#,##0] → [General]
+    ... and 205 more formatting changes
+
+================================================================================
+SHEET: 5. Key Assumptions
+================================================================================
+  Our dimensions: B3:S104
+  Fran dimensions: A3:S104
+
+  MERGED CELLS added by Fran: ['B3:J3', 'B4:J4']
+
+  MERGED CELLS removed by Fran: ['B18:K18', 'B32:K32', 'B3:K3', 'B4:K4', 'B6:K6', 'B88:K88', 'B8:K8', 'M45:S45', 'M55:S55']
+
+  PRINT SETUP differences:
+    fitToHeight: OURS=None → FRAN=0
+    scale: OURS=None → FRAN=36
+    margin.left: OURS=0.7 → FRAN=0.7086614173228347
+    margin.right: OURS=0.7 → FRAN=0.7086614173228347
+    margin.top: OURS=0.75 → FRAN=0.3937007874015748
+    margin.bottom: OURS=0.75 → FRAN=0.3937007874015748
+    margin.header: OURS=0.3 → FRAN=0.1968503937007874
+    margin.footer: OURS=0.3 → FRAN=0.31496062992125984
+
+  COLUMN WIDTH differences (18):
+    Col A: OURS=3.42578125 → FRAN=3.453125
+    Col B: OURS=5.140625 → FRAN=5.1796875
+    Col C: OURS=37.7109375 → FRAN=47.0
+    Col D: OURS=11.85546875 → FRAN=11.81640625
+    Col E: OURS=9.85546875 → FRAN=9.90625
+    Col F: OURS=12.85546875 → FRAN=17.81640625
+    Col G: OURS=12.0 → FRAN=15.81640625
+    Col H: OURS=13.85546875 → FRAN=14.81640625
+    Col I: OURS=10.85546875 → FRAN=10.81640625
+    Col J: OURS=13.85546875 → FRAN=13.90625
+    Col K: OURS=None → FRAN=8.7265625
+    Col M: OURS=6.5703125 → FRAN=6.54296875
+    Col N: OURS=10.5703125 → FRAN=10.6328125
+    Col O: OURS=13.28515625 → FRAN=13.26953125
+    Col P: OURS=None → FRAN=8.7265625
+    Col Q: OURS=14.28515625 → FRAN=14.81640625
+    Col S: OURS=11.5703125 → FRAN=None
+    Col T: OURS=None → FRAN=8.7265625
+
+  ROW HEIGHT differences (10):
+    Row 3: OURS=23.25 → FRAN=26.0
+    Row 6: OURS=15.75 → FRAN=18.0
+    Row 8: OURS=15.75 → FRAN=18.0
+    Row 18: OURS=15.75 → FRAN=18.0
+    Row 32: OURS=15.75 → FRAN=18.0
+    Row 33: OURS=15.75 → FRAN=17.0
+    Row 38: OURS=15.75 → FRAN=17.0
+    Row 65: OURS=15.75 → FRAN=17.0
+    Row 71: OURS=15.75 → FRAN=17.0
+    Row 88: OURS=15.75 → FRAN=None
+
+  DATA/VALUE differences (26):
+    B3: FORMULA CHANGED: =+'3. Headline #s'!$A$10 → =+'3. Headline #s'!$A$8
+    B4: FORMULA CHANGED: =+'3. Headline #s'!A12 → =+'3. Headline #s'!A10
+    F20: FORMULA CHANGED: ='4. Area Schedule'!E54 → ='4. Area Schedule'!E55
+    H20: FORMULA CHANGED: ='4. Area Schedule'!F54 → ='4. Area Schedule'!F55
+    F21: FORMULA CHANGED: ='4. Area Schedule'!E55 → ='4. Area Schedule'!E56
+    H21: FORMULA CHANGED: ='4. Area Schedule'!F55 → ='4. Area Schedule'!F56
+    F22: FORMULA CHANGED: ='4. Area Schedule'!E56 → ='4. Area Schedule'!E57
+    H22: FORMULA CHANGED: ='4. Area Schedule'!F56 → ='4. Area Schedule'!F57
+    F23: FORMULA CHANGED: ='4. Area Schedule'!E57 → ='4. Area Schedule'!E58
+    H23: FORMULA CHANGED: ='4. Area Schedule'!F57 → ='4. Area Schedule'!F58
+    F24: FORMULA CHANGED: ='4. Area Schedule'!E58 → ='4. Area Schedule'!E59
+    H24: FORMULA CHANGED: ='4. Area Schedule'!F58 → ='4. Area Schedule'!F59
+    F25: FORMULA CHANGED: ='4. Area Schedule'!E59 → ='4. Area Schedule'!E60
+    H25: FORMULA CHANGED: ='4. Area Schedule'!F59 → ='4. Area Schedule'!F60
+    H26: FORMULA CHANGED: ='4. Area Schedule'!F60 → ='4. Area Schedule'!F61
+    H36: FORMULA CHANGED: =+'3. Headline #s'!G30 → =+'3. Headline #s'!G27
+    H37: FORMULA CHANGED: =+'3. Headline #s'!G34-'3. Headline #s'!G31 → =+'3. Headline #s'!G31-'3. Headline #s'!G28
+    H38: FORMULA CHANGED: =-'3. Headline #s'!G33 → =-'3. Headline #s'!G30
+    E42: 'Devpt Cost' → 'Dev Cost'
+    C61: '     Comission & Incentive' → '     Commission & Incentive'
+    G72: NEW VALUE: $ Per SF
+    F96: FORMULA CHANGED: ='3. Headline #s'!G39 → ='3. Headline #s'!G36
+    F97: FORMULA CHANGED: ='3. Headline #s'!G36 → ='3. Headline #s'!G33
+    F100: FORMULA CHANGED: ='3. Headline #s'!G37 → ='3. Headline #s'!G34
+    F101: FORMULA CHANGED: ='3. Headline #s'!G29 → ='3. Headline #s'!G26
+    F104: FORMULA CHANGED: ='3. Headline #s'!G40 → ='3. Headline #s'!G37
+
+  FORMATTING changes (313):
+    B3: font: [name=Calibri, size=18.0, BOLD, color=theme:4] → [name=Open Sans, size=18.0, BOLD, color=FF335572]
+    B4: font: [name=Calibri, size=11.0, color=theme:4] → [name=Open Sans, size=11.0, color=FF335572]
+    B6: font: [name=Calibri, size=12.0, BOLD, color=theme:0] → [name=Open Sans, size=12.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B8: font: [name=Calibri, size=12.0, BOLD, color=theme:0] → [name=Open Sans, size=12.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    C10: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    G10: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0]
+    E11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    F11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C12: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    E12: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    C13: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    E13: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    C14: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    E14: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    C15: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    E15: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    F15: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    C16: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    E16: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B18: font: [name=Calibri, size=12.0, BOLD, color=theme:0] → [name=Open Sans, size=12.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    C20: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F20: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H20: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C21: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C22: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F22: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H22: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C23: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F23: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H23: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C24: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F24: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H24: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C25: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F25: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H25: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C26: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    F26: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    H26: font: [name=Arial, size=10.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    C28: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C29: font: [name=Arial, size=10.0] → [name=Open Sans, size=10.0]
+    F29: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0]
+    H29: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0]
+    B32: font: [name=Calibri, size=12.0, BOLD, color=theme:0] → [name=Open Sans, size=12.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    D34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    E34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    F34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    ... and 263 more formatting changes
+
+================================================================================
+SHEET: 6. Debt Stack & Financing
+================================================================================
+  Our dimensions: B1:I45
+  Fran dimensions: B1:I45
+
+  PRINT SETUP differences:
+    orientation: OURS=landscape → FRAN=portrait
+    scale: OURS=74 → FRAN=78
+    margin.left: OURS=0.7 → FRAN=0.7086614173228347
+    margin.right: OURS=0.7 → FRAN=0.7086614173228347
+    margin.top: OURS=0.75 → FRAN=0.7480314960629921
+    margin.bottom: OURS=0.75 → FRAN=0.7480314960629921
+    margin.header: OURS=0.3 → FRAN=0.31496062992125984
+    margin.footer: OURS=0.3 → FRAN=0.31496062992125984
+
+  COLUMN WIDTH differences (10):
+    Col A: OURS=None → FRAN=8.7265625
+    Col B: OURS=27.5703125 → FRAN=27.54296875
+    Col C: OURS=6.140625 → FRAN=7.08984375
+    Col D: OURS=12.5703125 → FRAN=14.81640625
+    Col E: OURS=7.42578125 → FRAN=7.54296875
+    Col F: OURS=14.42578125 → FRAN=14.54296875
+    Col G: OURS=12.42578125 → FRAN=12.453125
+    Col H: OURS=None → FRAN=8.7265625
+    Col I: OURS=14.85546875 → FRAN=14.81640625
+    Col J: OURS=None → FRAN=8.7265625
+
+  ROW HEIGHT differences (1):
+    Row 9: OURS=8.45 → FRAN=8.5
+
+  FORMATTING changes (56):
+    I1: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B4: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B5: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B8: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B11: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    E12: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    F12: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    B13: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D13: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B16: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    D16: font: [name=Calibri, size=11.0, BOLD, color=theme:4] → [name=Open Sans, size=10.0]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B17: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D17: font: [name=Calibri, size=11.0, BOLD, color=FF0070C0] → [name=Open Sans, size=10.0]
+    E17: font: [name=Calibri, size=11.0, BOLD, color=FF0070C0] → [name=Open Sans, size=10.0]
+    F17: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B18: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=theme:9, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    D18: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=theme:9, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    E18: font: [name=Calibri, size=11.0, BOLD, color=FF0070C0] → [name=Open Sans, size=10.0]; fill: [fg=theme:9, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    F18: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=theme:9, pattern=solid] → [fg=FFE0E7ED, pattern=solid]
+    B19: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    D19: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    F19: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B20: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    D20: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B23: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B24: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B27: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B29: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D31: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B32: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D32: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D33: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    E33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D34: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B35: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D35: font: [name=Calibri, size=11.0, color=theme:8] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B38: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D38: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B39: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D39: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B40: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D40: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    ... and 6 more formatting changes
+
+================================================================================
+SHEET: 7. Op Rev and Exp
+================================================================================
+  Our dimensions: A1:V60
+  Fran dimensions: A1:V60
+
+  PRINT SETUP differences:
+    scale: OURS=97 → FRAN=56
+    margin.left: OURS=0.25 → FRAN=0.2362204724409449
+    margin.right: OURS=0.25 → FRAN=0.2362204724409449
+    margin.top: OURS=0.75 → FRAN=0.7480314960629921
+    margin.bottom: OURS=0.75 → FRAN=0.7480314960629921
+    margin.header: OURS=0.3 → FRAN=0.31496062992125984
+    margin.footer: OURS=0.3 → FRAN=0.31496062992125984
+
+  COLUMN WIDTH differences (18):
+    Col A: OURS=6.5703125 → FRAN=6.54296875
+    Col B: OURS=29.85546875 → FRAN=36.08984375
+    Col C: OURS=9.0 → FRAN=16.6328125
+    Col D: OURS=12.0 → FRAN=12.08984375
+    Col E: OURS=9.42578125 → FRAN=9.453125
+    Col F: OURS=14.140625 → FRAN=15.6328125
+    Col G: OURS=11.0 → FRAN=11.1796875
+    Col H: OURS=12.85546875 → FRAN=14.54296875
+    Col I: OURS=7.42578125 → FRAN=7.453125
+    Col J: OURS=None → FRAN=8.81640625
+    Col L: OURS=18.28515625 → FRAN=23.26953125
+    Col M: OURS=11.0 → FRAN=11.08984375
+    Col N: OURS=None → FRAN=11.0
+    Col O: OURS=11.42578125 → FRAN=11.453125
+    Col P: OURS=12.42578125 → FRAN=12.453125
+    Col Q: OURS=None → FRAN=8.81640625
+    Col U: OURS=12.42578125 → FRAN=12.453125
+    Col V: OURS=None → FRAN=8.81640625
+
+  ROW HEIGHT differences (57):
+    Row 2: OURS=96.6 → FRAN=49.5
+    Row 3: OURS=15.75 → FRAN=None
+    Row 6: OURS=3.6 → FRAN=3.65
+    Row 7: OURS=4.35 → FRAN=4.4
+    Row 8: OURS=12.75 → FRAN=None
+    Row 9: OURS=12.75 → FRAN=None
+    Row 10: OURS=12.75 → FRAN=None
+    Row 11: OURS=12.75 → FRAN=None
+    Row 12: OURS=12.75 → FRAN=None
+    Row 13: OURS=4.35 → FRAN=4.4
+    Row 14: OURS=12.75 → FRAN=None
+    Row 15: OURS=12.75 → FRAN=None
+    Row 16: OURS=12.75 → FRAN=None
+    Row 17: OURS=12.75 → FRAN=None
+    Row 18: OURS=12.75 → FRAN=None
+    Row 19: OURS=12.75 → FRAN=None
+    Row 20: OURS=12.75 → FRAN=None
+    Row 21: OURS=12.75 → FRAN=None
+    Row 22: OURS=4.35 → FRAN=4.4
+    Row 23: OURS=24.0 → FRAN=29.0
+    ... and 37 more
+
+  DATA/VALUE differences (3):
+    B3: FORMULA CHANGED: ='3. Headline #s'!A10 → ='3. Headline #s'!A8
+    B4: FORMULA CHANGED: ='3. Headline #s'!A12 → ='3. Headline #s'!A10
+    E38: 'Annual/Unit' → 'Annual /Unit'
+
+  FORMATTING changes (260):
+    I1: font: [name=Calibri, size=8.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    B3: font: [name=Calibri, size=12.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    B4: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    B5: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B8: font: [name=Calibri, size=10.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B9: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D9: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    B10: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D10: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    B11: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D11: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    B12: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D12: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    F12: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G12: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H12: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B14: font: [name=Calibri, size=10.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    C15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    D15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    E15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    F15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    G15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    H15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    I15: font: [name=Calibri, size=10.0, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    B16: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    C16: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    D16: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    E16: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    F16: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G16: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H16: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I16: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B17: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    C17: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    D17: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    E17: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    F17: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G17: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H17: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I17: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B18: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    C18: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    D18: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    E18: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    F18: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G18: font: [name=Calibri, size=10.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H18: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I18: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    L19: font: [name=Calibri, size=10.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    ... and 210 more formatting changes
+
+================================================================================
+SHEET: 8. Schedule
+================================================================================
+  Our dimensions: A1:BP60
+  Fran dimensions: A1:BP60
+
+  PRINT SETUP differences:
+    scale: OURS=77 → FRAN=None
+    margin.left: OURS=0.25 → FRAN=0.2362204724409449
+    margin.right: OURS=0.25 → FRAN=0.2362204724409449
+    margin.top: OURS=0.75 → FRAN=0.7480314960629921
+    margin.bottom: OURS=0.75 → FRAN=0.7480314960629921
+    margin.header: OURS=0.3 → FRAN=0.31496062992125984
+    margin.footer: OURS=0.3 → FRAN=0.31496062992125984
+
+  COLUMN WIDTH differences (8):
+    Col A: OURS=2.5703125 → FRAN=2.54296875
+    Col B: OURS=16.85546875 → FRAN=16.81640625
+    Col BQ: OURS=None → FRAN=8.81640625
+    Col C: OURS=7.85546875 → FRAN=9.453125
+    Col D: OURS=10.42578125 → FRAN=10.453125
+    Col F: OURS=17.85546875 → FRAN=17.81640625
+    Col G: OURS=4.5703125 → FRAN=4.54296875
+    Col H: OURS=1.85546875 → FRAN=1.81640625
+
+  ROW HEIGHT differences (36):
+    Row 3: OURS=18.75 → FRAN=18.0
+    Row 6: OURS=3.6 → FRAN=3.65
+    Row 7: OURS=14.1 → FRAN=14.15
+    Row 8: OURS=14.1 → FRAN=14.15
+    Row 9: OURS=14.1 → FRAN=14.15
+    Row 10: OURS=14.1 → FRAN=14.15
+    Row 11: OURS=14.1 → FRAN=14.15
+    Row 12: OURS=14.1 → FRAN=14.15
+    Row 13: OURS=14.1 → FRAN=14.15
+    Row 14: OURS=14.1 → FRAN=14.15
+    Row 15: OURS=14.1 → FRAN=14.15
+    Row 16: OURS=14.1 → FRAN=14.15
+    Row 17: OURS=14.1 → FRAN=14.15
+    Row 18: OURS=14.1 → FRAN=14.15
+    Row 19: OURS=14.1 → FRAN=14.15
+    Row 20: OURS=14.1 → FRAN=14.15
+    Row 21: OURS=14.1 → FRAN=14.15
+    Row 22: OURS=14.1 → FRAN=14.15
+    Row 23: OURS=14.1 → FRAN=14.15
+    Row 24: OURS=14.1 → FRAN=14.15
+    ... and 16 more
+
+  DATA/VALUE differences (2):
+    B3: FORMULA CHANGED: ='3. Headline #s'!A10 → ='3. Headline #s'!A8
+    B4: FORMULA CHANGED: ='3. Headline #s'!A12 → ='3. Headline #s'!A10
+
+  BOLD BLUE cells (consultant input markers) (1):
+    D9: value=None, font=(name=Open Sans, size=10.0, BOLD, color=FF0070C0)
+
+  FORMATTING changes (268):
+    B3: font: [name=Calibri, size=14.0, BOLD, color=theme:1] → [name=Open Sans, size=12.0, BOLD, color=FF335572]
+    B4: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B5: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    B8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D8: font: [name=Calibri, size=11.0, BOLD, color=FF0070C0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    I10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    J10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    K10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    L10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    M10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    N10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    O10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    P10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    Q10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    R10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    S10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    T10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    U10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    V10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    W10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    X10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    Y10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    Z10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AA10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AB10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AC10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AD10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AE10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AF10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AG10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AH10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AI10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AJ10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AK10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AL10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    AM10: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]
+    C11: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    D11: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    E11: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    F11: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    G11: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    I11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    L11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    O11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    R11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    U11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    X11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    AA11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    AD11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    AG11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    ... and 218 more formatting changes
+
+================================================================================
+SHEET: 9. Development Costs
+================================================================================
+  Our dimensions: A1:Q96
+  Fran dimensions: A1:Q96
+
+  PRINT SETUP differences:
+    orientation: OURS=landscape → FRAN=portrait
+    paperSize: OURS=17 → FRAN=None
+    fitToHeight: OURS=None → FRAN=0
+    scale: OURS=91 → FRAN=59
+    margin.left: OURS=0.25 → FRAN=0.2362204724409449
+    margin.right: OURS=0.25 → FRAN=0.2362204724409449
+    margin.top: OURS=0.75 → FRAN=0.7480314960629921
+    margin.bottom: OURS=0.75 → FRAN=0.7480314960629921
+    margin.header: OURS=0.3 → FRAN=0.31496062992125984
+    margin.footer: OURS=0.3 → FRAN=0.31496062992125984
+
+  COLUMN WIDTH differences (13):
+    Col A: OURS=None → FRAN=8.7265625
+    Col B: OURS=8.85546875 → FRAN=8.81640625
+    Col C: OURS=None → FRAN=8.7265625
+    Col E: OURS=7.85546875 → FRAN=12.36328125
+    Col F: OURS=7.42578125 → FRAN=10.90625
+    Col H: OURS=14.5703125 → FRAN=14.54296875
+    Col I: OURS=11.140625 → FRAN=11.26953125
+    Col J: OURS=None → FRAN=8.81640625
+    Col K: OURS=12.5703125 → FRAN=12.6328125
+    Col L: OURS=None → FRAN=13.90625
+    Col M: OURS=10.5703125 → FRAN=11.453125
+    Col N: OURS=None → FRAN=8.81640625
+    Col O: OURS=None → FRAN=8.7265625
+
+  ROW HEIGHT differences (14):
+    Row 2: OURS=52.35 → FRAN=52.4
+    Row 3: OURS=15.75 → FRAN=None
+    Row 6: OURS=3.6 → FRAN=3.65
+    Row 7: OURS=4.35 → FRAN=4.4
+    Row 8: OURS=14.1 → FRAN=14.15
+    Row 11: OURS=4.35 → FRAN=4.4
+    Row 17: OURS=4.35 → FRAN=4.4
+    Row 23: OURS=4.35 → FRAN=4.4
+    Row 42: OURS=4.35 → FRAN=4.4
+    Row 47: OURS=4.35 → FRAN=4.4
+    Row 60: OURS=4.35 → FRAN=4.4
+    Row 67: OURS=4.35 → FRAN=4.4
+    Row 81: OURS=4.35 → FRAN=4.4
+    Row 88: OURS=8.1 → FRAN=8.15
+
+  DATA/VALUE differences (2):
+    B3: FORMULA CHANGED: ='3. Headline #s'!A10 → ='3. Headline #s'!A8
+    B4: FORMULA CHANGED: ='3. Headline #s'!A12 → ='3. Headline #s'!A10
+
+  FORMATTING changes (283):
+    J1: font: [name=Calibri, size=8.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    B3: font: [name=Calibri, size=12.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B4: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B5: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B9: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I9: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    J9: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B10: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I10: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    J10: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H12: font: [name=Calibri, size=11.0, BOLD, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    I12: font: [name=Calibri, size=11.0, BOLD, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    J12: font: [name=Calibri, size=11.0, BOLD, color=theme:1, underline=single] → [name=Open Sans, size=10.0, BOLD, color=theme:1, underline=single]
+    B13: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    M13: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H14: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=theme:1]; fill: [None] → [fg=theme:0, pattern=solid]; numfmt: [#,##0;\(#,##0\)] → ["$"#,##0]
+    I14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    J14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0.0_-;\-* #,##0.0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B15: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G15: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=theme:1]
+    H15: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [#,##0;\(#,##0\)] → ["$"#,##0]
+    I15: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    J15: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0.0_-;\-* #,##0.0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B16: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    G16: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H16: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I16: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    J16: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0.0_-;\-* #,##0.0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B18: font: [name=Calibri, size=11.0, color=theme:0] → [name=Open Sans, size=10.0, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B19: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H19: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I19: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    J19: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0.0_-;\-* #,##0.0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    L19: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    M19: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B20: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H20: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I20: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    J20: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0.0_-;\-* #,##0.0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G21: font: [name=Calibri, size=11.0, color=theme:4] → [name=Open Sans, size=10.0, color=theme:1]
+    H21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    J21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0.0_-;\-* #,##0.0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    K21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    L21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    M21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    N21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B22: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    ... and 233 more formatting changes
+
+================================================================================
+SHEET: 10. Development Cash Flow
+================================================================================
+  Our dimensions: A2:CZ122
+  Fran dimensions: A2:DA122
+
+  COLUMN WIDTH differences (32):
+    Col A: OURS=4.85546875 → FRAN=4.81640625
+    Col AD: OURS=9.5703125 → FRAN=None
+    Col AE: OURS=8.85546875 → FRAN=None
+    Col AZ: OURS=10.7109375 → FRAN=None
+    Col BA: OURS=8.85546875 → FRAN=None
+    Col BB: OURS=12.140625 → FRAN=None
+    Col BC: OURS=8.85546875 → FRAN=None
+    Col BF: OURS=7.85546875 → FRAN=None
+    Col BG: OURS=8.85546875 → FRAN=None
+    Col BH: OURS=9.85546875 → FRAN=None
+    Col BI: OURS=10.5703125 → FRAN=None
+    Col BJ: OURS=8.85546875 → FRAN=None
+    Col BK: OURS=8.85546875 → FRAN=None
+    Col BO: OURS=9.85546875 → FRAN=9.90625
+    Col BP: OURS=8.85546875 → FRAN=8.90625
+    Col BU: OURS=9.42578125 → FRAN=9.54296875
+    Col BV: OURS=10.85546875 → FRAN=10.90625
+    Col BW: OURS=8.85546875 → FRAN=8.90625
+    Col C: OURS=10.140625 → FRAN=15.0
+    Col CA: OURS=9.140625 → FRAN=9.26953125
+    ... and 12 more
+
+  ROW HEIGHT differences (13):
+    Row 2: OURS=15.0 → FRAN=16.5
+    Row 4: OURS=57.6 → FRAN=57.65
+    Row 98: OURS=11.25 → FRAN=12.0
+    Row 99: OURS=11.25 → FRAN=12.0
+    Row 100: OURS=11.25 → FRAN=12.0
+    Row 101: OURS=11.25 → FRAN=12.0
+    Row 102: OURS=11.25 → FRAN=12.0
+    Row 103: OURS=11.25 → FRAN=12.0
+    Row 104: OURS=11.25 → FRAN=12.0
+    Row 106: OURS=11.25 → FRAN=12.0
+    Row 107: OURS=11.25 → FRAN=12.0
+    Row 108: OURS=11.25 → FRAN=12.0
+    Row 109: OURS=11.25 → FRAN=12.0
+
+  DATA/VALUE differences (2):
+    B2: FORMULA CHANGED: ='3. Headline #s'!A10 → ='3. Headline #s'!A8
+    B3: FORMULA CHANGED: ='3. Headline #s'!A12 → ='3. Headline #s'!A10
+
+  BOLD BLUE cells (consultant input markers) (1):
+    D107: value='=+C107/C104', font=(name=Open Sans, size=8.0, BOLD, color=FF0070C0)
+
+  FORMATTING changes (2954):
+    B2: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=11.0, BOLD, color=theme:1]
+    B3: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]
+    B5: font: [name=Calibri, size=9.0, BOLD, color=theme:1] → [name=Open Sans, size=9.0, BOLD, color=theme:1]
+    I5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    J5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    K5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    L5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    M5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    N5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    O5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    P5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    Q5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    R5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    S5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    T5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    U5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    V5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    W5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    X5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    Y5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    Z5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AA5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AB5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AC5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AD5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AE5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AF5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AG5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AH5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AI5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AJ5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AK5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AL5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    AM5: font: [name=Calibri, size=9.0, color=theme:0] → [name=Open Sans, size=9.0, color=theme:0]
+    I6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    J6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    K6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    L6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    M6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    N6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    O6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    P6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    Q6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    R6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    S6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    T6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    U6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    V6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    W6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    X6: font: [name=Calibri, size=9.0, color=theme:1] → [name=Open Sans, size=9.0, color=theme:1]
+    ... and 2904 more formatting changes
+
+================================================================================
+SHEET: 11. 10-Yr Cash Flow IRR
+================================================================================
+  Our dimensions: A1:T195
+  Fran dimensions: A1:T195
+
+  PRINT SETUP differences:
+    orientation: OURS=landscape → FRAN=portrait
+    scale: OURS=87 → FRAN=55
+    margin.left: OURS=0.78740157480315 → FRAN=0.7874015748031497
+    margin.right: OURS=0.78740157480315 → FRAN=0.7874015748031497
+    margin.top: OURS=0.275590551181102 → FRAN=0.2755905511811024
+    margin.bottom: OURS=0.196850393700787 → FRAN=0.1968503937007874
+    margin.header: OURS=0.31496062992126 → FRAN=0.31496062992125984
+    margin.footer: OURS=0.31496062992126 → FRAN=0.31496062992125984
+
+  COLUMN WIDTH differences (16):
+    Col A: OURS=7.140625 → FRAN=7.1796875
+    Col B: OURS=9.85546875 → FRAN=14.90625
+    Col C: OURS=9.5703125 → FRAN=10.6328125
+    Col D: OURS=None → FRAN=11.90625
+    Col E: OURS=None → FRAN=11.7265625
+    Col F: OURS=11.140625 → FRAN=13.6328125
+    Col G: OURS=10.85546875 → FRAN=13.6328125
+    Col H: OURS=10.42578125 → FRAN=11.81640625
+    Col I: OURS=10.85546875 → FRAN=13.54296875
+    Col K: OURS=None → FRAN=14.90625
+    Col L: OURS=None → FRAN=13.54296875
+    Col M: OURS=8.85546875 → FRAN=8.81640625
+    Col N: OURS=None → FRAN=8.7265625
+    Col O: OURS=10.85546875 → FRAN=10.90625
+    Col P: OURS=None → FRAN=8.81640625
+    Col U: OURS=None → FRAN=8.7265625
+
+  ROW HEIGHT differences (193):
+    Row 1: OURS=10.35 → FRAN=10.4
+    Row 2: OURS=10.35 → FRAN=16.0
+    Row 3: OURS=10.35 → FRAN=17.5
+    Row 4: OURS=10.35 → FRAN=14.5
+    Row 5: OURS=3.6 → FRAN=3.65
+    Row 6: OURS=4.35 → FRAN=4.4
+    Row 7: OURS=36.6 → FRAN=36.65
+    Row 8: OURS=11.25 → FRAN=None
+    Row 9: OURS=11.25 → FRAN=None
+    Row 10: OURS=11.25 → FRAN=None
+    Row 11: OURS=11.25 → FRAN=None
+    Row 12: OURS=11.25 → FRAN=None
+    Row 13: OURS=11.25 → FRAN=None
+    Row 14: OURS=11.25 → FRAN=None
+    Row 15: OURS=11.25 → FRAN=None
+    Row 16: OURS=11.25 → FRAN=None
+    Row 17: OURS=4.35 → FRAN=4.4
+    Row 18: OURS=4.35 → FRAN=4.4
+    Row 19: OURS=11.25 → FRAN=None
+    Row 20: OURS=11.25 → FRAN=None
+    ... and 173 more
+
+  DATA/VALUE differences (2):
+    A2: FORMULA CHANGED: ='3. Headline #s'!A10 → ='3. Headline #s'!A8
+    A3: FORMULA CHANGED: ='3. Headline #s'!A12 → ='3. Headline #s'!A10
+
+  FORMATTING changes (1288):
+    M1: font: [name=Calibri, size=8.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    A2: font: [name=Calibri, size=8.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    A3: font: [name=Calibri, size=8.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    A4: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B8: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B9: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E9: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    H9: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K9: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B10: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E10: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    H10: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K10: font: [name=Calibri, size=8.0] → [name=Open Sans, size=10.0]
+    B11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E11: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    H11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K11: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B12: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E12: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H12: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K12: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    B13: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E13: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H13: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K13: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, BOLD]
+    S13: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B14: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E14: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H14: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K14: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    S14: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B15: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E15: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H15: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K15: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    L15: font: [name=Calibri, size=8.0, italic, color=theme:1] → [name=Open Sans, size=10.0, italic, color=theme:1]
+    M15: font: [name=Calibri, size=8.0, italic, color=theme:1] → [name=Open Sans, size=10.0, italic, color=theme:1]
+    B16: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E16: font: [name=Calibri, size=8.0, color=FF0070C0] → [name=Open Sans, size=10.0]
+    H16: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K16: font: [name=Calibri, size=8.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    L16: font: [name=Calibri, size=8.0, italic, color=theme:1] → [name=Open Sans, size=10.0, italic, color=theme:1]
+    M16: font: [name=Calibri, size=8.0, italic, color=theme:1] → [name=Open Sans, size=10.0, italic, color=theme:1]
+    B19: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    C19: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    D19: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    E19: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    F19: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    G19: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    H19: font: [name=Calibri, size=8.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    ... and 1238 more formatting changes
+
+================================================================================
+SHEET: 12. Sensitivity
+================================================================================
+  Our dimensions: A1:J33
+  Fran dimensions: A1:J33
+
+  PRINT SETUP differences:
+    margin.left: OURS=0.7 → FRAN=0.7086614173228347
+    margin.right: OURS=0.7 → FRAN=0.7086614173228347
+    margin.top: OURS=0.75 → FRAN=0.7480314960629921
+    margin.bottom: OURS=0.75 → FRAN=0.7480314960629921
+    margin.header: OURS=0.3 → FRAN=0.31496062992125984
+    margin.footer: OURS=0.3 → FRAN=0.31496062992125984
+
+  COLUMN WIDTH differences (4):
+    Col A: OURS=None → FRAN=8.7265625
+    Col I: OURS=14.85546875 → FRAN=14.81640625
+    Col J: OURS=0.5703125 → FRAN=0.54296875
+    Col K: OURS=None → FRAN=8.7265625
+
+  ROW HEIGHT differences (4):
+    Row 2: OURS=48.6 → FRAN=48.65
+    Row 3: OURS=15.75 → FRAN=None
+    Row 6: OURS=3.6 → FRAN=3.65
+    Row 9: OURS=15.75 → FRAN=None
+
+  DATA/VALUE differences (2):
+    B3: FORMULA CHANGED: ='3. Headline #s'!A10 → ='3. Headline #s'!A8
+    B4: FORMULA CHANGED: ='3. Headline #s'!A12 → ='3. Headline #s'!A10
+
+  FORMATTING changes (47):
+    J1: font: [name=Calibri, size=8.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    B3: font: [name=Calibri, size=12.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B4: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=FF335572]
+    B5: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B9: font: [name=Calibri, size=12.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    B10: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    H10: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    B11: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H11: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B12: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H12: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B13: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H13: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B15: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    H15: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    B16: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H16: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B17: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H17: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B18: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H18: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B20: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    H20: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    B21: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H21: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B22: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H22: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B23: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H23: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B25: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    H25: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    B26: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H26: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B27: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H27: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H28: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B30: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    H30: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    B31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H31: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B32: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H32: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+    B33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    H33: font: [name=Calibri, size=11.0, color=FF0070C0] → [name=Open Sans, size=10.0, color=FF335572]
+
+================================================================================
+SHEET: 13. Altus Cost Guide 25
+================================================================================
+  Our dimensions: A1:K57
+  Fran dimensions: A1:K57
+
+  COLUMN WIDTH differences (1):
+    Col L: OURS=None → FRAN=8.7265625
+
+  ROW HEIGHT differences (4):
+    Row 1: OURS=18.75 → FRAN=None
+    Row 2: OURS=15.75 → FRAN=None
+    Row 4: OURS=30.0 → FRAN=29.0
+    Row 51: OURS=15.75 → FRAN=None
+
+  FORMATTING changes (299):
+    A1: font: [name=Calibri, size=14.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    A2: font: [name=Calibri, size=12.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    A4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    B4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    C4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    D4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    E4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    F4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    G4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    H4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    I4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    J4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    K4: font: [name=Calibri, size=11.0, BOLD] → [name=Open Sans, size=10.0, BOLD]
+    A5: font: [name=Calibri, size=11.0, BOLD, italic] → [name=Open Sans, size=10.0, BOLD, italic]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    A6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    F6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    H6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    J6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    A7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    F7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    H7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    J7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K7: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    A8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    E8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    F8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    H8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    J8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    A9: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B9: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C9: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    ... and 249 more formatting changes
+
+================================================================================
+SHEET: 14. Sensitivity 2
+================================================================================
+  Our dimensions: B2:D14
+  Fran dimensions: B2:D14
+
+  COLUMN WIDTH differences (1):
+    Col A: OURS=None → FRAN=8.7265625
+
+  FORMATTING changes (10):
+    B2: font: [name=Calibri, size=10.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    D4: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D6: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D8: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B10: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D10: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FFFFFF00, pattern=solid] → [fg=FFEDB426, pattern=solid]
+    B13: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    B14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+
+================================================================================
+SHEET: 15. Headline #s
+================================================================================
+  Our dimensions: A5:K58
+  Fran dimensions: A5:L58
+
+  MERGED CELLS added by Fran: ['A10:K10', 'A12:K12', 'A14:K14', 'A17:K17', 'A20:K20', 'A22:K22', 'A49:L49', 'A53:L53', 'A54:L54', 'A55:L55', 'A57:L57', 'A58:L58']
+
+  MERGED CELLS removed by Fran: ['A10:J10', 'A12:J12', 'A14:J14', 'A17:J17', 'A20:J20', 'A22:J22', 'A49:J49', 'A53:J53', 'A55:J55', 'A57:J57', 'A58:J58']
+
+  PRINT SETUP differences:
+    scale: OURS=78 → FRAN=64
+    margin.left: OURS=0.7 → FRAN=0.7086614173228347
+    margin.right: OURS=0.7 → FRAN=0.7086614173228347
+    margin.top: OURS=0.75 → FRAN=0.7480314960629921
+    margin.bottom: OURS=0.75 → FRAN=0.7480314960629921
+    margin.header: OURS=0.3 → FRAN=0.31496062992125984
+    margin.footer: OURS=0.3 → FRAN=0.31496062992125984
+    print_area: OURS='15. Headline #s'!$A$1:$L$61 → FRAN='15. Headline #s'!$A$1:$L$59
+
+  COLUMN WIDTH differences (10):
+    Col A: OURS=None → FRAN=8.81640625
+    Col C: OURS=None → FRAN=8.81640625
+    Col E: OURS=None → FRAN=8.90625
+    Col F: OURS=18.140625 → FRAN=18.1796875
+    Col G: OURS=15.140625 → FRAN=15.1796875
+    Col H: OURS=2.85546875 → FRAN=2.81640625
+    Col I: OURS=12.5703125 → FRAN=16.08984375
+    Col J: OURS=2.5703125 → FRAN=2.54296875
+    Col K: OURS=12.5703125 → FRAN=16.08984375
+    Col L: OURS=None → FRAN=8.81640625
+
+  ROW HEIGHT differences (10):
+    Row 5: OURS=14.85 → FRAN=14.9
+    Row 8: OURS=None → FRAN=8.5
+    Row 10: OURS=69.75 → FRAN=29.0
+    Row 12: OURS=14.85 → FRAN=14.9
+    Row 17: OURS=None → FRAN=16.5
+    Row 24: OURS=15.75 → FRAN=None
+    Row 46: OURS=81.6 → FRAN=81.65
+    Row 49: OURS=54.6 → FRAN=54.65
+    Row 55: OURS=33.0 → FRAN=45.0
+    Row 58: OURS=None → FRAN=38.0
+
+  DATA/VALUE differences (2):
+    A22: 'SVN Rock Advisors Inc.' → 'Rock Advisors Inc.'
+    A49: 'SVN Rock Advisors Inc. Brokerage, Derek A. Lobo & Associates (DALA) and/or SVN Canada Inc. (herein described as "the Consultant") has developed the New Apartment Construction Financial Model (herein described as "the model") as a general guide to help a user understand the high level profitability of rental apartment construction development on a given site. The Model is developed in Microsoft Excel, and it is expected by the consultant, that the user of the model is proficient in Excel. Any accidental deletion of a cell may corrupt the entire file and/or show inaccurate results that the Consultant is not responsible for. The model is intended to provide a high level understanding of the profitability, and does not assure and/or guarantee success of a project in any way.' → 'Rock Advisors Inc. Brokerage, Derek A. Lobo & Associates (DALA) (herein described as "the Consultant") has developed the New Apartment Construction Financial Model (herein described as "the model") as a general guide to help a user understand the high level profitability of rental apartment construction development on a given site. The Model is developed in Microsoft Excel, and it is expected by the consultant, that the user of the model is proficient in Excel. Any accidental deletion of a cell may corrupt the entire file and/or show inaccurate results that the Consultant is not responsible for. The model is intended to provide a high level understanding of the profitability, and does not assure and/or guarantee success of a project in any way.'
+
+  FORMATTING changes (85):
+    A5: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    A10: font: [name=Calibri, size=18.0, BOLD, color=theme:4] → [name=Open Sans, size=11.0, BOLD, color=FF335572]
+    A12: font: [name=Calibri, size=11.0, color=theme:4] → [name=Open Sans, size=10.0, color=FF335572]
+    A14: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    A17: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=11.0, BOLD, color=FF335572]
+    A20: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    A22: font: [name=Calibri, size=11.0, color=theme:4] → [name=Open Sans, size=10.0, color=FF335572]
+    C24: font: [name=Calibri, size=12.0, BOLD, color=theme:0] → [name=Open Sans, size=10.0, BOLD, color=theme:0]; fill: [fg=FF0070C0, pattern=solid] → [fg=FF335572, pattern=solid]
+    G26: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    I26: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    K26: font: [name=Calibri, size=11.0, BOLD, color=theme:1] → [name=Open Sans, size=10.0, BOLD, color=theme:1]
+    C28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    K28: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    C29: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G29: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [0.00%] → ["$"#,##0]
+    I29: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [0.00%] → ["$"#,##0]
+    K29: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [0.00%] → ["$"#,##0]
+    C30: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    D30: font: [name=Calibri, size=11.0, italic, color=theme:1] → [name=Open Sans, size=10.0, italic, color=theme:1]
+    E30: font: [name=Calibri, size=11.0, italic, color=theme:1] → [name=Open Sans, size=10.0, italic, color=theme:1]
+    F30: font: [name=Calibri, size=11.0, italic, color=theme:1] → [name=Open Sans, size=10.0, italic, color=theme:1]
+    G30: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I30: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    K30: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    C31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    I31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    K31: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    C32: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G32: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I32: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    K32: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    C33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    I33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    K33: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    C34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    I34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; numfmt: [_-* #,##0_-;\-* #,##0_-;_-* "-"??_-;_-@_-] → ["$"#,##0]
+    K34: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]; fill: [fg=FF92D050, pattern=solid] → [fg=FFEDB426, pattern=solid]; numfmt: [\ * _(#,##0_);* \(#,##0\);* _("-"??_);_-@_-] → ["$"#,##0]
+    C36: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G36: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I36: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K36: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    C37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    G37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    I37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    K37: font: [name=Calibri, size=11.0, color=theme:1] → [name=Open Sans, size=10.0, color=theme:1]
+    ... and 35 more formatting changes
+
+================================================================================
+NAMED RANGES COMPARISON
+================================================================================
+  No differences in named ranges
+
+================================================================================
+DATA VALIDATIONS COMPARISON
+================================================================================
+
+================================================================================
+CONDITIONAL FORMATTING COMPARISON
+================================================================================
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+  Formula cells overwritten with static values: 6
+  Data/value differences: 343
+  Bold blue consultant input cells: 32
+  Formatting changes: 6416

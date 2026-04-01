@@ -1,0 +1,488 @@
+00:00:36 Rod Schulhauser
+Oh Alejandro, how you doing?
+
+00:00:38 Derek Lobo
+Good, good. How are you guys doing? Good, good. Hey listen, very much appreciate you being here. I think, you know some of our team Noor who's having a camera problem is our CFO Okay Raja COO. Lisa is my long suffering assistant of 15 years, quite an introduction Lisa Right. And maybe maybe somebody else is going to join us from our research team Right. And, you might know some of them from those meetings you would come to with Darryl. Alejandro and I had an interesting experience in Quebec City, and I had forgotten about it until I did that. Alejandro, what was that called? That was the door. What was it called again in the Catholic faith? I forgot now.
+
+00:01:18 Alejandro Duque
+Yeah, I'll have to look it up. Oh,
+
+00:01:20 Derek Lobo
+I thought you would know. Okay, so the Catholic Church has this tradition where every fifty years or every jubilee. They open a certain door in a church, and it's a blessing you get when you walk through the door. And they have that every morning after mass, they do that. And Alejandro and I were in Quebec City at an SCC conference, yeah. We both decided we would go to it. So I had forgotten what a beautiful moment that was. Yes, anyways, thank you again for being here. Sorry,
+
+00:01:49 Alejandro Duque
+I was quickly looking at yeah It's called the Holy Door, and then Benedictine monks of Quebec. Yeah. They have it, and then it opens only in holy years. So we just happened to be there in the time that it was open.
+
+00:02:01 Derek Lobo
+So that was open, yes, yeah. Well, that was a special moment. So and I saw that. So anyway, so Alejandro is you know connected to us through Darryl. I did wind up sitting beside him once at an SEC conference somewhere somewhere in the US. Um and you know, he's spent a lot of time onum. You know, AI let's say more than most people. We're all figuring this thing out, right? And he's done a couple of things. I think when Daryl was telling me about this, We were trying to figure out how do we use AI in our business everywhere, and we're doing that to some extent. But you know, Alejandro has done it maybe more so than we have. Where is Javed Rod? That's who is supposed to be here. Why don't you text him?
+
+00:02:44 Rod Schulhauser
+He's not available this week; he's away.
+
+00:02:47 Derek Lobo
+Okay, so so Alejandro, maybe we can record this just internally if you don't mind. Lisa, you can record this right? So we asked Alejandro to said we said okay, we've got these financial pro formas which Noor has kind of developed for them. Right? We've got these financial pro formas that Noor has developed for them. We call it the one B, which is the the full tabbed in development spreadsheet. And then we got the reverse one B where we work backwards into it. Right? Alejandro, we explained that to you but they are cumbersome to run. Okay, they are difficult to run. It takes people a long time, and quite frankly, you know, if we could make it easier, we would use it more. And if we use it more, our clients would see our expertise much earlier. Yep right? And then we can now do financing equity leasing and Alejandro. We have a whole stack of services, especially for the pivoting first time apartment developer, right? Mhm and we call it the full service apartment development process. It's kind of our. 
+
+00:03:46 Derek Lobo
+Secret sauce, a little bit. Everything we do, anybody can do, but we string them all together into a service. So we're just trying to be more efficient with it. And we haven't really put in the effort on on AI on spreadsheets. So, we gave Alejandro I think a bunch of things, and he I don't if he had time to look at him, But he's kind enough to say I'll look at him and just give us advice on how we proceed. Okay? Alejandro with that introduction thank you again for doing this. 
+
+00:04:14 Alejandro Duque
+Of course, yeah. Thank you so much, Nora Lisa. Great to see you again, Nora. I think this is the first time we've officially met. So pleasure meeting you. And what I told Derek and Rod the first time we met, which is I have knowledge about it. I have a very basic technical background. I graduated from finance, so I was a financial analyst at Google for seven years, so I am not the tech person But I've used and I've seen kind of like the growth of AI, and I think that there is a lot of noise on one end, But then there is a lot of like super helpful tools on on the other. And that's what I was telling Derek and Rod the first time, which is in my opinion, There are so many amazing tools today that you don't have to go and like kind of like completely reinvent your business. It's more about finding uh workflows or anything that you currently have to use it.
+
+00:05:07 Alejandro Duque
+The first thing I would say is that, yeah, I did spend. I don't know. It took me like uh could take three hours to fully understand. I think I grabbed the concept between kind of like one, a, the feasibility study that he sent. I had actually looked at one of those last year. Um Jonathan he also works with Darryl, I think you guys did one for him. Uh yeah, so uh I remembered like he has shared that before or they've shared it like, I don't know, but i still had that file. So i remember kind of like looking at that. And then. Derek sent me the one B, the full model, which Nord like. That's incredible! Like that's such a fantastic thing. And then also the reverse one B. I looked through the videos, so I think there are a lot of kind of like different steps. I just wanted to step back first and and ask you guys, how are you planning about kind of like implementing? Let's say these AI solutions, because I can give you an idea kind of like what I did just with the information that you gave me and the limited time I had and limited time.
+
+00:06:04 Alejandro Duque
+And again, all of this is very limited. Like, I am not a coder; I know how to use the systems. And I was telling something that the last thing I would say in my introduction is that I was telling Derek and Rod that the interest is not about replacing anyone because I think there is a lot of noise about that now. You can capture a lot of the knowledge that like Nora has, and that Derek has, so when analysts are running these things. So, There's like you have an AI companion that is like having nor or direct kind of like explaining and getting that data like right away. So, I first wanted to see more about how are you guys thinking about the implementation? Is there a way is everyone doing it on their own? Like Rod, are you leading it? Like how's how are you guys planning for it?
+
+00:06:50 Derek Lobo
+Great question. Rod bring up the full service department development process ribbon. Okay. Well,
+
+00:06:56 Rod Schulhauser
+Let me answer Alejandro's question because we only have Alejandro for another 20 minutes.
+
+00:07:01 Alejandro Duque
+So, yeah, I was able to move my my meeting. I texted Derek late, but I moved it just in case. So, I do have till four thirty; I moved it to okay good.
+
+00:07:11 Rod Schulhauser
+So so so to answer your question, you know, this would be one of a few applications we're going to do. But, the fact that you are speaking to it in the Google AI ecosystem, it meshes with my game plan for the company wide implementation of AI because. That's the ecosystem I want to implement it under as well. So, that being said, You know, as well as I do that, you can take individual applications here in the same ecosystem, let that ecosystem grow with time and evolve with time, And let Google handle the tech evolution, and you know, the applications will be there. So, that's kind of the easiest answer I can give you. So, I think we're right in sync with what you were already thinking and the way you do your AI.
+
+00:07:53 Alejandro Duque
+Okay, perfect. Because, yeah, and I am asking this question. I can give a lot of ideas, and again, nor also for your context. And Lisa like I am not a consultant in AI ; like I would love to help you guys, because the relationship with them he's a friend. Yeah, but I am not here like oh, like this is my how companies that I work with implemented everything. I've built is for my own now. I had mentioned briefly, like the Gemini ecosystem, which Roddy is pretty aware of, which is kind of like Google's system. Because I think one of the areas is like I had some questions. Like for instance, like I know you guys have I think over like thousands of feasibility studies. Like where are those done? Like is there a database with all those benchmarks? Because I was thinking kind of like one idea is that you throw all of that into.
+
+00:08:47 Alejandro Duque
+Into the team,
+
+00:08:49 Rod Schulhauser
+Not yet. Right now, that AI application is an island, but obviously you are already reading into our intention. But currently,
+
+00:08:57 Alejandro Duque
+No perfect, because then you can start standardizing kind of like those inputs and then doing different things. If you guys want, I'll show you what with the like two hours, plus the research time I had kind of like stuff that I am doing now applicable to your business with this reverse one B right. Yeah, so first of all, I think that if if I understood correctly, Right now, the main pain point is kind of like, how do you present the one A the feasibility study is done, and you go to the client, But then how do you quickly then do a reverse one B? So it's a lot easier for them to see. So t here is this spreadsheet. Sorry Darryl, go ahead.
+
+00:09:39 Derek Lobo
+Hold on Alano and to continue the relationship because right now, He goes away for three years and he builds it. Then maybe we come back and lease it, and then maybe two years from there we sell it. How do we keep front and center engaged? So, what we want to do is bring on a mortgage broker. So now we do the financing. And how do we show expertise in financing? Right after we do the one A, we show the reverse one B; We look like geniuses. The numbers aren't right, but the process. So now we get the stress test interest rates, cap rates rents, and he just sees our prowess.
+
+00:10:13 Derek Lobo
+But it takes too long to do. Our research people barely understand the one B; it's pretty complex.
+
+00:10:20 Alejandro Duque
+It is, yeah, right.
+
+00:10:22 Derek Lobo
+Okay, So that's where we are making.
+
+00:10:23 Alejandro Duque
+Okay, So I'll mention the two tools that I think are the most powerful for this type of stuff.: one Gemini, kind of like the Google ecosystem; a lot of fantastic things with rationalizing data, understanding reading through documents, scanning PDFs like it is, Absolutely mind blowing. It gets like ninety five percent of the research within those documents done. Now, if you want to build a solution, There is cloud C L A U D E, which is another kind of like AI and I am using both in cloud. I use it as the architect or engineer that helps me look through all these spreadsheets data and helps me kind of like make inferences about different information based on things that I am filling out.
+
+00:11:08 Alejandro Duque
+And, it also allows me to build custom apps based on the needs that I have. So, to give you a perfect example, I uploaded i'm not going to show you the entire chat. It took me about an hour and a half to do it, but I uploaded the one B model, then the reverse one B sample and examples file that you gave us, then the one B guide. And I remember then i remember some of the things that we talked about with Derek, how we wanted to have a tool. That simplified an in person, was able to show a client kind of like the reverse one B model, right? If I understood correctly, that was kind of like what I was working on. So then based on that, for instance, like I am going to present here in cloud or Google Gemini. Can you guys see my laptop? Can you guys see my laptop? Yes.
+
+00:11:59 Alejandro Duque
+Okay, so for instance, Here, what I am telling Cloud in this case is that I am going to upload the one A feasibility study that you guys have and I am going to extract big values that I think are most relevant for the reverse one B screening tool, right? Which are total units, rentable square footage NOS stabilization and cap rate. Format is simple. That's it, right? So then I am going to come upload Again, this is the uh feasibility study I had when I talked to Jonatha. Maybe it's changed, but let's pretend that one is accurate. So I'll have Claude read through that document, and it should give me the requested values. Like it's gonna show me how it's thinking and then within, I don't know, thirty seconds like it's gonna run and and extract all the data from, I don't know, it's like a seven eight page document. And you can see kind of like all the steps and what it's doing.
+
+00:12:57 Alejandro Duque
+That's step one.
+
+00:12:58 Derek Lobo
+Alejandro, you recorded this or are you doing this right now?
+
+00:13:02 Alejandro Duque
+I am doing this right now.
+
+00:13:04 Rod Schulhauser
+Yeah, it's just it's like a chat GPT prompt but in a different LM.
+
+00:13:08 Alejandro Duque
+Exactly. Yeah, Think of it as as chat GPT. But it's just uh this one is a little bit more. Uh specific like it's is verifying based on market rents like he goes pretty crazy. Now what I built personally that I spent like thirty minutes building was, Based on what we talked about, this reverse one B financial screening tool. That, the idea is that this was custom built in thirty minutes by someone that only has basic knowledge of tech. So once we have that data, we can put it here and start playing with different metrics. Um. So for instance, it's going to tell me okay. So it's a hundred and sixty nine units I'm going to put a hundred and sixty nine units.
+
+00:13:54 Alejandro Duque
+This is the net rentable square footage. And again, I am thinking as a user that I don't have a lot of Excel knowledge and I just want something that I can show the client. And then it has different cap rate options, right? So let's take about six percent and then that's it. So then these are the inputs from the one A study target profit margin, let's say it's twenty percent. It immediately calculates building value. Less selling cost, net proceeds available for development. It can actually calculate the maximum land price based on these metrics. Here in the advanced settings, you can put how many months. Again, think of it as the reverse one B formula inputted here. I used by preset like these values based on what Derek, What you said during the call that I took notes that I think these are somewhat accurate and no, I think you had somewhat different in the reverse one B.
+
+00:14:50 Alejandro Duque
+And then it has rent sensitivity. Like, let's say if you adjust, I don't know,
+
+00:14:55 Derek Lobo
+Paint like and. 
+
+00:14:56 Alejandro Duque
+Then it starts down here, kind of like updating the development yield. It doesn't give me an IRR because I would have to do a cash flow model. Then he got sensitivity: best case, base, worst case and then the category breakdown. This was built by a non- technical person in about let's call it an hour. I mean, once I understood the whole concept, I went and I said, "I wanna build this," specifically for this using this as data. How I see it is that could something like this because again, I don't know the entire business code. So I don't know all the applications, but based on what we talked about. Anyone that.
+
+00:15:41 Alejandro Duque
+Has some because again, this is all typing me back and forth with cloud and then cloud code, which like I can't explain, But pretty much it's just a tool that is building this entire application in my system. Which then you can send it to anyone else. Then you can do things like for instance, Like he gave me the option : Do. You want to upload the 1A study directly into this tool? Have it populate all these project name total units automatically based on that file. So again Applications are almost endless. It's more about what's the workflow, what are the main pain points, And that's how I tell everyone, which is instead of just throwing things at AI, like first plan and see like where do you think you need more help. And I don't know if they're give I don't know if I understand correctly, but for instance like this presents it in a in a very fast way. You can start changing the profit margin so you can know what's the maximum land price based on that.
+
+00:16:39 Alejandro Duque
+I mean, all these fields update automatically, and it's just like the spreadsheet. But it's seen here, then you have these things to like toggle in between, and then it gives you this. So. Yep,
+
+00:16:52 Rod Schulhauser
+It's a great way to put a user interface on it, so you can be a human being interacting with the spreadsheet. So that's exactly what you're after.
+
+00:16:59 Alejandro Duque
+Exactly. So this is one of the applications now. I didn't have like. The entire time to go through the entire model, the one B model, But there are ways that you can put kind of like an AI within the model that if any agent is working on it, They can they could ask questions instead of having to reach out to Noor or reach out to Derek or Rod. It's all kind of like automatically populated and it's. The beauty is then now these systems like. You could either train it or you could just like throw it in. And then you'll try its best to understand it, and they're getting like very good at at doing that.
+
+00:17:34 Alejandro Duque
+Um, but yeah, Obviously, this, you could have it in the pocket, like you could have it on your phone, like even did like this phone viewing case, like you want it. But again, Solutions like this one I think could be built is more about where what are the main pain points for the business? And where do you spend most of the repetitive work repetitive time? Because then that's what I would say this, the opportunity goes, which is. Instead of thinking about bringing consultants and doing all of that, which might be fantastic, I would start first with like, "Hey, what are the most repetitive tasks we have in the business? " Like uh is there a way that for instance, like Nord's video explaining the one B model. That one, you can transcribe it and use it as a knowledge base for anyone that's using the tool. So they don't have to watch the full video or just ask questions and interact with the video. I don't know. Like there are a lot of ideas I had but um so yeah.
+
+00:18:31 Alejandro Duque
+So, As why I wanted to have this call first because I think the applications are endless. It's more about like in what.
+
+00:18:38 Noor Khan
+What is the output?
+
+00:18:41 Alejandro Duque
+Sorry, no go ahead.
+
+00:18:44 Noor Khan
+What is the output will provide to the client in this from this thing that you have just run for us?
+
+00:18:50 Alejandro Duque
+This is just to show it live. I mean, You can then make it a PDF like I could then instruct the system today, help me build this into a PDF or. The idea here is that, again, and this is based on my thirty minute last conversation with Eric. Which is, let's say you have a client in front of you, You put this basic stuff from the one A, and then you just start running different. I don't know what's the target profit margin. What's the different like timeline for construction? The cost allocation that you like to use? The financing assumptions for this model? And, then you just start playing with this. And the idea is that you get down here.
+
+00:19:29 Alejandro Duque
+In In one instant, in front of them, you could do it. So.
+
+00:19:33 Rod Schulhauser
+So newer right now at this point is purely an online model version model of the one B. This is just an online version; t here is no printouts, t here is no output, but that could easily be added if we were to take this. This is just a Alejandro's just invested one hour to do this.
+
+00:19:50 Noor Khan
+So it doesn't come like out in an Excel form? Can it come out in an Excel form also?
+
+00:19:55 Alejandro Duque
+That's yeah so now that's, That's kind of like the next questions I had because I again, I am just thinking like there are so many ideas and ways to then expand, but pretty much the applications are endless because I have, with cloud, I have a call it a personal engineer that I am telling it like hey, great job or hey change this. Um, I could say like, hey, can you give me then an Excel spreadsheet based on those values that matches exactly my.
+
+00:20:26 Alejandro Duque
+Reverse one B model, the one I uploaded before.
+
+00:20:29 Derek Lobo
+Yeah, yeah. Alejandro, Let me tell you what we're trying to achieve here from a high level business standpoint. Okay, And I think right. So Rod just bring up the bring up the ribbon because so I am coming at this from the CEO standpoint. Okay, yep. Noor is the guy who was doing this manually. And all of a sudden we find we can do it very, very quickly. Okay. So here is the problem that we have as sort of. The business case, okay? The business's case is that we have this very cool model of nine steps. It gets an apartment developer from step one, either buying the land or he's got a piece of land, right through to disposition and valuation. Fair enough? Okay, and this is for new apartment construction in Canada. Okay, and it's typically for new developers pivoting to the business. Our best client.
+
+00:21:23 Derek Lobo
+Is a guy who's building office buildings and building his first apartment. He's got no ego; he's a sponge. If the guy's already built ten buildings and he's got staff, it's very difficult. Fair enough, okay? So step number one is the land opportunity filter. Guy just says, "I've got this skill; I'll drive two hours." We say, "Here is where you should build," and here is where you build high rise, low rise, mid rise, and so on. Okay? Most people don't do that. Most people come to us when they have a piece of land under contract or they already own it. And they decide, I want to build an apartment. Maybe they've talked to their financier and he says, you need to know rent levels, you need to know absorption. Okay, so he comes to us and just saying, tell me the rent. And then we explain to him it's not just the rent. It's so much more than that. Okay, it's the people living there, size of the units, Amenities blah blah blahs So. Then we do the feasibility study that one a. 
+
+00:22:14 Rod Schulhauser
+Okay So Derek I just wanted just ask something Cole. Do we send you the video?
+
+00:22:18 Derek Lobo
+Yeah? Yeah yeah. I watched it yeah. Yeah, you know, he's done a lot of work. We're very grateful to you. Okay, so then what happens is we usually typically don't do financial modeling. We typically don't find money. We typically maybe optimize, then we come in two years later, and we lease it up. Okay. And then if we lease it up, then we got a real shot at selling it. Okay. So if if we do a hundred studies in a year, okay, we might do five lease ups, and we might sell two buildings.
+
+00:22:49 Derek Lobo
+But those two buildings, he is worth more than the hundred feasibility studies we do. It's the brokerage business, okay? So here is the challenge. We used to be on two floors back when we had an office. It felt like we were like a company of two thousand people with these little silos. The research people just did their research and then they moved on, you know what I mean? So what we want to do is connect them together. So how do we go and the initial feasibility number, like we're doing thirty fifty a year, okay? How do we take that and now in number four, we've gone to raising equity, which we've done and investing in this. But also why aren't we doing construction financing, takeout financing, bridge financing? So we're going to bring in a mortgage broker into our company. We have tried referring this out, but it only works if you're living under one roof. It doesn't work by ad hoc relationships. We haven't been able to make it work. Fair enough? Everyone's got their own priorities. So. 
+
+00:23:48 Derek Lobo
+We have the financial modeling done, but the research people are more like demographics economics. You know, they're spreadsheet people, but they're not nor okay. So that one B is quite complex as you saw right then. The reverse one B means you just make some assumptions. So how do we take our mortgage broker early in the process? Maybe, even before we start the study to introduce them to the prospect, right? Then we do the study. And then we give the client this beautiful surprise, the reverse one B. He doesn't even know he's going to get it. Maybe, right? Maybe he does. He's used to looking at a spreadsheet, so when he looks at this, he's just going to think "hocus pocus" behind it. I see Nora's point. Let's show him the actual spreadsheet. You know, if you looked at it, You'll see we input the construct the hard cost on an S curve or on a straight line basis like that's cool.
+
+00:24:44 Derek Lobo
+The fact that we understand that impresses the client, fair enough. Because he's mostly doing a static model. ; he's not even taking in time value of money. Like we put in land costs in month one, We put in the leasing agent's cost in month twenty six when we actually hire them. So. So we're running a dynamic budget that's going to impress the heck out of the developer, oh yeah. And by doing that, we get to. Talk about all the steps in the process. Why we hired the leasing agent here, why we picked fifteen apartments to rent in January and thirty in July. We get to explain them all that stuff, right? So, if we do that all in step two, and we go to sort of financial modeling here, then we get the mortgage brokerage. We think fair enough. If we get the mortgage brokerage now, we get the construction financing. The takeout—we ' re talking to them anyways.—then we sit on the design team with the architects.
+
+00:25:43 Derek Lobo
+And say," Look, here is why you want to put in whatever right a dog park." Yeah.
+
+00:25:52 Alejandro Duque
+And how do you see, for instance, like what's the main opportunity with AI being implemented here? Is it to help the and the like Nora already knows it, but is it the people inputting the data into the model? Yes.
+
+00:26:13 Derek Lobo
+You got to give me a minute. No, you talk. I got to get a glass of water.
+
+00:26:17 Noor Khan
+Okay, so you see, I like the output you showed. What I want to understand basically how to like, you know, because i i don't want to be doing all the modeling myself as well. The plan is to implement some form of some form of AI AI assisted financial modeling, so we can put the. Basic data into it, And if it can generate a financial model along the lines of the one B that we are doing, or along the lines of reverse one B. For example, In the case of a project, which is just like you know, we just have the proforma. Like in terms of revenue proforma only, but not the cost and everything else where it can just take percentages and say that you know, this is how it will be. But in my mind is to have a. 
+
+00:27:11 Noor Khan
+Like a AI assisted model which generates a kind of an Excel file. So our relevance as a like, you know, brokerage or as a consulting arm of the brokerage remains relevant. Anybody can subscribe to like cloud, people are almost getting subscribed to cloud and Gemini anyway generally, right? And, there are so many in my mind is that that, you know, we we should be able to give an output with our branded name and all that. So it says that you know, we have run it basically no matter how, but we have run it. It's our model and it's kind of a protected in terms of you know, intellectual property within it.
+
+00:27:56 Alejandro Duque
+Yeah, okay. And so the one B that's more construction. And then. This AI financial modeling. Is this speeding out kind of like new models that match different requests that you have at the point, like let's say mortgage.
+
+00:28:15 Derek Lobo
+No, no, For now, we just want it to look like the spreadsheet because that's what our client understands. That's what we understand and he sees all the steps. Right? Got it. Okay, now but I want to go back up. Noor has to Noor thinks in terms of, Numbers getting the spreadsheet done. I am thinking in terms of process and company culture, okay? So, the company culture is the salespeople are not spreadsheet people, but they're very good at talking to people, following up with people, building confidence up you know telling our company's story. Yep. Okay? So then they get them to the table; it's a funnel. You have one hundred conversations; you get you know and so on right. 
+
+00:28:59 Derek Lobo
+Then, typically, the entry point to our company okay is the feasibility study. So we're pretty good at doing the feasibility study. We're a iing that whole report right now, okay? The one that you saw from your friend in Saint Marie, right? But then that's where the problem occurs. Now the client just seems to disappear, okay? And we lose this opportunity to make money in the financing worse. And the hardest part about any business is customer acquisition. The actual mortgage financing is quite easy. So we found a mortgage broker that we're going to work with, and we can expand this division, okay? So, how do we get from step two where usually we just sign off and say, "Give us our check, we're done," and move to the mortgage broker? Well, the mortgage broker is commission-driven. We think we actually bring them in at the beginning of step two or during the discovery call.
+
+00:29:56 Derek Lobo
+Okay, and it's very hard to tell people now," Hey, we want to be there in step nine when you sell," when they haven't even decided to build yet. It's like you are dating a girl and all of a sudden you are talking about university tuition for your children. It's just too far in advance, right? It's creepy.
+
+00:30:18 Alejandro Duque
+Got it. And so, then feasibility study is done, and then the reverse one B is done. Kind of like what I showed, And it spits out an Excel that they can like change metrics and play with it. 
+
+00:30:29 Derek Lobo
+During the feasibility stage. And we explain we just use fifteen percent for land. But what they see is our power, our understanding, our skill. And they go," We want to do business with those people," right? Yeah. And then we can adjust that model now. To the lender underwriting that you need to do because maybe that's different, right? Yeah, so it's a beautiful handoff to a mortgage broker, okay? And then it's a beautiful handoff to our marketing team. Like what we could say, Alejandro is you get step one to step nine for one million dollars brokerage fee. Like I mean we can't do that okay but you get the idea.
+
+00:31:18 Derek Lobo
+But, that's the kind of money we're talking about making throughout this process over five years.
+
+00:31:24 Alejandro Duque
+Got it, okay, yeah.
+
+00:31:26 Derek Lobo
+So and we're losing people; other brokers are calling them while they're building the building. We're not, We don't have a reason to talk to them, and we don't have enough staff. But the mortgage broker will be that connection or the mortgage brokerage team. Got it?
+
+00:31:40 Alejandro Duque
+So, you get the business model;. We run in silos less so than before. But.
+
+00:31:46 Derek Lobo
+The customer is the ribbon through this whole thing thread.
+
+00:31:49 Alejandro Duque
+Okay, okay, and just for clarity, so the client sees feasibility study. Then, you run a Forza reverse one B that may be kind of like this slide build that you show it to them on based on metrics that you all that you agree with at that point. Then would the plan be that does spits out the data and preloads it into a full one B model or the reverse one B model?
+
+00:32:15 Derek Lobo
+Oh no, no. You are going to go from the one A to the reverse one B just for demonstration purpose. Yeah, then you are going to build out the full one B. But that's also going to be. And then that's probably going to spit out a mortgage broker summary. But the mortgage broker can use still lend it, but we're not even there yet, Alejandro.
+
+00:32:34 Alejandro Duque
+Got it, got it. Okay, make sense? Yeah yeah because I thinkum yeah I think with these tools again like, It's about playing with them, but you guys have a lot of the pieces now. It's getting them all to communicate and kind of like automate the flow of data because the hardest part, which is what already built, like all those models are there. It's more about how do you activate them? And then how do you get your staff to use it.
+
+00:33:07 Alejandro Duque
+And that's what I was thinking, kind of like there is two parts, Which is the education piece and getting kind of like a knowledge base where people, anyone like so if Rod or let's say so a new hire comes in. He he looks at that spreadsheet and he's not completely overwhelmed. Like, they can start asking questions about how you figured it out all of that. But then also if you already have a feasibility study. Like, how much of that data could then go into the reverse one? B first just for. Pur poses. And then how much of that can then feed automatically into the full one B report.
+
+00:33:44 Derek Lobo
+As soon as we say in the one A, the building's worth one hundred million dollars, you can run the entire one B with all the information in there. The reverse one B with everything there, we may be putting a few more assumptions, but you just say fifteen percent for land, twenty percent margin, twenty percent for profit and just bang bang bang. And the cap rate's already in there. We pick one, get sensitivity around it. We just do a sale in year ten, calculate IRR, right? All at a high level.
+
+00:34:11 Alejandro Duque
+Got it. Okay. Yeah, Because that's what I tried to do with like this more sell C tool, which was like based on the one A and the metrics that you had look at that. Okay. Um yeah I mean again, from my side, I would need to like obviously spend more time to understand like the full cycle. But that piece. Maybe it's not fully solved, but I think using these two tools, there could be a lot of at least like manual work removed. So it's a lot faster. And obviously in the sales process, You show feasibility study, and then you have a little place like this thing I built or anything else that you show the client instead of the full spreadsheet. And then he's like, "Hey, for more details, I go here."
+
+00:35:00 Alejandro Duque
+Or you know, meeting Derek and you have the visibility to these guys. Could be,
+
+00:35:03 Derek Lobo
+But you know the client we're talking to is usually the developer himself. Yeah. And he understands by just showing him that raw Excel has value. Okay. Just showing him the extraction is just like it's focused folk like these are detail. People like developers, number one are numbers. People. Mhm So they're going to absorb this, but really it's all a sales demo, It's showing how smart we are. Yeah, even if he does it internally, I want to do business with those people. They understand the nuances of the business. Fair enough, and that's the real value of us compared to other brokers. Yeah,
+
+00:35:48 Derek Lobo
+We actually understand the business.
+
+00:35:50 Alejandro Duque
+So the reverse one B? Then how does that tie to a full one B? Or is there reverse one B kind of like on its own? And then they won't be. It's yeah,
+
+00:35:59 Derek Lobo
+Yeah. You do the reverse one B just to prove to him how smart you are, Okay? Then later on he can do his own one B. We'll give it to him or we'll do it for him. It's to show how smart we are. You want to have us in your corner, you know? If you were doing a sales pitch right now, you're not. I want you in my corner. You understood my business, yeah? You asked me questions that weren't just programmer questions.;, just what are you trying to do? Mhm, So, I am trying to get my staff number one to buy into this. Yeah, And the one B is so difficult that you know, it's be now, we made it easy for you. Understand the and if you and here is what I say Alejandro, if you can understand the one B in all its steps, You now understand the entire apartment business because everything is in there : leaseings and their marketings and their budgeting is in there, right.
+
+00:36:57 Rod Schulhauser
+Yeah, yeah, yeah.
+
+00:37:01 Derek Lobo
+Okay. Andum, yeah, no.
+
+00:37:06 Noor Khan
+Leandro, what will you share with us? Like for example assuming we are your client. For this one, can you share something with us like in terms of so we can then I can have a look at it and try to build something from there?
+
+00:37:19 Alejandro Duque
+Yeah, because that's what I wanted to say. That if you want, I'll send kind of like the stuff that I've done up to this point and kind of like the tools and how I see them playing out. And then based on that, like again, you guys decide like how you move forward. Again, Am not this is not like I don't sell AI solutions. So but I always think kind of like as the business itself. So.
+
+00:37:46 Derek Lobo
+Alejandro's a developer and a broker.
+
+00:37:48 Alejandro Duque
+Yeah, yeah,
+
+00:37:49 Derek Lobo
+So and because of our relationship, I am trying to explain; he's our friend. I know that's how you, yeah.
+
+00:37:58 Noor Khan
+No, no, I've looked at his profile. Yeah, I didn't know that; it's very helpful. Yeah,
+
+00:38:03 Alejandro Duque
+Yeah and and similar to you guys like, for instance, right now, we have four developments going up in V. Ir gini, a;. It's light industrial, small bay warehouses. That's what we're doing. And then we also have. A new like private lending side for where we provide liquidity to node holders, small like between one and five million dollars. Node holders, and that's a project that I am working on. And I am building the entire stack using Gemini and Cloud Code. I am paying like one hundred and forty dollars a month, and it's better than having a twenty thousand dollars a month engineer helping me. Now it does take a little bit of time to get trained.
+
+00:38:41 Alejandro Duque
+But once you do, I mean, I know like if you talk to Excel, like I'll send the links. But i'm I'm happy to send it because yeah, I think that you guys have a lot of the pieces now. It's like how do they come together? And and yeah, and and i'm i'm happy to do it. Like, i'm happy to send kind of like what what we have. And then yeah, then you guys can ask me questions since since yeah. Um it's. 
+
+00:39:08 Noor Khan
+How much does it cost? To subscribe to Gemini and Cloud, how much does it cost?
+
+00:39:13 Alejandro Duque
+Twenty dollars a month, and then Cloud is twenty dollars a month or twenty five a month. Then if you want to start building apps on websites like I am, you pay one hundred dollars a month. So I pay one hundred and twenty five dollars between Gemini and Cloud, and I am building full websites. No man, no it's nothing. It's nothing now so just. 
+
+00:39:40 Alejandro Duque
+The Investment Is your time, but I am telling you, like if think of it as you have an engineering on your side. And the last step that I mentioned to Rod and Derek in our first meeting.: spend eighty percent of the time planning, Like, what is it that you want in terms of, like what features you tell, the system will completely build it for you. Like we're building a full. To give you guys like a two minute rundown on our business, why we had to build something from scratch. We are providing liquidity to private note holders. So say you lend, either you sold or you made a private loan against a real estate property. So you hold that first note position. Today in the US, at least if you want to get liquidity out of that note, You have to sell it. And most of the time you're going to get a discount for that note.
+
+00:40:32 Alejandro Duque
+We are coming in and say, "like, hey, we'll give you a loan against that note." In some states, You don't pay taxes because it's a loan and you don't take a market haircut. So, we talked to like ten different providers that are using different tools to track notes, private notes, all of that. And and and we did it. So now I just went ahead and I built a full website. I am building a whole internal app, and it's going to take me like two more weeks to do it but It's gonna be a full underwriting thing that someone comes in. They either send us the note or they fill out a form, then it automatically populates all the information that we need and stuff like that. So that's how powerful it is. That before I would have never been able to do this, I would have had to hire an engineer or we were about to pay for the mortgage office, which is ten thousand dollars a month for those capabilities. So what I am saying now is that you come with these tools and that again.
+
+00:41:28 Alejandro Duque
+Nothing complex, like you start simple. Like start simple, but start thinking what features do I want to see, what answers do I want, and then you start building from there. So yeah, I can send it to you and then Andrea, if you guys need more help like I'm happy to take a deeper look. Again, this is not my business, so I don't want to say, and I don't have like unlimited time. So but okay,
+
+00:41:48 Derek Lobo
+But Alejandro you you were giving us just an understanding of what's possible. Yeah right now okay so, The second, so thank you. And we'll, you know, we're okay. The, second one is:. You also said you took all that information on deal. Structuring the stuff Darryl teaches us, and you put it into an LLM of seventeen thousand pages. Yep, show us that please. Okay,
+
+00:42:17 Rod Schulhauser
+Before we go down that one, can we just conclude the discussion about the A one B? So I want to be sure that you know Nur. Derek, you guys are all on the same page. And then Alejandro can say if I've recanted this correctly into English. So, where we have to go overall, Derek is all the inputs into our feasibility study. So think about all the things that are manually collected by the research team. All the inputs for the feasibility study need to be digital. Okay, that's step number one. They're. 
+
+00:42:48 Derek Lobo
+All in the one A right now, just so you know, they're all in the one A Step.
+
+00:42:50 Rod Schulhauser
+Number two is we have a report generate. That then takes these inputs and creates the physical deliverable for our client. Alejandro and I was said, Here is you know, with some work, there can be a one B model that can leverage the exact same data inputs that we use for the feasibility study. And the key is these are all inside the Google you know ecosystem. So, if our large language models in the eco space where we've got all of our rock advisor content books and everything else, everything we've talked about to date.
+
+00:43:23 Rod Schulhauser
+The feasibility study, the report generator, the one B moving forward that becomes now all available for lease up. It becomes all available for brokerage. Right now, all these things are in islands of data. But, this is why I, like I said the reason I enjoyed Alejandro's first conversation with us is he's using a platform that I am bought into, and it keeps it super super simple and decouples you from we've got to,
+
+00:43:48 Derek Lobo
+Okay. So we have to think about this Alejandro fair enough. Now I know to some extent what's possible, okay? That's all I know, right? So this is a journey; it's a mental journey, also. Fair enough. Nora, you are sitting there; you've been doing spreadsheets for forty fifty years. All of a sudden, you go for one hundred and twenty dollars a month: "I am replaceable," right? No, you are not. What you are doing is bringing your intel to it.
+
+00:44:20 Derek Lobo
+To do it faster,
+
+00:44:22 Alejandro Duque
+Exactly, that's the big mistake that I think most people think that is just like replacing everyone. Absolutely not. It's actually making your job more valuable. What, you are replacing is a lot of like the manual like inputting of data and all of that. Because now you have, Think of it as an assistant that almost knows your models. But you know, the models. Like at the end of the day, it's running on those models and if you can't do it then, It's going to be tough, so no.
+
+00:44:52 Derek Lobo
+Think about if you are a writer, what you are thinking today. Well, you just tell Chat GPT," Write me a book." Here is the index, right? It's happening everywhere. Okay, So we have to just think about this rod, nor This is a lot to absorb, right? But, the one thing I am saying, Alejandro is we want to actually see the spreadsheet because that's the way our client is right now. Later on we'll fill out reports but we don't okay So we're good. I think we're good. We'd love to see this LLM thing. I don't rod's been telling me about it, and I haven't really understood it. My own private LLM.
+
+00:45:25 Alejandro Duque
+Yeah, so there are two ways to do it. Sorry, so let me just explain it. So let's just talk about Gemini in this case. So, you can upload a ton of data and then build a tool that you could have anyone on your staff or anyone on your team again. What's, the data related to how I built it is that I have about seventeen thousand pages of content between creative real estate, the IRS tax code related to real estate transactions, and then CCIM, the entire CCIM workbook. All of that because I just have access to it. I am not a CCIM yet, but I had access to all the content. So, then you can then upload there any deal or any idea. And just ask.
+
+00:46:09 Alejandro Duque
+Any questions you want, like" Hey, how are you structured?" The deal, like what would be a creative deal for.
+
+00:46:15 Derek Lobo
+But Alejandro, why couldn't you do that just with Chat GPT? Because all that information isn't uploaded. You've uploaded.
+
+00:46:22 Alejandro Duque
+Yeah, because I am putting guardrails and saying" Hey," like look at my data first and look at these sorts of information. And you can do it two ways. You could have it just looking specifically through your data, like your personal LLM. Or, you could have it also looking at your data and then getting reinforcement for the web. In my opinion, It's the most powerful is within just notebook LM, because it just looks at your data. Like in that case, it's not going anywhere outside of that. And then yeah, I am using it as I mean I can show you guys, but I am using yeah show us show us.
+
+00:47:04 Derek Lobo
+I think this is fascinating. Because Rod's telling me we could upload everything we've ever written into one LLM. It's all our own information.
+
+00:47:10 Rod Schulhauser
+Yeah, he teased this by showing us that last time, but I'd love to see it again. Yeah, because I don't remember. I love Notebook LLM, so that's great.
+
+00:47:18 Alejandro Duque
+Yeah, so Notebook LLM like here are all the different files that I've uploaded. These are all the content over seventeen pages. I also uploaded a big, beautiful bill and yeah, how I use it is that uh I don't know likeum. Like you, you could have.
+
+00:47:35 Derek Lobo
+Do something we'll no, you do something we'll relate to. You know what we do.
+
+00:47:40 Alejandro Duque
+Yeah, So uh, let me think uh because I am trying to. 
+
+00:47:44 Derek Lobo
+Exchanging real estate, exchanging real estate like Daryl teaches us.
+
+00:47:49 Alejandro Duque
+Yeah, So I I mean, uh I don't know like give me a scenario. So we have a client looking to sell.
+
+00:47:58 Derek Lobo
+Okay, We have a client. Okay, I'll give you an exact scenario. We're facing right now. Yes, we have a client who has a hundred and forty million dollar building. Mm hmm. Ten years old, one thousand beds of student housing. Okay, two towers. The building is thirty percent vacant. Mm hmm. We could combine with no with regular turnover. 
+
+00:48:33 Derek Lobo
+We can combine the two buildings into one full student housing building and have a fully vacant building to turn into social housing. Okay, Our client to turn into institutional,
+
+00:48:53 Alejandro Duque
+Sorry to turn into what what type of housing?
+
+00:48:57 Derek Lobo
+Social housing for homeless people. Yeah, for homeless people. Okay.
+
+00:49:03 Derek Lobo
+Okay, it's all fully furnished. There is twenty or thirty thousand square feet of amenity space. Enough space you could set up a church. Fair enough, ample parking, ample underground parking. Our client Is willing to exchange. Oh, there is a hundred million dollar mortgage. There is a hundred million dollar mortgage and forty million dollars of equity. Our client would exchange this building for cash, like a cash out with the take cash, okay? They would accept.
+
+00:50:00 Derek Lobo
+All their apartment buildings, or they would add cash and buy more buildings with it. So, for example, They would add thirty million dollars, and now they would have seventy million dollars in equity to exchange for something else. They will only exchange for apartments, no other asset class, but they will take an empty building. That's newly constructed and assume the lease up risk. Okay, we have the full pro forma available. The operate, we have the rent roll and the pro forma. Okay,
+
+00:50:50 Alejandro Duque
+So yeah, for instance, I also oh like I am going to throw it into this.
+
+00:50:57 Alejandro Duque
+Like it's gonna analyze it. So this notebook, I lent you to give you the differences. This one is just looking at stuff I've uploaded into the into the system. It's not going out in the world,
+
+00:51:10 Derek Lobo
+We know Jim Bondi knows, you know? Yeah,
+
+00:51:13 Alejandro Duque
+And then this one it's the same but this one does go out. It not only looks inside. This is called a gem, which is like my own GPT that does the same. This one also looks outside of the model. So, these are two things. So, this is going to obviously refer to 1031 because it's looking at US, but then it's going to start right away like the strategic value at play, why structuring the exchange, the developer swap, financial metrics that replacement requirement. Again this is because it's a 1031 he starts thinking like that.
+
+00:51:54 Derek Lobo
+I would just say, Do a ten thirty one and it wouldn't do that.
+
+00:52:08 Alejandro Duque
+Okay, so you see what I am doing now. This is exactly what I what i do all the time. Like I just come here and as this is looking uh, It's uh it starts going like this one, because I was doing other stuff again. This is gonna say ten thirty one again, but and then he's gonna give an idea. But I am gonna say the same.
+
+00:52:32 Derek Lobo
+So, this is like having a thousand Derrils look at it and advise you exactly,
+
+00:52:38 Alejandro Duque
+Pretty much. So did it to the last one? Yeah, so that's the idea that that you get. This is an idea builder. That's why people say like, oh, you're replaceable. No, This is going to give you ideas, because at the end, we need the experts like you guys that are going to come in, look at this data and say, like, yeah, it's helpful or it's not helpful. The brilliance is that this is taking our input, Going against the knowledge base. And then just coming out with a ton of like strategies and possible solutions. Okay,
+
+00:53:11 Derek Lobo
+Okay. So so so basically you've got a prompt here that you just have against your own data with guardrails on it. Exactly, And then you can do it this way in the world, or a combination of the two.
+
+00:53:24 Alejandro Duque
+Exactly, Like here it started like okay, we can't do a ten thirty one. So think about a sell leaseback strategy. That's exactly then a partial tower bifurcation. So, is the most direct solution? Then your client retains tower one and then the other one separate the fee. You could sell the building structure, but retain ownership of the underground parking and or or the amenity space. Joint venture for lease up, installment seller financing, and then he compares all of them. And then I just keep kind of keep going into each one of them, give more examples, Say like hey I have this other building;, those owners want X, Y and Z. How would you structure both deals?
+
+00:54:08 Derek Lobo
+So Alejandro, could I say I also have an owner who has this that's interested? And another owner has this because I've got to do a triple leg. This is not going to work with a straight exchange. Can this help with thinking the third leg? So I put in the ten options that I have and it says," Oh, here is the probability." You get it right exactly.
+
+00:54:29 Alejandro Duque
+Yeah, and then this one that just looks at my data like he recommended. Sorry, I know if you guys can see it, but it goes like let me see the installment sales. So yeah. Seller financing the direct equity horse trade, barter, which is traded forty million directly into a forty million equity. So pretty much he's a buyer with a forty million the paper exchange. And why master lease with option to buy pre- lease strategies? It just goes on and on converting equity to interest.
+
+00:55:06 Derek Lobo
+Yeah, in the course that you sat beside me and there was a workbook. Is that in here? Yep.
+
+00:55:12 Derek Lobo
+Okay, fantastic. Because I can never remember this stuff, right? So this is an idea generator. Exactly.
+
+00:55:18 Alejandro Duque
+That's how I look at it. I have it built with the US tax code. If you just have all the text related to the Canadian tax code, then you just upload it and and you can do anything. I mean like like your book, You know, like if you grab The Appointment Day The Intentional AppointmentDeveloper and uploaded, then people can ask questions, and it's just like interacting back and forth And. You can do NotebookLM. That just limits to that set of information, or you can do it to uh to then do something else. You can also upload the book itself and get an audio overview. You could make it into flashcards, you can make it into so you can. 
+
+00:55:59 Derek Lobo
+Get an audio overview. Wow,
+
+00:56:02 Alejandro Duque
+A video overview, if you want like It just goes on and on and That's, what I am saying;, it's more about knowing what the use cases are and how you want to use it. All of this that you're saying, I'm paying twenty dollars a month. By the way, what's that? I'm paying twenty dollars a month for Gemini Pro and and I get access to this.
+
+00:56:22 Derek Lobo
+It's like you could live eight hundred years here and never be bored.
+
+00:56:26 Alejandro Duque
+Yeah, and you can keep going on and on. Is it replacing people as why I always tell people like I don't know like my dad and I have like. Business owners that are like, oh, we're gonna replace the workforce. And it's like maybe some of the tasks that are pretty manual, But you just need to have the understanding of what is it that you need in order to solve solutions. If. Now you're just going to like actually get so into the weeds with AI because it also hallucinates and is not accurate all the time, that if you don't know what you're looking at, it might give you wrong information.
+
+00:57:02 Derek Lobo
+Yeah, yeah, I think we're beyond the people thing, but this just allows us to be so powerful. So so you so you said you would share this with us. That'd be super gracious if you did. What we want to do is input. We've written thousands of pages on apartment development, which we want to input in there, right?
+
+00:57:20 Alejandro Duque
+Yeah. Yeah. 
+
+00:57:22 Derek Lobo
+I don't think I would ever I would never watch television again.
+
+00:57:25 Alejandro Duque
+Yeah Oh man like you You're gonna go uh I've built podcasts for Darryl like he sent me. He was doing a presentation about a headless, and then I made a podcast out of it. So in seven minutes, you could be driving and do it. Then with Gemini, you could then talk to it while you are driving and say like, "Hey, what about this? What about this strategy? How complex is this?" Again, that's how I learned a lot of the development the basics I know now. And that's how I've been able to build things. So, if there is anything is what I am saying, like keep it simple, use the tools that you already have.
+
+00:57:59 Alejandro Duque
+They're powerful enough, and I talk to engineers at Google and they tell me," Yeah, like don't bother paying more; like just stay." And for a hundred two hundred bucks a month, you have an engineer and an idea creator next to you.
+
+00:58:12 Derek Lobo
+Oh yeah, yeah. We never need to talk about the cost again; it's so small, right? Yeah, yeah. So, we just have to we just have we just have to turn our culture to this. The way you have that becomes our culture. Just it's easy to use. You know? Yeah, Easy to use,
+
+00:58:28 Alejandro Duque
+Yeah, And that's why what Rod said, like the beauty of these things is that it's not like a new LLM. Like, and again, if you're worried about security, I mean your emails are hosted by these same guys. So if you're worried about security, then go build your own email servers. Like we. 
+
+00:58:46 Derek Lobo
+Lost our privacy about 40 years ago.
+
+00:58:48 Alejandro Duque
+Exactly. Yeah, like everyone that tells me like oh, Because I have one that is for my family, Tells me my wife and I. We have a seven month old and a three year old. Since they want to get the checkups, and it automatically pings emails us like," Hey, time for this," you know stuff like that. So it's like an assistant. So and obviously, you can't put enough guardrails. So uh the sharing it just stays within the company, just like on Google Drive.
+
+00:59:11 Derek Lobo
+Right. So if you're willing and we're very appreciative here and you know, we'll we'll do anything for you here. Um if we could share this, you shared with our team, On a spreadsheet basis, not the app, even simpler. Just say this is how you do it, right? I can be very, very valuable if you wouldn't mind doing that for us. Very grateful to you.
+
+00:59:32 Alejandro Duque
+Yeah, if you want to let me start first.
+
+00:59:34 Noor Khan
+Whatever he can.
+
+00:59:39 Derek Lobo
+We're friends, we both love the same guy Dale.
+
+00:59:42 Alejandro Duque
+Yeah And I'll share what I'm using now? So you guys can take a look and then That would be good. Yeah, and then we can see if yeah, if that makes sense. I am going to Virginia next week for the projects, and that's why this week has been also a little bit wonky. But then yeah, then let's um let's see how how we can help you. But, yeah, my, if there is anything is plan, plan plan know what features you want, then tell the system to build it. It's really good for that. And, then on the other end, don't overcomplicate it, just use existing stuff and then start playing with it. Get comfortable.
+
+01:00:17 Alejandro Duque
+You know, like you don't need to go a hundred miles an hour.
+
+01:00:19 Derek Lobo
+Don't develop anything yourself, yes. So yeah, thank you. It's four thirty. You are a great guy. We'll follow up with you and thank you again. Of course, and we can have we can have that LLM thing. I think I'll never watch television again.;. This will be my new thing to do.
+
+01:00:34 Alejandro Duque
+Thank you all right no thank you guys Thank you, Rodnor, i'll be in touch. I'll email you guys the tools by Monday because I have to head on out here.
+
+01:00:42 Derek Lobo
+Okay. Yeah, Nora and Rob, will you just. yeah. Thanks, Alejandro. Nora and Rob, will you stay on? Lisa, will you stay on? Yeah.

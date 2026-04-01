@@ -1,6 +1,6 @@
 # SVN Rock — Project Summary
 
-Last Updated: 2026-03-19
+Last Updated: 2026-03-31
 
 ## Phase 1: 1A to Reverse 1B Populator
 
@@ -92,6 +92,11 @@ Last Updated: 2026-03-19
   - Old keys (cmhc_mli_select, cmhc_standard) aliased for backwards compatibility
 - [x] **Stale cached value clearing** — formula cells stripped of template cached values across all 15 sheets
 - [x] **calcChain.xml removal** — prevents Excel repair warnings from stale formula chain
+- [x] **All 5 projects regenerated 2026-03-23** — all now use CMHC MLI Select 100pts (50yr amort, 3.7%, 5.00% premium). Old March 13/19 files cleaned out. All 5 pass validation (65-68 checks each). Sent to SVN team.
+- [x] **Start date fix (2026-03-31)** — `=TODAY()` on month-end dates broke EDATE chain in Sheet 10 (units never "completed" → NOI=0). Fixed by forcing 1st of current month.
+- [x] **Fran V2 template adopted (2026-03-31)** — Rock Advisors branding, Open Sans font, gold/slate colors, bold-blue consultant-input markers, print setup. Sheet 1 and 6 columns shifted left by 1. All cell mappings updated in populate_reverse_1b.py, validate_output.py, and import functions.
+- [x] **Financing preview removed from presentation mode (2026-03-31)** — per Noor's feedback, takeout financing not shown to clients. Financing program selector kept in upload form (drives Sheet 6 calculations).
+- [x] **Deployed to Railway (2026-03-31)** — live at https://earnest-celebration-production.up.railway.app
 
 ### IRR Accuracy (verified 2026-03-12 vs Excel Sheets 10 & 11)
 - **Merchant IRR: 27.96% vs 27.90% (0.06pt gap)** — was 0.82pt before fix
@@ -114,7 +119,7 @@ Last Updated: 2026-03-19
 
 ### Not Yet Done
 - [ ] Test on 1440px laptop + iPad (responsive)
-- [ ] Deploy to Railway
+- [x] ~~Deploy to Railway~~ (done 2026-03-31)
 
 ## Output Validation (added 2026-03-11)
 
@@ -175,9 +180,9 @@ python3 validate_output.py
 5. Empty unit type row (e.g., no 1-beds) shows `#DIV/0!` in $/SF column — template formula issue, needs IFERROR() from Noor
 
 ## Waiting On
-- **Noor:** Expanded template (3 → 14 unit rows) — away until ~2026-03-20
+- **Noor:** Expanded template (3 → 14 unit rows) — should be back (was away until ~2026-03-20)
 - **Noor:** Affordable vacancy handling, financing sheet connection
-- **Joanna:** Confirm financing parameters still current; discuss auto-populating her proforma revenue side
+- **Joanna:** 5 financing programs incoming (confirmed 2026-03-19 call) — Jeffrey (underwriter) preparing details
 - **Joanna:** Decide if Debt Advisory section should show max capacity or her actual deal numbers
 
 ## Resolved

@@ -1,0 +1,356 @@
+00:01:10 Alejandro Duque
+Well, we'll be able to have some concrete conversations probably then. Okay, you know. I'm just joking. So. Okay,
+
+00:01:20 Noor Khan
+We're waiting for Alejandro right?
+
+00:01:22 Andrew Banken
+Yeah, he's here now. I'm here. Okay. Lisa,
+
+00:01:34 Noor Khan
+I like your backdrop there That's neat Thank you Thank you Rod, You can get me one of those. That's great. And Andrew, are you doing here now?
+
+00:01:48 Alejandro Duque
+Yes, yes, I am here. Yeah, I've joined.
+
+00:01:51 Noor Khan
+Okay, very good. So are we waiting for anybody else? Are we can start?
+
+00:01:55 Speaker 5
+Yeah, we can start.
+
+00:02:03 Noor Khan
+Not Putting my video on for the sound and all that internet, Maybe you know a little better this way. Let me just start sharing my screen with you. So, you can see my screen now? Okay. Yes. See your Wi- Fi, no? Yeah, I know. Okay, there we go.
+
+00:02:29 Noor Khan
+That was I was like, you know, trying to see if everything is okay, there actually okay. Okay, so what we have here is basically the one A. One A is our proforma, Which is part of the feasibility study that we do for our consulting clients for the apartment development purpose - built apartment development. They are mostly like part of the twenty five thirty thousand dollar fee, which is charged for this work. There's a detailed feasibility study which. 
+
+00:03:02 Noor Khan
+Talks about the entire market. And where does this particular building, which is proposed, is going to sit as such in terms of achievement of certain rents and what will be the most likely valuation, considering the cap rate that can apply to that building. So this is a recent study that our team has done for this address, which is two, two four zero bridge bridge mount road scarborough. It's a hundred and seventeen unit building. About forty nine percent one bed, forty percent two bed, eleven percent three bed. And three point eight dollars, a square foot is what they are forecasting to be their rent for this building and about five point eight million annual revenue. Total, another thing just to keep in mind. 
+
+00:03:54 Noor Khan
+Is the total area, which is the rentable area is one twenty eight thousand.
+
+00:04:12 Noor Khan
+Either based on the current plans are based on whatever they were discussed with him. This is what came to me as such during. 
+
+00:04:29 Noor Khan
+Like before. I did this model.
+
+00:04:32 Noor Khan
+So, this is one. Here we are, in fact, here is estimated other operating revenues. For example, underground. 
+
+00:04:45 Noor Khan
+Parking if there is a storage. We. 
+
+00:04:56 Noor Khan
+Have got some submetering reimbursement also; they are also affected here also.
+
+00:05:02 Noor Khan
+We Can see is also taken into account. I. 
+
+00:05:14 Andrew Banken
+Think I lost the connection there, right?
+
+00:05:18 Noor Khan
+Let me change my location actually.
+
+00:05:20 Noor Khan
+Since better, I was talking about the other operating revenue that I think you heard already. And then the. Operating expenses, which also come from the team, and that's how we calculate the net operating income for the building. Right? And this is the first part. This is just. 
+
+00:05:42 Noor Khan
+Trying to like go to a better spot, so it's easy for them.
+
+00:05:59 Speaker 5
+No, we can't hear you anymore. On your screen is not shared.
+
+00:06:03 Noor Khan
+I was coming down actually, so now it should be okay now. So. 
+
+00:06:08 Noor Khan
+My screen is being shared or not yet? No,
+
+00:06:11 Noor Khan
+Do I need to share again? Let me share the screen. Okay,
+
+00:06:21 Noor Khan
+So I think we heard the revenue side right already and the other income also, we heard. And I was talking about the operating expenses. I believe when the connection got like disconnected, so operating expenses also come from the team. They estimated based on industry standards for the type of the building. Sometimes they take into account amenities also and of course, the property tax like that's also based on certain information they have. So here we see twenty seven percent total operating expenses they assume.
+
+00:06:57 Noor Khan
+And this gives them a net operating income for the building as such. So, for this, they're estimating a four point six million dollar of NOI. And you see, remember the number here; it's the rental revenue five point eight million. They've got additional other income, then they reduce it by the vacancy allowances. So total like potential income is about uh 6.3 million dollar and they estimate the operating expenses in this case 1.7 million so they are expecting it to be 1.4, 4. 6 million dollar of NOI for this building and the estimated valuation based on the cap rate applicable for this, like based on whatever their estimate is, is a base case of 4.5% cap rate of $102 million. 
+
+00:07:56 Noor Khan
+And a best case, which is four point two five cap, is one hundred and eight million dollars. In four point seven five percent, if it's a worst case, then ninety seven million dollars. So this is what I got from the team. This one A I just wanted because there are so many people on this call and not everybody will be familiar with this also. So I just wanted them to see it once to understand it. This is the sheet that I got, which is called One A Pro Forma Is. This clear to everybody right? Yes. Yeah. No question, right? Okay, so just need to change the logo. Yeah, of course. When I got it, so you know that, right? This was one So. This is what I got. And based on this one sheet, actually I developed the entire 15 This is actually a total 15 sheet model, right? So this is where we are actually trying to That's why we call it.
+
+00:08:54 Noor Khan
+One B, reverse one B, right? Because yeah, so we call it reverse one B. The whole the entire fifteen sheets have been built just from this one sheet actually, right? So we're building it in reverse order. Otherwise, like, you know, if you have everything. So what we are going to present to the client is this sheet, which is a reverse one B summary. This is like one sheet however Derek wants uh, The team to present the whole exercise. So then they can see that, you know, how detailed, how much detailed this model is and how long did we take to like, you know, come out with the results of this model. So I'll come back to this later. But, this is a reverse one B executive summary, which puts everything like in terms of development proforma in one page as such and gives you like, you know, the scenarios. Right?
+
+00:09:54 Noor Khan
+Sheet number three is also a headline numbers, which we used to call cover sheet earlier. So. This is also like a high level outcome of the project based on the K rate and development cost. We will come to this sheet two and three later. Now I am going to this sheet which is sheet number four. So sheet number four is an area schedule. So if you remember from the previous sheet here We just got this area from our team saying that hundred seventy units and this much. So, this detailed area schedule I generated out of this cloud. See this here? Cloud, right? So, I generated out of this. I just asked it to give me a detailed area schedule for a building located in this thing with this kind of whatever area metrics, I got from them. So, they gave me the schedule. So, I've made the schedule part of the. 
+
+00:10:53 Noor Khan
+Model, And I needed that mainly for differentiating the GFA, because GFA is a floor area, which is above the ground. And I needed the underground parking, which is 67, 000 square feet. In this case, that model has like, you know, the cloud is created, which I think is reasonably okay for this purpose. So this is one thing we do. And then basically there's a key assumption sheet here. And in the key assumption sheet, like you know, I've put the information for this building because the formula here is today. So whenever we did it, it was showing then fifteen of February or whenever, right? So, we have put this schedule based on our information and what we think like, you know, it can do. We have assumed that the land is already purchased. There's a pre-development period of twelve months for zoning and approvals.
+
+00:11:48 Noor Khan
+We assumed a construction period of eighteen months, and we assumed a lease - up period of eleven months for this project. And here is the area schedule which comes back here, so you can see the GFA is one hundred fifty thousand square feet. This will not total to that. If you do that ;. This is basically two hundred seventeen thousand because we exclude from it the parking area, which is below grade. We needed this for determining the. Hard cost for this building. I'll show you that how I did that. So total number of units are 170, we remember from earlier. I did not know if this building will be like how many stories they are going to build, but I assumed 13 to 39. There is a reason for that because the hard cost I am taking from LDC's Cost Guide. And that defines the cost by.
+
+00:12:43 Noor Khan
+By the stories of the building. So I assume that it would be somewhere 13 to 39, or it might be less, right? Then we've got the development cost here. This is basically a detailed development cost that we have assumed for this building. And here is our high level breakdown in terms of what might be the profit. Of this building, like you know, today and what will be the profit on completion? You see here today. So, we are running this model at four point five percent cap rate base cap rate as you remember from our feasibility team's original list, number four point five percent. And that's where basically, we are calling it a base case, right? One hundred, two million dollar. So we are saying at four point five percent one hundred percent.
+
+00:13:38 Noor Khan
+Value today, like today will be hundred and two million dollar and the rentable square foot. If you remember one twenty eight thousand square feet, it comes to seven ninety. See these. These are all numbers basically right in terms of statistics because we know toronto market inside out. So when we see these numbers, we can figure them out that you know how does it compare to market in general and developer also understand it. And so what we do here, basically this first box is basically what is the profit before? Commission if we sell the building. So, we are just putting a number eight percent here. This is a number put by hand, eight percent. And that gives us a development cost of ninety four million dollars, right? Because ninety two is hundred minus eight, right? So ninety four million dollars per square foot base. So, this is the starting point for us when we are working on the reverse one B model. And just as like.
+
+00:14:33 Noor Khan
+Comparison with not to discuss. Now here is eight percent profit when the building completes. These, these numbers are today when the building completes in about two and a half to three years. So, Uh, there is a time value of money and rents go up. So when everything takes it taken into account, so this will be 10 2 million value will be 108 million, right, And the profit will be basically for 14 million dollar taking into account these things. So this eight percent profit becomes thirteen percent you can see it here. Everything else is the same. Land is essentially a residual value for this model. As such, I've calculated it in a particular way to just like you know have it, but essentially it's a residual value for this. I don't know really like how much did this developer pay for this land, But the appropriate cost based on eight percent profit for this developer is about seventy seven dollars, seventy seven dollars square foot of net leasable.
+
+00:15:31 Noor Khan
+This language is about nine to ten million dollar, right? And the next is basically hard cost. So this is where we are assuming ourselves because we don't have the details, but we have got this table here. So we had two options for the hard cost. One option was to just put X percentage that the development cost will be X percentage of like, you know, this ninety four million dollar. But this is what is our like kind of key number. So instead of that, We have assumed that you know, we have went for a detailed calculation, which can be more credible and defended and justified in that sense. So, the only thing which is basically calculated by us in the dark, is basically the GFA. The GFA we had the rentable area one twenty eight thousand square feet. So we got the GFA from the cloud.
+
+00:16:22 Noor Khan
+And then we have the parking also that we calculated. These numbers are coming from the LTO's cost guide. Lto's cost guide is there in the website and like in somewhere in the thing. And I've downloaded it here from there, right? It's available for cloud to work automatically also when you ask it to do that, it should be able to do that. So, this is where I was saying to you like in terms of height of the building, so this is the GTA So GTA Greater Toronto Area low or high right, low range and high range. And up to if the building is up to 12 story, it's a residential condominium apartment. You can see here if it's a up to 12 story building, then you are talking about 200 between 2 90 to $ 39 0 of square foot of the GFA. And if it is 13 to 39, then $ 2 95 to $ 38 5. I have assumed this for the building just because I thought. 
+
+00:17:18 Noor Khan
+Based on 170 units, it might be this. But if it is 12 story, then we go with this area. So that's one component of the hard cost that I took from here. The other component is the parking, right? So parking we are assuming here underground parking. Underground parking is like priced at $170 to $285 per square foot. This is the rate for that, but you need to use if you see the rate is much different from. Others, But you need to use the underground parking square footage for this to apply this. That's why I needed that area schedule to be able to apply this rate to it actually. So I come here back and you can see here the the 150 square feet, right? 310 to 340 and uh this is my low cost is $46 million, right? And high cost is $51 million.
+
+00:18:17 Noor Khan
+And I am taking here average for the model because I am not sure what they will choose in terms of final finishes and all that. But I just wanted to show both to them. And then I wanted to have the parking area below grade separately, calculating the hard cost for them, which is about fifteen million dollar, whatever the calculation it comes to. So sixty four million dollars. So there is a like an internal check. Also I have kept here like, you know. So there is a difference is zero because this is what is going to perform six. 64 million dollar. You can see the 64 million dollar. I have got a contingency also here for this project, which is about for the hard construction cost, I have put two percent. It's two percent of hard cost, right? And so $10 per square foot, right? So 500 here it comes to like you know construction cost. It's, a ballpark number is almost okay. Like when we show it to even a cost consultant, also I understand this will work out because we do it all the time in our business.
+
+00:19:13 Noor Khan
+And then the professional fees, the percentage of hard cost we are assuming here. So this is also like you know kind of assumption here, three percent we have assumed here right? Three percent of the hard cost. And there is a contingency also I am assuming here, five percent for this cost as well. The development management is basically also as a percentage of this. Hard cost, which is about two point five percent. I am, assuming here, the permits is another thing where we had to like, you know, be more credible. In the sense, there is a development charge calculation, which comes from each municipality, has their own rates for development charges. This project is based in Toronto, so Toronto development charges are based on type of unit like one bed, two bed, three beds. I have used actual current. 
+
+00:20:10 Noor Khan
+Prevalent development charges for this project for one bed is whatever thirty four thousand two bed is fifty thousand three bed is little less forty seven thousand seven point two million dollars development charges. And those development charges are coming here in the model, and I will assume the five percent contingency. Also, it can be little more. For example, there is a sub meter installation credit, which uh which come through, like you know, uh, one of the partners that we have, if you install sub meters hundred and two thousand negative. Reduces the cost. We have got a marketing and leasing fee. We assume about one and a half month of commission and incentive of like regular rent, and one and a half month for the marketing as well. So, About total three months, we assume as a marketing cost for these type of projects, one point six million dollar. And then we come to the development financing assumption for the project. So here they. 
+
+00:21:06 Noor Khan
+It's too ambitious in the sense that 10% like, 10% is too low on equity like we know that. So. But anyway, we are assuming a 10 % equity here, okay, with the 15 % mezzanine there and 75 % regular construction there. So, this is not a CM at risk construction loan, but a regular construction debt. We are assuming here and the total is about 90 %. For the development, right? So these rates should come like this rate has come from Joanna, Which is like seven point seven point nine, five percent for the mezzanine debt and five point four five percent. Like it can go up or down based on the prime rate and margin that can be expected. So once we feed this, so this also goes basically there is another debt stake.
+
+00:21:56 Noor Khan
+And financing sheet in the model, which is here. This is also like a same thing but in a different way of presentation. And this basically goes into the model, this interest cost. So this is not an X percentage kind number. This is actually coming from the development cash flow, seven point six million dollars. And, we have got financing fee, one percent here and contingency of zero point five as well. So total is about eight point nine or nine million dollars, nine point five percent of the total development cost. And you add the total development cost. This is basically, we are adding here these numbers, all of this. It comes to about so this is uh. This is the development cost from above which we calculated. We just showed you how we calculated then. 
+
+00:22:48 Noor Khan
+We offset this by the operating income during lease up, which is three point five million dollar in this case. And the total net development cost is ninety four million dollar. So if you compare this to the number that we had above, which we just took from the percentage, You know, this ninety four point three million dollar is a number, which comes from F thirty eight here, this number. So this number is just like a X percentage as we did. If you remember this, we had the value and we said eight percent I want profit. Ninety-two percent will need development costs, all in. So, ninety-four point three million dollars or ninety-four point four million dollars. This is basically like you know substantiated by all this breakdown, Including numbers coming from the model and numbers coming from the government, like you know, prescribed rates and the numbers coming from the alters. So about ninety-four point four million dollars. The difference is only about forty-two thousand square feet.
+
+00:23:45 Noor Khan
+So I just leave it okay. So I say okay below one percent. That's my like this thing, uh, this is how we do the development cost assumption basically right? Uh, This is one sheet, and there is another sheet for the team. Basically like you know, they are on the call as well. So what we have got here some additional information here so land assumption KPIs. So I'm assuming here if the land is not already purchased, then in this model land cost is determined as a residual value based.
+
+00:24:15 Noor Khan
+On the desired profit based on today's project value at D K rate input in the model. Number two, Land cost in the model is based on. So this is where it is explaining that you know how the land cost is coming. So, in this model, The land cost is based on a ten point five percent of D development cost, right? Assuming the land is not purchased, right, if the land is actually purchased, we will put D land. Whatever the developer says to us, they have bought the land for eleven million dollars. So I'll put eleven million dollar here. So, then this ten point five percent will not come in that sense, and this this number will be pulled and added here, direct right? And, then this number will basically either increase or decrease this number, which we will see like you know when when we run that exercise, We can see, but that's uh for the team to know that right? Generally, we have here.
+
+00:25:09 Noor Khan
+Merchant builder, so two kind of like you know, IRR, we are putting here. Two kind of information we are putting here. One is the merchant builder IRR. So it's basically the project's equity uh project equity IRR. It's sold on completion is twenty seven point nine percent. So I'm just putting this, my listing acceptable good. This is acceptable, twenty seven percent good. If twenty percent are there about projects return on cost, if sold on completion, it is fourteen percent here. So I'm saying acceptable. Investment hold right so project's development IRR is 5.99% and the ke which is running in the system right now is 4.5%. So that there's a spread of 0.69%. So I'm saying over 1% is better, right? So project's ten year equity IRR is 20.6%. I'm not giving any comments here because this is a ten year IRR, so it depends on the requirement but I think 20% is definitely good. I don't see a problem with that. So. 
+
+00:26:07 Noor Khan
+Up to this, you are clear, right? Any question? No question. Okay, fine. So, you guys are hearing me. I believe so, right? So,
+
+00:26:19 Speaker 6
+Yeah, we hear you. We hear you.
+
+00:26:22 Noor Khan
+Thank you. Okay. So we go to the next sheet. So this was the debt structure for the project, right? So we call it debt, take and financing assumptions. The blended construction cost assumption and the. Financing assumption I've already explained to you the ten percent equity and ninety percent debt and how this is calculated. And then this is the permanent takeout loan, so which is basically so up to this is merchant builder, right? You build complete and out, right? And here is basically the CMHC permanent takeout loan. So, if you want to hold or whoever is buying and they are holding it, so. 
+
+00:26:59 Noor Khan
+CMHC, they have a program currently called MLI Select Program, so where you can go, I'm assuming up to 95%, right? You can go there. And the DSCR 1.1 and amortization 40 years, go higher also, right? You can go there. So interest rate we will assume here 3.7%. This came from Joanna who is our debt department head, right? And we've got a CMHC premium cost of 5.18%. So this like our team will know that you know, the CMHC premium was not reflected in the model in the earlier versions that we had. This was not going anywhere. So I just want to make sure we capture it because it's a big amount, right? So like if you are going for a ninety million dollar loan, so then this can be a big amount five percent. We cannot ignore it because has to be paid back, although it is paid by CMHC. When you take it next, you don't have to pay as a developer, but.
+
+00:27:52 Speaker 7
+Paid by the lender, actually, to the principal.
+
+00:27:56 Noor Khan
+Yes, but this will be added to the principal, so they have to be paid. So we want to make sure we respect that. So, we've got a value now on completion based on this stabilized NOI on completion, four point nine million dollar gives us one hundred and eight million dollar of value at a four point five percent cap rate that we are running right. I said that three cap rates four point five is base, and four point two five is best case. And four point seven five is the worst case in case, right? So, The loan amount that it can sustain based on the DSCR is up to ninety two million dollars, which is basically eighty five percent LTV ratio. Although it can go higher because the program does it, but has to be paid back at one point one DSCR. So, we are not making it too rosy as such. ;, we are just going by what it can do. So, this is what it is, and the annual debt service amount is just an amount, which comes from the model as well.
+
+00:28:52 Noor Khan
+Then we see the operating expense. This is our one B model, our reverse one B model's operating revenue and expenses. It's the same sheet, a different way of presenting, Which is basically the development team and the feasibility team has already done this exercise. We are just putting it here for our reconfirmation. And because information goes from here to the model. So this comes from there. You can see here. The NOI today is four point six million dollar at three point eight. Dollar per square foot of residential rental rates, One hundred and two million dollar valuation today on stabilization when the building is complete in few months after one hundred percent, leased is about four point nine million dollars. So, it comes to about four point four eight takes into account time value of money, and four point five percent cap rate seems talking about this much, right. So the this stays at six hundred three thousand per unit or six forty thousand average.
+
+00:29:50 Noor Khan
+There are certain assumptions, which like certain numbers are running. So that's why we use this as an additional operating expense revenue and expense sheet. Actually, this is and this is not like this is not presented to the client anyway. This is like our own calculation, but this can be presented as part of the detail book, which is done. These are some additional calculations that we do because there are two type of sensitivities in this model. One is sensitivity. One, one is sensitivity two when we do that I will show you that right. And this is the schedule. The schedule, if you remember, we did in the beginning. We said that you know, today's date is February, and then we are assuming land is already purchased. We are assuming 12 months of redevelopment period for this project, which is zoning or there were approvals, and we are assuming an 18 months of construction for this project. So these dates start and end they go into the model as well. Lease up, we are resuming about 11 months for this project, roughly about 45 units.
+
+00:30:48 Noor Khan
+Each quarter of the project, right? And we go here development cost. Now the development cost that we saw there, That was like, you know, our high level calculation of development cost as a percentage. Now, this is the development cost schedule detail, and this goes into the cash flow. Actually. So, this is here where, again, basically the land comes from the key assumption sheet. We already these numbers already, we have seen they are pulling from there basically, and this can be. Expand it to have more. So we have got two models. We call one reverse 1B. Reverse 1B is what we do based on just that one sheet. And, when we do a detailed 1B for a client, which has all the information, then we can populate this with more information than we are currently showing you. Like for example, professional fees, We have put all in architect, but there can be different type of professional fees so we can itemize them based on the information we have.
+
+00:31:42 Noor Khan
+Otherwise, it's basically like a total provision of a fifteen dollars per square foot, basically for architect. And we've got development management. We already explained how this is coming. The development charges I've already explained. So development charges are also broken down into like you know, different type of like you know, within the scheme that they have, but we just put one number here just for the ease. Submitter is coming and then some contingency is there. Marketing I already explained last time about, One and a half month each for commission and one and a half month for marketing, so total three percent of the rent. And we have got the financing cost already, the loan fees I've already discussed, then construction loan interest. If you see now this is coming from the cash flow right? This is the number which was going there actually including this number two. And then this is the operating income during lease up. So we are expecting security deposit to come to the builder, we are expecting revenues.
+
+00:32:38 Noor Khan
+Of four point one million during the lease-up period, vacancy provision, Then operating expenses is minus a total three point four million dollar worth of income during lease - up. So that will be offset against the development cost. So we are talking about ninety-four point four million dollar. This is the number which was going there, like you know in this sheet, like we have seen that number. I just let me see if I can show you here this number. See that there number coming from the model right? And so after this, we have seen this number. And, these are some additional calculations, which are part of like, you know, sensitivity and all that, some control numbers. We go here development cash flow. This is actually a detailed cash flow. This is a machine builder cash flow for developing the constructing the building. So this mainly covers that. And once the building is stabilized, then basically it stops like you know it calculates the IRR for that.
+
+00:33:34 Noor Khan
+Builder, right? So it takes it completes cash flow, like, you know until you have to complete. Like if you see here, it's the total these are months. You see forty five fifty and all that stuff. These are months. So, it's about let me see how many months August twenty six month, basically right? So, it's a pretty good model in that sense. Uh. And here you can see all the uh parameters of how this model is calculating various aspects. So. Lease up schedule takes into account like, you know how many months and how this is going to do. And then the units occupied. This is basically very detailed monthly cash flow and monthly calculation of each item that can be asked why and where what is coming from right, including your revenue inflation and cost inflation. All is factored here, right? Security deposit amount revenue I was saying earlier. This is how it's capturing there.
+
+00:34:28 Noor Khan
+And then the land cost, so we are assuming land is already purchased, so it goes in month one, right? In that sense. And, then we've got other costs is basically S - curve based cost like you know, for the development cost that takes into account from there. We are assuming it will be from April 27, which is one I think one year for the pools, right? Takes into account that thing. Then completion is October 28th. It's from here if you remember this these dates are coming from there right? Uh so this is, This is taken into account, and it basically runs all the numbers automatically from that this sheet and takes into account everything that we have defined there. We just play with the dates here, if you need to play because some costs might be like, you know, payable earlier, some might be payable later and some might be payable over an escrow, right? So those kind of like, you know work we do here when we do these things, like, for example, the development charges.
+
+00:35:24 Noor Khan
+Used to be payable earlier or upfront, But now the cities allow you to pay it on completion in I, think six installments, right? So, in this case, we are because this is a merchant model, so we are assuming the developer will pay the entire fee on completion, right? In October twenty eight you can see that here. In October, the cash flow takes into account that you know, this is all paid, right? So when we otherwise run like, An investment cash flow, Then we'll be taking into account like you know, five or six installments, because one will be paid on completion once the building is occupied and the remainder will be paid in I. Think five installments right like that. Toronto also is the same rule, but just to avoid any confusion, we just assume all paid on completion. Because the model has two components merchant builder being one of the like primary one. Everything else is.
+
+00:36:19 Noor Khan
+Understood. The interest, as I was saying, is coming from the model itself. This seven point six million, if you remember the loan phase, right? All of that. Now here for example, you know everything is there in that sense. You can change the if you want to change the date that you know, when should be, what can be done. And, we have got uh free cash flow for the project. Okay. And then we've got the loan draws also coming there. And we've got the equity also reflected in the model right here. Ten percent equity that we were talking about is reflected here. As we can expect, the equities assumed to be paid upfront while the debt comes later, right? Everything else is basically these are internal checks for the model, right? How to do and this is giving you the IRR for the Martian builder. This IRR is for when the building is complete, right? This is stage one. Hello sir.
+
+00:37:15 Alejandro Duque
+Good, good. I want the line with Darryl. Can I call you back in like five minutes?
+
+00:37:18 Noor Khan
+This is actually the headline number we call this. You know, I mean, four point eight million dollars.
+
+00:37:25 Alejandro Duque
+Okay, yeah. So we can't finish those contracts because Arden is driving me nuts. And,
+
+00:37:29 Noor Khan
+If you tell me, we are resuming eleven point seven million dollars for equity and ninety four million dollars is the cost, do you remember this number? And the profit before taxes will be thirteen million dollars. Do you know that? So, this gives you a fourteen percent basically return on cost. Right, Development yield is as we know, the development yield is basically the NOI stabilization divided by the total development cost. And the IRR if sold is basically twenty seven point nine percent. So, I was saying to you that you know, I'll show you, this IRR is coming from here, twenty seven point nine percent. So actually cash running from cash flow that's stage one.
+
+00:38:12 Noor Khan
+Of the development cash flow. Then we've got stage two, 10-year cash flow. The 10-year cash flow has all the assumptions here itself, right? So whatever assumptions coming from those sheets, other sheet but it's all here, right? Whatever it is taking into account. Uh, we have assumed the like interest rates and all that as per our team, whatever they gave us. And this is like from year one to year ten. So year one being today's year and then this thing. And here you can see the Stabilize NOI, it can take the current model is running four point five percent k bridge. Give you fair value. And this gives you the maximum loan, which is allowed right? So that in fact, in this case, like you know, the total equity required is two two million total, right? This completion right, it's showing and four point four million debt service so that debt service will give you one point one NOI, uh, one point one NOI coverage, right uh.
+
+00:39:09 Noor Khan
+Everything is automated here. Nothing is done otherwise. Okay, So the model is taking into account everything you are putting basically like, you know, your equity IRR calculations are all here, right? And it gives you. So if you see the 10 - year IRR calculation is coming from here, right. So in this case on take out financing, it is saying that you will need an equity requirement two million dollars, right. So that also takes into account model here. What is happening here? This is where for the team, basically like the kids like who have been dealing with it, basically is so I have now basically net of CMHC premiums. I am I have found a place in the model. I didn't want to disturb the model because it's a very detailed model, and it's so many what you call it like, you know, uh, so many formulas, and like, you know, very detailed and complex. So I've just found a good place here to uh take these CMHC cost out right.
+
+00:40:07 Noor Khan
+So, which is here? C M S C premium comes out from this, and that's basically and then it calculates what it calculates. Right, So if it yourself on a five year, basis or seven year, is from inception to seven years, from inception to ten years, is where it comes. Assumptions are all here in this one, as I was saying right, but the model restricts basically any financing to the. Dsr right it like has to meet DSCR, so which is check within the model. Uh I've already shown you the L T S course guide sensitivity too. I will show later. So now I'll come back to the. I'll come back to our summary sheets. Now this sheet I've just introduced you. You can see a return on cost fourteen point, one percent five point two percent yield uh development yield. We have seen calculation irr. Its sort of stabilization is.
+
+00:41:01 Noor Khan
+27.9% time value of money, earlier you sell the better. IRR if you hold it for 10 years is 20.6%, still good to hold it, why not? And this is two more, so we call it merchant builder. I've just put this one also new so team can see that. Merchant builder IRR, equity IRR, The merchant, if you want to investor, this is the investment hold IRR right for the equity. And the construction cost per unit is 555000, the cost per square foot is 733 And the value per unit on stabilization is six forty, and the value per square foot at stabilization is eight forty five. This is one level of summary. A detailed summary is here, So which basically put everything together in the sense that first, it tells you the overall valuation of the building. So, the base case one hundred eight million.
+
+00:41:57 Noor Khan
+In the best case is four point two five hundred and fifteen million, and worst case is four like one hundred and three million dollars. Right, so what happens here? Merchant builder return on cost basically is fourteen percent here, twenty percent here, and eight percent here. So building the project is pretty good if it can achieve those rents. Frankly speaking, any of those costs can be materialized as well. Right, this is like key consideration. So merchant builder IRR calculating model for base case like Whatever we are running, and then twenty percent IRR for ten years, right? And, these are the schedule, just like a high level for the client to see that, you know, this has been taken into account because not everybody can go through details of the models. It's all coming from there. Again, the unit mix just high level basically total total numbers. We remember one twenty eight thousand, we remember one seventy units and those three point eight right today. And these are the development costs. We have seen this number, and we have seen how ninety four million is calculated. This is.
+
+00:42:56 Noor Khan
+How it is summarized further in a very short summary. Then we've got the construction financing, we can see, we remember the 90% construction loan and 10% equity right there. And then the permanent financing, we remember that 85% LTV ratio, One point one one NOI coverage and then this loan amount and will debt service right. This is uh the second somebody this we already know. I'll just quickly show you. So, this model is currently running a base case. As we can see here, right? So, this base case and this is also here showing the base case outcomes. If we go there and we have a sensitivity sheet here, right? And if you change it to the sensitivity, we've got three types of sensitivities here: base case, then best case and then worst case. So, we do sensitise based on cap rate. We sensitise based on the construction loan rate.
+
+00:43:51 Noor Khan
+What we do basically is coming from the debt stake that we have, and we are increasing by either zero point like twenty five bps, or either reducing or increasing. Right? So, if five point eight seven, You are saying you can get a better deal if you are able to reduce it by twenty five bps. We can make it like whatever somebody says, no best case will be fifty bps later or fifty bps lower or fifty bps higher. But we are assuming twenty five bps for this calculation. Construction base case we have assumed 18 months, But when we are showing like, you know, minus three months or plus three months. And the lease up period. We have assumed base case 11 months, and we can say that somebody can say, we are assuming here two months plus minus. Likewise the operating cost variance, We are assuming like, you know, of course, zero means current. But if we are assuming, it can be less by five percent or more by five percent.
+
+00:44:45 Noor Khan
+So, then we can see that you know what happened if we run an alternative scenario. If you go with the best case, so we can see the result here. It's like we all know what it is now, so you can see our summary here. Everything changes here, but this is I think a better display. So. Now it is showing basically in the best case you are talking about a twenty two million of profit, which will be for a merchant builder, about twenty three percent right? So forty four percent, IRR on stabilization and IRR of ten year will also increase to about twenty four percent. Model is able to split those numbers out like high level, right? Not everything will be too perfect, but at least gives you some indication. We can run a um what you call it. Um we can run a worst case scenario. Also, you can see everything changes here. So worst case, scenario is in our, if you go to this summary, so it is showing you that on the merchant builder IRR is seven point five percent in this case, and you are talking about the merchant builder.
+
+00:45:45 Noor Khan
+So, Return on cost is seven point five percent, and merchant builder IRR is still sixteen percent, and ten year is basically twenty percent right in this case, which is still good, not bad in their sense. So this is one level of sensitivity that we run on this model, right? It's called sensitivity. One, we restore the base case. You just double check once again that it's actually working okay, because those are our numbers. We remember them. So we just don't want to lose. Site of these numbers. So, this is how we do what you call it sensitivity one. And, we have another provision in the model also where we can do sensitivity two. This is basically another sensitivity. So uh, but we do here basically, we can sensitize these items individually in that sense. So, If we just want to see what is the item like these are the three items, one is rent. 
+
+00:46:43 Noor Khan
+One is operating cost, one is the construction cost. So, we just want to see which one has the highest impact, basically on the valuation of the building. So if we say the rent goes up by five percent, maybe do it like that. Like this is what Derek does that. So just to demonstrate, The rent is most basically relevant item to consider when it comes to, like, you know this thing. So if we say the rent goes up by five percent, so I've got a I think, Yeah, this is headline numbers based on this, right? So if you remember the base case headline numbers were here. Let me go back to make it 100 so you can remember. Just takes one more minute for me to finalize it. Actually, see this is the base case. If you remember these number 4.9 million, 4.5% cap rate base and this and that everything is the same, right? So there's no difference, right? We call it modified base when we run sensitivity two. 
+
+00:47:36 Noor Khan
+Right, So you see these numbers : fourteen point, one percent return on cost and everything else. So, I am going to do it here. I am going to call it let's increase the rent by five percent. If we increase the rent by five percent, so what happens basically the profit goes up by five point six million dollars. So like this is the impact of if you are able to achieve higher rent, right? So the return on cost goes to twenty percent. And likewise your IRR this and that all the numbers improve right? So this is a number that green We keep in mind, we go back and we bring it back to one hundred. So that means the model is neutralized again. Then we say, okay, what if we are able to reduce the operating cost by five percent? So let's make it ninety-five percent. If you do that, So the net impact in terms of profit for the merchant builder is one point eight million dollars. We are comparing this against the five point five million dollars we were talking earlier. We again restore it and again zero.
+
+00:48:34 Noor Khan
+Now, we say that what if we are able to reduce the construction cost by five percent. So it's about a five percent comparison we do here. So we are talking about an impact of, on the profit of three point five million dollar. So, of all these three components, The best component to like, you know, focus on in terms of like, you know, the highest possibility for you is if you're able to achieve higher rents. If you achieve higher rent, you're talking five point six and thereabout right? A million dollar impact.
+
+00:49:04 Noor Khan
+So, This is the fifteen sheet model that we developed from this one sheet that we got from our team. This completes the presentation, And we can discuss any aspect that you know, if somebody wants to talk about and any comments, if somebody has. We can then take it from there.
+
+00:49:28 Speaker 5
+I have a question. Yeah, so you did a, A typical construction loan, but then you went to MLI Select. Is there a reason we did that for this purpose? Is that how this project went or. 
+
+00:49:41 Noor Khan
+No actually No, Actually, what I did I assumed a typical construction loan because I didn't want to assume CMHC. You might not necessarily like, you know, we don't want to make it too rosy. So we don't want to say that the person is basically qualified like we are just doing reverse one B. We have just done a, What you call it feasibility study, right? Yeah, okay. We don't want to assume that, you know he will qualify for everything, and he will have this like green this. And we don't want to assume anything like, like, you know, we want to go base case, which is basically the standard right. Then we are assuming also here, although we are saying you can go up to 95 percent, right mli select and stuff like that. But we are not going 95 percent. We are going 85 percent, actually, yeah.
+
+00:50:30 Noor Khan
+You can go for amortization of an MLI select up to forty five years, right? But, we are just going for forty years, because we like, you know like this is why I am saying that you know, I am trying to be conservative.
+
+00:50:44 Speaker 5
+Conservative yeah. Because,
+
+00:50:45 Noor Khan
+We don't want to show you a rosy, do just hook you with something like, you know, kind of what do you call it something. So you feel that you know, we are actually trying to get your business in there since like this is my way of doing anyway because. You have to bring credibility, right, to be something. Otherwise, so I have this MLIS select here, right, Which I took here and there construction also and Joanna was also saying the construction road was the construction rate was less. Right? Yes. But I didn't take that into account because you know, there are criteria and there are like, you know, affordability criteria and then efficiency criteria and then accessibility criteria. So. 
+
+00:51:28 Noor Khan
+I don't want like, you know everything to be saying that you know, you will meet all the criteria. And because you know life is so good. I mean, who knows, right? So we have not assumed anything like you know too much on there.
+
+00:51:40 Speaker 7
+But is there any way we can create a pro forma using CMC construction loan? Because in currently in the market, a lot of purpose built rental developers, they are actually using CMC construction loan, which Yeah,
+
+00:51:55 Noor Khan
+Yeah, you can do that. There's no problem. We can we just simply change the assumption. Okay, team. If you do that, that will increase the that will increase the margins anyway. So, that did you know what I was saying when you develop, You need to work with friend and can to just like, you know, develop a one sheet, which will be called financing proposal. And then can we say sheet number seven? You can add that sheet here like in the next sheet. And then we'll have your.
+
+00:52:27 Noor Khan
+The way you want to present the financing package to the client, and then you can start your presentation basically by saying that, you know, Like that's a pitch that you can discuss with Derek and friend at how you guys want to do that. But you can, be having all this material to substantiate that, you know, behind a debt proposal that we are proposing to a client. You have worked so much. The objective is for this exercise to substantiate the like, you know, background work, and then to entice the client to say that you know, by the way, we have this expertise, and we have the next expertise for you to consider financing package basically. And we have the team here for that also. And that is the package. We think you can attain in that sense,
+
+00:53:20 Speaker 7
+Exactly I think it would be necessary for our team to work with. Like feasibility study team to examine those rent roll, to strategically structure the rent roll to meet the loan criteria, to achieve a lower cost which can increase our development yield. Anyway.
+
+00:53:44 Speaker 5
+Yeah. So, would you create. 
+
+00:53:47 Speaker 7
+This should happen before we create the 1 B or reverse 1 B model, I think.
+
+00:53:56 Speaker 7
+If we have, like, I mean, if we are using lower construction loan, we were just input them here. Like yeah yeah sure. Right? Yeah okay.
+
+00:54:05 Noor Khan
+So it's just an assumption. We just make it easy.
+
+00:54:08 Speaker 7
+Right? They might don't need the mezzanine debt, just the CMC loan. 
+
+00:54:12 Noor Khan
+Or no loan at all. This is quite a stress right? Mezzanine debt is quite I would expect somebody to have twenty five percent equity and seventy five percent. Uh CMC loan CMC construction loan right. Makes it much like you know, doable, right?
+
+00:54:26 Speaker 5
+Mhm. Yeah.
+
+00:54:29 Andrew Banken
+Yeah, and then would you have different models of that Joanna? Like, would you or like is that a side sheet of what the MLI select would be? Like how much percentage of affordable would you do kind of thing? Yeah, that I'm leaving to her.
+
+00:54:46 Speaker 7
+Yeah, That should be like it will be a work between me and Keenan and Fran. And regarding once the rent roll has been like achievable rent has been finalized, we can work on the rent as well.
+
+00:55:05 Andrew Banken
+Uh, one thing I need I want to clarify more. Um, I saw there is a merchant builder like the IR and the ten year IR. So merchant builder is based on what the developer will sell upon stabilization.
+
+00:55:22 Speaker 7
+And ten year is that like the developers holding for ten years? Yeah. Am I right? Okay. Okay, got it. It's quite interesting. Like I see you play those numbers and for some for some case, It seems that like you're saying like the 10 - year IRR is better than like merchant builder, but when you play with the worst case, I believe and actually the 10-year IRR is higher than the merchant builder. Yeah.
+
+00:55:52 Speaker 7
+Valuable for a developer to see how those numbers being impacted by different cases. Yeah,
+
+00:56:03 Noor Khan
+Alejandro, thank you very much for joining us. So, what do you think? Like, because in our mind is to see if we can automate it. And like you know how much so what I did basically as as you could see from my presentation that we had the cloud update. I've already subscribed. Add to that, right? It's there in the like you know me. And I've tried to run it as well. Like as as I mentioned that I, I ran the area schedule came out of it which was very helpful. And then I thought to see if I can like, you know, give it a few commands to try to replicate the model for another project for me. And it could not do that basically and it said that you know, our memory has basically like you know reached. 
+
+00:56:49 Noor Khan
+Because it's fifteen sheets and all that, right? Maybe, we we can work together separately to see that you know how we can automate it.
+
+00:56:57 Alejandro Duque
+Yeah, absolutely. Yeah, Because I think the connection where it's most helpful is that you have all the data. I just need to understand a little bit more kind of like our point is the feasibility is done. This comes in and then how that and then how the follow up with the client goes between. Yeah, the mortgage and the brokerage side. Yeah, I think it could be, Yeah, like again, I just have to see it a little bit more. How feasibility study flew into this model? Maybe, it's not building the entire thing because you've already done it and it's fantastic. It's more about how to present the data and make it a lot easier for the client to digest. Yes, and for the and for everyone on the team here to like present it. I think that yeah, I do have to run in two minutes. But yeah, absolutely like now you have a very good understanding. And I can follow up with you directly. So we can talk about.
+
+00:57:47 Alejandro Duque
+About that, and then, and then yeah, Then you tell me if it's Caroline Joanna or anyone else on the team that to follow up and see how they use it because I think now for the users that are getting the data out of it, it's how to make it easier.
+
+00:58:02 Noor Khan
+So. So what happened? Actually, we we had a model called one B that we used to do like, you know, when I when I was in my previous time with SVN, and Derek said that you know, I want. The team to do reverse one B, So one B used to be generated based on the information that the client will provide us, and we will have a proforma that our team feasibility team will do. And then we will do a one B for them, and we used to charge I think five thousand dollars for this work. This is called one B right? And that was presented to the bank also, and that was quite like you know acceptable and all. And uh, and for this was for the people who could not afford like you know.
+
+00:58:46 Noor Khan
+Like heavy, like heavy finance people, right, because they needed help because you, you don't need to have a chartered accountant, for example, you know, or a CFA to do this work for you, like you can hire somebody for like on a from people like us, for example, right? We don't need to hire a CFA. It's too expensive, right and those chartered accountants. So we used to provide that service then. So Derek said we should be able to do a reverse one before the people who who have just come to us. So, we can show to them that we have this capability also, and we should run it based on just like percentages, for instance, X percentage development cost, X percentage professional fees, X percentage others. So that will help. And, we did that. Like, you know, we have an existing template where we do where we can do that. But when I came now, like I've rejoined the business now, so I wanted to do like something improved.
+
+00:59:42 Noor Khan
+Because, we have the access to the like, you know, artificial intelligence that we can combine with it, So I thought, maybe with that, we can do something like, you know, better and have information, which is more credible. To it brings credibility to the output that we give to them, and there can be like you know reliability. So, then you can entice the client more towards, like you know dealing more with you.
+
+01:00:05 Alejandro Duque
+Absolutely yeah yeah and I think that's, So yeah, if you want, let's let's follow up separately and then you and I. Yeah, yeah, yeah.
+
+01:00:13 Noor Khan
+Yeah we can do that hundred percent. Yeah.
+
+01:00:14 Alejandro Duque
+Yeah now I have a much better idea absolutely.
+
+01:00:17 Noor Khan
+Yeah very good man. Thank you. Thank you. Okay. Any other question. We have because we are almost eleven o'clock now. 
+
+01:00:23 Speaker 6
+I I have a quick question Noor. And it was regarding the second worksheet. So we landed on an eight percent profit assumption to work towards the total construction cost on the project, and we have all the supporting evidence to land on that total construction cost. So, I am going to be editing that eight percent tell it is close or variance to the tool. That's the idea of it, and then very cool.
+
+01:00:47 Speaker 6
+Yeah, Okay, okay.
+
+01:00:48 Noor Khan
+Like I can do a more session with you in that sense. Like because when we when we finalize the I think what we can do now is to work with Joanna to have her financing package sheet. Let's get that and input into the model as well like on the side, right And once that is done. Then I can work separately with a hundred to see that, you know, how we can automate it or which components we can, so which components we can automate. So it can basically expedite the development. And like you know, spitting out of the model actually. We don't want it to be too much long in terms of taking time. But I think like, you know, we have components, like, you know, maybe some components can be done. Some components can be manual because.
+
+01:01:33 Noor Khan
+In my mind, like you know, When I was speaking to Derek also and Alejandro knows it basically like you know. Especially if you are a service provider, And if you tell somebody I have given this time I've generated this out of AI. And uh like model and all that. So everybody knows that how much does AI cost right? So, it's a twenty thirty dollar basically like a month right in their sense. So so it reduces your value proposition. But when you give something like, you know, which is your own, like, you know this thing right. So it's like a fast food and like gourmet kind of a thing right. If I can make an example it says that, you know, You really cooked something yourself, and this is your recipe or like a Michelin star and all this stuff right. It's compared to just go to McDonald's it costs two three dollar. Then, you know, so we so we want to have a combination for sure, like with that. But I don't think if anybody says like, you know I was in one of the presentation like. 
+
+01:02:30 Noor Khan
+In this thing, the guy said that you know these prompts have come out of the AI. So then who wants to buy? So nobody wanted to buy prompts out of AI because they know anybody can like there's a lot of material available right that you can learn. And once you do that, so then you can get all those prompts yourself.
+
+01:02:52 Alejandro Duque
+Yeah. Yeah. I just have to run by Great Singh, everyone and Nord. Let's follow up separately when just show me an email and then Great Singh everyone.
+
+01:03:00 Noor Khan
+Sure. Thank you very much. Have a good afternoon. Thank you.

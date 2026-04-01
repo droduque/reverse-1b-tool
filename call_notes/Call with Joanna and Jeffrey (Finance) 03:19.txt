@@ -1,0 +1,598 @@
+Mar 19, 2026
+Alejandro/Joanna Loan Proforma - Transcript
+00:00:00
+ 
+Alejandro Duque: Hey, Joanna.
+Joanna Zhou: Hi, Alejandra. How are you?
+Alejandro Duque: Good. Good. How are you? How's everything going?
+Joanna Zhou: Yeah, I'm good. Good. Everything's good.
+Alejandro Duque: Cool.
+Joanna Zhou: How about Yes,
+Alejandro Duque: Are you in Toronto?
+Joanna Zhou: I live in like Oakville that's close to So,
+Alejandro Duque: Okay.
+Joanna Zhou: yeah.
+Alejandro Duque: That's awesome. Well, nice to meet you. I live in Miami, Florida. And yeah,
+Joanna Zhou: Wow.
+Alejandro Duque: met met Derek through Daryl McAuliff at a real estate conference like three years ago in Louisville, Kentucky out of all places. And then yeah, and then we've been in touch since.
+Joanna Zhou: Wow.
+Alejandro Duque: And now yeah, I I do some real estate uh lending and and other things. But yeah,
+Joanna Zhou: Okay.
+Alejandro Duque: excited to connect.
+Joanna Zhou: Yeah. Very good. Actually, I I'm a commercial multi broker. I specialize in financing Marty residential m like marty family and I kind of join or like partner with rock advisor since this year because they haven't have someone could in charge of the debt advisory.
+ 
+ 
+00:01:32
+ 
+Joanna Zhou: So yeah I basically I just joined and I have a team I have
+Alejandro Duque: Okay.
+Joanna Zhou: um three four other um analyst and underwriter helping me underwrite the loan. Um hopefully I can get like we can have like a more like a win-win solution. I can provide like more background for the finan like financing to the team and they can bring the new leads for us to getting like Yeah.
+Alejandro Duque: Yeah,
+Joanna Zhou: So it's it's pretty excited about it.
+Alejandro Duque: that's cool. No, that's awesome. And and yeah, know and I think that it's fascinating that that uh you get to work with with Derek. I'm not at that level. I'm not at the institutional level by any means, but it's it's cool to to see it. Uh, so yeah, I've been working with Nor a lot in uh kind of like how what I'm helping him build. There's Jeffrey. Should I admit him?
+Joanna Zhou: Yeah. Yeah. Yeah. Jeffree man writer. Yeah.
+ 
+ 
+00:02:31
+ 
+Joanna Zhou: If you can I Yeah.
+Alejandro Duque: Okay.
+Joanna Zhou: He's actually exploring using AI and some tours to do underwriting as well.
+Alejandro Duque: Okay,
+Joanna Zhou: So I share the link with Jeffrey.
+Alejandro Duque: perfect.
+Jeffrey Niu: Hi.
+Alejandro Duque: Hi, Jeffrey.
+Jeffrey Niu: Hi. How are you?
+Alejandro Duque: Good, good.
+Jeffrey Niu: Good, good, good.
+Alejandro Duque: How are you?
+Jeffrey Niu: Thank
+Joanna Zhou: Yeah. So, yeah, thank you. So, Jeffree is my underwriter.
+Jeffrey Niu: you.
+Joanna Zhou: Uh, he helps me under those loans. So,
+Alejandro Duque: Okay,
+Joanna Zhou: like those like uh perform I sent to you was created by Jeffrey.
+Alejandro Duque: sweet.
+Joanna Zhou: Yeah.
+Alejandro Duque: Okay. Yeah. And I wanted to ask so so you guys know I'm as new to this as you guys probably are as far as like understanding the whole scope. What I'm helping nor with is bringing getting from a 1A what they call a physibility study into the new reverse
+Joanna Zhou: Yes.
+Alejandro Duque: 1B.
+Joanna Zhou: Right.
+Alejandro Duque: Uh because when he was explaining to me it was a pretty manual process.
+ 
+ 
+00:03:30
+ 
+Alejandro Duque: It took him like two to three hours and he was saying that to transfer the data.
+Joanna Zhou: Right.
+Alejandro Duque: I haven't showed it to him yet because I was still going through the entire formula making sure it works. But we pretty much built I call it the reverse 1B generator where you drop a file 1A and immediately gives you a reverse 1B.
+Joanna Zhou: Okay.
+Alejandro Duque: Not only that, but then for Derek, so Derek wanted two things. He wanted one the full Excel spreadsheet like fully built out so someone can walk the potential client through that and then kind of like as a sensitivity tool that you can
+Joanna Zhou: Mhm.
+Alejandro Duque: play with different metrics and different things. So, uh you can do that. So, that's what I'm working on and now seeing how the financing
+Joanna Zhou: Oh, okay.
+Alejandro Duque: piece could be incorporated into the tool since that's pretty much kind of like what what I what I've been working on. I don't know if you guys I could show you the the tool or if you guys want to first walk me through the underwriting that you guys use to see where there might be a way to like compile all of this
+ 
+ 
+00:04:35
+ 
+Joanna Zhou: Yeah, for sure. Yeah,
+Alejandro Duque: together.
+Joanna Zhou: if you uh that would be great. So for us, we will do underwriting based on the rent row and expense provided by 1A and we might have like different options for loan
+Alejandro Duque: Okay.
+Joanna Zhou: program. We can go to let's say we might have we might want to offer like option ABC like different loan program to the client and then put our the result of our loan program into nor's um
+Alejandro Duque: Yeah.
+Joanna Zhou: financing like the financing section using different number it will
+Alejandro Duque: Yeah.
+Joanna Zhou: show up with like different development development yield. So that's how this these things interact each
+Alejandro Duque: Got it. Yeah. Yeah. Yeah. Okay. So, so pretty important.
+Joanna Zhou: other.
+Alejandro Duque: And I had some questions. Let me look them up since uh sorry that I'm a little As far as the programs themselves. Again, we don't have a CH CMS in the US,
+Joanna Zhou: Mhm.
+Alejandro Duque: but uh for those um I was pulling the rates from the version, the 3.1 versions that you guys sent to us.
+ 
+ 
+00:05:52
+ 
+Alejandro Duque: Are those current,
+Joanna Zhou: Mhm.
+Alejandro Duque: let's say, throughout the year? Do those change? like how do those rates or or do you think that they'll be standard across for the rest of the year as far as rates amortization and premiums?
+Joanna Zhou: You mean the interest rate?
+Alejandro Duque: Yeah.
+Joanna Zhou: You mean the test rate we are using?
+Alejandro Duque: Danger.
+Joanna Zhou: Oh, this is a little bit complicated.
+Alejandro Duque: Yeah.
+Joanna Zhou: So during construction, we might have a interest rate for construction loan.
+Alejandro Duque: Okay.
+Joanna Zhou: And that usually will be interest only and case by case around like prime uh prime plus something or prime and
+Alejandro Duque: Okay.
+Joanna Zhou: then once they build up uh they stabilize we do takeout loan. Takeout loan will be um aratized.
+Alejandro Duque: Yeah.
+Joanna Zhou: It can be 40, 45 year or 50 years.
+Alejandro Duque: Okay.
+Joanna Zhou: And and the rate would be like for now around 3.7.
+Alejandro Duque: Okay. Gotcha. Okay. And Okay.
+Joanna Zhou: Yeah.
+Alejandro Duque: And then how different so you guys from the 1A you're pulling the rental uh the rent roll and I'm guessing obviously the property information and then is everything else custom
+ 
+ 
+00:07:06
+ 
+Joanna Zhou: Right.
+Alejandro Duque: that you guys put in or how much data is it shared between the 1A and the and do you guys use the reverse 1B at all or that's completely separate like the reverse 1B do you guys play with that or no?
+Joanna Zhou: No. Uh I play with it just like for knowledge base to see how our financing results will be affect those development yield. like I know the rational behind the reverse 1B but we didn't use that for our clients or whatever that but that is something Derek would like to um utilize and would like to show to future clients
+Alejandro Duque: Got it. Got it.
+Joanna Zhou: and from 1A what we will use will be the rent row and like
+Alejandro Duque: Okay.
+Joanna Zhou: vacancy and there are three other type of of operating expense we are using that is property tax insurance and utilities except for that like our loan underwriting have our own benchmarking for other expense that might different from 1A it's quite complicated I
+Alejandro Duque: Got it. Okay. Yeah. No, no, no.
+ 
+ 
+00:08:23
+ 
+Alejandro Duque: But, but no, because I thought I was going crazy,
+Joanna Zhou: guess
+Alejandro Duque: but I'm like, okay. No, that's good because initially I thought they were using the same by numbers were a little bit different. So, okay. So, it they are different. Okay.
+Joanna Zhou: Yeah. Yeah. A little different.
+Alejandro Duque: Okay. And then as far as programs,
+Joanna Zhou: Yeah.
+Alejandro Duque: I think there are three options. The uh so wait, let me put it up here. The MLI select at 100 points,
+Joanna Zhou: Mhm.
+Alejandro Duque: the select energy at 50 points and conventional.
+Joanna Zhou: Right.
+Alejandro Duque: Are there any other programs like MLI at 70
+Joanna Zhou: Yeah.
+Alejandro Duque: points?
+Joanna Zhou: They are like and like there are so many different type of program we can
+Alejandro Duque: Okay.
+Joanna Zhou: use even MLI select we have 50 point 70 point and 100 points and we have standard CMC um and we also have conventional
+Alejandro Duque: got it.
+Joanna Zhou: but I think maybe we don't need to consider conventional right now I guess a lot of them they want to
+ 
+ 
+00:09:22
+ 
+Alejandro Duque: Okay.
+Joanna Zhou: do CM CMC. Maybe we just go go with like
+Alejandro Duque: Okay.
+Joanna Zhou: CMC.
+Alejandro Duque: And okay because yeah I can then show you what I what I've built like just to quickly and but the last thing question I had that I just remember. So what I was helping nor with was pretty much getting from a 1A to a reverse 1B in a in a second which I think we finally got it down. Now for the underwriting on the loan. Do you guys want some of that stuff prefilled as well? uh kind of like unit mix uh I don't know uh rents operating expenses like parking things that property taxes things that you said from the same 1A data like would that save you time or do you guys already kind of like bring it into the underwriting uh template manually like how do you guys do it?
+Joanna Zhou: Uh Jeffrey Jeffoffrey already like start using AI
+Alejandro Duque: Oh,
+Joanna Zhou: to Yeah.
+Alejandro Duque: perfect. So you guys already have
+Joanna Zhou: So but but like we would love to see how you were populate those like uh data and help us have like more idea of if we can save more time.
+ 
+ 
+00:10:41
+ 
+Alejandro Duque: Yeah. So, uh let me present quickly
+Joanna Zhou: Yeah. I just want to exactly I want to see like how Derek or No would like
+Alejandro Duque: my
+Joanna Zhou: to present this in terms of how AI can help so that I can utilize maybe the same tool to populate the number and then Yeah.
+Alejandro Duque: Yeah.
+Joanna Zhou: Okay.
+Alejandro Duque: And again, so I'm going to present pretty much I'm going to show you what I built for them. Nor has been out of office for the last two weeks, so we haven't like we've emailed back and forth, but in his mind, he they have a 1A, right? So, uh, let me I can't see my screen right now, but hopefully uh sorry, let me bring just so I know. Okay, so for instance, um, I'm looking at this. This is the tool. So, let me step back. This is the tool I've created, right?
+Joanna Zhou: Mhm.
+Alejandro Duque: You can either import a reviewed reverse 1B in case you want to present it or you can upload your own 1A.
+ 
+ 
+00:11:46
+ 
+Alejandro Duque: So say anyone in the team has a 1A. Let's go with Birchbound since that's the one that we've been using. So this immediately starts detecting address, total units, municipality, building type. So based on the municipality, it uses those development charges. Before they were doing all of these manually. So if they had uh anything here, he would have to like pull that spreadsheet. We kind of like brought them all here. Property taxes. It's also comes from the 1A.
+Joanna Zhou: Mhm.
+Alejandro Duque: These are the things that a user could override. Building type, which in this case it would be high-rise based on the 15 floors that is estimated, but you can always change it. This was the last piece that I was adding, which is these are the three programs I looked at based on what you
+Joanna Zhou: Mhm.
+Alejandro Duque: shared. But then you can have it here because what this this will do is two things, right? So let's say we we do the 100 points MLI select I don't know just and again pardon my so then this is going to go and create a
+ 
+ 
+00:12:49
+ 
+Joanna Zhou: No.
+Alejandro Duque: 1B that now they can download right and this is the full 1B right exactly the reverse 1B just like nor
+Joanna Zhou: Mhm.
+Alejandro Duque: would do it like it pulls all the data from the 1 A dumps it here now you have the 1B this is more because Derek wanted to show uh potential clients that this is what kind of like walk them through each different thing.
+Joanna Zhou: Mhm.
+Alejandro Duque: I've manually reviewed two of them and they're I would say like 99% accurate like again I haven't found anything but now it's pulling that data automatically. Right? So now the reverse 1B is one thing.
+Joanna Zhou: Okay.
+Alejandro Duque: So once they present that to the client, they open this kind of like presentation mode and this brings all of the financial analysis very high level. Think about the executive summary page here.
+Joanna Zhou: Yeah.
+Alejandro Duque: But instead of being like like here uh and having these parameters, you have it here. total units uh kind of like revenue and income NOS stabilization cost breakdown and again it goes more of a is more informative here and then you have a sensitivity analysis that what you could do here is
+ 
+ 
+00:14:14
+ 
+Joanna Zhou: Mhm.
+Alejandro Duque: that then you can start playing and say like I don't know let's say we increase the rent by 10 cents by 5 cents 10 cents like what's going to happen right uh what happens if the cab rates go up if the cab rates come down and it's almost automatic.
+Joanna Zhou: Wow.
+Alejandro Duque: It's not perfect obviously because this is not this is a reverse one B. So it's more of a overall like brainstorming and this is more to get to like how much should I pay for that piece of land right like based on those metrics and then lastly I was thinking of
+Joanna Zhou: Hey.
+Alejandro Duque: adding a financing preview based based on that information to
+Joanna Zhou: Mhm.
+Alejandro Duque: present to them. Now this part I just started building it and I haven't played with it yet fully but I'm thinking
+Joanna Zhou: Mhm.
+Alejandro Duque: that the idea is to get either here or I don't know how you guys would like to present it and if it even makes sense to incorporate it here like that was my question to Nor before he left but he didn't give me an answer but it's it would be in my mind Derek wants an a person to explain the full spreadsheet the reverse 1B then do a sensitivity ity analysis and then do the financing.
+ 
+ 
+00:15:33
+ 
+Alejandro Duque: But I don't know at what point these things come into play. That was my question. Like is the financing a separate meeting that you guys are doing something completely different or would it be here at the same time that uh these mortgage options are discussed?
+Joanna Zhou: Based on my understanding, I would think this is more like a sales pitch.
+Alejandro Duque: Yeah.
+Joanna Zhou: So, we better to present the best financing options to make the numbers like work the best for the client and then we can discuss with the client okay to achieve this finance thing results what we should do. That may be that might be uh like that in my opinion it should
+Alejandro Duque: Yeah.
+Joanna Zhou: be working this way. But for sure if we if we can show some just different financing options maybe to three different long to value different
+Alejandro Duque: Mhm.
+Joanna Zhou: amidation. Um and then like different financing will lead to different numbers for the development
+Alejandro Duque: Yeah.
+Joanna Zhou: fields.
+Alejandro Duque: Yeah. Yeah. Yeah. Because Yeah.
+ 
+ 
+00:16:48
+ 
+Alejandro Duque: I was looking and and Yeah. I mean like like I was looking for instance at the files that you sent me and and I'm guessing for them are you mainly presenting the executive summary here?
+Joanna Zhou: Uh we are presenting the perform construction. Oh no perform construction.
+Alejandro Duque: Oh yeah this one.
+Joanna Zhou: Yeah. Yeah.
+Alejandro Duque: Okay.
+Joanna Zhou: This this this will be the final result from our department like this is how we underwrite the loan.
+Alejandro Duque: Got it. Okay. So okay and what again if we had this tool like what would be most helpful here then like different previews for each program or do you guys want to keep it separate in Excel? Um, or I don't know like I'm just asking if is there an idea of tying it here or should we just keep here more of a sales pitch and then something else for the for the financing piece.
+Joanna Zhou: I think this would be like if we provide like let's say three options for financing this will confuse the client a lot.
+ 
+ 
+00:18:00
+ 
+Joanna Zhou: I personally prefer to just provide the best financing we can get.
+Alejandro Duque: Okay.
+Joanna Zhou: Put them here and then we should have a separate one for and for financing I think.
+Alejandro Duque: Got it. Okay.
+Joanna Zhou: So maybe you put like the the best one that would be like 100 points. Do we have right? Yeah. Yeah,
+Alejandro Duque: Yeah.
+Joanna Zhou: if we have like the the one 100 pounds maybe have the highest uh that is standard not that
+Alejandro Duque: Yeah. Sorry. No,
+Joanna Zhou: one
+Alejandro Duque: because I was looking at the uh this crash. Uh, I was looking at the energy uh
+Joanna Zhou: 50 is 40 years, right?
+Alejandro Duque: 50.
+Joanna Zhou: And this is 50 years. Oh, but the low amount is almost the same. Oh, this is like standard. Oh okay. Yeah.
+Alejandro Duque: Yeah.
+Joanna Zhou: Like it's difficult for me because different project have has different long program to
+Alejandro Duque: Yeah. Yeah. Yeah. No. And I can Yeah.
+ 
+ 
+00:18:59
+ 
+Joanna Zhou: use.
+Alejandro Duque: I mean and in this one the DSCR is super safe. Let's say it's 85 of 1.3 then in the other one. Got it. Okay.
+Joanna Zhou: Um
+Alejandro Duque: And all of the data coming into here then it's from the 1A. Nothing is from the reverse 1B.
+Joanna Zhou: nothing.
+Alejandro Duque: Okay.
+Joanna Zhou: Um maybe construction cost maybe from reverse 1B but we might
+Alejandro Duque: Okay.
+Joanna Zhou: not use that as
+Alejandro Duque: Okay.
+Joanna Zhou: well.
+Alejandro Duque: Uh okay. Um, so how do you guys I mean like what would it be helpful from like from my end should we try to um because what I'm trying to think is which data to pull based on everything that we already have and either speed out something for financing or keep it separate or help you guys I don't know Jeffrey like up to what point the the 1A now fits into this performance and then how manual work goes into it afterwards.
+Joanna Zhou: What do you use to make this like uh like from a 1
+ 
+ 
+00:20:07
+ 
+Alejandro Duque: Uh both CL uh everything was using
+Joanna Zhou: A to reverse 1B?
+Alejandro Duque: CLA and Gemini. I mean that those are the two as far as like uh yeah like brainstorming like reading through the spreadsheets and then both claude and codeex which is chat GPT to build the tool.
+Joanna Zhou: Oh, okay.
+Alejandro Duque: Yeah. And again, because in their case,
+Joanna Zhou: Okay.
+Alejandro Duque: like with Nor's case, his biggest need was getting from a 1A to a reverse 1B, not having to rely on the team to put in the I don't know,
+Joanna Zhou: Mhm.
+Alejandro Duque: it's like 600 values that have to be inputed manually.
+Joanna Zhou: Right.
+Alejandro Duque: So what I did is that I went and then I analyzed and then it built a it's a Python script using JSON to pull the data and create the reverse 1B because that was that was the most important thing for them and then having like a place that they can show a client like they can they can always go in and say like well um based on on on these numbers like how these things change like what if we decrease rent what if we increase it and And this piece again this is a lot of hypothetical data but it just helps them like sell the idea.
+ 
+ 
+00:21:25
+ 
+Alejandro Duque: The last piece is this financing which I don't know if it's here.
+Joanna Zhou: Right.
+Alejandro Duque: I don't know if and again I don't know if you saw it but I don't know if it's selecting like back here the type of program
+Joanna Zhou: Okay. I Yes. I I think maybe we should work on a high level to just like give Yeah. like 100 points, 50 points or whatever. Not like not like very specific angel or or whatever, but we should show 50 points, 70 point and 100 points. And how were that different the the loan to value and amotization and also conventional just high level category maybe five most at mo like most mostly will be up to
+Alejandro Duque: Yeah. Mhm.
+Joanna Zhou: five and that we provide we we can provide
+Alejandro Duque: Yeah.
+Joanna Zhou: the uh yeah just like the numbers to here and then we can generate generate those reverse First one be
+Alejandro Duque: Yeah. Yeah. Because the idea here,
+Joanna Zhou: that's
+Alejandro Duque: this was built to generate a reverse 1B, but then if you tell me like, oh no, let's do a 1B and then do financing, it could be done as well.
+ 
+ 
+00:22:41
+ 
+Alejandro Duque: Like it's more of what would the workflow look like.
+Joanna Zhou: Hold
+Alejandro Duque: So then because I'm already ingesting all of the data or most of the data from the 1A. So the and and it took me a while but now the system pretty much understand all the different parameters from the 1A to the it could drop it in a reverse 1B it could drop it in your financing sheet like in again like in one second and keeping the templates intact because what I
+Joanna Zhou: on.
+Alejandro Duque: told Derek is that since this I don't know how sophisticated uh the underwriting is here but I mean when build like those are 17 sheets with It's it's very easy to mess it up.
+Joanna Zhou: Hey.
+Alejandro Duque: So that's why I said just leave it there. just start getting help pulling the data and then you can present the basics and then go deeper if you want because that's the beauty that then I don't know say we you're talking to a client and somehow they're like oh yeah maybe the rents are 390 the cap rate let's be more conservative but then the construction cost we can get it down then they can save that scenario and export it into a full reverse 1B that they can take
+ 
+ 
+00:23:56
+ 
+Joanna Zhou: Right.
+Alejandro Duque: home So there are like multiple like different things that that that
+Joanna Zhou: Yeah, this is right.
+Alejandro Duque: are
+Joanna Zhou: Okay, I think this is good.
+Alejandro Duque: done.
+Joanna Zhou: I think we shouldn't put our loan make it like too much complicated. Right. Right.
+Alejandro Duque: Yeah.
+Joanna Zhou: Because this is just a sales pitch for them to show.
+Alejandro Duque: Yeah.
+Joanna Zhou: It's not it's not helping us to streamline our workflow.
+Alejandro Duque: Mhm.
+Joanna Zhou: Okay.
+Alejandro Duque: Yeah,
+Joanna Zhou: Got it.
+Alejandro Duque: and that's why that's why again as as you guys see fit if you think it's worth putting it here and Derek thinks so too like we can uh just know from my end I'm grabbing all the data from 1A and I could pretty much dump it in any other spreadsheet pretty well which I I think Jeffrey has done it right or I don't know what how you guys are are are doing it but then from that the last piece is do if if you guys need help with that.
+ 
+ 
+00:24:56
+ 
+Alejandro Duque: I I could help. And then on this end, if you guys want something in the front end, just let me know what you guys want and then we can drop it here as well.
+Joanna Zhou: Okay. Okay. Got it. Okay. Let me discuss with no um about how and direct as
+Alejandro Duque: Yeah.
+Joanna Zhou: well how we would like to present financing into this. But in my opinion will be too much complicated.
+Alejandro Duque: Yeah.
+Joanna Zhou: Just make it a one assumption should be enough.
+Alejandro Duque: Yeah. Yeah. And and and again the plan is that they can then take the sales teams obviously they can use it but then so it's easier to present and again if if if it has to be in spreadsheets that's fine too. Um, it's just that when I talked to Derek, in my opinion, his biggest pain point was jumping within the full reverse one B2 scenarios and just like jumping between tabs and selecting 0 255 here,
+Joanna Zhou: Right.
+Alejandro Duque: 0.35 there.
+Joanna Zhou: Yeah.
+ 
+ 
+00:25:57
+ 
+Alejandro Duque: So,
+Joanna Zhou: But like that draw you presented it was super cool like in front of client like which you can just show them how.
+Alejandro Duque: exactly.
+Joanna Zhou: Yeah. And that's powerful.
+Alejandro Duque: And it's still an estimate. But I mean because then until they give full numbers and constructions like this is pulling a lot of whatifs but at least it's it's well based like it's not something
+Joanna Zhou: Yeah.
+Alejandro Duque: that you told AI like hey what's the constru what does it cost to build an appointment in
+Joanna Zhou: No. Right. For sure.
+Alejandro Duque: Toronto?
+Joanna Zhou: No.
+Alejandro Duque: See?
+Joanna Zhou: Yeah. So, uh, if you can Okay. So, I I think like I know how I should talk with Derek and Nora about my financing options. Um but in terms of how we do you have any idea or suggestion to our team if we would like to utilize AI to our workflow let's say we do our underwriting based on appraisal report if they are same with our 1A like you can see like we could maybe we can use our 1A and starting from 1A and we need to how to say like generate our underwriting module How how would that work for us?
+ 
+ 
+00:27:12
+ 
+Alejandro Duque: And do you have existing templates for the underwriting?
+Joanna Zhou: Yeah, we're using the the package I sent I showed I showed to
+Alejandro Duque: Okay. So,
+Joanna Zhou: you.
+Alejandro Duque: okay. Yeah. I mean multiple ways. there is from pretty much just building a simple tool like this that pulls the 1A and drops it into the underwriting all of those things and
+Joanna Zhou: Mhm.
+Alejandro Duque: then yeah from there like this the sky's is the limit in the sense that you can start trying a lot of different things um I would recommend if you're starting with cloud with cloud and cloud code I think those are the easiest because then you can start building this programs on your laptop like again it's like your personal engineer next to you building it and I worked at Google seven years so but I was a financial analyst I don't come from any tech background I can't code like if you told me build this I'm I'll be like sorry I can't I understand their ar their
+Joanna Zhou: Mhm.
+Alejandro Duque: architecture but it's not so yeah just playing with that and then seeing um yeah like for instance what I told Nor is that there are different municipalities and he's he's using different development cause different property taxes.
+ 
+ 
+00:28:27
+ 
+Alejandro Duque: So, it's very manual. Like you get a I don't know a client in this municipality, it's it might be different from this one and before he had to do it manually. So,
+Joanna Zhou: Right.
+Alejandro Duque: what we did is that we built a um a template that had all the different municipalities. So in the tool when I showed you when I select uh let me present but these are things that I think are super powerful and helpful when when with these tools which is if let's say you are picking here the municipality because that's going to say your development charges for the
+Joanna Zhou: Mhm.
+Alejandro Duque: reverse 1B. Oh, sorry.
+Joanna Zhou: Mhm.
+Alejandro Duque: Like you need to see my screen. Uh, so because it is so if I go here, I mean like look at all the different municipality charges that we have. Before they did it manually, they had a template, let's say, I don't know, for Richmond Hill. So then they had to open the Richmond Hill template. But now if I select that,
+ 
+ 
+00:29:35
+ 
+Joanna Zhou: Right.
+Alejandro Duque: the tool knows that it has to pick from that database and create a reverse 1B based on that.
+Joanna Zhou: Mhm.
+Alejandro Duque: So things like that like like you can build these things and instead of having to manually do it, you just like select and drop and then it just creates it and then you have your template fully drafted with all these things.
+Joanna Zhou: Okay, let's say we can considering building up one tour like this and then our analysts don't have to you to manu manually input those data and they can use tour to generate our underwriting package and then just
+Alejandro Duque: Exactly.
+Joanna Zhou: like do a like like review from from it.
+Alejandro Duque: Exactly. So these are the things where I'm using AI. I'm not I'm not trusting it to run the underwriting. I think that analyst and people think like, oh, it's going to replace everyone's job. I'm like, no, it's just making it easier in some cases. In this case, like before,
+Joanna Zhou: Right.
+Alejandro Duque: no had to go and and pick all of these development
+ 
+ 
+00:30:44
+ 
+Joanna Zhou: Yeah.
+Alejandro Duque: charges.
+Joanna Zhou: Uhhuh.
+Alejandro Duque: But now we just put set up the database, which that takes time.
+Joanna Zhou: Yeah.
+Alejandro Duque: But once you do it, then you just select this. And again, and when I drop the 1A and I have another examples, if I put this one, it reads the municipality. So, it knows it picks it up right away. Like, it's pre-selected. I can always change it, but it's it's already there.
+Joanna Zhou: Mhm.
+Alejandro Duque: But it's not building a full underwriting on whatever it thinks it is. This is just building the reverse 1B and then based on that creating this presentation mode. That's all it's doing. And right now I'm learning I'm running I haven't published this.
+Joanna Zhou: Ray.
+Alejandro Duque: I want to show it to Derek and Nor like you guys are the first ones to see it because uh and I was adding this financing team but again it could be here. It could be anywhere else. But I would say for teams, if you have a lot of different data sets that you use within a uh an underwriting tool or model,
+ 
+ 
+00:31:45
+ 
+Joanna Zhou: Mhm.
+Alejandro Duque: you could automate 99% of that because then then these are the data sources, right? So because that's the other thing I was working with with nor do like these are valid, let's say through December, this one through June 30th.
+Joanna Zhou: Okay.
+Alejandro Duque: the altus construction cost guide. So, this is going to flag in June and say like, hey, your cost guide might might be off because you need to update it. Things like that.
+Joanna Zhou: Mhm.
+Alejandro Duque: So, so yeah.
+Joanna Zhou: And and the database can be updated. How how long it take you to make a tour like this?
+Alejandro Duque: Yeah. Oh, I've spent now like 50 hours, I would say.
+Joanna Zhou: That's not long.
+Alejandro Duque: But but what?
+Joanna Zhou: That's not
+Alejandro Duque: No, no, exactly. No,
+Joanna Zhou: long.
+Alejandro Duque: but I'm saying I mean if you think about it like it was taking nor three hours to do H reverse 1B. Now I can drop I can drop what I need him to check and make sure that
+ 
+ 
+00:32:43
+ 
+Joanna Zhou: Exactly. Anything.
+Alejandro Duque: they're good. But I think he sent me some examples and they match 99% and again the little mistakes is because it caught mistakes that the person was doing when inputting the data. But but yeah,
+Joanna Zhou: Mhm.
+Alejandro Duque: this one has been like 50 hours. But in my opinion, it's worth it because then it's not replacing anyone. It's just cutting the need for all this manual
+Joanna Zhou: Yeah. Right.
+Alejandro Duque: work.
+Joanna Zhou: Oh yeah, I understand. Al, so what I will do later is I will and can you go back to the financing part?
+Alejandro Duque: Uh
+Joanna Zhou: So what what is the number you you are
+Alejandro Duque: yes.
+Joanna Zhou: using from my my package into this?
+Alejandro Duque: So
+Joanna Zhou: Just just the long to value DSCR amidation and like in
+Alejandro Duque: this premium.
+Joanna Zhou: insure.
+Alejandro Duque: Yeah. But but I I was just making a preview because I don't even know if it's accurate. Let me see because I have the standard.
+ 
+ 
+00:33:51
+ 
+Alejandro Duque: But um you can tell me I mean you I can sh send it to you and you tell me like hey this is what we need X Y and Z because for instance like there is no cash in cash return because right now it's estimating that there's no equity
+Joanna Zhou: Okay.
+Alejandro Duque: required since the take will will it wouldn't need any sort of equity right but but
+Joanna Zhou: Oh, okay.
+Alejandro Duque: uh this is like you and tell me what what you want and then we'll add it.
+Joanna Zhou: Okay. I I think I can show just like as I said like I I I I I customized this uh case to our underwriting. So I I don't think I should do that way. I should just present maybe five long criterial general to you. No matter whether a case would be qualified or not that's another discussion I just provide high level maybe five to you and you input them to this so that like when the sales pitch they
+Alejandro Duque: Yep.
+Joanna Zhou: can play okay this is the possible loan you are go you might able to get and then how that like will affect your final
+ 
+ 
+00:35:11
+ 
+Alejandro Duque: Yep.
+Joanna Zhou: numbers okay I understand yeah okay sure I okay I think
+Alejandro Duque: Yeah.
+Joanna Zhou: from hours uh reverse 1B the only thing affect the number there will be just the long to the loan amount and the interest rate and like amization things like that I think there's other things is
+Alejandro Duque: Okay.
+Joanna Zhou: not related to his reverse 1B okay I
+Alejandro Duque: Okay.
+Joanna Zhou: understand uh yeah okay okay yeah I should go back to
+Alejandro Duque: Yeah.
+Joanna Zhou: another yeah because this is a gen general tour. It's not a it's not a based on this case what will be
+Alejandro Duque: No, no, exactly. And that's why I wanted to be up front,
+Joanna Zhou: Yeah.
+Alejandro Duque: which is the idea here was what we had before, but but we can add it. I mean, we can add it. And then this could also just like the the previous step. It generates the reverse 1B. It could generate uh this underwriting tool that that sorry um it could fill out as much of these proform as as needed like we would need more information but it could be build there in there as well.
+ 
+ 
+00:36:32
+ 
+Joanna Zhou: Mhm. Mhm. Right. Yeah. Okay.
+Alejandro Duque: So
+Joanna Zhou: And it doesn't need to be update for it don't need to be uh I mean update frequently.
+Alejandro Duque: no uh if you see so I asked them for the rates and these are the files they gave me right like these were some of the rates um then
+Joanna Zhou: Okay.
+Alejandro Duque: this is other like rates they gave me for different things. So, so yeah,
+Joanna Zhou: Mhm.
+Alejandro Duque: it's just files and then you can drop them in and they get automatically updated.
+Joanna Zhou: Okay. Good. Good. So Jeffrey,
+Alejandro Duque: So,
+Joanna Zhou: do you have any questions from Alexandro about how we kind of can build things like this or how this can help us to save our underwriting time or eliminate those like manual input?
+Jeffrey Niu: uh uh I think that the uh UI is very uh attractive. I mean the the whole uh website uh that is really
+Joanna Zhou: Right.
+Jeffrey Niu: really amazing.
+Alejandro Duque: Thank you.
+ 
+ 
+00:37:39
+ 
+Jeffrey Niu: Yeah. Yeah. Yeah. Yeah. But uh for our underwriting um so uh I I don't have any uh questions about the the uh automatic uh tools using to our underwriting process at this moment because we we may be using another way to to do this.
+Alejandro Duque: Okay,
+Jeffrey Niu: Yeah.
+Alejandro Duque: cool.
+Jeffrey Niu: Yeah. Yeah.
+Joanna Zhou: Oh,
+Alejandro Duque: And what what tool are you guys
+Joanna Zhou: okay.
+Alejandro Duque: using?
+Jeffrey Niu: So actually we are we are using some uh like uh open cloud to to help to do some auto uh automation for the
+Alejandro Duque: Nice. Okay.
+Joanna Zhou: I have I have a question like it's my pain point.
+Jeffrey Niu: yeah
+Joanna Zhou: It's we need to work with we need to populate things from that spreadsheet I sent to you. We need to populate this into a long summary. Uh it could be word or it could be PDF. I don't know but I don't know how to do that part. Do you have any suggestion like which direction we should go to to make it
+ 
+ 
+00:38:43
+ 
+Alejandro Duque: Okay. Yeah.
+Joanna Zhou: easier?
+Alejandro Duque: I think the easiest way is Do you have an example of what that summary could look like?
+Joanna Zhou: Yes. Uh Jeffrey, can you can you can you show a case like the from the performer to the word version of our loan summary?
+Jeffrey Niu: Yeah, I think I can show the long summary template. Let me see. Can I share the screen?
+Alejandro Duque: Uh, let me see. Can you Does it allow you or no?
+Jeffrey Niu: Uh, let me see.
+Alejandro Duque: It's the little icon right in the middle with a an arrow pointing
+Jeffrey Niu: Okay,
+Alejandro Duque: up.
+Jeffrey Niu: let me see. Let me try. Do you see that screen? Okay.
+Joanna Zhou: Yeah.
+Jeffrey Niu: Yeah.
+Alejandro Duque: Yep.
+Jeffrey Niu: This is our uh long summary template. So uh you can see the structure on the left hand side. So the executive summary,
+Joanna Zhou: Appraisal
+Jeffrey Niu: proposed mortgage details and uh general contractor builder
+Alejandro Duque: Yeah.
+Jeffrey Niu: in introduction, sponsorship of the project and then the property details.
+ 
+ 
+00:40:24
+ 
+Jeffrey Niu: Most of the this parts come from the um yeah and
+Joanna Zhou: required.
+Jeffrey Niu: then this part is the performer. So it it is from one sheet of that uh uh Excel trying to send to you. So that that is the uh performer part and then the budget of the project and then uh the project economic
+Alejandro Duque: Cool.
+Jeffrey Niu: analysis. So that is that that is the structure of our um long summary. So normally we will uh when we prepare the long summary we will run the performer at the first uh at the first step and then we got the numbers. Then we uh uh just input the performance numbers and the the results to the uh long summary.
+Alejandro Duque: Okay. Okay.
+Jeffrey Niu: Yeah.
+Alejandro Duque: And got it. And the pictures and all of that is just unique to each project.
+Joanna Zhou: Right.
+Jeffrey Niu: Yes.
+Joanna Zhou: Project's different. This from appraisal
+Jeffrey Niu: Yes.
+Alejandro Duque: Yeah. Okay. Yeah.
+Joanna Zhou: report.
+Alejandro Duque: I mean, there are a lot of parts of that that could be just uh like you could just tell the AI or the tool to just fill out the data automatically.
+ 
+ 
+00:41:53
+ 
+Alejandro Duque: I think it's the pictures part that it would need a little bit of work, but but yeah, it could definitely be uh I mean like sped up in the sense of instead of having to like type it manually like obviously you could just bring all that data from one to here like it's very doable. Yeah, like with open claw or any tool that you guys are using it's very doable. Now the pictures you just have to say and specify that piece. So that's the piece of manual review but yeah we're using it. So we we do loans uh commercial loans and our entire back office has been fully automated at this point in the sense of we know the pictures and so now we have a place that we put in the pictures. We set up in the system the loan terms or all of that based on some underwriting and it just puts a beautiful like uh term sheet together for for them in in in because
+Jeffrey Niu: Mhm.
+Alejandro Duque: now it knows exactly where it goes. So So yeah, it's definitely feasible.
+ 
+ 
+00:43:00
+ 
+Joanna Zhou: Okay. Do you mean like you have built up a system a back system to let's say put
+Alejandro Duque: Yeah.
+Joanna Zhou: pictures here and put a prison here and then they can generate term
+Alejandro Duque: Yeah. Exactly.
+Joanna Zhou: sheet or or underwriting package for you?
+Alejandro Duque: Yeah.
+Joanna Zhou: Okay.
+Alejandro Duque: And it's again,
+Joanna Zhou: And you are using Yes,
+Alejandro Duque: it's not perfect, but it gets me 90% of the way there. And then I just go in and make my
+Joanna Zhou: for sure. That's 90% 80% would be great.
+Alejandro Duque: Yeah. Yeah. So definitely doable.
+Joanna Zhou: Okay. Okay. Okay. Okay.
+Alejandro Duque: Yeah.
+Jeffrey Niu: Oops.
+Alejandro Duque: But uh but yeah, so no, let's keep in touch. I I do have a call in one minute,
+Joanna Zhou: Go.
+Alejandro Duque: but uh if you want to send me what you would like to see in that in that page and again and probably the best thing is that we'll talk to next week when he's back so we can uh uh see how that comes together. But um and yeah, and then you guys let me know like, hey, we thought of this idea or maybe again whatever you guys need and and we can incorporate it. Sounds good. All right. Thank you, Joanna. Thank you, Jeffrey. Great seeing you guys.
