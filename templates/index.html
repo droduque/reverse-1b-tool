@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reverse 1B Generator — Rock Advisors</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,7 +25,7 @@
 }
 
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -85,17 +85,17 @@ body {
 }
 
 h1 {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 32px;
-  font-weight: 400;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 38px;
+  font-weight: 700;
   color: var(--text);
   margin-bottom: 8px;
 }
 .subtitle {
-  font-size: 15px;
+  font-size: 18px;
   color: var(--dim);
   margin-bottom: 36px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* ── Flash messages ──────────────────────── */
@@ -106,7 +106,7 @@ h1 {
   padding: 12px 16px;
   border-radius: var(--radius);
   margin-bottom: 20px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
 }
 
@@ -125,7 +125,7 @@ h1 {
 
 .card-title {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2.5px;
@@ -152,26 +152,26 @@ h1 {
 }
 .form-group label {
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--text);
   margin-bottom: 8px;
 }
 .form-group .hint {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--dim);
   font-weight: 400;
   margin-top: 8px;
   line-height: 1.5;
 }
 
-select, input[type="text"] {
+select, input[type="text"], input[type="number"] {
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  font-size: 14px;
-  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
   color: var(--text);
   background: #0F1218;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -184,12 +184,12 @@ select {
   background-repeat: no-repeat;
   background-position: right 14px center;
 }
-select:focus, input[type="text"]:focus {
+select:focus, input[type="text"]:focus, input[type="number"]:focus {
   outline: none;
   border-color: var(--gold);
   box-shadow: 0 0 0 3px var(--gold-glow);
 }
-input[type="text"]::placeholder {
+input[type="text"]::placeholder, input[type="number"]::placeholder {
   color: #4A4D52;
 }
 select option {
@@ -240,13 +240,13 @@ select option {
   font-size: 22px;
 }
 .upload-text {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--text);
   font-weight: 500;
   margin-bottom: 4px;
 }
 .upload-hint {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--dim);
 }
 .upload-filename {
@@ -257,7 +257,7 @@ select option {
   border: 1px solid rgba(61,176,107,0.2);
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--green);
 }
@@ -272,7 +272,7 @@ select option {
 .upload-area.has-file::after {
   content: 'Click to change file';
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--dim);
   margin-top: 10px;
 }
@@ -310,18 +310,18 @@ select option {
   gap: 8px 24px;
 }
 .preview-item {
-  font-size: 13px;
+  font-size: 14px;
 }
 .preview-label {
   color: var(--dim);
-  font-size: 11px;
+  font-size: 12px;
   margin-bottom: 1px;
 }
 .preview-value {
   color: var(--text);
   font-weight: 500;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 /* ── Building type toggle ────────────────── */
@@ -345,14 +345,14 @@ select option {
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--dim);
   background: var(--bg);
 }
 .toggle-option label .label-sub {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   color: #555;
   margin-top: 3px;
@@ -367,6 +367,53 @@ select option {
   color: var(--dim);
 }
 
+/* ── Stepper (construction duration) ─────── */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #0F1218;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  width: fit-content;
+}
+.stepper-btn {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  font-size: 20px;
+  font-weight: 600;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.stepper-btn:hover {
+  background: var(--gold-glow);
+}
+.stepper-btn:active {
+  background: var(--gold-glow-strong);
+}
+.stepper-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 44px;
+  text-align: center;
+  padding: 0 4px;
+}
+.stepper-unit {
+  font-size: 14px;
+  color: var(--dim);
+  padding-right: 8px;
+}
+
 /* ── Submit button ───────────────────────── */
 .btn-generate {
   display: block;
@@ -377,7 +424,7 @@ select option {
   border: none;
   border-radius: var(--radius);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -411,7 +458,7 @@ select option {
   align-items: center;
   gap: 12px;
   padding: 10px 0;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--dim);
   transition: color 0.3s;
 }
@@ -486,7 +533,7 @@ select option {
   color: var(--gold);
   text-decoration: none;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -502,7 +549,7 @@ select option {
   padding: 12px 16px;
   border-radius: var(--radius);
   margin-bottom: 16px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -535,7 +582,7 @@ select option {
 }
 .data-sources summary {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -574,7 +621,7 @@ select option {
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 14px 16px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .ds-item .ds-name {
   font-weight: 600;
@@ -588,7 +635,7 @@ select option {
 .ds-badge {
   display: inline-block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -603,7 +650,7 @@ select option {
 .ds-badge.not-integrated { background: rgba(139,138,135,0.1); color: var(--dim); }
 .ds-pending-note {
   margin-top: 14px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--dim);
   font-style: italic;
   padding-left: 2px;
@@ -616,7 +663,7 @@ select option {
   color: rgba(139,138,135,0.5);
   text-align: center;
   padding: 24px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .footer a {
   color: var(--gold);
@@ -624,7 +671,7 @@ select option {
 }
 .footer .tagline {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: rgba(139,138,135,0.3);
@@ -781,9 +828,15 @@ select option {
     <div class="card">
       <div class="card-title">Construction Duration</div>
       <div class="form-group">
-        <label for="construction_months">Months of construction</label>
-        <input type="number" name="construction_months" id="constructionMonths" placeholder="Auto" min="6" max="60" step="1">
-        <div class="hint" id="constructionHint">Leave blank for auto-estimate based on unit count (&le;200 units = 18mo, 200-400 = 24mo, 400+ = 30mo). Override for project-specific timelines.</div>
+        <label>Months of construction</label>
+        <input type="hidden" name="construction_months" id="constructionMonthsHidden">
+        <div class="stepper">
+          <button type="button" class="stepper-btn" id="constrMinus">&minus;</button>
+          <span class="stepper-value" id="constrValue">18</span>
+          <span class="stepper-unit">months</span>
+          <button type="button" class="stepper-btn" id="constrPlus">+</button>
+        </div>
+        <div class="hint" id="constructionHint">Auto-estimated based on unit count. Adjust with +/&minus; buttons.</div>
       </div>
     </div>
 
@@ -878,6 +931,27 @@ select option {
 </footer>
 
 <script>
+// Construction duration stepper
+var constrMonths = 18;
+var constrValueEl = document.getElementById('constrValue');
+var constrHidden = document.getElementById('constructionMonthsHidden');
+constrHidden.value = constrMonths;
+
+document.getElementById('constrMinus').addEventListener('click', function() {
+  if (constrMonths > 6) {
+    constrMonths -= 3;
+    constrValueEl.textContent = constrMonths;
+    constrHidden.value = constrMonths;
+  }
+});
+document.getElementById('constrPlus').addEventListener('click', function() {
+  if (constrMonths < 60) {
+    constrMonths += 3;
+    constrValueEl.textContent = constrMonths;
+    constrHidden.value = constrMonths;
+  }
+});
+
 // File upload interaction
 var uploadArea = document.getElementById('uploadArea');
 var fileInput = document.getElementById('proformaInput');
@@ -954,12 +1028,13 @@ function previewFile(file) {
       }
 
       // Auto-suggest construction duration based on unit count
-      var constrInput = document.getElementById('constructionMonths');
       var constrHint = document.getElementById('constructionHint');
       if (data.total_units) {
         var suggested = data.total_units <= 200 ? 18 : (data.total_units <= 400 ? 24 : 30);
-        constrInput.placeholder = suggested + 'mo (auto)';
-        constrHint.textContent = data.total_units + ' units \u2192 ' + suggested + ' months suggested. Override if your project timeline differs.';
+        constrMonths = suggested;
+        document.getElementById('constrValue').textContent = suggested;
+        document.getElementById('constructionMonthsHidden').value = suggested;
+        constrHint.textContent = data.total_units + ' units \u2192 ' + suggested + ' months suggested. Adjust with +/\u2212 buttons.';
       }
 
       // Show preview card with auto-detected info
