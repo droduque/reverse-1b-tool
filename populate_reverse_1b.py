@@ -717,7 +717,10 @@ def consolidate_unit_mix(unit_types):
 # TEMPLATE WRITER — copies template and writes data to 3 sheets
 # ---------------------------------------------------------------------------
 
-def populate_template(data, output_path, municipality=None, building_type='high-rise', financing_program=None, construction_months=None):
+def populate_template(data, output_path, municipality=None, building_type='high-rise',
+                      financing_program=None, construction_months=None,
+                      gfa_override=None, parking_sf_override=None,
+                      construction_financing=None):
     """
     Copy the Reverse 1B template and write parsed 1A data into it.
     Uses the ZIP/XML writer to preserve all drawings, images, and formatting.
@@ -726,6 +729,9 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     municipality: dict from load_dc_rates() with 'name' and 'rates' keys, or None
     building_type: 'mid-rise' or 'high-rise' — affects Altus cost guide row reference
     construction_months: override for construction duration (default: auto from unit count)
+    gfa_override: user-provided GFA in SF (overrides 1A/estimated value)
+    parking_sf_override: user-provided total parking SF
+    construction_financing: dict with mezz/bank debt %, prime rates, margins, fees
     """
     from xml_writer import write_cell, save_workbook
 
@@ -822,9 +828,12 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("")
     log.append("--- Sheet 1 Internal Section (Operating Assumptions) ---")
 
-    # GFA — from 1A if available, else estimate from net rentable / efficiency
-    gfa = data.get('gfa')
-    if gfa:
+    # GFA — user override > 1A value > estimate
+    if gfa_override:
+        gfa = gfa_override
+        queue_write(sheet1_writes, 'E62', gfa, f"Building GFA (user override: {gfa:,.0f} SF)")
+    elif data.get('gfa'):
+        gfa = data['gfa']
         queue_write(sheet1_writes, 'E62', gfa, "Building GFA (from 1A internal section)")
     else:
         gfa = round(data['total_rentable_sf'] / GFA_EFFICIENCY)
@@ -992,16 +1001,23 @@ def populate_template(data, output_path, municipality=None, building_type='high-
 
     # --- Section 4.1: Parking ---
     log.append("")
-    log.append("--- Parking (counts from 1A, SF estimated) ---")
+    log.append("--- Parking (counts from 1A, SF estimated or overridden) ---")
     parking_items = [
         (39, 'Underground Parking', data['parking_underground']['spaces']),
         (40, 'Visitor Parking', data['parking_visitor']['spaces']),
         (41, 'Retail Parking', data['parking_retail']['spaces']),
     ]
+    total_spaces = sum(s for _, _, s in parking_items)
+    # If user provided total parking SF, distribute proportionally across types
+    if parking_sf_override and total_spaces > 0:
+        sf_per_space = round(parking_sf_override / total_spaces)
+        sf_note = f"USER OVERRIDE: {parking_sf_override:,.0f} total SF / {total_spaces} spaces = {sf_per_space} SF/space"
+    else:
+        sf_per_space = PARKING_SF_PER_SPACE
+        sf_note = f"ESTIMATED: {PARKING_SF_PER_SPACE} SF/space (industry standard)"
     for row, label, spaces in parking_items:
         queue_write(sheet4_writes, f'C{row}', spaces, f"{label} spaces (from 1A)")
-        queue_write(sheet4_writes, f'D{row}', PARKING_SF_PER_SPACE,
-                    f"ESTIMATED: {PARKING_SF_PER_SPACE} SF/space (industry standard)")
+        queue_write(sheet4_writes, f'D{row}', sf_per_space, sf_note)
 
     # --- Section 4.2: Back of House ---
     log.append("")
@@ -1054,6 +1070,28 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     queue_write(sheet5_writes, 'E16', 0, "Stabilized duration (months)")
     queue_write(sheet5_writes, 'F15', -3, "Lease-up offset (months)")
     queue_write(sheet5_writes, 'E37', 0.08, "Profit percentage (8%)")
+
+    # Construction financing — debt stack, rates, fees
+    cf = construction_financing or {}
+    mezz_pct = cf.get('mezz_debt_pct', 0.15)
+    mezz_prime = cf.get('mezz_prime_rate', 0.0445)
+    mezz_margin = cf.get('mezz_margin', 0.035)
+    bank_pct = cf.get('bank_debt_pct', 0.75)
+    bank_prime = cf.get('bank_prime_rate', 0.0445)
+    bank_margin = cf.get('bank_margin', 0.01)
+    fin_fees = cf.get('financing_fees_pct', 0.01)
+    fin_contingency = cf.get('financing_contingency_pct', 0.005)
+
+    log.append("")
+    log.append("--- Construction Financing (Sheet 5) ---")
+    queue_write(sheet5_writes, 'E69', mezz_pct, f"Mezzanine debt ({mezz_pct:.0%})")
+    queue_write(sheet5_writes, 'I69', mezz_prime, f"Mezzanine prime rate ({mezz_prime:.2%})")
+    queue_write(sheet5_writes, 'J69', mezz_margin, f"Mezzanine margin ({mezz_margin:.2%})")
+    queue_write(sheet5_writes, 'E70', bank_pct, f"Bank debt ({bank_pct:.0%})")
+    queue_write(sheet5_writes, 'I70', bank_prime, f"Bank prime rate ({bank_prime:.2%})")
+    queue_write(sheet5_writes, 'J70', bank_margin, f"Bank margin ({bank_margin:.2%})")
+    queue_write(sheet5_writes, 'D74', fin_fees, f"Financing fees ({fin_fees:.1%})")
+    queue_write(sheet5_writes, 'D75', fin_contingency, f"Financing contingency ({fin_contingency:.1%})")
 
     # Project start date — replace =TODAY() with 1st of current month.
     # EDATE from month-end dates (29/30/31) gets clamped by short months
@@ -1494,7 +1532,21 @@ def import_reverse_1b(xlsx_path):
 # PROJECT JSON EXPORT — for the presentation tool
 # ---------------------------------------------------------------------------
 
-def export_project_json(data, output_path, municipality=None, building_type='high-rise', financing_program=None):
+def _blended_construction_rate(cf):
+    """Compute blended construction interest rate from debt stack params."""
+    cf = cf or {}
+    mezz_pct = cf.get('mezz_debt_pct', 0.15)
+    mezz_rate = cf.get('mezz_prime_rate', 0.0445) + cf.get('mezz_margin', 0.035)
+    bank_pct = cf.get('bank_debt_pct', 0.75)
+    bank_rate = cf.get('bank_prime_rate', 0.0445) + cf.get('bank_margin', 0.01)
+    total = mezz_pct + bank_pct
+    if total == 0:
+        return 0
+    return (mezz_pct * mezz_rate + bank_pct * bank_rate) / total
+
+
+def export_project_json(data, output_path, municipality=None, building_type='high-rise',
+                        financing_program=None, construction_financing=None):
     """
     Export project data as a JSON file for the presentation/sensitivity tool.
     Contains all inputs needed to calculate revenue, costs, and valuation
@@ -1621,8 +1673,8 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
         },
         'financing': {
             # Construction financing (Sheet 5 rows 67-71)
-            'construction_loan_pct': 0.90,   # 90% debt / 10% equity
-            'construction_loan_rate': 0.0587, # blended (15% mezz @ 7.95% + 75% bank @ 5.45%)
+            'construction_loan_pct': (construction_financing or {}).get('mezz_debt_pct', 0.15) + (construction_financing or {}).get('bank_debt_pct', 0.75),
+            'construction_loan_rate': _blended_construction_rate(construction_financing),
             # Permanent take-out loan (Sheet 6 rows 27-35) — from selected program
             'program_key': fp_key,
             'program_label': fp['label'],

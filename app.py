@@ -13,8 +13,10 @@ import tempfile
 import re
 import json
 import glob
+import logging
 from datetime import date
 
+import requests
 from flask import (Flask, render_template, request, send_file,
                    redirect, url_for, flash, jsonify)
 
@@ -31,6 +33,8 @@ from populate_reverse_1b import (
     _log_municipality_gap,
     HIGH_RISE_FLOOR_THRESHOLD,
     FINANCING_PROGRAMS,
+    PARKING_SF_PER_SPACE,
+    GFA_EFFICIENCY,
 )
 from data_freshness import get_freshness_report, get_alerts
 from validate_output import validate_output, validate_financials
@@ -43,6 +47,28 @@ OUTPUT_DIR = os.path.join(os.path.dirname(__file__), 'output')
 # Load DC rates once at startup
 MUNICIPALITIES = load_dc_rates()
 
+# Fetch Bank of Canada prime rate once at startup
+# Policy rate + 2.20% spread = prime. Falls back to 4.45% if API unavailable.
+PRIME_RATE_CACHE = {'prime': 0.0445, 'policy': 0.0225, 'fetched': None}
+
+def fetch_prime_rate():
+    """Fetch Bank of Canada overnight rate target, derive prime = policy + 2.20%."""
+    try:
+        url = 'https://www.bankofcanada.ca/valet/observations/V39079/json?recent=1'
+        resp = requests.get(url, timeout=5)
+        resp.raise_for_status()
+        obs = resp.json()['observations'][-1]
+        policy = float(obs['V39079']['v']) / 100  # API returns e.g. 2.25 meaning 2.25%
+        prime = policy + 0.0220
+        PRIME_RATE_CACHE['policy'] = policy
+        PRIME_RATE_CACHE['prime'] = prime
+        PRIME_RATE_CACHE['fetched'] = date.today().isoformat()
+        logging.info(f"Bank of Canada prime rate: {prime:.2%} (policy {policy:.2%} + 2.20%)")
+    except Exception as e:
+        logging.warning(f"Could not fetch Bank of Canada rate, using default 4.45%: {e}")
+
+fetch_prime_rate()
+
 
 @app.route('/', methods=['GET'])
 def index():
@@ -51,7 +77,8 @@ def index():
     freshness = get_freshness_report()
     return render_template('index.html', municipalities=MUNICIPALITIES,
                            current_year=date.today().year,
-                           freshness_alerts=alerts, freshness_report=freshness)
+                           freshness_alerts=alerts, freshness_report=freshness,
+                           prime_rate=PRIME_RATE_CACHE)
 
 
 @app.route('/preview', methods=['POST'])
@@ -75,6 +102,18 @@ def preview():
         # Auto-detect municipality from project address
         muni_match = detect_municipality(data.get('address', ''))
 
+        # GFA: from 1A if available, else estimate
+        gfa = data.get('gfa')
+        gfa_estimated = gfa is None
+        if gfa is None:
+            gfa = round(data['total_rentable_sf'] / GFA_EFFICIENCY)
+
+        # Parking SF: spaces × standard SF/space
+        total_spaces = (data['parking_underground']['spaces']
+                        + data['parking_visitor']['spaces']
+                        + data['parking_retail']['spaces'])
+        parking_sf = total_spaces * PARKING_SF_PER_SPACE
+
         return jsonify({
             'address': data['address'],
             'total_units': data['total_units'],
@@ -85,6 +124,10 @@ def preview():
             'municipality_name': muni_match['name'],
             'tax_rate': data.get('tax_rate', 0),
             'assessed_value': data.get('assessed_value', 0),
+            'gfa': gfa,
+            'gfa_estimated': gfa_estimated,
+            'parking_sf': parking_sf,
+            'parking_spaces': total_spaces,
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 400
@@ -208,6 +251,42 @@ def generate():
         except ValueError:
             pass
 
+    # Get GFA and parking SF overrides
+    gfa_override = None
+    gfa_str = request.form.get('gfa_override', '').strip()
+    if gfa_str:
+        try:
+            gfa_override = float(gfa_str)
+        except ValueError:
+            pass
+
+    parking_sf_override = None
+    parking_sf_str = request.form.get('parking_sf_override', '').strip()
+    if parking_sf_str:
+        try:
+            parking_sf_override = float(parking_sf_str)
+        except ValueError:
+            pass
+
+    # Get construction financing parameters (form shows %, we convert to decimal)
+    default_prime = PRIME_RATE_CACHE['prime']
+    construction_financing = {}
+    for field, key, default in [
+        ('mezz_debt_pct', 'mezz_debt_pct', 15),
+        ('mezz_prime_rate', 'mezz_prime_rate', default_prime * 100),
+        ('mezz_margin', 'mezz_margin', 3.5),
+        ('bank_debt_pct', 'bank_debt_pct', 75),
+        ('bank_prime_rate', 'bank_prime_rate', default_prime * 100),
+        ('bank_margin', 'bank_margin', 1.0),
+        ('financing_fees_pct', 'financing_fees_pct', 1.0),
+        ('financing_contingency_pct', 'financing_contingency_pct', 0.5),
+    ]:
+        val_str = request.form.get(field, '').strip()
+        try:
+            construction_financing[key] = float(val_str) / 100 if val_str else default / 100
+        except ValueError:
+            construction_financing[key] = default / 100
+
     # Save uploaded file to temp location
     with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
         file.save(tmp.name)
@@ -242,12 +321,17 @@ def generate():
         if 'assessed_value' in tax_overrides:
             data['assessed_value'] = tax_overrides['assessed_value']
 
-        log = populate_template(data, output_path, municipality=municipality, building_type=building_type, financing_program=financing_program, construction_months=construction_months)
+        log = populate_template(data, output_path, municipality=municipality,
+                                building_type=building_type, financing_program=financing_program,
+                                construction_months=construction_months,
+                                gfa_override=gfa_override, parking_sf_override=parking_sf_override,
+                                construction_financing=construction_financing)
 
         # Also export the project JSON for the presentation tool
         json_filename = f"Reverse_1B_{project_name}_{today}.json"
         json_path = os.path.join(OUTPUT_DIR, json_filename)
-        export_project_json(data, json_path, municipality=municipality, building_type=building_type, financing_program=financing_program)
+        export_project_json(data, json_path, municipality=municipality, building_type=building_type,
+                            financing_program=financing_program, construction_financing=construction_financing)
 
         # Save the generation log — documents every cell written, estimated,
         # and skipped. Serves as an audit trail for Noor's review.

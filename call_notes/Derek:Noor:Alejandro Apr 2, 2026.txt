@@ -1,0 +1,913 @@
+Apr 2, 2026
+Noor/Alejandro - Transcript
+00:00:00
+ 
+Noor Khan: Hi, Andrew.
+Alejandro Duque: Hey, Nor. Good morning. How are you?
+Noor Khan: Very good. How are
+Alejandro Duque: Good. Good.
+Noor Khan: you?
+Alejandro Duque: How's How's doing? Getting ready for some. So, do you guys have tomorrow and Monday off in Canada?
+Noor Khan: Yeah. Uh,
+Alejandro Duque: Like Okay.
+Noor Khan: Monday will be working day. Tomorrow will be off.
+Alejandro Duque: Okay. Sounds good.
+Noor Khan: Did you get the email from Lisa? She wanted to add Derek also to the meeting.
+Alejandro Duque: Oh, sorry. I I was on a call two calls now,
+Noor Khan: It's fine.
+Alejandro Duque: but
+Noor Khan: So you can just send him an invite if he can join in case you know I think because his calendar is already booked
+Alejandro Duque: uh
+Noor Khan: for this call and he might be thinking so I think maybe we can give him a quick update and if
+Alejandro Duque: okay.
+Noor Khan: then he wants to stay on the call it's up to him right because you you made it almost
+ 
+ 
+00:00:49
+ 
+Alejandro Duque: Yes.
+Noor Khan: 25 minutes call anyway just to focus on the business
+Alejandro Duque: Yeah.
+Noor Khan: right no I I think I'm good with 25 minutes
+Alejandro Duque: But I can stay longer. Yeah, I just like uh
+Noor Khan: like I'm okay with whatever time you have that's good with me Like I'm not fussed about
+Alejandro Duque: Okay, perfect. Uh yeah,
+Noor Khan: that.
+Alejandro Duque: I just replied back uh send it to him. Okay, cool. Uh yeah, so I went through the notes. I also made a couple of uh updates to match the uh I wanted the the tool to match pretty much the even the same font as and I made the font a little larger because some of the things were not really legible. But um yeah, we can go over
+Noor Khan: Let me open the bird file. So I I think in the one thing is like there was some like you know kind of a uh just added him as well. Okay, good. like I like the tool it's very powerful like without doubt
+ 
+ 
+00:01:50
+ 
+Alejandro Duque: Yeah.
+Noor Khan: right and uh I did get some messages like for example like you know of like it gave me some messages that you know when it was not working and like
+Alejandro Duque: Yeah.
+Noor Khan: but I didn't I didn't let you know those messages I can if you want I can read those for
+Alejandro Duque: Yes, please. Yeah. Anything that you see like right now because from my end uh pretty much I put here.
+Noor Khan: So, so I I'll tell you two messages I got.
+Alejandro Duque: Yeah.
+Noor Khan: Let me just go to my I took the picture on those actually. One message was application failed to respond. This error appears to be caused by the application. If this is your project,
+Alejandro Duque: Okay.
+Noor Khan: check out your deploy logs to see what went wrong. Refer to our docs on fixing common errors for help or reach out over our help station. If you are a visitor, please contact the applicant application owner or try again later. This was one message I got.
+ 
+ 
+00:03:16
+ 
+Alejandro Duque: Okay, Derek is joining now.
+Noor Khan: So So I got a I got a picture of the
+Alejandro Duque: Okay.
+Noor Khan: message. I Derek Yeah.
+Derek Lobo: Hello.
+Alejandro Duque: Hey,
+Derek Lobo: I'm just going to fly on the wall here.
+Alejandro Duque: Derek.
+Derek Lobo: Okay,
+Noor Khan: Okay. Okay. Okay. Okay. That's fine. Both are okay. So,
+Derek Lobo: guys.
+Noor Khan: we I was just letting him know a message I got yesterday when I was testing the application. You got the message now, right? So,
+Alejandro Duque: Yeah.
+Noor Khan: this was probably from the place where you hosted it, right?
+Alejandro Duque: Yeah.
+Noor Khan: Railway is go to railway.
+Alejandro Duque: Yeah. Yeah.
+Noor Khan: I don't know what is the
+Alejandro Duque: Yeah.
+Noor Khan: railway.
+Alejandro Duque: Railway is just uh think of it as just a hosting system for a URL. Since we have so many Excel and and data things, it's the best one. I'll probably have to upgrade to the $10 a month because I was just using the five bucks a month.
+ 
+ 
+00:04:03
+ 
+Alejandro Duque: That's probably
+Noor Khan: That's fine. So I'm just letting you know the other message I got before that was uh this
+Alejandro Duque: why.
+Noor Khan: site cannot can't be reached. The web page is https then two slash then says earnest dot earnest dash celebration dash prediction
+Alejandro Duque: Yeah.
+Noor Khan: uprailway generate might be temporarily down or
+Alejandro Duque: Okay.
+Noor Khan: it may have moved permanently to a new website. This was also a message I got but then I tried again because I switched it off like I I exited and I tried it again and it basically worked later on.
+Alejandro Duque: Yeah.
+Noor Khan: But those are the two other side messages I got as well which I did not let you know
+Alejandro Duque: Okay, perfect. Again, if you have the screenshots or the images,
+Noor Khan: actually.
+Alejandro Duque: if you want to send them, then I can because before I was running it in my computer, once it goes out in railway, think of it as I don't know, GoDaddy or any of these hosting website,
+Noor Khan: Yeah, sure.
+ 
+ 
+00:05:02
+ 
+Alejandro Duque: Google, uh things might slow down or break.
+Noor Khan: Sure.
+Alejandro Duque: Like for instance, like right now I'm working because it takes about right now it's like 125 seconds to generate the 1B, but the reverse 1B. Uh,
+Noor Khan: Yeah.
+Alejandro Duque: and something that I added here as well was the month of construction.
+Noor Khan: Yeah. Okay. It's good.
+Alejandro Duque: And it does suggest based on how many units I sent you in the email,
+Noor Khan: Yeah. I saw that.
+Alejandro Duque: the logic
+Noor Khan: I think that's one way to look at it. That's fine because you know what my point was that you know it it was remembering the original original model that we did and it was just thinking everything will be like that
+Alejandro Duque: Yeah. Yep.
+Noor Khan: like you know it's like a child right kind of training it right so I I I thought fine should we do it
+Alejandro Duque: Yeah.
+Noor Khan: manually or what but I wanted to point it out to you right I think it's a good idea to do it this way
+ 
+ 
+00:05:52
+ 
+Alejandro Duque: Yeah. Perfect. Yeah.
+Noor Khan: like if you giving an option here then why not the one question I had I don't think if you
+Alejandro Duque: Mhm.
+Noor Khan: responded Because how is it calculating the area
+Alejandro Duque: So there was one thing that I should have caught that I
+Noor Khan: schedule?
+Alejandro Duque: didn't but on the template itself it's referencing Otawa instead of the GTA. So and I even put the sheet because I have not touched the templates because I don't want
+Noor Khan: Sure.
+Alejandro Duque: to mess anything up in the formulas.
+Noor Khan: Fine.
+Alejandro Duque: But I think that whole mistake uh the lower like cost per square foot and the development cost gap I think is coming from that and and I highlighted one. I've had issues sometimes when I touch Excel sheets with my MacBook that it breaks other things. So if you don't mind just changing that one. I think that should solve
+Noor Khan: No, I can do that. No,
+Alejandro Duque: it.
+Noor Khan: what my question is the area schedule like how is it calculating it that breaking it down into how much should be the area for the amenities this and that that
+ 
+ 
+00:07:00
+ 
+Alejandro Duque: Okay. Yeah. So, yeah. So, from the 1A, it's pulling unit counts, I think, commercial square footage, parking, and storage. That's directly from the 1A. But the other ones are using like estimation,
+Noor Khan: Well,
+Alejandro Duque: I think. So, I added some like amenity space at $22 at 22 square foot per unit across five room types. The corridors at 25 square unit per unit. I could send you all of them.
+Noor Khan: you have defined those parameters for it.
+Alejandro Duque: how it's going.
+Noor Khan: You mean?
+Alejandro Duque: Yeah, it has some parameters that he's
+Noor Khan: Okay. Okay. So, actually Okay.
+Alejandro Duque: using.
+Noor Khan: So okay so what I did when I when I did my original area schedule so in my mind is like two two ways to do it right the area schedule because what we need
+Alejandro Duque: Yeah.
+Noor Khan: is a parking square footage parking square footage can be defined based on
+Alejandro Duque: Mhm.
+Noor Khan: x amount per parking space right which is there in my in that model right because that is above
+ 
+ 
+00:07:53
+ 
+Alejandro Duque: Yeah.
+Noor Khan: GFA anyway so what we need like outside the GFA area for if If the model 1 a that we received from the uh research team if it has a GFA number already because which is most likely they may have got from the client then we
+Alejandro Duque: Mhm.
+Noor Khan: use that then even we don't need the full detailed area schedule as well because the area
+Alejandro Duque: Okay.
+Noor Khan: number is coming just we need to have a parking area because parking is to be built so that that that's like below the grade right so we need to have
+Alejandro Duque: Gotcha.
+Noor Khan: a cost estimate for that which is applied based on the like you know underground parking per square foot from the elus report. So okay so if if the 1A from the team does not have a
+Alejandro Duque: Okay.
+Noor Khan: GFA then it can apply those generic parameters that you are talking about you know that that should be the logic and then we can
+Alejandro Duque: Gotcha. Okay. Okay. Okay. Perfect. Yeah.
+ 
+ 
+00:09:01
+ 
+Noor Khan: we can refine those logics that you have in case like you know in case let's for example once we are into practice then the team can say by the way this logic is low for this we need to increase or whatever right we will leave it to them and to Derek for example he might also have an input that I think it should be more or less we will leave it to them at that stage but for now the logic should be if the GF is already in the
+Alejandro Duque: He should keep it.
+Noor Khan: 1A then pick it up from there if the if the 1A has a
+Alejandro Duque: Okay.
+Noor Khan: parking area also then pick it from there like don't like you know work it out otherwise work out the GFA also and the parking such.
+Alejandro Duque: Yeah. Okay. Yeah.
+Noor Khan: Okay.
+Alejandro Duque: And and and here are all the ones because these are the formulas kind of like that we built.
+Noor Khan: Okay. Good.
+Alejandro Duque: I'm happy to send this to you,
+Noor Khan: Perfect.
+ 
+ 
+00:09:49
+ 
+Alejandro Duque: but how it's calculated like some are industry,
+Noor Khan: Okay.
+Alejandro Duque: some more units divided by 12.
+Noor Khan: Okay. You've taken from industry, right? It's an industry averages for example.
+Alejandro Duque: Exactly.
+Noor Khan: Perfect.
+Alejandro Duque: And then it says there but um okay so that's good note
+Noor Khan: Okay. That's good.
+Alejandro Duque: then then yeah so now obviously so now the reverse 1B takes into account the construction then I would need your help updating the template because again
+Noor Khan: Yeah,
+Alejandro Duque: I don't want to touch it and break something else.
+Noor Khan: I will update. I will update. You want me to update the one which friend sent recently? Right. That is the updated
+Alejandro Duque: Yeah. Yeah. That's the one we're using for all of them.
+Noor Khan: template.
+Alejandro Duque: So then that one will be here. Uh, and I mean and I think now it should be pulling all of the information properly um as far as the construction timeline goes. And then yeah, in the presentation mode I increase the the size of the letters just a little bit so
+ 
+ 
+00:10:42
+ 
+Noor Khan: presentation mode.
+Alejandro Duque: it's
+Noor Khan: So what I did basically I did not go review the presentation mode because
+Alejandro Duque: okay.
+Noor Khan: for me it was the file was more important to get the file basically right because that is what we're going to present first anyway to the
+Alejandro Duque: Exactly.
+Noor Khan: client right so file I was testing that you know how the file is like the production of the file is what is the like you know calculation is it doing good job or no that was my
+Alejandro Duque: Yeah.
+Noor Khan: thing other than that I'm good so my comment the first comment was difference in the area schedules
+Alejandro Duque: Okay.
+Noor Khan: how is it you clarified to uh the development schedule.
+Alejandro Duque: Yeah.
+Noor Khan: So the development schedule now you have a logic for that which is good.
+Alejandro Duque: Yep.
+Noor Khan: Construction cost being picked from Ottawa we know that how to fix. there. Uh we will need to define somewhere that you know GTA includes these municipalities like high level unless it can take a map.
+ 
+ 
+00:11:32
+ 
+Noor Khan: If you can define a map within the uh cloud to say that you know if uh if the property is located within this parameter like you know the geographical uh spread then take
+Alejandro Duque: Yeah.
+Noor Khan: GTA probably in that case we will not have this issue of going
+Alejandro Duque: Gotcha.
+Noor Khan: to the system is currently like picking up from Ottawa right so that because majority of
+Alejandro Duque: Yeah.
+Noor Khan: our business is in GTA anyway So that way we we will not have to like you know worry about if it picked up the right uh cost from Elasar or not.
+Alejandro Duque: God.
+Noor Khan: So maybe like you know you can put in the Google to say make me a map of like make me like a general like you know geographical spread of the GTA.
+Alejandro Duque: Mhm.
+Noor Khan: It will it will include like you know XYZ like other than Hamilton for example we know like Hamilton and all that is separate but those are improvements we can do later but in the meantime to avoid OI and all that we can say GTA is this much pick it up from there basically because from east to west right like it's a horseshoe that we have here like that kind of around Lake Ontario so there are
+ 
+ 
+00:12:38
+ 
+Alejandro Duque: Yeah.
+Noor Khan: certain mun main like five six municipalities which form part of the GTA
+Alejandro Duque: Okay.
+Noor Khan: like
+Alejandro Duque: Okay. Yeah, I'll look into it. And is there an existing map that like
+Noor Khan: GTA map. Yeah. Yeah.
+Alejandro Duque: Yeah.
+Noor Khan: GTA map like you can just like you know if I go to Google for example you know and I
+Alejandro Duque: Okay.
+Noor Khan: tell him that you know uh the map of GTA like Toronto GTA Ontario for example you just put that map of GTA Ontario.
+Alejandro Duque: Yeah.
+Noor Khan: So yeah,
+Alejandro Duque: When Google picks it up here.
+Noor Khan: you can see that it's uh basically like you know picked up the municipalities and all that but we
+Alejandro Duque: Yeah.
+Noor Khan: now people have started adding Hamilton also to it. So we don't want to add Hamilton.
+Alejandro Duque: Okay.
+Noor Khan: We just want to say GTA means GTA basically because Hamilton is another municipality and it's separate.
+Alejandro Duque: Mhm.
+Noor Khan: So we will have to just say that you know take uh XYZ like so if you want I can share the screen with you.
+ 
+ 
+00:13:41
+ 
+Alejandro Duque: Yeah. Uh let me stop
+Noor Khan: Okay. So what we need to do basically just a minute.
+Alejandro Duque: mine.
+Noor Khan: Okay. Let me go there. Okay. I don't know where did my screen go. Actually I'm looking at so many things. So I cannot see that screen myself. I can just see. Okay. I can see here. Okay. So let me share my screen with you. Here my entire screen is trying me. You see this one? You see this screen.
+Alejandro Duque: Yep. Yep.
+Noor Khan: So this is basically covering from here. You see this Oshua? This is on the east side, right? So this going all the way here.
+Alejandro Duque: Yep.
+Noor Khan: New market, Kelton and all that. So it comes up to this. So this G for example this uh maybe G also not this Mil because Hamilton right? Right. So this is basically York, Peele, Hamilton and Toronto.
+ 
+ 
+00:14:45
+ 
+Noor Khan: And this is uh another I forgot the name. This is another we call on the east side. Right. So these are the municipal five.
+Derek Lobo: Durham region Durham region Durham
+Noor Khan: Uh which region D? Durham region. Durham.
+Derek Lobo: Dam like Durham North
+Noor Khan: Yeah. Durham. Yeah. This is Durham region. Right.
+Alejandro Duque: Got it.
+Noor Khan: So this is Durham. This is York.
+Derek Lobo: Time.
+Noor Khan: This is Peele. This is Holton. Maybe you can tell him the GTA means these NC city of Toronto. These five regions. So that way at least G will all be out basically of it right.
+Derek Lobo: You got You guys You guys can figure that
+Noor Khan: So five we can figure it out.
+Derek Lobo: out.
+Noor Khan: Yeah.
+Alejandro Duque: Okay.
+Noor Khan: So we can we know that the Durham, York, Peele, Holton and city of Toronto that is the compris if the project is located in any of these municipalities some municipalities then there that is part of the GTA for example you know that makes it easy in that in that sense.
+ 
+ 
+00:15:37
+ 
+Alejandro Duque: Mhm. Yeah.
+Noor Khan: Right. So that will be that. Other than that development charges maybe it took it from the most written are different. So development charges are re but I need to double check that if they were picked up correctly because then I will need to
+Alejandro Duque: Mhm.
+Noor Khan: make sure that you know because development charges is a big element and there like the cities are playing
+Alejandro Duque: Of course.
+Noor Khan: with it in the sense that you know playing in the sense that they're trying to make it attractive and reducing it and in one case probably I heard from somebody that you know they're almost making it zeroing it out too which I don't know what is going on so we just need to be sure on the development charges amount so I need to Just double check if the model is picking up correctly which I will do it in the next
+Derek Lobo: Okay. So, so Nor Alejandra,
+Noor Khan: run.
+Derek Lobo: one sec because I've kind of got a busy day today. I didn't I didn't need to be on this meeting and I understand why now.
+ 
+ 
+00:16:30
+ 
+Noor Khan: Yes.
+Derek Lobo: Okay.
+Noor Khan: Okay. Okay.
+Derek Lobo: You are working out the micro details,
+Noor Khan: Yes.
+Derek Lobo: right?
+Noor Khan: Yes.
+Derek Lobo: You're getting Okay,
+Noor Khan: Yeah.
+Derek Lobo: but I want to ask you a question. Maybe I'll ask Alejandro first. And it's I don't want to be pedantic here.
+Noor Khan: Sure.
+Derek Lobo: Why am I doing this?
+Noor Khan: Why are you on the call or
+Derek Lobo: Alejandro, why are we doing the reverse 1B? I just want to get philosophical for a
+Noor Khan: what?
+Alejandro Duque: Okay,
+Derek Lobo: minute.
+Alejandro Duque: I'll start. Uh, I think you you have clients that come to you for the 1A and for the full report and then you're showing them the underwriting capacities that you have and then in the past from the 1A to the reverse 1B will take a couple hours. Now, this does it in 60 seconds. And then you walk them through the full spreadsheet.
+Derek Lobo: Right.
+Alejandro Duque: You make them go through the pain of understanding the capabilities because that's the goal. That's the template that you guys have.
+ 
+ 
+00:17:26
+ 
+Alejandro Duque: That's like the gold standard in my opinion. AI can never do that. Now AI just bridge the gap as far as time and complexity. And then at the end you're going to have at least what I'm building is a sensitivity analysis tool using those same metrics from the reverse 1B that instead of jumping around DXL which you can do you have a website that just hey I moved the rent by 10 cents like how how much does that change my uh my
+Derek Lobo: Okay. Okay.
+Alejandro Duque: my project like like
+Derek Lobo: Okay. Okay. So, so on the sensitivity analysis, be careful because de older developers only know the spreadsheet.
+Alejandro Duque: Yeah,
+Derek Lobo: They've got to go through the pain of I changed it.
+Alejandro Duque: exactly.
+Derek Lobo: Look what happened to cell 7 A70. Now look what happened to BB200. Fair enough. Okay. So that's the first part of it.
+Alejandro Duque: Yep.
+Derek Lobo: I want you to go from a business development level. Why are we doing this? So yes, correct. Okay.
+Alejandro Duque: So,
+ 
+ 
+00:18:28
+ 
+Derek Lobo: The other thing is we're also going to show our understanding of the development process. When you pay the architect, when you hire the first leasing agent so they're going to go, "Holy crap, you know all this stuff." Good, good, good. Okay. So that's Okay. So that's the technical part of it. And by the way, we never did the reverse 1B. The staff just said, "f*** off. We're not doing this." Okay? And it's cost us millions of dollars. Okay? I never swear this is my fourth time this year using the F word. Okay? Maybe maybe five. Okay? Maybe five, but but small. So that you so we want to technically just take the pain away from the people doing it and so on. But first and foremost, this is a sales tool. Okay. ignore. Why are we going through this brain damage of doing this from a sales business development standpoint? You already know the answer. I just want to be a little, you
+Noor Khan: So, so this is what I've been discussing with Alejandra also in the last meeting also we had basically so
+ 
+ 
+00:19:22
+ 
+Derek Lobo: know,
+Noor Khan: why we are doing it is basically to just like you know because this is basically not even asked by the client that's the first thing right and if you go like I was saying
+Derek Lobo: say that again.
+Noor Khan: this is not even asked by the client The client did not ask for it.
+Derek Lobo: Exactly.
+Noor Khan: Okay. If you go Yes.
+Derek Lobo: Hold on. Deliver more than they even
+Noor Khan: Yes. So like I was going to I I told him last time that you know even the 1A perform is also not
+Derek Lobo: think.
+Noor Khan: part of the deliverable because we are delivering a physibility which is a write up of how much the potential for generation of rent of this project is in a municipality or in in a location. That is what you pay us for basically that. So that boils down to X dollar per square foot or X rent per unit type of unit that we are able to give you and we give you along with that a comparison and about a 100 pages a report which is basically kind of a typical consultant report.
+ 
+ 
+00:20:27
+ 
+Noor Khan: Nobody's going to give you in that report a performer that we give which is one. So which is already an basically I did add edited item that we gave to you
+Derek Lobo: But but they're expecting the 1A because we showed in the demo.
+Noor Khan: right okay so we are doing that now after that we are bringing them to C1B right so the 1B is
+Derek Lobo: Okay.
+Noor Khan: basically uh is a is demonstration of our ability that we are we have a basically we are subject matter experts and we can basically like you know uh we we know this inside out and the main objective is for us to let you know by the way there are this kind of financing abilities financing like you know possibilities that you can consider because right now at this stage the client has to go for a development financing or construction financing for that matter right so our aim out of this as a whole should be to somehow like you know because now once he takes the visibility he's out he's out of the door right because he didn't need like because maybe he's doing it for the bank already.
+ 
+ 
+00:21:33
+ 
+Noor Khan: So we we have to just try to see if we can hook the client with Johanna for the discussion of the uh construction financing bus. This is it. If he takes it, this is kind of a bait. If he takes it, good. Otherwise, thank you very much. He's gone on the door X. We go on the door Y. Next
+Derek Lobo: Okay,
+Noor Khan: client.
+Derek Lobo: both of you completely understand that's the purpose. I'm going to state it even simpler. Okay,
+Noor Khan: H.
+Derek Lobo: this is the launching pad from research to finance. Okay.
+Noor Khan: Yes.
+Derek Lobo: Then finance will come the launching pad to lease up and then lease up is the launching pad to
+Noor Khan: Yes.
+Derek Lobo: brokerage.
+Alejandro Duque: Absolutely.
+Noor Khan: Yeah.
+Alejandro Duque: One piece of feedback I got, so I talked to Joanna separately when Nor wasn't here just once the Yeah,
+Derek Lobo: Yeah, it's important you talk to her.
+Alejandro Duque: I think the finance piece should come if at any point in this presentation. So I get a 1A.
+ 
+ 
+00:22:33
+ 
+Alejandro Duque: They're expecting that the reverse one be you walk them through it. financing first if any would be about construction not perm loan because I don't think they're because I talked to Joanna a lot about perm lending which I think matters but I'm a developer I'm and I've done development like I'm I'm not thinking four years down the line line yet I'm I'm
+Derek Lobo: It's only construction financing.
+Alejandro Duque: think nor
+Derek Lobo: Nor I never thought that's a very good point.
+Alejandro Duque: discussed this
+Derek Lobo: So because when we're trying to tell him about lease up,
+Alejandro Duque: Yeah.
+Derek Lobo: he goes, "Lase up? I didn't even decide I want to build a building." Okay. So as long as Okay.
+Noor Khan: H.
+Derek Lobo: So So that's a good point. Okay. So that's correct. This is the launching point. It's basically built we're building a tool for debt advisory,
+Noor Khan: Yes.
+Derek Lobo: but we're also building a tool saying look how smart we are because the people that we build for are typically developers pivoting. They don't get the lease up. They don't get the fact that if we bring the building to January, it's a different lease up schedule.
+ 
+ 
+00:23:34
+ 
+Derek Lobo: bring the building to market in April versus bringing it to to winter, right? Leasing goes on a bell curve, Alejandro.
+Noor Khan: Yeah.
+Derek Lobo: Okay,
+Alejandro Duque: Mhm.
+Derek Lobo: January, December makes sense,
+Alejandro Duque: Yeah.
+Derek Lobo: but there's this little spike in April, blah blah blah. So, we can do all that and get down to detail. Okay, so good. So, I made three points as we go down the road of understanding AI, my long-term conclusion is feasibility studies are going to go to zero in terms of price. What? We'll do them for a dollar. So, we get your business. Fair enough. And maybe we charge you $1,000 a month for 24 months or 36 months. You get all our services as long as we get this maybe. Or if you pull the plug in the early stage, when you pull the plug, then you owe us 10 $20,000. But if you just stay with us and we keep working with you, we want that carrot at the end. I really am seeing this is the extreme now. This is the Star Trek version.
+ 
+ 
+00:24:35
+ 
+Derek Lobo: Everything is going to zero. Everything. So, Visa, Mastercard finished as robots talk to each other. Why do we pay 2% to each other? Fair enough. Okay. So, that's number one. Number two, um, be careful with the summaries. Alejandro, I know you love them, but it's the pain of understanding.
+Alejandro Duque: Yeah. Yeah. And that was super clear to me from our first meeting. That's why with NOR, we're concentrating on the tool and that the biggest gap was from 1 A to reverse 1B. There was still a lot of work for Nord to do and we're going to get it at 99% level that it's uploaded, Nord reviews it,
+Derek Lobo: Okay.
+Alejandro Duque: team goes and
+Derek Lobo: Okay. Okay. So,
+Alejandro Duque: sells.
+Derek Lobo: the construction financing is a point I didn't realize. You should be testing this out on nor Joanna her her people if her staff can understand this because this is a tool we're building for them but it's also a tool for our salespeople. Okay. Now, when you're finished this,
+ 
+ 
+00:25:31
+ 
+Alejandro Duque: Mhm.
+Derek Lobo: which sounds like you're getting there, please tell me that.
+Noor Khan: Yeah, we're getting
+Derek Lobo: Okay, good. 3% of the work is done.
+Noor Khan: there.
+Derek Lobo: 97% of everything is marketing and getting your staff to use it. Okay. So, my gut feel is if you develop this and give it to the staff, it'll never see the light of day. Think about how we force this to occur. It's Alejandro. If I want a meeting with you and I put it in my scheduling pipeline, it'll eventually get scheduled. Okay? But if I send you an email saying, Alejandro, here are three dates. I'm not sure they work. Pick one. It's going to get scheduled. Fair enough.
+Alejandro Duque: Yep.
+Derek Lobo: Or everybody does this. They say, "Well, we'll have one meeting, then when we come, then we'll get the next, then we'll get the next." I call the client say, "Let's schedule the last meeting." That forces us to do the three. and we book it and we write it in blood. So,
+Alejandro Duque: Yeah.
+ 
+ 
+00:26:31
+ 
+Derek Lobo: I want you to start thinking now. You're both smart guys. You both run businesses, right? How do we get the staff to use it where they're saying, "What's in it for me? I'm not going to be here five years from now."
+Noor Khan: I I think you see if if you make it like a uh part of the process because the
+Derek Lobo: Yes.
+Noor Khan: tool is so uh user friendly and so like if the tool spits out a reliable model it like as Alejandra is saying about 95 96% is also good with me frankly speaking because it's just like a like a demonstration of what we can do for
+Derek Lobo: Okay.
+Noor Khan: you
+Derek Lobo: Who benefits the most from this in our company? Nor.
+Noor Khan: like in terms of a process uh like a
+Derek Lobo: Yeah. Department financial whatever.
+Noor Khan: department
+Derek Lobo: It's it's debt advisory first because it brings in business. Well, the ultimate winner is the company and brokerage.
+Noor Khan: of course I I think there are everybody's a winner the first winner is basically the le the
+Derek Lobo: Yes.
+ 
+ 
+00:27:30
+ 
+Noor Khan: physibility team itself because that establishes them as a credible basically like you know
+Derek Lobo: Yes.
+Noor Khan: source beyond others.
+Derek Lobo: And and they and nor they have to understand the scurve on construction. They have to understand why you pay de why you pay development charges on month one.
+Noor Khan: Yeah.
+Derek Lobo: They have you see what I'm saying?
+Noor Khan: Yeah.
+Derek Lobo: Because they listen
+Noor Khan: They they they're pretty smart like the senior people are all good anyway. So the only thing was it was not an easy to do this uh 1B. So which which basically is now going to become very easy. We are just trying to minimize. We are going to because the rollout plan I discussed with Alejandra are going to discuss is basically to to roll out to have a plan that you know how much of this will be done manually and how much will come out automatically and
+Derek Lobo: Okay. No, no, I I get that. I get that.
+Noor Khan: then we can give it to the people that's it basically and then beyond that 1% 2% they want me to check I'm there too for them to check and that's it basically we'll be ready.
+ 
+ 
+00:28:28
+ 
+Derek Lobo: So, so here here's the phrase I want to leave you with. Done is better than perfect. I live by this except in brain surgery.
+Noor Khan: Yeah, I know.
+Derek Lobo: Done is better than perfect. So,
+Alejandro Duque: Yep.
+Noor Khan: Yes.
+Derek Lobo: let's just And the key now get is getting the staff to use it. Research looks good. Debt advisory looks good. Dave Price should be like the proud grandfather. Look at what we're delivering to you. No work for me.
+Noor Khan: Yeah,
+Derek Lobo: Look at what we're delivering in our
+Noor Khan: there's there's just one thing you need to do if you don't mind because in the call that uh
+Derek Lobo: relationship.
+Noor Khan: Johanna and team had with Alejandro, they were just talking about the takeout financing and he ended up even building it also in like a kind of a presentation for that when when I looked at the thing last time. So I said why are you doing it? He said basically she spent most of the time on that. I said this is not what this is not the stage right.
+ 
+ 
+00:29:20
+ 
+Noor Khan: So when you speak to Johanna next time or when you like you know when we have the meeting this afternoon just let her know that you know she needs to develop her presentation or whatever for the construction financing because this is the
+Derek Lobo: Yeah, I but remember we're thinking about a full cycle five-year project here
+Noor Khan: focus.
+Derek Lobo: and but but she is because that's where she gets paid. But that's also where the client is, right? But we're thinking long term here. Okay. So, I think we all I think we all agree with this. I think we do this as soon as we can. But Alejandro and Nor start thinking about the implementation.
+Noor Khan: Yeah, that's what we are going to work.
+Derek Lobo: Okay.
+Noor Khan: We finishing implementation.
+Alejandro Duque: Yep.
+Derek Lobo: And and research they really they really are good but they're research people.
+Noor Khan: Correct.
+Derek Lobo: Everything with them has to be precise. That's why they never like the 1B because I just said take the finish value and take 80% of it and say 20% margin. Use 10%.
+ 
+ 
+00:30:17
+ 
+Noor Khan: Yeah.
+Derek Lobo: It drove them crazy and they can't we can't do this except I said
+Noor Khan: Yeah.
+Derek Lobo: this is a illustration of what we do but rather than talk about a building we're talking about your building. So if you tell me how to get healthy and live to 100 that's an interesting discussion. If you look at my blood work and now tell me how and my DEXA scan and say here's how you live to 100 in theory I'm listening.
+Alejandro Duque: Yep.
+Noor Khan: Yeah.
+Derek Lobo: So that's why we're going to it's a sales tool, right? And by the way, nobody ever hires us through the 1B. They always do it themselves. And their analysts hate the fact that we do the 1B. We're putting them on a job,
+Alejandro Duque: Yeah. Yeah. Yeah.
+Derek Lobo: right?
+Alejandro Duque: And this is what I told Nor Derek that if you think about the business, I think nor the underwrited and the encyclopedic knowledge that you have up here is just incredible like bar none very few people can do it. What we're trying to do especially with this first play is how do we shorten the gap?
+ 
+ 
+00:31:17
+ 
+Alejandro Duque: Because then you have the sales team here. They don't want to be involved in spreadsheet messing up formulas. How do we get it? So they we remove the selling point to them is listen, we're giving you another tool that is a better sales tool and you can do it in two minutes. Spend maybe another 30 just learning what it did, changing a few things that now human element and there you have it.
+Noor Khan: That's
+Derek Lobo: Okay. Right now, now right now,
+Alejandro Duque: That that's the
+Derek Lobo: keep in mind our top sales guy, we only have one,
+Noor Khan: good.
+Derek Lobo: Dave Price,
+Alejandro Duque: Yep.
+Derek Lobo: does not know what an IR is.
+Alejandro Duque: Yeah. Yeah. No, and I get it. I mean, like I work with I love numbers. Nor loves numbers, but I know and I know that that building this and again like AI, good luck to a developer going and trying to have AI build something that would nor build. We're way far from that.
+Derek Lobo: We never going to
+ 
+ 
+00:32:04
+ 
+Alejandro Duque: But yeah, but now we can close the gap and then tell Dave,
+Derek Lobo: happen.
+Alejandro Duque: hey, you don't need like the system is going to ask you what do you need and if you want to change it like it can
+Derek Lobo: Right.
+Alejandro Duque: be so simple.
+Derek Lobo: So,
+Alejandro Duque: So
+Derek Lobo: so the research people will understand this. Okay. will understand it.
+Alejandro Duque: yeah,
+Derek Lobo: The salespeople, we only have one, but I'm going to hire five this year. Okay, this has to be I met one of our ex employees.
+Alejandro Duque: okay.
+Derek Lobo: I can't remember his name now. He said to me, Derek, you once said to me, you will never understand apartment, new apartment construction till you understand the 1B. Thank you. I've now left. I'm now a mortgage broker finance here. But because you told me that 1B and taught me the 1B, said I understand development. I didn't understand it till I nor I faked it for like 20 years. Okay. Up until I saw the 1B then I said okay now I understand it right.
+ 
+ 
+00:33:00
+ 
+Alejandro Duque: Yep.
+Derek Lobo: So so so please so it looks like it's going to be very successful. Keep debt advisory in mind. This is their tool. This is Dave's tool to look very overarching over the whole process.
+Noor Khan: Yeah.
+Derek Lobo: And I think once we get this perfected, we could change our fee structure to a subscription monthly basis where we're just here for you, right? But we want to get this and if you quit, well, we need some more money from you or
+Noor Khan: I think I I think you see I'm not going to talk about the pricing right now,
+Derek Lobo: something.
+Noor Khan: but I think basically we keep the price as is,
+Derek Lobo: Yeah.
+Noor Khan: but you for now and you give them a minimal price for subscribing.
+Derek Lobo: For now.
+Noor Khan: You know what I'm saying?
+Derek Lobo: Yes.
+Noor Khan: Like $100,
+Derek Lobo: No. No.
+Noor Khan: $200 for like something if you want to cash them.
+Derek Lobo: Exactly $1.99 a month.
+Noor Khan: That's it. Not much $1.99 a month.
+Derek Lobo: You get the
+Alejandro Duque: Yeah.
+Noor Khan: So you pay 15,000 physibility or whatever 199 of one for X for the make a menu
+ 
+ 
+00:33:52
+ 
+Derek Lobo: 2020
+Noor Khan: of who is available during that time for you and that's it rather than make it
+Derek Lobo: make no make a menu.
+Noor Khan: straight Yeah.
+Derek Lobo: Nor write this down with pictures of the people how long they've been with the
+Noor Khan: Yeah.
+Derek Lobo: company and their background.
+Noor Khan: Yeah.
+Derek Lobo: So,
+Noor Khan: Yeah.
+Derek Lobo: nor you get like limited act, but you know what I mean, right? Okay, good. Okay. Listen, I'm confident this was a really good idea,
+Noor Khan: Yeah.
+Derek Lobo: but you you have to lead the horse to water. Then you've got to make them
+Noor Khan: Yeah. That that's what we are doing. That's why we cancel the meeting today to make sure that you know we don't give them a half cooked thing.
+Derek Lobo: drink.
+Alejandro Duque: Yep.
+Noor Khan: So they feel oh it's basically not happened and it's not there. Basically it's going to take time. So we want to perfect it as much as we can before we put it to them.
+Alejandro Duque: Yeah.
+Noor Khan: Basically they will be
+ 
+ 
+00:34:36
+ 
+Alejandro Duque: And now we have the meeting for next Thursday at 1 p.m.
+Derek Lobo: Yeah.
+Alejandro Duque: So
+Derek Lobo: Okay.
+Noor Khan: there.
+Alejandro Duque: we'll
+Noor Khan: Okay.
+Alejandro Duque: God bless you too, Derek. Thank you. Bye.
+Noor Khan: Okay.
+Alejandro Duque: He's so
+Noor Khan: Okay. So, that's good. Now, let me Yeah,
+Alejandro Duque: funny.
+Noor Khan: let me see my other comments. I have development charges. That's I will check myself. And I chose 40 years.
+Alejandro Duque: Yep.
+Noor Khan: I will double check that because last next time it was good. It was good. And to get one a reverse B only measure utilities number. Not sure why the number Did you have a chance to look at the utilities number
+Alejandro Duque: Uh yes. So utilities, it was a rounding issue when we switched the templates,
+Noor Khan: 490
+Alejandro Duque: but it was on my end. I fixed it. So now,
+Noor Khan: should be fine
+Alejandro Duque: so now the 740 that was before matches the 182781 within a dollar.
+ 
+ 
+00:35:44
+ 
+Alejandro Duque: And there's just a rounding thing,
+Noor Khan: okay this rounding is fine I'm not worried about that that's all good and the GFA
+Alejandro Duque: but now it's Yeah.
+Noor Khan: number we discussed it already right we're going to fix that then we'll see how the her cost difference
+Alejandro Duque: Yeah.
+Noor Khan: basically fix right and then the development course between the high level this is 46% right we already discussed it we're going to see
+Alejandro Duque: Yeah. Yeah.
+Noor Khan: that
+Alejandro Duque: So that's because the template. So that's the only ask I have is that it's referencing Ottow instead of GTA. And I even put is I sheet five cell uh sheet five uh cell. Yeah,
+Noor Khan: And by the way, one of the things that is going to change when we change the number of months to develop the financing cost will also increase
+Alejandro Duque: it's
+Noor Khan: accordingly because you know that's a dead cost, right? When you when you rationalize the number of months it is take going to take to complete the building that will
+ 
+ 
+00:36:28
+ 
+Alejandro Duque: Yeah.
+Noor Khan: automatically lengthen the uh financing like you know cost as well. So that will bring more cost. So the cost per square foot will go up further proportionately for that also.
+Alejandro Duque: Yeah. Yeah. Yeah. So,
+Noor Khan: Okay.
+Alejandro Duque: uh yeah, and I I sent you which uh two were there, but uh and I just checked and yeah, it's that again, I would change it. I just don't want to break anything. So, if you don't mind just making that change and sending it
+Noor Khan: So use one minute. Okay.
+Alejandro Duque: over.
+Noor Khan: So headline number 70% return on cost. Yeah, those those we need to check it out because 70% return on cost that basically means something is wrong, right? 45% means something is
+Alejandro Duque: Yeah. Yeah. No, and for for 93 Claire,
+Noor Khan: wrong.
+Alejandro Duque: I mean, that little difference was a 46% development in the cost. So,
+Noor Khan: Yeah. Okay. So what other comments you send me?
+ 
+ 
+00:37:20
+ 
+Alejandro Duque: so that's why uh so development
+Noor Khan: You send me the email.
+Alejandro Duque: charges, it was using Canon's last frozen rates for Toronto. Um the template was using I think older suspended index rates but uh that's how the development charges were coming in for Toronto. Um then amortization.
+Noor Khan: So you you have a detailed email you sent me right like which was last night. I'm so I need to read all of them and to make sure accordingly then I have to fix the file that was sent by the
+Alejandro Duque: Yeah.
+Noor Khan: lady to you right.
+Alejandro Duque: Yeah. So exactly. So France, I think it was when she cancelled one of the cells that you'll see it is sheet five, cell 048 and P48. I think it's pointed to columns F and G instead of H and I from the Altos report. And I think that I'm pretty sure I I did it and that fixed it, but I didn't save it because again don't want to break a macro or anything in there with my Mac.
+ 
+ 
+00:38:23
+ 
+Noor Khan: Okay. Okay.
+Alejandro Duque: And then yeah the uh return on capital and the IRRa they'll all align once the Otawa fix is in.
+Noor Khan: Okay.
+Alejandro Duque: Then my other only ask is that for the input on the tool when they're dropping the 1A. So I just added the construction months. Is there anything else that you
+Noor Khan: I think the GI I mentioned to the GFA and the parking square footage if they have if
+Alejandro Duque: Okay.
+Noor Khan: they have that's good otherwise then it should calculate itself
+Alejandro Duque: Okay. And should it come up here? So when you drop the 1A, should the GFA come up here and make that node?
+Noor Khan: But I think I think I like the idea. The more like you know the more things you put in the like you know this thing and
+Alejandro Duque: Okay.
+Noor Khan: on top right here this this uh this place so that at least prompts the
+Alejandro Duque: Yeah.
+Noor Khan: person to by the way that you know uh make a decision.
+ 
+ 
+00:39:25
+ 
+Alejandro Duque: Okay,
+Noor Khan: It's not a bad idea if you can bring it here.
+Alejandro Duque: perfect.
+Noor Khan: That way at least it doesn't get like you know lost because that file that they have the 1A file if you look at
+Alejandro Duque: Yeah,
+Noor Khan: it it's so like a crappy file with lot of information and all that garbage actually almost like you know
+Alejandro Duque: it is. Yeah.
+Noor Khan: it's not a clean file as such because they take just one summary and put it in the document but there's all working behind it underneath.
+Alejandro Duque: Yeah.
+Noor Khan: So it's not a bad idea to have a ask here to say define basically you know what is it basically do do you have the GFA for example you know if not then system will give you do you have the parking square
+Alejandro Duque: Yeah.
+Noor Khan: footage if you have then put it here for example you know or for example you
+Alejandro Duque: Okay,
+Noor Khan: know something like
+Alejandro Duque: perfect. Okay. Um,
+Noor Khan: that
+Alejandro Duque: sounds good. So, for the financing piece, uh, right now we have the
+ 
+ 
+00:40:12
+ 
+Noor Khan: or we can ask them to put in the 1A in a separate place GFA and the parking square foot then it can pick up and show it here for the guy to confirm.
+Alejandro Duque: Yeah.
+Noor Khan: So he doesn't have to add something manually like for example it it populates for the municipality and all that itself right now right so if it can populate it from there and show it here so the guy can confirm like you are putting months
+Alejandro Duque: Yeah.
+Noor Khan: of construction here now right so that's good at least like you know it can say okay fine like you know okay that's what it
+Alejandro Duque: Yeah. Okay.
+Noor Khan: is like that and it is not showing about the construction
+Alejandro Duque: Okay. Sounds good.
+Noor Khan: financing the can permanent financing you are showing here for example but is it having a place to show the construction construction financing which was what we talked
+Alejandro Duque: Yeah,
+Noor Khan: about.
+Alejandro Duque: I haven't yet because right now I don't know if there are any programs or how how
+Noor Khan: No,
+ 
+ 
+00:40:59
+ 
+Alejandro Duque: do
+Noor Khan: I think so what what you can do if you if you see the current model I think it's not a bad idea to have this is this is
+Alejandro Duque: Yeah.
+Noor Khan: good for permanent loan you can have another place for a construction that construction financing right or the construction debt stake for example you know and that can be like let me show you my if you if you if you if you just stop sharing let me share my screen with you and I can show you basically what I want to show you sorry it's taking some time because you might have had a lesser time in your Fine. But oh,
+Alejandro Duque: No, it's fine.
+Noor Khan: where is the thing?
+Alejandro Duque: No. Uh, no, I was good today.
+Noor Khan: Okay, good.
+Alejandro Duque: So,
+Noor Khan: So, let me then open the file. Uh, I can open this reverse one before. No, I'll open this one for example, the other project, right? So, we have here because I was working on my office PC actually that's why I sent you from there.
+ 
+ 
+00:41:56
+ 
+Alejandro Duque: Yeah, that's
+Noor Khan: Yeah.
+Alejandro Duque: fine.
+Noor Khan: So there is a place uh where the dead stick comes basically like you know let's say this is the 1 A this is 1 B and the key assumptions are here right
+Alejandro Duque: Mhm.
+Noor Khan: this is number five number five is going
+Alejandro Duque: Yeah.
+Noor Khan: there. So I don't know why it's showing that the view should be actually normal view you know what I'm saying should not be
+Alejandro Duque: Yeah,
+Noor Khan: the
+Alejandro Duque: th this came this came when uh Fran changed the formatting that he changes to his print mode by
+Noor Khan: Yeah,
+Alejandro Duque: default.
+Noor Khan: it should be actually like you know like a regular mode because we're going to present we're not going to give it to anybody like the
+Alejandro Duque: Yeah.
+Noor Khan: objective is not to give them basically like you know to run away with it because this is our lots of like you know intellectual properties in this document and we don't want it to start circulating in the market too.
+ 
+ 
+00:43:18
+ 
+Noor Khan: No because once you once I give it to you for example you know you are a developer you can share it with
+Alejandro Duque: Mhm.
+Noor Khan: XYZ here this is the this is where it is inputting this is a development
+Alejandro Duque: Mhm.
+Noor Khan: financing assumption so this one is assuming how much is the misanine debt and how much is the
+Alejandro Duque: Mhm.
+Noor Khan: regular debt that makes it 90% for example so the remainder is basically equity so this kind of a question it can pick up the interest rate from whatever source we can ask them to update them for example monthly or something like that or quarterly from miss right our miss Joanna can provide those rates which they can update it once every like like you we updating we will have the ability to update the municipal development charges right prime rate is a public information
+Alejandro Duque: Is that public information that prime rate? Yeah.
+Noor Khan: yes we can pick it up from there that's okay it's public
+Alejandro Duque: I don't want to like
+Noor Khan: information you can just put there uh prime rate for example here it will pick it up from CIBC for example you know I'm just trying to
+ 
+ 
+00:44:22
+ 
+Alejandro Duque: Okay. So,
+Noor Khan: there
+Alejandro Duque: primary CIBC at Canada. So, today is 4.45 for instance because what I could do
+Noor Khan: yeah because you know yeah that's right this is see 4.45 Four five we have here
+Alejandro Duque: is like even we don't Yeah.
+Noor Khan: already plus margin remain 3.5
+Alejandro Duque: Yeah. So,
+Noor Khan: this remains one for example regular date you can make it 2% also depends upon like you know what is your credit rating
+Alejandro Duque: Because on the input fields then for the financing piece we could even add this these options like so mezzanine debt what percentage regular debt what percentage the equity is automatically calculated based on that prime rate
+Noor Khan: Correct. And prime rate will come automatically.
+Alejandro Duque: is public and then you just add
+Noor Khan: Prime will come automatically. What is the margin?
+Alejandro Duque: the Yeah.
+Noor Khan: You can give a margin also like a option if you want to give for example you know because because in
+Alejandro Duque: Okay.
+Noor Khan: the margin I think misanine debt is fine at 3.5 but I think the margin for regular debt might be more than 1%.
+ 
+ 
+00:45:24
+ 
+Noor Khan: I know that right when you go to the bank if especially you are a new developer like you know in US
+Alejandro Duque: Yeah. Mhm.
+Noor Khan: also they will not give you 1% margin right they will say no we need 2% or whatever
+Alejandro Duque: Yeah. At least 200 basis points.
+Noor Khan: right 200 basis points like that so so that way at least like
+Alejandro Duque: Yep.
+Noor Khan: you know we have that option up front so that makes it much easy because that's when Jonah can do her
+Alejandro Duque: Mhm.
+Noor Khan: bit also like we are not going to I would not give this tool to Joanna as such because this is basically for our development team right for sorry our physibility team
+Alejandro Duque: Yeah.
+Noor Khan: but
+Alejandro Duque: Yeah. And that's why I think that if it's a tool for
+Noor Khan: yeah
+Alejandro Duque: Joanna, that's why I wanted to mention what Yona discussed.
+Noor Khan: no it's not for
+Alejandro Duque: Construction. I'm not I don't know where I'll be in three years as a I know what I want to be,
+ 
+ 
+00:46:09
+ 
+Noor Khan: Janna
+Alejandro Duque: but I'm I want to close my loan bill today. Like that's okay.
+Noor Khan: yes that is
+Alejandro Duque: Uh so so I'll add those because I'll have to check how difficult it might be. But uh so we can plug whatever uh the prime rate is and it shows it automatically and then you have the options to add a margin. It's going to default to the values that we get from Joanna but they can change it. So when they generate the reverse 1B that's automatically populated as well,
+Noor Khan: Okay.
+Alejandro Duque: right?
+Noor Khan: Okay, that's good. Actually, you know what? I asked Joanna, if you remember my original email, I asked Joanna and the physibility team to come up with a sheet that they
+Alejandro Duque: one
+Noor Khan: want they want the model to split out along with the 1B.
+Alejandro Duque: pager.
+Noor Khan: So they can basically talk that with the client in terms of like financing packages that
+Alejandro Duque: Yeah.
+Noor Khan: are available. But they have not done that up to now.
+ 
+ 
+00:47:16
+ 
+Alejandro Duque: Okay. Yeah.
+Noor Khan: He said that I don't know what they discuss with you like trying to understand what is this one bit this is just like you know so bringing them to like you know that thing if not then I'll have to speak to Derek to say that you know what do the because then they can do themselves otherwise there'll be waste of time for
+Alejandro Duque: Yeah.
+Noor Khan: them because that one page I need from like if I have the executive summary right where we can
+Alejandro Duque: Um
+Noor Khan: do we can present everything in the model I want them to have an summary of like you know financing possibility so then they share that page with the client that by the way out of this exercise this is what we are giving you unless she wants to do it out or outside the model which is also okay with me but she will she may have to have some marketing uh flyer to go
+Alejandro Duque: Yeah.
+Noor Khan: with this output like with the we were not going to give the output to the client we know that at least after the call what do we give to the client that was my whole question basically
+ 
+ 
+00:48:10
+ 
+Alejandro Duque: Yeah. Because what she sent us, she did send us, but it was the full underwriting performer.
+Noor Khan: No,
+Alejandro Duque: That's
+Noor Khan: we don't need their underwriting because we are doing underwriting here already.
+Alejandro Duque: Yeah.
+Noor Khan: Plus the underwriting is for takeout financing what they
+Alejandro Duque: Exactly.
+Noor Khan: have.
+Alejandro Duque: Yeah. Yeah. Because Yeah. I remember like I just looked and Yeah. Here was the email from Joanna. She's like, "Um, I've attached my loan underwriting performer." And this is pretty much what she sent. But this is and again this is and then we got a lot of so for
+Noor Khan: within
+Alejandro Duque: the programs that we have this is where we got that information from these files. But but yeah,
+Noor Khan: and by the way I'm thinking what what happens if this program changes
+Alejandro Duque: we
+Noor Khan: how we going to deal with that for because you are doing now with us I understand but you might be busy with something else down the line after six months one year you will say what the f***
+ 
+ 
+00:48:59
+ 
+Alejandro Duque: Yeah.
+Noor Khan: I'm not going to do it basically and the other guy will not even remember I I don't know really.
+Alejandro Duque: Yeah.
+Noor Khan: So we don't we want it to be like I'm just telling you very like you know frankly right because you are too excited about it you love it
+Alejandro Duque: Yeah. I know.
+Noor Khan: basically right you you are also like you know into it like with us which is good but it's basically like you know for now for example one year down the line you may not have that interest in it you will say that I'm not
+Alejandro Duque: Yeah.
+Noor Khan: going to do this it's so stupid I'm just thinking you know I'm just thinking loud loud
+Alejandro Duque: Yeah. Yeah. Yeah. No. And Yeah. No, absolutely. No, and that's why I was even thinking that with Yo and Derek, like as you guys think of because I think this is kind of like a little thing that is being tried, but if there is anything else down the line that could be a lot more interesting involving because I talked to Daryl and I know that Derek is doing a lot of other like creative transactions, but but yeah, just throwing it out there.
+ 
+ 
+00:49:52
+ 
+Alejandro Duque: Uh because yeah, we'll get to a good place and that's why I thought the call with uh Derek was good.
+Noor Khan: Yeah.
+Alejandro Duque: So, we'll get it there.
+Noor Khan: Okay,
+Alejandro Duque: Now,
+Noor Khan: let's focus on
+Alejandro Duque: the implementation and all of that. It's it's on them. But, but okay. So,
+Noor Khan: that.
+Alejandro Duque: I'll wait for you to get back to me with the template to make sure that it's fine at those those cells. I mentioned them there. Then, I'll put it I'll run it again. We'll compare. I took a bunch of notes about what what we're doing. I'll look into the maps into the interest rates and and the margins and then we'll keep improving.
+Noor Khan: Okay,
+Alejandro Duque: So, yeah. So from your end,
+Noor Khan: good.
+Alejandro Duque: if you don't mind sending the two errors, those screenshots if you have them or those pictures of the errors you got and then the fix template
+Noor Khan: Okay.
+Alejandro Duque: so then I can build it all into into the system.
+ 
+ 
+00:50:40
+ 
+Alejandro Duque: So,
+Noor Khan: Okay.
+Alejandro Duque: and then the last thing.
+Noor Khan: Done.
+Alejandro Duque: So, uh next Tuesday. Oh, I know you work on on
+Noor Khan: No, I I can have calls with you during the week also because that's fine because you know I'm allowed to have those calls anyway during the working
+Alejandro Duque: Okay,
+Noor Khan: hours.
+Alejandro Duque: let's schedule one for Tuesday.
+Noor Khan: Yeah,
+Alejandro Duque: Is that okay?
+Noor Khan: Tuesday should be fine. Yeah, don't feel problem. What time?
+Alejandro Duque: So, I'm I'm booked until 11:30. After 11:30,
+Noor Khan: Yeah, should be fine.
+Alejandro Duque: uh 11:30 is good.
+Noor Khan: Tuesday will be 7th, right?
+Alejandro Duque: Uh what was that? Yeah,
+Noor Khan: Tuesday will be 7th.
+Alejandro Duque: the seventh.
+Noor Khan: Yeah. Yeah.
+Alejandro Duque: Yeah.
+Noor Khan: Send with invite. Fine.
+Alejandro Duque: Okay. So, I'll put it for 11:30. I'll remove Derek. Uh since we have today and sorry, I had sent an invite for like May. I was in another call and All right. So, the 7th at 11:30. I just sent the invite. Yeah. All right, man.
+ 
+ 
+Transcription ended after 00:51:56
+
+This editable transcript was computer generated and might contain errors. People can also change the text after it was created.

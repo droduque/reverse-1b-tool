@@ -97,6 +97,11 @@ Last Updated: 2026-03-31
 - [x] **Fran V2 template adopted (2026-03-31)** — Rock Advisors branding, Open Sans font, gold/slate colors, bold-blue consultant-input markers, print setup. Sheet 1 and 6 columns shifted left by 1. All cell mappings updated in populate_reverse_1b.py, validate_output.py, and import functions.
 - [x] **Financing preview removed from presentation mode (2026-03-31)** — per Noor's feedback, takeout financing not shown to clients. Financing program selector kept in upload form (drives Sheet 6 calculations).
 - [x] **Deployed to Railway (2026-03-31)** — live at https://earnest-celebration-production.up.railway.app
+- [x] **Noor feedback round 1 (2026-04-01)** — utilities rounding fixed ($45/unit off), construction duration auto-sized (≤200=18mo, 200-400=24mo, 400+=30mo) with manual override
+- [x] **Rock Advisors branding (2026-04-02)** — Open Sans + Playfair Display fonts, bumped all font sizes, custom stepper for construction duration
+- [x] **GFA + Parking SF display (2026-04-02)** — auto-filled from 1A, overridable on upload form. Feeds into Sheet 1 E62 and Sheet 4 area schedule.
+- [x] **Construction financing inputs (2026-04-02)** — 8 Sheet 5 cells: mezz/bank debt %, prime rates, margins, fees/contingency. Collapsible card with live equity display.
+- [x] **Prime rate auto-fetch (2026-04-02)** — Bank of Canada Valet API (policy rate + 2.20%). Pre-fills prime rate fields. Silent fallback to 4.45%.
 
 ### IRR Accuracy (verified 2026-03-12 vs Excel Sheets 10 & 11)
 - **Merchant IRR: 27.96% vs 27.90% (0.06pt gap)** — was 0.82pt before fix

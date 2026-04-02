@@ -203,8 +203,57 @@ select option {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
+.field-row-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 12px;
+}
 @media (max-width: 600px) {
   .field-row { grid-template-columns: 1fr; }
+  .field-row-4 { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Collapsible card ──────────────────── */
+.card-collapsible .card-body {
+  display: none;
+  margin-top: 16px;
+}
+.card-collapsible.open .card-body {
+  display: block;
+}
+.card-summary {
+  font-size: 14px;
+  color: var(--dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-summary:hover {
+  color: var(--text);
+}
+.card-summary .expand-arrow {
+  font-size: 10px;
+  color: var(--gold);
+  transition: transform 0.2s;
+}
+.card-collapsible.open .expand-arrow {
+  transform: rotate(90deg);
+}
+.equity-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--dim);
+  margin-top: 8px;
+}
+.form-group-sm label {
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 4px;
+  display: block;
+}
+.form-group-sm input {
+  font-size: 14px;
 }
 
 /* ── File upload ─────────────────────────── */
@@ -799,6 +848,23 @@ select option {
       <div class="hint" id="taxHint">Values will auto-fill after file upload. Override if needed.</div>
     </div>
 
+    <!-- Building Areas -->
+    <div class="card">
+      <div class="card-title">Building Areas</div>
+      <div class="field-row">
+        <div class="form-group">
+          <label for="gfa_override">Building GFA (SF)</label>
+          <input type="text" name="gfa_override" id="gfaOverride" placeholder="Auto-detected">
+          <div class="hint" id="gfaHint">Gross floor area from the 1A. Override if different.</div>
+        </div>
+        <div class="form-group">
+          <label for="parking_sf_override">Total Parking SF</label>
+          <input type="text" name="parking_sf_override" id="parkingSfOverride" placeholder="Auto-calculated">
+          <div class="hint" id="parkingSfHint">Based on parking spaces &times; 350 SF/space. Override if known.</div>
+        </div>
+      </div>
+    </div>
+
     <!-- Building Type -->
     <div class="card">
       <div class="card-title">Building Type</div>
@@ -851,6 +917,78 @@ select option {
           <option value="conventional">Conventional &mdash; 75% LTV, 25yr, 5.50%</option>
         </select>
         <div class="hint">Controls the permanent take-out loan parameters written to Sheet 6. Parameters from Joanna's v3.12 proformas. 100pts is the default for purpose-built rental.</div>
+      </div>
+    </div>
+
+    <!-- Construction Financing -->
+    <div class="card card-collapsible" id="constrFinCard">
+      <div class="card-title">Construction Financing</div>
+      <div class="card-summary" id="constrFinToggle">
+        <span id="constrFinSummary">90% debt / 10% equity</span>
+        <span class="expand-arrow">&#9654;</span>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Debt Structure</label>
+          <div class="field-row" style="margin-bottom: 8px;">
+            <div>
+              <div class="hint" style="margin-top: 0; margin-bottom: 6px;">Mezzanine Debt</div>
+              <div class="stepper">
+                <button type="button" class="stepper-btn" id="mezzMinus">&minus;</button>
+                <span class="stepper-value" id="mezzValue">15</span>
+                <span class="stepper-unit">%</span>
+                <button type="button" class="stepper-btn" id="mezzPlus">+</button>
+              </div>
+              <input type="hidden" name="mezz_debt_pct" id="mezzDebtHidden" value="15">
+            </div>
+            <div>
+              <div class="hint" style="margin-top: 0; margin-bottom: 6px;">Bank / Senior Debt</div>
+              <div class="stepper">
+                <button type="button" class="stepper-btn" id="bankMinus">&minus;</button>
+                <span class="stepper-value" id="bankValue">75</span>
+                <span class="stepper-unit">%</span>
+                <button type="button" class="stepper-btn" id="bankPlus">+</button>
+              </div>
+              <input type="hidden" name="bank_debt_pct" id="bankDebtHidden" value="75">
+            </div>
+          </div>
+          <div class="equity-display" id="equityDisplay">10% equity</div>
+        </div>
+        <div class="form-group">
+          <label>Interest Rates</label>
+          <div class="hint" style="margin-bottom: 10px;" id="primeHint">Prime: {{ "%.2f"|format(prime_rate.prime * 100) }}% (Bank of Canada{% if prime_rate.fetched %}, fetched {{ prime_rate.fetched }}{% endif %})</div>
+          <div class="field-row-4">
+            <div class="form-group-sm">
+              <label>Mezz Prime</label>
+              <input type="text" name="mezz_prime_rate" id="mezzPrimeRate" value="{{ "%.2f"|format(prime_rate.prime * 100) }}">
+            </div>
+            <div class="form-group-sm">
+              <label>Mezz Margin</label>
+              <input type="text" name="mezz_margin" id="mezzMargin" value="3.50">
+            </div>
+            <div class="form-group-sm">
+              <label>Bank Prime</label>
+              <input type="text" name="bank_prime_rate" id="bankPrimeRate" value="{{ "%.2f"|format(prime_rate.prime * 100) }}">
+            </div>
+            <div class="form-group-sm">
+              <label>Bank Margin</label>
+              <input type="text" name="bank_margin" id="bankMargin" value="1.00">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Fees</label>
+          <div class="field-row">
+            <div class="form-group-sm">
+              <label>Financing Fees %</label>
+              <input type="text" name="financing_fees_pct" id="finFees" value="1.00">
+            </div>
+            <div class="form-group-sm">
+              <label>Contingency %</label>
+              <input type="text" name="financing_contingency_pct" id="finContingency" value="0.50">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -952,6 +1090,38 @@ document.getElementById('constrPlus').addEventListener('click', function() {
   }
 });
 
+// Construction financing steppers + collapsible toggle
+var mezzPct = 15, bankPct = 75;
+var mezzValueEl = document.getElementById('mezzValue');
+var bankValueEl = document.getElementById('bankValue');
+var mezzHidden = document.getElementById('mezzDebtHidden');
+var bankHidden = document.getElementById('bankDebtHidden');
+var equityEl = document.getElementById('equityDisplay');
+var constrFinSummary = document.getElementById('constrFinSummary');
+
+function updateEquity() {
+  var eq = 100 - mezzPct - bankPct;
+  equityEl.textContent = eq + '% equity';
+  equityEl.style.color = eq < 0 ? '#D94F4F' : '#8B8A87';
+  constrFinSummary.textContent = (mezzPct + bankPct) + '% debt / ' + eq + '% equity';
+}
+
+function makeStepper(minusId, plusId, valueEl, hiddenEl, getter, setter, step, min, max) {
+  document.getElementById(minusId).addEventListener('click', function() {
+    if (getter() > min) { setter(getter() - step); valueEl.textContent = getter(); hiddenEl.value = getter(); updateEquity(); }
+  });
+  document.getElementById(plusId).addEventListener('click', function() {
+    if (getter() < max) { setter(getter() + step); valueEl.textContent = getter(); hiddenEl.value = getter(); updateEquity(); }
+  });
+}
+makeStepper('mezzMinus', 'mezzPlus', mezzValueEl, mezzHidden, function(){return mezzPct;}, function(v){mezzPct=v;}, 5, 0, 50);
+makeStepper('bankMinus', 'bankPlus', bankValueEl, bankHidden, function(){return bankPct;}, function(v){bankPct=v;}, 5, 0, 95);
+
+// Collapsible construction financing card
+document.getElementById('constrFinToggle').addEventListener('click', function() {
+  document.getElementById('constrFinCard').classList.toggle('open');
+});
+
 // File upload interaction
 var uploadArea = document.getElementById('uploadArea');
 var fileInput = document.getElementById('proformaInput');
@@ -1037,6 +1207,24 @@ function previewFile(file) {
         constrHint.textContent = data.total_units + ' units \u2192 ' + suggested + ' months suggested. Adjust with +/\u2212 buttons.';
       }
 
+      // Auto-fill GFA and parking SF from 1A
+      var gfaInput = document.getElementById('gfaOverride');
+      var gfaHint = document.getElementById('gfaHint');
+      var parkInput = document.getElementById('parkingSfOverride');
+      var parkHint = document.getElementById('parkingSfHint');
+      if (data.gfa) {
+        gfaInput.value = Math.round(data.gfa).toLocaleString('en-US');
+        gfaInput.style.borderColor = '#C9993A';
+        gfaHint.textContent = data.gfa_estimated
+          ? 'Estimated from net rentable SF. Override if GFA is known.'
+          : 'From 1A proforma. Override if different.';
+      }
+      if (data.parking_sf > 0) {
+        parkInput.value = Math.round(data.parking_sf).toLocaleString('en-US');
+        parkInput.style.borderColor = '#C9993A';
+        parkHint.textContent = data.parking_spaces + ' spaces \u00D7 350 SF = ' + data.parking_sf.toLocaleString('en-US') + ' SF. Override if known.';
+      }
+
       // Show preview card with auto-detected info
       document.getElementById('previewAddress').textContent = data.address || '--';
       document.getElementById('previewUnits').textContent = data.total_units || '--';
@@ -1084,6 +1272,12 @@ document.getElementById('municipality').addEventListener('change', function() {
 
 // Processing animation + loading state on submit
 document.getElementById('generateForm').addEventListener('submit', function() {
+  // Strip commas from formatted number fields before submit
+  var gfaEl = document.getElementById('gfaOverride');
+  var parkEl = document.getElementById('parkingSfOverride');
+  if (gfaEl.value) gfaEl.value = gfaEl.value.replace(/,/g, '');
+  if (parkEl.value) parkEl.value = parkEl.value.replace(/,/g, '');
+
   var btn = document.getElementById('submitBtn');
   btn.classList.add('loading');
   btn.textContent = 'GENERATING...';

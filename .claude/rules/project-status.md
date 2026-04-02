@@ -1,23 +1,37 @@
 ---
-description: Current project status and decisions (updated 2026-04-01)
+description: Current project status and decisions (updated 2026-04-02)
 ---
 
 ## Status
 
 - **Phase 1 (Automation):** COMPLETE. 1A → Reverse 1B in ~1 minute.
-- **Phase 2 (Presentation Tool):** COMPLETE. 7-section HTML, 5 sensitivity sliders, IRR calculations, CMHC financing. Deployed to Railway.
+- **Phase 2 (Presentation Tool):** COMPLETE. 4 sensitivity sliders, IRR calculations. Deployed to Railway.
 - **Phase 2B (Expansion):** ON HOLD. No row expansion for now — keeping weighted average consolidation (3 unit types).
+- **Phase 2C (Construction Financing + Overrides):** IN PROGRESS. GFA/parking display, construction debt stack inputs, prime rate auto-fetch — code done, deploying.
 
 ## Deployment
 
 - Live at Railway: https://earnest-celebration-production.up.railway.app
 - Fran V2 template adopted 2026-03-31 (gold/slate colors, Open Sans font)
+- Railway timeout/speed issues reported by Noor — needs investigation
 
 ## Current Decisions
 
-- **No row expansion** — keeping 3-row weighted average consolidation instead of 14 rows. Decision confirmed by Alejandro 2026-04-01.
-- **Noor is testing** Fran V2 template locally as of 2026-03-31.
-- **Next step:** client presentation (waiting on Noor's feedback).
+- **No row expansion** — keeping 3-row weighted average consolidation instead of 14 rows.
+- **Construction financing = construction debt** — not permanent loan. Developers care about construction phase first (Derek confirmed).
+- **Financing preview removed** from presentation mode (Noor: "creates discredit"). Kept in upload form for Sheet 6.
+- **Prime rate** auto-fetched from Bank of Canada Valet API (policy + 2.20%).
+
+## Blocking Items
+
+- **Noor:** Fix template O48/P48 (Ottawa→GTA construction cost references)
+- **Noor:** Set template default view to Normal (not Print/Page Break)
+- **Us:** Swap updated template once Noor sends it
+
+## Next Meetings
+
+- Tuesday April 7, 11:30 AM — Noor/Alejandro call
+- Thursday (likely April 10) 1 PM — full team presentation (Derek, Joanna, Dave, research)
 
 ## 5 Test Projects (all passing)
 
