@@ -24,9 +24,9 @@ description: Current project status and decisions (updated 2026-04-02)
 
 ## Blocking Items
 
-- **Noor:** Fix template O48/P48 (Ottawa→GTA construction cost references)
-- **Noor:** Set template default view to Normal (not Print/Page Break)
-- **Us:** Swap updated template once Noor sends it
+- ~~**Noor:** Fix template O48/P48~~ — DONE 2026-04-02, V3 template swapped in
+- **Noor:** Set template default view to Normal (minor — not blocking)
+- **Railway:** Speed/timeout — Procfile updated (300s timeout, 2 workers). Upgrade to Pro ($20/mo) is SVN's call.
 
 ## Next Meetings
 

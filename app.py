@@ -70,6 +70,16 @@ def fetch_prime_rate():
 fetch_prime_rate()
 
 
+@app.route('/refresh-prime', methods=['POST'])
+def refresh_prime():
+    """Re-fetch the Bank of Canada prime rate on demand."""
+    fetch_prime_rate()
+    return jsonify({
+        'prime': round(PRIME_RATE_CACHE['prime'] * 100, 2),
+        'fetched': PRIME_RATE_CACHE['fetched'],
+    })
+
+
 @app.route('/', methods=['GET'])
 def index():
     """Main page — upload form with municipality and building type selectors."""

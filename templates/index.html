@@ -921,72 +921,72 @@ select option {
     </div>
 
     <!-- Construction Financing -->
-    <div class="card card-collapsible" id="constrFinCard">
+    <div class="card" id="constrFinCard">
       <div class="card-title">Construction Financing</div>
-      <div class="card-summary" id="constrFinToggle">
-        <span id="constrFinSummary">90% debt / 10% equity</span>
-        <span class="expand-arrow">&#9654;</span>
+      <div class="form-group">
+        <label>Debt Structure</label>
+        <div class="field-row" style="margin-bottom: 8px;">
+          <div>
+            <div class="hint" style="margin-top: 0; margin-bottom: 6px;">Mezzanine Debt</div>
+            <div class="stepper">
+              <button type="button" class="stepper-btn" id="mezzMinus">&minus;</button>
+              <span class="stepper-value" id="mezzValue">15</span>
+              <span class="stepper-unit">%</span>
+              <button type="button" class="stepper-btn" id="mezzPlus">+</button>
+            </div>
+            <input type="hidden" name="mezz_debt_pct" id="mezzDebtHidden" value="15">
+          </div>
+          <div>
+            <div class="hint" style="margin-top: 0; margin-bottom: 6px;">Bank / Senior Debt</div>
+            <div class="stepper">
+              <button type="button" class="stepper-btn" id="bankMinus">&minus;</button>
+              <span class="stepper-value" id="bankValue">75</span>
+              <span class="stepper-unit">%</span>
+              <button type="button" class="stepper-btn" id="bankPlus">+</button>
+            </div>
+            <input type="hidden" name="bank_debt_pct" id="bankDebtHidden" value="75">
+          </div>
+        </div>
+        <div class="equity-display" id="equityDisplay">10% equity</div>
       </div>
-      <div class="card-body">
-        <div class="form-group">
-          <label>Debt Structure</label>
-          <div class="field-row" style="margin-bottom: 8px;">
-            <div>
-              <div class="hint" style="margin-top: 0; margin-bottom: 6px;">Mezzanine Debt</div>
-              <div class="stepper">
-                <button type="button" class="stepper-btn" id="mezzMinus">&minus;</button>
-                <span class="stepper-value" id="mezzValue">15</span>
-                <span class="stepper-unit">%</span>
-                <button type="button" class="stepper-btn" id="mezzPlus">+</button>
-              </div>
-              <input type="hidden" name="mezz_debt_pct" id="mezzDebtHidden" value="15">
-            </div>
-            <div>
-              <div class="hint" style="margin-top: 0; margin-bottom: 6px;">Bank / Senior Debt</div>
-              <div class="stepper">
-                <button type="button" class="stepper-btn" id="bankMinus">&minus;</button>
-                <span class="stepper-value" id="bankValue">75</span>
-                <span class="stepper-unit">%</span>
-                <button type="button" class="stepper-btn" id="bankPlus">+</button>
-              </div>
-              <input type="hidden" name="bank_debt_pct" id="bankDebtHidden" value="75">
-            </div>
+      <div class="form-group">
+        <label>Interest Rates</label>
+        <div class="field-row-4">
+          <div class="form-group-sm">
+            <label>Mezz Prime</label>
+            <input type="text" name="mezz_prime_rate" id="mezzPrimeRate" value="{{ "%.2f"|format(prime_rate.prime * 100) }}">
+            <div class="hint">Auto-fetched from Bank of Canada</div>
           </div>
-          <div class="equity-display" id="equityDisplay">10% equity</div>
-        </div>
-        <div class="form-group">
-          <label>Interest Rates</label>
-          <div class="hint" style="margin-bottom: 10px;" id="primeHint">Prime: {{ "%.2f"|format(prime_rate.prime * 100) }}% (Bank of Canada{% if prime_rate.fetched %}, fetched {{ prime_rate.fetched }}{% endif %})</div>
-          <div class="field-row-4">
-            <div class="form-group-sm">
-              <label>Mezz Prime</label>
-              <input type="text" name="mezz_prime_rate" id="mezzPrimeRate" value="{{ "%.2f"|format(prime_rate.prime * 100) }}">
-            </div>
-            <div class="form-group-sm">
-              <label>Mezz Margin</label>
-              <input type="text" name="mezz_margin" id="mezzMargin" value="3.50">
-            </div>
-            <div class="form-group-sm">
-              <label>Bank Prime</label>
-              <input type="text" name="bank_prime_rate" id="bankPrimeRate" value="{{ "%.2f"|format(prime_rate.prime * 100) }}">
-            </div>
-            <div class="form-group-sm">
-              <label>Bank Margin</label>
-              <input type="text" name="bank_margin" id="bankMargin" value="1.00">
-            </div>
+          <div class="form-group-sm">
+            <label>Mezz Margin</label>
+            <input type="text" name="mezz_margin" id="mezzMargin" value="3.50">
+            <div class="hint">Standard: 3.50%</div>
+          </div>
+          <div class="form-group-sm">
+            <label>Bank Prime</label>
+            <input type="text" name="bank_prime_rate" id="bankPrimeRate" value="{{ "%.2f"|format(prime_rate.prime * 100) }}">
+            <div class="hint">Auto-fetched from Bank of Canada</div>
+          </div>
+          <div class="form-group-sm">
+            <label>Bank Margin</label>
+            <input type="text" name="bank_margin" id="bankMargin" value="1.00">
+            <div class="hint">Standard: 1.00%</div>
           </div>
         </div>
-        <div class="form-group">
-          <label>Fees</label>
-          <div class="field-row">
-            <div class="form-group-sm">
-              <label>Financing Fees %</label>
-              <input type="text" name="financing_fees_pct" id="finFees" value="1.00">
-            </div>
-            <div class="form-group-sm">
-              <label>Contingency %</label>
-              <input type="text" name="financing_contingency_pct" id="finContingency" value="0.50">
-            </div>
+        <div class="hint" id="primeHint" style="margin-top: 10px;">Prime rate: {{ "%.2f"|format(prime_rate.prime * 100) }}% (Bank of Canada policy rate + 2.20%{% if prime_rate.fetched %}, fetched {{ prime_rate.fetched }}{% endif %}) <a href="#" id="refreshPrime" style="color: var(--gold); text-decoration: none; margin-left: 6px;">Refresh rate</a></div>
+      </div>
+      <div class="form-group">
+        <label>Fees</label>
+        <div class="field-row">
+          <div class="form-group-sm">
+            <label>Financing Fees %</label>
+            <input type="text" name="financing_fees_pct" id="finFees" value="1.00">
+            <div class="hint">Standard: 1.00% of total debt</div>
+          </div>
+          <div class="form-group-sm">
+            <label>Contingency %</label>
+            <input type="text" name="financing_contingency_pct" id="finContingency" value="0.50">
+            <div class="hint">Standard: 0.50% of total debt</div>
           </div>
         </div>
       </div>
@@ -1114,12 +1114,28 @@ function makeStepper(minusId, plusId, valueEl, hiddenEl, getter, setter, step, m
     if (getter() < max) { setter(getter() + step); valueEl.textContent = getter(); hiddenEl.value = getter(); updateEquity(); }
   });
 }
-makeStepper('mezzMinus', 'mezzPlus', mezzValueEl, mezzHidden, function(){return mezzPct;}, function(v){mezzPct=v;}, 5, 0, 50);
-makeStepper('bankMinus', 'bankPlus', bankValueEl, bankHidden, function(){return bankPct;}, function(v){bankPct=v;}, 5, 0, 95);
+makeStepper('mezzMinus', 'mezzPlus', mezzValueEl, mezzHidden, function(){return mezzPct;}, function(v){mezzPct=v;}, 1, 0, 50);
+makeStepper('bankMinus', 'bankPlus', bankValueEl, bankHidden, function(){return bankPct;}, function(v){bankPct=v;}, 1, 0, 95);
 
-// Collapsible construction financing card
-document.getElementById('constrFinToggle').addEventListener('click', function() {
-  document.getElementById('constrFinCard').classList.toggle('open');
+// Refresh prime rate on demand (delegated so it works after innerHTML replace)
+document.getElementById('primeHint').addEventListener('click', function(e) {
+  if (e.target.id !== 'refreshPrime') return;
+  e.preventDefault();
+  var link = e.target;
+  link.textContent = 'Refreshing...';
+  fetch('/refresh-prime', { method: 'POST' })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      document.getElementById('mezzPrimeRate').value = data.prime.toFixed(2);
+      document.getElementById('bankPrimeRate').value = data.prime.toFixed(2);
+      link.textContent = 'Refresh rate';
+      // Update the hint text (keep the link)
+      var hintEl = document.getElementById('primeHint');
+      hintEl.childNodes[0].textContent = 'Prime rate: ' + data.prime.toFixed(2) + '% (Bank of Canada policy rate + 2.20%, fetched ' + data.fetched + ') ';
+    })
+    .catch(function() {
+      link.textContent = 'Refresh failed';
+    });
 });
 
 // File upload interaction
