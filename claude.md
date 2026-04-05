@@ -1,34 +1,16 @@
 # SVN Rock — Reverse 1B Automation
 
-## About Me
-- Financial analyst, basic tech knowledge — not a developer
-- I value working software over perfect architecture
-- I trust you, but verify with me on decisions that are hard to reverse
-- Simple > clever. If I can't understand what you built, I can't maintain it
+## Working Principles
 
-## How I Work With You
-
-Before starting any task:
-1. Create a plan.md with the approach
-2. If anything is ambiguous, ask — don't assume
-3. Explain technical decisions in plain language
-
-When building:
-- Test before declaring done
-- Comment code explaining *why*, not just *what*
-- One feature at a time, fully working, before moving on
-- No over-engineering — build what we need now, not what we might need later
-
-When something breaks:
-- Explain what went wrong in plain English
-- Give me options with tradeoffs
-- Don't spiral into complex fixes — sometimes starting fresh is better
+Global working principles apply (see `~/.claude/CLAUDE.md`). Project-specific:
+- Explain technical decisions in plain language (Noor reviews the output)
+- Test Excel output opens without errors before declaring done
 
 ## Project Tracking
 
 At the END of every session:
-- Update PROJECT-SUMMARY.md with what was built
-- Mark completed items as ✅
+- Update guides/PROJECT-SUMMARY.md with what was built
+- Mark completed items as done
 - Add new features discovered during build
 - Update "Last Updated" date
 
@@ -95,9 +77,13 @@ reference/
                                        # This is what a paid engagement produces
                                        # Not used in our automation
 
-docs/
-├── 1B_User_Manual.pdf                # Official user manual with color conventions and sheet descriptions
-└── DATA_MAP.md                       # Cell-by-cell mapping: 1A proforma → Reverse 1B template
+context/reference/
+└── 1B_User_Manual.pdf                # Official user manual with color conventions and sheet descriptions
+
+guides/
+├── DATA_MAP.md                       # Cell-by-cell mapping: 1A proforma → Reverse 1B template
+├── INVESTIGATION_REPORT.md           # Sheet-by-sheet analysis of the template
+└── PROJECT-SUMMARY.md                # Build progress tracking
 ```
 
 ---
@@ -199,7 +185,7 @@ Investigation (2026-03-04) revealed that Sheet 5 is **mostly formulas** — it c
 | I137 | Reserve for replacement % | 0.02 |
 
 ### Sheet 4 ("4. Area Schedule") — Building area breakdown
-Needs values derived from 1A + estimation rules. See docs/INVESTIGATION_REPORT.md for full cell list.
+Needs values derived from 1A + estimation rules. See guides/INVESTIGATION_REPORT.md for full cell list.
 
 ### Sheet 5 ("5. Key Assumptions") — Only these TRUE input cells
 Most of Sheet 5 is formulas cascading from Sheets 1, 4, 7, 13. Only write to:
@@ -254,20 +240,4 @@ Phase 1 is done when:
 
 ## Self-Improvement Protocol
 
-### When corrected
-Write the correction as a permanent rule in `.claude/rules/`.
-Include what was wrong, what is right, and the date learned.
-
-### When a new procedure is established
-Write it as a rule in `.claude/rules/`.
-
-### When a mistake leads to a fix
-Document BOTH the mistake AND the fix as a rule. Title it clearly.
-
-### When a task is requested more than twice
-Propose creating a slash command in `.claude/commands/`.
-Create it after receiving approval.
-
-### When to update claude.md
-NEVER auto-modify claude.md. Only update when Alejandro explicitly asks.
-All learned patterns go to `.claude/rules/`.
+See global `~/.claude/CLAUDE.md`. NEVER auto-modify this file.
