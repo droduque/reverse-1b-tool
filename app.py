@@ -403,7 +403,12 @@ def generate():
                                 warnings='|'.join(all_warnings) if all_warnings else ''))
 
     except Exception as e:
-        flash(f'Error processing file: {str(e)}')
+        err_msg = str(e)
+        if 'xlrd' in err_msg.lower() or 'sst' in err_msg.lower() or 'assertionerror' in err_msg.lower():
+            flash('Error: This .xls file has a format issue that requires LibreOffice to convert. '
+                  'Please re-save the file as .xlsx in Excel and try again.')
+        else:
+            flash(f'Error processing file: {err_msg}')
         return redirect(url_for('index'))
 
     finally:

@@ -338,9 +338,20 @@ def _parse_1a_xlsx(filepath):
 
 
 def _parse_1a_xls(filepath):
-    """Parse .xls format using xlrd."""
+    """Parse .xls format using xlrd, falling back to LibreOffice conversion
+    if xlrd can't handle the file (some .xls files have corrupt shared string
+    tables that crash xlrd but open fine in Excel/LibreOffice)."""
     import xlrd
-    wb = xlrd.open_workbook(filepath)
+    try:
+        wb = xlrd.open_workbook(filepath)
+    except Exception as e:
+        # xlrd failed — try converting to .xlsx via LibreOffice
+        print(f"  [xlrd] Failed to open .xls ({e}), trying LibreOffice conversion...")
+        converted = _convert_xls_to_xlsx(filepath)
+        if converted:
+            return _parse_1a_xlsx(converted)
+        raise ValueError(f"Cannot open .xls file: xlrd failed ({e}) and LibreOffice is not available")
+
     ws = wb.sheet_by_index(0)
 
     # xlrd uses 0-based indexing; our parser uses 1-based rows and letter columns
@@ -361,6 +372,59 @@ def _parse_1a_xls(filepath):
         return val
 
     return _parse_sheet(cell, ws.nrows)
+
+
+def _convert_xls_to_xlsx(filepath):
+    """Convert a .xls file to .xlsx using ssconvert (gnumeric) or LibreOffice.
+    Returns the path to the converted file, or None if neither is available."""
+    import subprocess
+    import shutil
+    import tempfile
+
+    basename = os.path.splitext(os.path.basename(filepath))[0] + '.xlsx'
+    outdir = tempfile.mkdtemp()
+    converted = os.path.join(outdir, basename)
+
+    # Try ssconvert first (gnumeric, ~37MB on Railway vs ~400MB for LibreOffice)
+    ssconvert = shutil.which('ssconvert')
+    if ssconvert:
+        try:
+            proc = subprocess.run(
+                [ssconvert, filepath, converted],
+                capture_output=True, timeout=30
+            )
+            if proc.returncode == 0 and os.path.exists(converted) and os.path.getsize(converted) > 0:
+                print(f"  [xlrd] Converted to .xlsx via ssconvert: {converted}")
+                return converted
+        except Exception:
+            pass
+
+    # Fall back to LibreOffice (available locally on Mac)
+    soffice = shutil.which('soffice')
+    if not soffice:
+        for path in ['/Applications/LibreOffice.app/Contents/MacOS/soffice',
+                     '/opt/homebrew/bin/soffice', '/usr/bin/soffice',
+                     '/usr/local/bin/soffice']:
+            if os.path.exists(path):
+                soffice = path
+                break
+    if not soffice:
+        return None
+
+    try:
+        proc = subprocess.run(
+            [soffice, '--headless', '--calc', '--convert-to', 'xlsx',
+             '--outdir', outdir, filepath],
+            capture_output=True, timeout=30
+        )
+        if proc.returncode != 0:
+            return None
+        if os.path.exists(converted) and os.path.getsize(converted) > 0:
+            print(f"  [xlrd] Converted to .xlsx via LibreOffice: {converted}")
+            return converted
+        return None
+    except Exception:
+        return None
 
 
 def _parse_sheet(cell, max_row):
