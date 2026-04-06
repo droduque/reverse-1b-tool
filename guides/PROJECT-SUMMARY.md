@@ -1,6 +1,6 @@
 # SVN Rock — Project Summary
 
-Last Updated: 2026-03-31
+Last Updated: 2026-04-06
 
 ## Phase 1: 1A to Reverse 1B Populator
 
@@ -102,6 +102,7 @@ Last Updated: 2026-03-31
 - [x] **GFA + Parking SF display (2026-04-02)** — auto-filled from 1A, overridable on upload form. Feeds into Sheet 1 E62 and Sheet 4 area schedule.
 - [x] **Construction financing inputs (2026-04-02)** — 8 Sheet 5 cells: mezz/bank debt %, prime rates, margins, fees/contingency. Collapsible card with live equity display.
 - [x] **Prime rate auto-fetch (2026-04-02)** — Bank of Canada Valet API (policy rate + 2.20%). Pre-fills prime rate fields. Silent fallback to 4.45%.
+- [x] **Railway OOM crash fix (2026-04-06)** — formulas library was resolving 13 external workbook refs to Noor's local Windows paths, causing OOM on Railway. Fix: skip formulas library when no LibreOffice (Railway), use Python metrics instead. Also: /health endpoint, clearer file-missing message after redeploys, 1 worker with 120s timeout. Upgraded Railway free→Hobby ($5/mo).
 
 ### IRR Accuracy (verified 2026-03-12 vs Excel Sheets 10 & 11)
 - **Merchant IRR: 27.96% vs 27.90% (0.06pt gap)** — was 0.82pt before fix
