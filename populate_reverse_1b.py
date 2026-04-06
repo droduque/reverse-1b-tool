@@ -1720,8 +1720,12 @@ def _extract_excel_metrics(xlsx_path):
     if recalc_result:
         return recalc_result
 
-    # Fallback: formulas library (partial — can't handle Altus CHOOSE chain)
-    return _extract_via_formulas_library(xlsx_path)
+    # No LibreOffice available (e.g. Railway). Skip the formulas library
+    # entirely — it tries to resolve external workbook refs from Noor's
+    # local Windows paths, consuming all available memory and crashing
+    # the server. Python metrics are accurate to within 0.06pt on IRRs
+    # and exact on everything else. Not worth the crash risk.
+    return None
 
 
 def _extract_via_libreoffice(xlsx_path):
@@ -1854,15 +1858,39 @@ def _extract_via_formulas_library(xlsx_path):
         import warnings
         import io
         import sys as _sys
+        import signal
+        import threading
         warnings.filterwarnings('ignore')
 
-        old_stderr = _sys.stderr
-        _sys.stderr = io.StringIO()
-        try:
-            xl = formulas.ExcelModel().loads(xlsx_path).finish()
-            sol = xl.calculate()
-        finally:
-            _sys.stderr = old_stderr
+        # Timeout guard: the formulas library can hang on Railway trying to
+        # resolve external workbook refs (Noor's local Windows paths).
+        # Cap at 30 seconds to prevent gunicorn worker OOM/SIGKILL.
+        result_holder = [None]
+        error_holder = [None]
+
+        def _run_formulas():
+            try:
+                old_stderr = _sys.stderr
+                _sys.stderr = io.StringIO()
+                try:
+                    xl = formulas.ExcelModel().loads(xlsx_path).finish()
+                    result_holder[0] = xl.calculate()
+                finally:
+                    _sys.stderr = old_stderr
+            except Exception as e:
+                error_holder[0] = e
+
+        t = threading.Thread(target=_run_formulas, daemon=True)
+        t.start()
+        t.join(timeout=30)
+        if t.is_alive():
+            print(f"  [formulas] Warning: timed out after 30s, skipping formula evaluation")
+            return None
+        if error_holder[0]:
+            raise error_holder[0]
+        sol = result_holder[0]
+        if sol is None:
+            return None
 
         def get_val(sheet_part, cell):
             cell_upper = cell.upper()

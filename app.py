@@ -70,6 +70,12 @@ def fetch_prime_rate():
 fetch_prime_rate()
 
 
+@app.route('/health')
+def health():
+    """Lightweight health check for Railway."""
+    return jsonify({'status': 'ok'}), 200
+
+
 @app.route('/refresh-prime', methods=['POST'])
 def refresh_prime():
     """Re-fetch the Bank of Canada prime rate on demand."""
@@ -437,7 +443,8 @@ def download_file(filename):
     safe_name = os.path.basename(filename)
     file_path = os.path.join(OUTPUT_DIR, safe_name)
     if not os.path.exists(file_path):
-        flash('File not found.')
+        flash('This file is no longer available. The server clears generated files on each deploy. '
+              'Please re-upload your 1A proforma to regenerate it.')
         return redirect(url_for('index'))
     return send_file(
         file_path,
