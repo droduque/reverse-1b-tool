@@ -591,36 +591,40 @@ def results():
 
                 # ── TIER 3: Verified metrics (when available) ──
 
-                # 14. Cost gap — compute from available data
-                # Bottom-up TDC = sum of all cost items (what the model calculates)
-                # Top-down TDC = building value * (1 - profit%) = what the building should cost
-                # Gap = (top_down - bottom_up) / top_down
+                # 14-16. Calculated metrics — threshold flags only.
+                # These are Python estimates that may differ from Excel's formula chain.
+                # Show pass/warn/fail thresholds, NOT specific values, to avoid confusion
+                # when the analyst compares against the actual Excel output.
                 tdc = metrics.get('total_dev_cost') if metrics else None
                 bldg_value = metrics.get('value') if metrics else None
                 profit_pct = dev.get('profit_pct', 0.08)
                 if tdc and bldg_value and bldg_value > 0:
                     top_down_tdc = bldg_value * (1 - profit_pct)
-                    cost_gap = (top_down_tdc - tdc) / top_down_tdc if top_down_tdc > 0 else 0
-                    gap_abs = abs(cost_gap)
-                    gap_dir = 'under' if cost_gap > 0 else 'over'
+                    gap_abs = abs((top_down_tdc - tdc) / top_down_tdc) if top_down_tdc > 0 else 0
                     if gap_abs < 0.05:
-                        checklist.append(('pass', 'Cost Gap', f"{gap_abs:.1%}"))
+                        checklist.append(('pass', 'Cost Gap', 'Within 5% (check Sheet 5, F86)'))
                     elif gap_abs < 0.15:
-                        checklist.append(('warn', 'Cost Gap', f"{gap_abs:.1%} {gap_dir} (analyst review needed)"))
+                        checklist.append(('warn', 'Cost Gap', 'Above 5%, review in Excel (Sheet 5, F86)'))
                     else:
-                        checklist.append(('fail', 'Cost Gap', f"{gap_abs:.1%} {gap_dir} (significant, adjust manually)"))
+                        checklist.append(('fail', 'Cost Gap', 'Above 15%, adjust manually (Sheet 5, F86)'))
 
-                # 15. Merchant IRR
                 mirr = metrics.get('merchant_irr') if metrics else None
                 if mirr is not None:
-                    status = 'pass' if 0.10 <= mirr <= 0.30 else ('warn' if mirr <= 0.40 else 'fail')
-                    checklist.append((status, 'Merchant IRR', f"{mirr:.1%}"))
+                    if 0.05 <= mirr <= 0.30:
+                        checklist.append(('pass', 'Merchant IRR', 'Within expected range'))
+                    elif mirr > 0.30:
+                        checklist.append(('warn', 'Merchant IRR', 'Above 30%, likely driven by cost gap'))
+                    else:
+                        checklist.append(('warn', 'Merchant IRR', 'Below 5%, verify inputs'))
 
-                # 16. Return on cost
                 mr = metrics.get('merchant_return') if metrics else None
                 if mr is not None:
-                    status = 'pass' if 0.10 <= mr <= 0.50 else ('warn' if mr <= 0.65 else 'fail')
-                    checklist.append((status, 'Return on Cost', f"{mr:.1%}"))
+                    if 0.05 <= mr <= 0.50:
+                        checklist.append(('pass', 'Return on Cost', 'Within expected range'))
+                    elif mr > 0.50:
+                        checklist.append(('warn', 'Return on Cost', 'Above 50%, likely driven by cost gap'))
+                    else:
+                        checklist.append(('warn', 'Return on Cost', 'Below 5%, verify inputs'))
 
                 # 17. Validation result
                 val_result = pj.get('validation', {})
