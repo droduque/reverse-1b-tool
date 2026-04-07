@@ -443,27 +443,156 @@ def results():
                 with open(json_path) as f:
                     pj = json.load(f)
                 areas = pj.get('areas', {})
+                units_data = pj.get('units', {})
+                opex = pj.get('opex', {})
                 dev = pj.get('development', {})
                 fin = pj.get('financing', {})
+                sched = pj.get('schedule', {})
+                parse = pj.get('parse', {})
+                parking = pj.get('parking', {})
+                storage = pj.get('storage', {})
+                commercial = pj.get('commercial', {})
                 metrics = pj.get('verified', pj.get('verified_metrics', pj.get('metrics', {})))
+                cap_rates = pj.get('cap_rates', {})
+                total_units = units_data.get('total', 0)
+                unit_types = units_data.get('types', [])
 
-                # 1. GFA source
+                # ── TIER 1: Data integrity (did we parse the 1A correctly?) ──
+
+                # 1. Parser warnings
+                pw = parse.get('warnings', [])
+                if len(pw) == 0:
+                    checklist.append(('pass', '1A Parsing', 'All sections found'))
+                elif len(pw) <= 2:
+                    checklist.append(('pass', '1A Parsing', '; '.join(pw)))
+                elif len(pw) <= 4:
+                    checklist.append(('warn', '1A Parsing', '; '.join(pw[:3])))
+                else:
+                    checklist.append(('fail', '1A Parsing', f"{len(pw)} sections missing or defaulted"))
+
+                # 2. Unit count
+                unit_sum = sum(u.get('count', 0) for u in unit_types)
+                if total_units > 0 and unit_sum == total_units:
+                    checklist.append(('pass', 'Unit Count', f"{total_units} units ({len(unit_types)} types)"))
+                elif total_units > 0:
+                    checklist.append(('fail', 'Unit Count', f"Mismatch: types sum to {unit_sum}, total is {total_units}"))
+                else:
+                    checklist.append(('fail', 'Unit Count', '0 units detected'))
+
+                # 3. Revenue sanity (rent per SF)
+                if unit_types and total_units > 0:
+                    total_rent = sum(u['rent'] * u['count'] for u in unit_types)
+                    total_sf = sum(u['sf'] * u['count'] for u in unit_types)
+                    avg_rent_psf = (total_rent / total_sf) if total_sf > 0 else 0
+                    if 1.5 <= avg_rent_psf <= 7.0:
+                        checklist.append(('pass', 'Avg Rent', f"${avg_rent_psf:.2f}/SF/mo (${total_rent / total_units:,.0f}/unit)"))
+                    elif avg_rent_psf > 7.0:
+                        checklist.append(('warn', 'Avg Rent', f"${avg_rent_psf:.2f}/SF/mo (high, verify)"))
+                    elif avg_rent_psf > 0:
+                        checklist.append(('warn', 'Avg Rent', f"${avg_rent_psf:.2f}/SF/mo (low, verify)"))
+                    else:
+                        checklist.append(('fail', 'Avg Rent', '$0 rent detected'))
+
+                # 4. Cap rates
+                caps = [cap_rates.get('best'), cap_rates.get('base'), cap_rates.get('worst')]
+                caps_valid = [c for c in caps if c and 0.02 <= c <= 0.10]
+                if len(caps_valid) == 3:
+                    checklist.append(('pass', 'Cap Rates', f"{caps[0]:.2%} / {caps[1]:.2%} / {caps[2]:.2%}"))
+                elif len(caps_valid) > 0:
+                    checklist.append(('warn', 'Cap Rates', f"Only {len(caps_valid)} of 3 in valid range (2-10%)"))
+                else:
+                    checklist.append(('fail', 'Cap Rates', 'Missing or out of range'))
+
+                # 5. Tax rate and assessed value
+                tax_rate = opex.get('tax_rate', 0)
+                assessed = opex.get('assessed_value_per_unit', 0)
+                if tax_rate > 0 and assessed > 0:
+                    tax_per_unit = tax_rate * assessed
+                    checklist.append(('pass', 'Property Tax', f"{tax_rate:.4%} rate, ${assessed:,.0f}/unit (${tax_per_unit:,.0f}/unit/yr)"))
+                elif tax_rate > 0 and assessed == 0:
+                    checklist.append(('fail', 'Property Tax', f"Rate {tax_rate:.4%} but assessed value is $0"))
+                elif tax_rate == 0 and assessed > 0:
+                    checklist.append(('fail', 'Property Tax', f"Assessed ${assessed:,.0f}/unit but tax rate is 0%"))
+                else:
+                    checklist.append(('fail', 'Property Tax', 'No tax rate or assessed value found'))
+
+                # 6. Parking and storage
+                pkg_total = sum(parking.get(k, {}).get('spaces', 0) for k in ('underground', 'visitor', 'retail'))
+                stor_count = storage.get('count', 0)
+                pkg_status = 'pass' if pkg_total > 0 else ('warn' if total_units < 50 else 'warn')
+                checklist.append((pkg_status, 'Parking', f"{pkg_total} spaces" + ('' if pkg_total > 0 else ' (none detected)')))
+                checklist.append(('pass' if stor_count > 0 else 'warn', 'Storage', f"{stor_count} lockers" + ('' if stor_count > 0 else ' (none detected)')))
+
+                # 7. Commercial
+                comm_sf = commercial.get('sf', 0)
+                if comm_sf > 0:
+                    checklist.append(('pass', 'Commercial', f"{comm_sf:,.0f} SF detected"))
+                else:
+                    checklist.append(('pass', 'Commercial', 'None (verify against 1A)'))
+
+                # ── TIER 2: Assumptions used ──
+
+                # 8. GFA source and scaling
                 gfa_ext = areas.get('gfa_from_external', False)
                 gfa_scale = areas.get('gfa_scale', 1.0)
+                gfa_val = areas.get('gfa', 0)
+                rentable = areas.get('total_rentable_sf', 0)
                 if gfa_ext:
+                    efficiency = (rentable / gfa_val * 100) if gfa_val > 0 else 0
+                    scale_note = ''
                     if abs(gfa_scale - 1.0) < 0.01:
-                        checklist.append(('pass', 'GFA Source', f"From 1A ({areas.get('gfa', 0):,.0f} SF), no scaling needed"))
-                    elif gfa_scale <= 1.5:
-                        checklist.append(('pass', 'GFA Scaling', f"{gfa_scale:.2f}x (normal range)"))
-                    elif gfa_scale <= 2.5:
-                        checklist.append(('warn', 'GFA Scaling', f"{gfa_scale:.2f}x (review area breakdown)"))
+                        scale_note = ', no scaling needed'
                     else:
-                        checklist.append(('fail', 'GFA Scaling', f"{gfa_scale:.2f}x (unusually high, check 1A GFA)"))
+                        scale_note = f', scaled {gfa_scale:.2f}x'
+                    status = 'pass' if gfa_scale <= 1.5 else ('warn' if gfa_scale <= 2.5 else 'fail')
+                    checklist.append((status, 'GFA', f"From 1A ({gfa_val:,.0f} SF, {efficiency:.0f}% efficient{scale_note})"))
                 else:
-                    checklist.append(('warn', 'GFA Source', 'Estimated (1A does not contain GFA)'))
+                    checklist.append(('warn', 'GFA', f"Estimated ({gfa_val:,.0f} SF, no GFA in 1A)"))
 
-                # 2. Cost gap (from verified metrics if available)
-                cost_gap_pct = metrics.get('cost_gap_pct')
+                # 9. Building type
+                btype = pj.get('project', {}).get('building_type', 'unknown')
+                storeys = units_data.get('est_storeys', 0)
+                if btype == 'high-rise' and storeys >= 7:
+                    checklist.append(('pass', 'Building Type', f"High-rise (~{storeys} storeys)"))
+                elif btype == 'mid-rise' and storeys < 7:
+                    checklist.append(('pass', 'Building Type', f"Mid-rise (~{storeys} storeys)"))
+                else:
+                    checklist.append(('warn', 'Building Type', f"{btype.title()} selected (~{storeys} storeys, verify)"))
+
+                # 10. Construction duration
+                constr_mo = sched.get('construction_months', 18)
+                constr_auto = sched.get('construction_months_auto', True)
+                checklist.append(('pass', 'Construction', f"{constr_mo} months ({'auto from {0} units'.format(total_units) if constr_auto else 'user override'})"))
+
+                # 11. Municipality and DC
+                muni = pj.get('project', {}).get('municipality', '')
+                dc_total = dev.get('dc_total', 0)
+                if muni and muni != 'Not selected':
+                    dc_per_unit = dc_total / total_units if total_units > 0 else 0
+                    checklist.append(('pass', 'Municipality', f"{muni} (DC ${dc_per_unit:,.0f}/unit)"))
+                else:
+                    checklist.append(('warn', 'Municipality', 'Not selected (using template DC defaults)'))
+
+                # 12. OpEx sources
+                defaults = {'insurance_per_unit': 450, 'rm_per_unit': 1050, 'staffing_per_unit': 1200,
+                            'marketing_per_unit': 300, 'ga_per_unit': 250}
+                from_1a = sum(1 for k, dv in defaults.items() if opex.get(k, dv) != dv)
+                from_default = len(defaults) - from_1a
+                if from_default == 0:
+                    checklist.append(('pass', 'OpEx Sources', f"All {len(defaults)} items from 1A"))
+                elif from_default <= 2:
+                    checklist.append(('pass', 'OpEx Sources', f"{from_1a} from 1A, {from_default} defaulted"))
+                else:
+                    checklist.append(('warn', 'OpEx Sources', f"{from_1a} from 1A, {from_default} defaulted (review)"))
+
+                # 13. Financing program
+                fp_label = fin.get('program_label', 'Unknown')
+                checklist.append(('pass', 'Financing', fp_label))
+
+                # ── TIER 3: Verified metrics (when available) ──
+
+                # 14. Cost gap
+                cost_gap_pct = metrics.get('cost_gap_pct') if metrics else None
                 if cost_gap_pct is not None:
                     gap_abs = abs(cost_gap_pct)
                     if gap_abs < 0.05:
@@ -473,29 +602,19 @@ def results():
                     else:
                         checklist.append(('fail', 'Cost Gap', f"{gap_abs:.1%} (significant, adjust manually)"))
 
-                # 3. Merchant IRR sanity
-                mirr = metrics.get('merchant_irr')
+                # 15. Merchant IRR
+                mirr = metrics.get('merchant_irr') if metrics else None
                 if mirr is not None:
-                    if 0.10 <= mirr <= 0.30:
-                        checklist.append(('pass', 'Merchant IRR', f"{mirr:.1%}"))
-                    elif 0.30 < mirr <= 0.40:
-                        checklist.append(('warn', 'Merchant IRR', f"{mirr:.1%} (high, verify costs)"))
-                    elif mirr > 0.40:
-                        checklist.append(('fail', 'Merchant IRR', f"{mirr:.1%} (too high, likely cost gap issue)"))
-                    elif mirr < 0.10:
-                        checklist.append(('warn', 'Merchant IRR', f"{mirr:.1%} (low)"))
+                    status = 'pass' if 0.10 <= mirr <= 0.30 else ('warn' if mirr <= 0.40 else 'fail')
+                    checklist.append((status, 'Merchant IRR', f"{mirr:.1%}"))
 
-                # 4. Return on cost
-                mr = metrics.get('merchant_return')
+                # 16. Return on cost
+                mr = metrics.get('merchant_return') if metrics else None
                 if mr is not None:
-                    if 0.10 <= mr <= 0.50:
-                        checklist.append(('pass', 'Return on Cost', f"{mr:.1%}"))
-                    elif 0.50 < mr <= 0.65:
-                        checklist.append(('warn', 'Return on Cost', f"{mr:.1%} (high)"))
-                    elif mr > 0.65:
-                        checklist.append(('fail', 'Return on Cost', f"{mr:.1%} (too high, check costs)"))
+                    status = 'pass' if 0.10 <= mr <= 0.50 else ('warn' if mr <= 0.65 else 'fail')
+                    checklist.append((status, 'Return on Cost', f"{mr:.1%}"))
 
-                # 5. Validation result
+                # 17. Validation result
                 val_result = pj.get('validation', {})
                 if val_result:
                     if val_result.get('passed', True):

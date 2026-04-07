@@ -1192,6 +1192,8 @@ def populate_template(data, output_path, municipality=None, building_type='high-
             construction_months = 30
     queue_write(sheet5_writes, 'E14', construction_months,
                 f"Construction duration ({construction_months}mo — {'auto from ' + str(data['total_units']) + ' units' if auto_construction else 'user override'})")
+    data['construction_months'] = construction_months
+    data['construction_months_auto'] = auto_construction
 
     queue_write(sheet5_writes, 'E16', 0, "Stabilized duration (months)")
     queue_write(sheet5_writes, 'F15', -3, "Lease-up offset (months)")
@@ -1816,8 +1818,14 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
         'schedule': {
             'land_months': 0,
             'predev_months': 12,
-            'construction_months': 18,
+            'construction_months': data.get('construction_months', 18),
+            'construction_months_auto': data.get('construction_months_auto', True),
             'leaseup_offset': -3,
+        },
+        'parse': {
+            'sections_found': data.get('sections_found', 0),
+            'total_sections': 11,
+            'warnings': data.get('parse_warnings', []),
         },
     }
 
