@@ -272,6 +272,56 @@ body {
   font-weight: 700;
   color: var(--gold);
 }
+
+/* ── Review Checklist ────────────────────── */
+.checklist-section {
+  width: 100%;
+  max-width: 520px;
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.checklist-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.checklist-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(30,37,48,0.5);
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-icon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+}
+.checklist-icon.pass { color: var(--green); }
+.checklist-icon.warn { color: var(--gold); }
+.checklist-icon.fail { color: #e55; }
+.checklist-label {
+  color: var(--dim);
+  min-width: 120px;
+  font-size: 13px;
+}
+.checklist-value {
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
 </style>
 </head>
 <body>
@@ -317,20 +367,27 @@ body {
       <div class="action-arrow">&darr;</div>
     </a>
 
-    <a href="{{ url_for('present', filename=present_slug) }}" class="action-card primary">
-      <div class="action-number">2</div>
-      <div class="action-text">
-        <div class="action-label">Open in Presentation Mode</div>
-        <div class="action-desc">Interactive sensitivity analysis</div>
-      </div>
-      <div class="action-arrow">&rarr;</div>
-    </a>
+    {# Presentation mode hidden for initial team rollout (Noor, April 7 2026).
+       Route stays alive at /present/<filename> for testing. #}
   </div>
 
   <div class="validated">
     <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-    READY TO PRESENT
+    VALIDATED &mdash; READY FOR REVIEW
   </div>
+
+  {% if checklist %}
+  <div class="checklist-section">
+    <div class="checklist-title">Review Checklist</div>
+    {% for status, label, value in checklist %}
+    <div class="checklist-item">
+      <span class="checklist-icon {{ status }}">{% if status == 'pass' %}&#10003;{% elif status == 'warn' %}!{% else %}&#10007;{% endif %}</span>
+      <span class="checklist-label">{{ label }}</span>
+      <span class="checklist-value">{{ value }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   <div class="back-link">
     <a href="/">&larr; Generate another project</a>

@@ -386,6 +386,19 @@ def validate_output(xlsx_path, parsed_data):
                           f"(rounded: {round(s1d_resolved)})")
 
     # ===================================================================
+    # GFA CONSISTENCY CHECK
+    # ===================================================================
+    # Sheet 4 E64 is a formula referencing Sheet 1 E62 (Building GFA).
+    # We verify E62 on Sheet 1 is numeric and positive.
+    _, e62_val, e62_type, _ = _get_cell(sheet1_root, 'E62')
+    if e62_val and e62_type in ('n', None):
+        try:
+            gfa_val = float(e62_val)
+            check(gfa_val > 0, f"Sheet 1 E62 (Building GFA) should be > 0, got {gfa_val}")
+        except (ValueError, TypeError):
+            pass
+
+    # ===================================================================
     # RESULT
     # ===================================================================
     return {

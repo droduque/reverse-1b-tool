@@ -424,9 +424,8 @@ def generate():
 @app.route('/results')
 def results():
     """
-    Post-generation results page. Shows download + presentation links
-    for the SPECIFIC project that was just generated. Each user lands on
-    their own results page, so 10 simultaneous users never cross wires.
+    Post-generation results page. Shows download link, review checklist,
+    and any warnings for the SPECIFIC project that was just generated.
     """
     download = request.args.get('download', '')
     present = request.args.get('present', '')
@@ -434,12 +433,86 @@ def results():
     units = request.args.get('units', '')
     warnings_str = request.args.get('warnings', '')
     warnings = [w for w in warnings_str.split('|') if w] if warnings_str else []
+
+    # Build review checklist from the project JSON
+    checklist = []
+    if present:
+        json_path = os.path.join(OUTPUT_DIR, present + '.json')
+        if os.path.exists(json_path):
+            try:
+                with open(json_path) as f:
+                    pj = json.load(f)
+                areas = pj.get('areas', {})
+                dev = pj.get('development', {})
+                fin = pj.get('financing', {})
+                metrics = pj.get('verified', pj.get('verified_metrics', pj.get('metrics', {})))
+
+                # 1. GFA source
+                gfa_ext = areas.get('gfa_from_external', False)
+                gfa_scale = areas.get('gfa_scale', 1.0)
+                if gfa_ext:
+                    if abs(gfa_scale - 1.0) < 0.01:
+                        checklist.append(('pass', 'GFA Source', f"From 1A ({areas.get('gfa', 0):,.0f} SF), no scaling needed"))
+                    elif gfa_scale <= 1.5:
+                        checklist.append(('pass', 'GFA Scaling', f"{gfa_scale:.2f}x (normal range)"))
+                    elif gfa_scale <= 2.5:
+                        checklist.append(('warn', 'GFA Scaling', f"{gfa_scale:.2f}x (review area breakdown)"))
+                    else:
+                        checklist.append(('fail', 'GFA Scaling', f"{gfa_scale:.2f}x (unusually high, check 1A GFA)"))
+                else:
+                    checklist.append(('warn', 'GFA Source', 'Estimated (1A does not contain GFA)'))
+
+                # 2. Cost gap (from verified metrics if available)
+                cost_gap_pct = metrics.get('cost_gap_pct')
+                if cost_gap_pct is not None:
+                    gap_abs = abs(cost_gap_pct)
+                    if gap_abs < 0.05:
+                        checklist.append(('pass', 'Cost Gap', f"{gap_abs:.1%}"))
+                    elif gap_abs < 0.15:
+                        checklist.append(('warn', 'Cost Gap', f"{gap_abs:.1%} (analyst review needed)"))
+                    else:
+                        checklist.append(('fail', 'Cost Gap', f"{gap_abs:.1%} (significant, adjust manually)"))
+
+                # 3. Merchant IRR sanity
+                mirr = metrics.get('merchant_irr')
+                if mirr is not None:
+                    if 0.10 <= mirr <= 0.30:
+                        checklist.append(('pass', 'Merchant IRR', f"{mirr:.1%}"))
+                    elif 0.30 < mirr <= 0.40:
+                        checklist.append(('warn', 'Merchant IRR', f"{mirr:.1%} (high, verify costs)"))
+                    elif mirr > 0.40:
+                        checklist.append(('fail', 'Merchant IRR', f"{mirr:.1%} (too high, likely cost gap issue)"))
+                    elif mirr < 0.10:
+                        checklist.append(('warn', 'Merchant IRR', f"{mirr:.1%} (low)"))
+
+                # 4. Return on cost
+                mr = metrics.get('merchant_return')
+                if mr is not None:
+                    if 0.10 <= mr <= 0.50:
+                        checklist.append(('pass', 'Return on Cost', f"{mr:.1%}"))
+                    elif 0.50 < mr <= 0.65:
+                        checklist.append(('warn', 'Return on Cost', f"{mr:.1%} (high)"))
+                    elif mr > 0.65:
+                        checklist.append(('fail', 'Return on Cost', f"{mr:.1%} (too high, check costs)"))
+
+                # 5. Validation result
+                val_result = pj.get('validation', {})
+                if val_result:
+                    if val_result.get('passed', True):
+                        checklist.append(('pass', 'Excel Validation', f"{val_result.get('checks_passed', '?')}/{val_result.get('checks_run', '?')} checks passed"))
+                    else:
+                        checklist.append(('fail', 'Excel Validation', f"Failed: {'; '.join(val_result.get('errors', [])[:2])}"))
+
+            except Exception:
+                pass
+
     return render_template('results.html',
                            download_filename=download,
                            present_slug=present,
                            address=address,
                            units=units,
-                           warnings=warnings)
+                           warnings=warnings,
+                           checklist=checklist)
 
 
 @app.route('/download/<filename>')

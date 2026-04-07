@@ -893,11 +893,16 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("--- Sheet 1 Internal Section (Operating Assumptions) ---")
 
     # GFA — user override > 1A value > estimate
+    # gfa_from_external: True when GFA comes from 1A or user override (not estimated).
+    # Used later to scale Sheet 4 area breakdown so totals match the known GFA.
+    gfa_from_external = False
     if gfa_override:
         gfa = gfa_override
+        gfa_from_external = True
         queue_write(sheet1_writes, 'E62', gfa, f"Building GFA (user override: {gfa:,.0f} SF)")
     elif data.get('gfa'):
         gfa = data['gfa']
+        gfa_from_external = True
         queue_write(sheet1_writes, 'E62', gfa, "Building GFA (from 1A internal section)")
     else:
         gfa = round(data['total_rentable_sf'] / GFA_EFFICIENCY)
@@ -991,35 +996,30 @@ def populate_template(data, output_path, municipality=None, building_type='high-
             pct = round(unit['count'] / data['total_units'] * 100) if data['total_units'] > 0 else 0
             queue_write(sheet4_writes, f'F{row}', f"{pct}% of total units", f"{unit['label']} note")
 
-    # --- Section 2.1: Amenity Spaces ---
-    log.append("")
-    log.append("--- Amenity Spaces (ESTIMATED) ---")
-    # Total amenity budget then distribute across 5 rooms
-    total_amenity = amenity_sf
-    # Keep the same proportions as Birchmount: 32%, 27%, 16%, 14%, 11%
-    amenity_rooms = [
-        ('Fitness Centre', 0.32),
-        ('Multi-Purpose/Party Room', 0.27),
-        ('Co-Working Space', 0.16),
-        ('Games/Lounge Area', 0.14),
-        ('Outdoor Terrace/BBQ Area', 0.11),
-    ]
-    for idx, (name, pct) in enumerate(amenity_rooms):
-        row = 14 + idx
-        room_sf = round(total_amenity * pct, -1)  # round to 10
-        queue_write(sheet4_writes, f'C{row}', 1, f"{name} quantity")
-        queue_write(sheet4_writes, f'D{row}', int(room_sf),
-                    f"ESTIMATED: {pct:.0%} of {total_amenity} total amenity SF")
-        queue_write(sheet4_writes, f'E{row}', int(room_sf), f"{name} total SF")
+    # --- Calculate all estimated area items BEFORE writing ---
+    # We calculate amenity, common, and BoH SF first so we can scale them
+    # to match the 1A's GFA when available. Residential and commercial are
+    # fixed (from 1A data) and never scaled.
 
-    # --- Section 2.2: Common Areas ---
-    log.append("")
-    log.append("--- Common Areas (ESTIMATED) ---")
+    # Amenity rooms — proportions from Birchmount template
+    total_amenity = amenity_sf
+    amenity_rooms = [
+        (14, 'Fitness Centre', 0.32),
+        (15, 'Multi-Purpose/Party Room', 0.27),
+        (16, 'Co-Working Space', 0.16),
+        (17, 'Games/Lounge Area', 0.14),
+        (18, 'Outdoor Terrace/BBQ Area', 0.11),
+    ]
+    amenity_data = []
+    for row, name, pct in amenity_rooms:
+        room_sf = round(total_amenity * pct, -1)
+        amenity_data.append((row, name, int(room_sf)))
+    amenity_total = sum(sf for _, _, sf in amenity_data)
+
+    # Common areas
     est_floors = math.ceil(data['total_units'] / 12)
     elevator_count = 2 if data['total_units'] < 100 else (3 if data['total_units'] <= 250 else 4)
-
     common_items = [
-        # (row, label, qty, sf_each, total_override, note_for_log)
         (22, 'Main Lobby', 1, 800, 800,
          "DEFAULT: 800 SF"),
         (23, 'Corridors & Hallways', data['total_units'], 25, None,
@@ -1042,18 +1042,89 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         (31, 'Janitor/Housekeeping Closets', max(1, est_floors // 5), 40, None,
          f"ESTIMATED: {max(1, est_floors // 5)} closets (floors/5) x 40 SF"),
     ]
-
+    common_data = []
     for row, label, qty, sf_each, total_override, note in common_items:
-        queue_write(sheet4_writes, f'C{row}', qty, note)
-        queue_write(sheet4_writes, f'D{row}', sf_each, f"{label} SF each")
-        # E column: write total SF — xml_writer's write_cell will skip if it's a formula
         total_sf = total_override if total_override else qty * sf_each
-        queue_write(sheet4_writes, f'E{row}', total_sf, f"{label} total SF")
+        common_data.append((row, label, qty, sf_each, total_sf, note))
+    common_total = sum(sf for _, _, _, _, sf, _ in common_data)
 
-    # --- Section 3: Commercial ---
-    log.append("")
-    log.append("--- Commercial (from 1A) ---")
+    # Back of House
+    mech_sf = round(data['total_units'] * 12, -2)
+    boh_items = [
+        (45, 'Loading Dock', 500, "DEFAULT: 500 SF"),
+        (46, 'Building Management Office', 200, "DEFAULT: 200 SF"),
+        (47, 'Security Office', 150, "DEFAULT: 150 SF"),
+        (48, 'Maintenance Workshop', 300, "DEFAULT: 300 SF"),
+        (49, 'Mechanical Penthouse', mech_sf,
+         f"ESTIMATED: {data['total_units']} units x 12 SF/unit = {mech_sf} SF"),
+    ]
+    boh_data = []
+    for row, label, total_sf, note in boh_items:
+        boh_data.append((row, label, total_sf, note))
+    boh_total = sum(sf for _, _, sf, _ in boh_data)
+
+    # Commercial (fixed, from 1A)
     commercial_sf = data['commercial']['sf']
+
+    # --- GFA Scaling ---
+    # When the 1A provides an actual GFA, scale estimated areas (amenity,
+    # common, BoH) so their sum matches. This ensures Sheet 5's hard cost
+    # formula (O48 x N48) uses the correct GFA, not our rough estimates.
+    # Residential and commercial areas are from 1A data and stay fixed.
+    residential_sf = data['total_rentable_sf']
+    fixed_area = residential_sf + commercial_sf
+    scalable_area = amenity_total + common_total + boh_total
+    estimated_gfa = fixed_area + scalable_area
+    gfa_scale = 1.0
+
+    if gfa_from_external and scalable_area > 0 and gfa > fixed_area:
+        target_scalable = gfa - fixed_area
+        gfa_scale = target_scalable / scalable_area
+        log.append("")
+        log.append(f"--- GFA Scaling (1A GFA: {gfa:,.0f} SF) ---")
+        log.append(f"  Fixed areas (residential + commercial): {fixed_area:,.0f} SF")
+        log.append(f"  Estimated scalable areas: {scalable_area:,.0f} SF")
+        log.append(f"  Target scalable: {target_scalable:,.0f} SF")
+        log.append(f"  Scale factor: {gfa_scale:.3f}")
+        log.append(f"  Estimated GFA before scaling: {estimated_gfa:,.0f} SF")
+        log.append(f"  GFA after scaling: {fixed_area + round(scalable_area * gfa_scale):,.0f} SF")
+        if gfa_scale > 3.0:
+            log.append(f"  WARNING: Scale factor {gfa_scale:.2f} is unusually high")
+    elif gfa_from_external and gfa <= fixed_area:
+        log.append("")
+        log.append(f"--- GFA Scaling SKIPPED ---")
+        log.append(f"  1A GFA ({gfa:,.0f}) <= fixed areas ({fixed_area:,.0f}). Cannot scale.")
+        log.append(f"  This may indicate a data issue in the 1A proforma.")
+
+    # Store scale factor for anomaly flags
+    data['gfa_scale'] = gfa_scale
+    data['gfa_from_external'] = gfa_from_external
+    data['estimated_gfa_before_scaling'] = estimated_gfa
+
+    # --- Write Section 2.1: Amenity Spaces ---
+    log.append("")
+    log.append("--- Amenity Spaces (ESTIMATED" + (f", scaled {gfa_scale:.2f}x" if gfa_scale != 1.0 else "") + ") ---")
+    for row, name, room_sf in amenity_data:
+        scaled_sf = int(round(room_sf * gfa_scale, -1))
+        queue_write(sheet4_writes, f'C{row}', 1, f"{name} quantity")
+        queue_write(sheet4_writes, f'D{row}', scaled_sf,
+                    f"ESTIMATED: {room_sf} SF" + (f" x {gfa_scale:.2f} = {scaled_sf} SF" if gfa_scale != 1.0 else ""))
+        queue_write(sheet4_writes, f'E{row}', scaled_sf, f"{name} total SF")
+
+    # --- Write Section 2.2: Common Areas ---
+    log.append("")
+    log.append("--- Common Areas (ESTIMATED" + (f", scaled {gfa_scale:.2f}x" if gfa_scale != 1.0 else "") + ") ---")
+    for row, label, qty, sf_each, total_sf, note in common_data:
+        scaled_sf = round(total_sf * gfa_scale)
+        # Derive scaled sf_each from scaled total (keeps qty unchanged)
+        scaled_sf_each = round(scaled_sf / qty) if qty > 0 else sf_each
+        queue_write(sheet4_writes, f'C{row}', qty, note)
+        queue_write(sheet4_writes, f'D{row}', scaled_sf_each, f"{label} SF each" + (f" (scaled from {sf_each})" if gfa_scale != 1.0 else ""))
+        queue_write(sheet4_writes, f'E{row}', scaled_sf, f"{label} total SF")
+
+    # --- Write Section 3: Commercial ---
+    log.append("")
+    log.append("--- Commercial (from 1A, NOT scaled) ---")
     if commercial_sf > 0:
         queue_write(sheet4_writes, 'C35', 1, "Commercial unit count")
         queue_write(sheet4_writes, 'D35', commercial_sf, "Commercial SF from 1A")
@@ -1063,7 +1134,7 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         queue_write(sheet4_writes, 'D35', 0, "No commercial SF")
         queue_write(sheet4_writes, 'E35', 0, "No commercial total SF")
 
-    # --- Section 4.1: Parking ---
+    # --- Write Section 4.1: Parking (NOT scaled, excluded from GFA) ---
     log.append("")
     log.append("--- Parking (counts from 1A, SF estimated or overridden) ---")
     parking_items = [
@@ -1072,7 +1143,6 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         (41, 'Retail Parking', data['parking_retail']['spaces']),
     ]
     total_spaces = sum(s for _, _, s in parking_items)
-    # If user provided total parking SF, distribute proportionally across types
     if parking_sf_override and total_spaces > 0:
         sf_per_space = round(parking_sf_override / total_spaces)
         sf_note = f"USER OVERRIDE: {parking_sf_override:,.0f} total SF / {total_spaces} spaces = {sf_per_space} SF/space"
@@ -1083,28 +1153,20 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         queue_write(sheet4_writes, f'C{row}', spaces, f"{label} spaces (from 1A)")
         queue_write(sheet4_writes, f'D{row}', sf_per_space, sf_note)
 
-    # --- Section 4.2: Back of House ---
+    # --- Write Section 4.2: Back of House ---
     log.append("")
-    log.append("--- Back of House (ESTIMATED) ---")
-    mech_sf = round(data['total_units'] * 12, -2)  # ~12 SF/unit, rounded to 100
-    boh_items = [
-        (45, 'Loading Dock', 500, "DEFAULT: 500 SF"),
-        (46, 'Building Management Office', 200, "DEFAULT: 200 SF"),
-        (47, 'Security Office', 150, "DEFAULT: 150 SF"),
-        (48, 'Maintenance Workshop', 300, "DEFAULT: 300 SF"),
-        (49, 'Mechanical Penthouse', mech_sf,
-         f"ESTIMATED: {data['total_units']} units x 12 SF/unit = {mech_sf} SF"),
-    ]
-    for row, label, total_sf, note in boh_items:
+    log.append("--- Back of House (ESTIMATED" + (f", scaled {gfa_scale:.2f}x" if gfa_scale != 1.0 else "") + ") ---")
+    for row, label, total_sf, note in boh_data:
+        scaled_sf = round(total_sf * gfa_scale)
         queue_write(sheet4_writes, f'C{row}', 1, f"{label} quantity")
-        queue_write(sheet4_writes, f'D{row}', total_sf, note)
-        queue_write(sheet4_writes, f'E{row}', total_sf, f"{label} total SF")
+        queue_write(sheet4_writes, f'D{row}', scaled_sf, note + (f" (scaled {gfa_scale:.2f}x)" if gfa_scale != 1.0 else ""))
+        queue_write(sheet4_writes, f'E{row}', scaled_sf, f"{label} total SF")
 
     # --- Verification: Target GFA ---
     log.append("")
     log.append("--- Verification ---")
     queue_write(sheet4_writes, 'E64', round(gfa),
-                f"Target GFA ({'from 1A' if data.get('gfa') else 'ESTIMATED from net rentable / 0.88'})")
+                f"Target GFA ({'from 1A' if gfa_from_external else 'ESTIMATED from net rentable / 0.88'})")
 
     # ===================================================================
     # SHEET 5: Key Assumptions (true inputs only)
@@ -1690,6 +1752,9 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
             'amenity_sf': amenity_sf,
             'common_area_sf': common_area_sf,
             'parking_sf': parking_sf,
+            'gfa_from_external': data.get('gfa_from_external', False),
+            'gfa_scale': data.get('gfa_scale', 1.0),
+            'estimated_gfa_before_scaling': data.get('estimated_gfa_before_scaling', 0),
         },
         'parking': {
             'underground': {'spaces': data['parking_underground']['spaces'],
