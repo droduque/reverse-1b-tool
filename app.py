@@ -591,16 +591,24 @@ def results():
 
                 # ── TIER 3: Verified metrics (when available) ──
 
-                # 14. Cost gap
-                cost_gap_pct = metrics.get('cost_gap_pct') if metrics else None
-                if cost_gap_pct is not None:
-                    gap_abs = abs(cost_gap_pct)
+                # 14. Cost gap — compute from available data
+                # Bottom-up TDC = sum of all cost items (what the model calculates)
+                # Top-down TDC = building value * (1 - profit%) = what the building should cost
+                # Gap = (top_down - bottom_up) / top_down
+                tdc = metrics.get('total_dev_cost') if metrics else None
+                bldg_value = metrics.get('value') if metrics else None
+                profit_pct = dev.get('profit_pct', 0.08)
+                if tdc and bldg_value and bldg_value > 0:
+                    top_down_tdc = bldg_value * (1 - profit_pct)
+                    cost_gap = (top_down_tdc - tdc) / top_down_tdc if top_down_tdc > 0 else 0
+                    gap_abs = abs(cost_gap)
+                    gap_dir = 'under' if cost_gap > 0 else 'over'
                     if gap_abs < 0.05:
                         checklist.append(('pass', 'Cost Gap', f"{gap_abs:.1%}"))
                     elif gap_abs < 0.15:
-                        checklist.append(('warn', 'Cost Gap', f"{gap_abs:.1%} (analyst review needed)"))
+                        checklist.append(('warn', 'Cost Gap', f"{gap_abs:.1%} {gap_dir} (analyst review needed)"))
                     else:
-                        checklist.append(('fail', 'Cost Gap', f"{gap_abs:.1%} (significant, adjust manually)"))
+                        checklist.append(('fail', 'Cost Gap', f"{gap_abs:.1%} {gap_dir} (significant, adjust manually)"))
 
                 # 15. Merchant IRR
                 mirr = metrics.get('merchant_irr') if metrics else None
