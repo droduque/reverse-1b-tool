@@ -482,13 +482,15 @@ def validate_financials(project_json, verified=None):
     total_units = units.get('total', 0)
     parking = project_json.get('parking', {})
     underground_spaces = parking.get('underground', {}).get('spaces', 0)
+    surface_spaces = parking.get('surface', {}).get('spaces', 0)
+    total_parking_spaces = underground_spaces + surface_spaces
     storage = project_json.get('storage', {})
     storage_count = storage.get('count', 0)
     submetering = project_json.get('submetering', {})
     sub_fee = submetering.get('fee', 0) if isinstance(submetering, dict) else 0
 
-    if total_units > 50 and underground_spaces == 0:
-        warnings.append(f"No underground parking for {total_units}-unit building — verify this is correct")
+    if total_units > 50 and total_parking_spaces == 0:
+        warnings.append(f"No parking for {total_units}-unit building — verify this is correct")
     if total_units > 50 and storage_count == 0:
         warnings.append(f"No storage lockers for {total_units}-unit building — verify this is correct")
     if total_units > 100 and sub_fee == 0:
