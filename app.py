@@ -126,6 +126,7 @@ def preview():
 
         # Parking SF: spaces × standard SF/space
         total_spaces = (data['parking_underground']['spaces']
+                        + data.get('parking_surface', {}).get('spaces', 0)
                         + data['parking_visitor']['spaces']
                         + data['parking_retail']['spaces'])
         parking_sf = total_spaces * PARKING_SF_PER_SPACE
@@ -517,7 +518,7 @@ def results():
                     checklist.append(('fail', 'Property Tax', 'No tax rate or assessed value found'))
 
                 # 6. Parking and storage
-                pkg_total = sum(parking.get(k, {}).get('spaces', 0) for k in ('underground', 'visitor', 'retail'))
+                pkg_total = sum(parking.get(k, {}).get('spaces', 0) for k in ('underground', 'surface', 'visitor', 'retail'))
                 stor_count = storage.get('count', 0)
                 pkg_status = 'pass' if pkg_total > 0 else ('warn' if total_units < 50 else 'warn')
                 checklist.append((pkg_status, 'Parking', f"{pkg_total} spaces" + ('' if pkg_total > 0 else ' (none detected)')))
@@ -753,6 +754,7 @@ def _project_json_to_data(proj):
     data['amenity_sf'] = proj['areas']['amenity_sf']
 
     data['parking_underground'] = proj['parking']['underground']
+    data['parking_surface'] = proj['parking'].get('surface', {'spaces': 0, 'fee': 0})
     data['parking_visitor'] = proj['parking']['visitor']
     data['parking_retail'] = proj['parking']['retail']
     data['storage'] = proj['storage']

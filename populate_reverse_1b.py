@@ -493,6 +493,7 @@ def _parse_sheet(cell, max_row):
 
     # Scan revenue section for specific items by label
     data['parking_underground'] = {'spaces': 0, 'fee': 0}
+    data['parking_surface'] = {'spaces': 0, 'fee': 0}
     data['parking_visitor'] = {'spaces': 0, 'fee': 0}
     data['parking_retail'] = {'spaces': 0, 'fee': 0}
     data['storage'] = {'count': 0, 'fee': 0}
@@ -533,6 +534,11 @@ def _parse_sheet(cell, max_row):
                 }
             elif 'VISITOR' in label:
                 data['parking_visitor'] = {
+                    'spaces': int(f_val) if isinstance(f_val, (int, float)) else 0,
+                    'fee': float(g_val) if isinstance(g_val, (int, float)) else 0,
+                }
+            elif 'SURFACE' in label or 'INTERNAL' in label:
+                data['parking_surface'] = {
                     'spaces': int(f_val) if isinstance(f_val, (int, float)) else 0,
                     'fee': float(g_val) if isinstance(g_val, (int, float)) else 0,
                 }
@@ -601,6 +607,15 @@ def _parse_sheet(cell, max_row):
             elif 'RESERVE' in label:
                 if g_val and isinstance(g_val, (int, float)):
                     data['reserve_pct'] = float(g_val)
+            elif 'SUBMETER' in label:
+                # Submetering appears as expense credit in some 1A files
+                # Col H = annual per unit (negative), convert to positive monthly fee
+                if h_val and isinstance(h_val, (int, float)) and data['submetering']['count'] == 0:
+                    monthly_fee = abs(float(h_val)) / 12
+                    data['submetering'] = {
+                        'count': data['total_units'],
+                        'fee': monthly_fee,
+                    }
 
     # --- Find VALUATION section ---
     # "ESTIMATED VALUATION" appears in col F or G depending on the proforma version
@@ -664,9 +679,9 @@ def _parse_sheet(cell, max_row):
         parse_warnings.append(f"Found {len(data.get('cap_rates', []))} of 3 cap rates — missing values will use defaults")
 
     # Revenue sub-items — warn if zero (common for some projects, useful to flag)
-    if data['parking_underground']['spaces'] == 0:
+    if data['parking_underground']['spaces'] == 0 and data.get('parking_surface', {}).get('spaces', 0) == 0:
         sections_found += 1  # still counts as "found" — just zero
-        parse_warnings.append('No underground parking found (0 spaces)')
+        parse_warnings.append('No parking found (0 spaces)')
     else:
         sections_found += 1
 
@@ -859,9 +874,20 @@ def populate_template(data, output_path, municipality=None, building_type='high-
             queue_write(sheet1_writes, f'E{row}', unit['count'], f"Unit type {i+1} count")
             queue_write(sheet1_writes, f'H{row}', unit['rent'], f"Unit type {i+1} monthly rent")
 
-    # Operating revenues
-    queue_write(sheet1_writes, 'E18', data['parking_underground']['spaces'], "Underground parking spaces")
-    queue_write(sheet1_writes, 'F18', data['parking_underground']['fee'], "Underground parking monthly fee")
+    # Operating revenues — combine underground + surface parking into template row 18
+    ug = data['parking_underground']
+    sf_park = data.get('parking_surface', {'spaces': 0, 'fee': 0})
+    if ug['spaces'] > 0 and sf_park['spaces'] > 0:
+        # Both exist: sum spaces, weighted-average fee
+        total_spaces = ug['spaces'] + sf_park['spaces']
+        avg_fee = (ug['spaces'] * ug['fee'] + sf_park['spaces'] * sf_park['fee']) / total_spaces
+        park_spaces, park_fee = total_spaces, avg_fee
+    elif sf_park['spaces'] > 0:
+        park_spaces, park_fee = sf_park['spaces'], sf_park['fee']
+    else:
+        park_spaces, park_fee = ug['spaces'], ug['fee']
+    queue_write(sheet1_writes, 'E18', park_spaces, "Parking spaces (underground + surface)")
+    queue_write(sheet1_writes, 'F18', park_fee, "Parking monthly fee")
     queue_write(sheet1_writes, 'E19', data['parking_visitor']['spaces'], "Visitor parking spaces")
     queue_write(sheet1_writes, 'F19', data['parking_visitor']['fee'], "Visitor parking monthly fee")
     queue_write(sheet1_writes, 'E20', data['parking_retail']['spaces'], "Retail parking spaces")
@@ -1137,8 +1163,9 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     # --- Write Section 4.1: Parking (NOT scaled, excluded from GFA) ---
     log.append("")
     log.append("--- Parking (counts from 1A, SF estimated or overridden) ---")
+    combined_parking_spaces = data['parking_underground']['spaces'] + data.get('parking_surface', {}).get('spaces', 0)
     parking_items = [
-        (39, 'Underground Parking', data['parking_underground']['spaces']),
+        (39, 'Parking', combined_parking_spaces),
         (40, 'Visitor Parking', data['parking_visitor']['spaces']),
         (41, 'Retail Parking', data['parking_retail']['spaces']),
     ]
@@ -1699,8 +1726,9 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
     # Common area = GFA - rentable SF, matching Excel's utilities formula
     common_area_sf = max(0, gfa - data['total_rentable_sf'])
 
-    # Parking SF
+    # Parking SF — include surface parking
     parking_sf = ((data['parking_underground']['spaces']
+                   + data.get('parking_surface', {}).get('spaces', 0)
                    + data['parking_visitor']['spaces']
                    + data['parking_retail']['spaces']) * PARKING_SF_PER_SPACE)
 
@@ -1761,6 +1789,8 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
         'parking': {
             'underground': {'spaces': data['parking_underground']['spaces'],
                             'fee': data['parking_underground']['fee']},
+            'surface': {'spaces': data.get('parking_surface', {}).get('spaces', 0),
+                        'fee': data.get('parking_surface', {}).get('fee', 0)},
             'visitor': {'spaces': data['parking_visitor']['spaces'],
                         'fee': data['parking_visitor']['fee']},
             'retail': {'spaces': data['parking_retail']['spaces'],
@@ -2684,6 +2714,7 @@ def main():
     print(f"Total units: {data['total_units']}")
     print(f"Total rentable SF: {data['total_rentable_sf']:,.0f}")
     print(f"Parking: {data['parking_underground']['spaces']} underground, "
+          f"{data.get('parking_surface', {}).get('spaces', 0)} surface, "
           f"{data['parking_visitor']['spaces']} visitor, {data['parking_retail']['spaces']} retail")
     print(f"Storage: {data['storage']['count']} lockers @ ${data['storage']['fee']}/mo")
     print(f"Commercial: {data['commercial']['sf']} SF @ ${data['commercial']['rate']}/SF")
