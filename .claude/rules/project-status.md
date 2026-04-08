@@ -30,8 +30,9 @@ description: Current project status and decisions (updated 2026-04-02)
 
 ## Next Meetings
 
-- Tuesday April 7, 11:30 AM — Noor/Alejandro call
-- Thursday (likely April 10) 1 PM — full team presentation (Derek, Joanna, Dave, research)
+- Wednesday April 9, 1 PM — full team presentation (Derek, Joanna, Dave, research, Kanan)
+  - Alejandro leads, demos 490 St Clair + Birchmount, ~30 min
+  - After: Kanan tests for ~1 week, then feedback
 
 ## 5 Test Projects (all passing)
 
