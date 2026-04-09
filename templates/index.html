@@ -1019,12 +1019,12 @@ select option {
 
   </form>
 
-  <!-- Open in Presentation Mode (shown after recent generation) -->
-  <div class="present-link" id="presentLink">
+  <!-- Presentation mode hidden for initial team rollout (Noor, April 2026) -->
+  <!-- <div class="present-link" id="presentLink">
     <a href="/present" id="presentAnchor">
       <span>&#9654;</span> Open in Presentation Mode
     </a>
-  </div>
+  </div> -->
 
   <!-- Data Sources Panel -->
   {% if freshness_report %}
@@ -1327,26 +1327,9 @@ document.getElementById('generateForm').addEventListener('submit', function() {
   }, delay * 5);
 });
 
-// Update "Open in Presentation Mode" link to the most recently generated project
-function updatePresentLink() {
-  fetch('/projects')
-    .then(function(r) { return r.json(); })
-    .then(function(projects) {
-      if (projects && projects.length > 0) {
-        var latest = projects[0];
-        var presentLink = document.getElementById('presentLink');
-        var presentAnchor = document.getElementById('presentAnchor');
-        var projectSlug = latest.filename.replace('.json', '');
-        presentAnchor.href = '/present/' + projectSlug;
-        presentAnchor.textContent = '\u2192 Open ' + latest.name + ' in Presentation Mode';
-        presentLink.classList.add('visible');
-      }
-    })
-    .catch(function() { /* silent */ });
-}
-
-// Run on page load
-updatePresentLink();
+// Presentation mode hidden for initial team rollout (Noor, April 2026)
+// function updatePresentLink() { ... }
+// updatePresentLink();
 
 // Re-check after form submit (file download takes a few seconds)
 document.getElementById('generateForm').addEventListener('submit', function() {
