@@ -35,6 +35,9 @@ from populate_reverse_1b import (
     FINANCING_PROGRAMS,
     PARKING_SF_PER_SPACE,
     GFA_EFFICIENCY,
+    DC_RELIEF_PROGRAMS,
+    get_available_relief,
+    apply_dc_relief,
 )
 from data_freshness import get_freshness_report, get_alerts
 from validate_output import validate_output, validate_financials
@@ -92,6 +95,7 @@ def index():
     alerts = get_alerts()
     freshness = get_freshness_report()
     return render_template('index.html', municipalities=MUNICIPALITIES,
+                           dc_relief_programs=DC_RELIEF_PROGRAMS,
                            current_year=date.today().year,
                            freshness_alerts=alerts, freshness_report=freshness,
                            prime_rate=PRIME_RATE_CACHE)
@@ -139,6 +143,7 @@ def preview():
             'building_type': 'mid-rise' if est_floors < HIGH_RISE_FLOOR_THRESHOLD else 'high-rise',
             'municipality_index': muni_match['index'],
             'municipality_name': muni_match['name'],
+            'dc_relief_available': get_available_relief(muni_match['name']),
             'tax_rate': data.get('tax_rate', 0),
             'assessed_value': data.get('assessed_value', 0),
             'gfa': gfa,
@@ -234,6 +239,11 @@ def generate():
                 municipality = MUNICIPALITIES[idx]
         except (ValueError, IndexError):
             pass
+
+    # Get DC relief program
+    dc_relief = request.form.get('dc_relief', 'none')
+    if dc_relief not in DC_RELIEF_PROGRAMS:
+        dc_relief = 'none'
 
     # Get building type
     building_type = request.form.get('building_type', 'high-rise')
@@ -342,13 +352,15 @@ def generate():
                                 building_type=building_type, financing_program=financing_program,
                                 construction_months=construction_months,
                                 gfa_override=gfa_override, parking_sf_override=parking_sf_override,
-                                construction_financing=construction_financing)
+                                construction_financing=construction_financing,
+                                dc_relief=dc_relief)
 
         # Also export the project JSON for the presentation tool
         json_filename = f"Reverse_1B_{project_name}_{today}.json"
         json_path = os.path.join(OUTPUT_DIR, json_filename)
         export_project_json(data, json_path, municipality=municipality, building_type=building_type,
-                            financing_program=financing_program, construction_financing=construction_financing)
+                            financing_program=financing_program, construction_financing=construction_financing,
+                            dc_relief=dc_relief)
 
         # Save the generation log — documents every cell written, estimated,
         # and skipped. Serves as an audit trail for Noor's review.
@@ -359,6 +371,7 @@ def generate():
             f.write(f"Source: {file.filename}\n")
             f.write(f"Output: {output_path}\n")
             f.write(f"Municipality: {municipality['name'] if municipality else 'None selected'}\n")
+            f.write(f"DC Relief: {DC_RELIEF_PROGRAMS.get(dc_relief, {}).get('label', 'None') if dc_relief != 'none' else 'None'}\n")
             f.write(f"Building Type: {building_type}\n")
             f.write(f"Date: {date.today().isoformat()}\n\n")
             f.write('\n'.join(log))
@@ -568,9 +581,13 @@ def results():
                 # 11. Municipality and DC
                 muni = pj.get('project', {}).get('municipality', '')
                 dc_total = dev.get('dc_total', 0)
+                dc_relief_key = dev.get('dc_relief', 'none')
+                relief_label = ''
+                if dc_relief_key and dc_relief_key != 'none':
+                    relief_label = f" [{DC_RELIEF_PROGRAMS.get(dc_relief_key, {}).get('label', dc_relief_key)}]"
                 if muni and muni != 'Not selected':
                     dc_per_unit = dc_total / total_units if total_units > 0 else 0
-                    checklist.append(('pass', 'Municipality', f"{muni} (DC ${dc_per_unit:,.0f}/unit)"))
+                    checklist.append(('pass', 'Municipality', f"{muni} (DC ${dc_per_unit:,.0f}/unit){relief_label}"))
                 else:
                     checklist.append(('warn', 'Municipality', 'Not selected (using template DC defaults)'))
 
@@ -871,6 +888,9 @@ def export_scenario():
 
     building_type = proj['project'].get('building_type', 'high-rise')
 
+    # Resolve DC relief from original project
+    dc_relief = proj.get('development', {}).get('dc_relief', 'none')
+
     # Resolve financing program — prefer payload key, fall back to original JSON
     fp_key = scenario_program_key or proj.get('financing', {}).get('program_key', 'cmhc_mli_100')
     financing_program = dict(FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_100']))
@@ -885,7 +905,7 @@ def export_scenario():
     output_path = os.path.join(OUTPUT_DIR, output_filename)
 
     try:
-        populate_template(data, output_path, municipality=municipality, building_type=building_type, financing_program=financing_program)
+        populate_template(data, output_path, municipality=municipality, building_type=building_type, financing_program=financing_program, dc_relief=dc_relief)
 
         # Validate before delivering
         validation = validate_output(output_path, data)

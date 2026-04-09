@@ -88,6 +88,88 @@ UNIT_GROUP_PATTERNS = [
 ]
 
 # ---------------------------------------------------------------------------
+# DC RELIEF PROGRAMS — Ontario PBR incentives (March 2026 framework)
+# ---------------------------------------------------------------------------
+# Each program defines how DC rates are modified for purpose-built rental.
+# 'multiplier' applies to all unit types unless 'per_type' overrides are set.
+# 'per_type' keys: '1bed', '2bed', '3bed' — each can be a multiplier or a
+# fixed rate (if 'fixed' key is present).
+
+DC_RELIEF_PROGRAMS = {
+    'none': {
+        'label': 'Full Rate (no relief)',
+        'multiplier': 1.0,
+        'municipalities': [],  # available everywhere as default
+    },
+    'pbr_50': {
+        'label': '50% PBR Reduction',
+        'multiplier': 0.5,
+        # March 2026 framework: Toronto confirmed, Peel Region (Brampton,
+        # Mississauga, Caledon), Barrie, London agreed to 50% cut.
+        'municipalities': [
+            'Toronto', 'Scarborough', 'Etobicoke', 'North York',
+            'Peel', 'Brampton', 'Mississauga', 'Caledon',
+            'Barrie', 'London',
+        ],
+    },
+    'pbr_20': {
+        'label': '20% PBR Reduction (Pilot)',
+        'multiplier': 0.8,
+        'municipalities': ['Hamilton'],
+    },
+    'york_deferral': {
+        'label': 'DC Deferral (5 years, non-luxury)',
+        'description': 'Full DCs deferred up to 5 years. Not a rate reduction.',
+        'multiplier': 1.0,  # rates unchanged, timing only
+        'is_deferral': True,
+        'municipalities': ['Vaughan', 'Markham', 'Richmond Hill', 'York'],
+    },
+}
+
+def get_available_relief(municipality_name):
+    """Return list of DC relief program keys available for a municipality."""
+    if not municipality_name:
+        return ['none']
+    city = municipality_name.split(',')[0].split('(')[0].strip().upper()
+    available = ['none']
+    for key, prog in DC_RELIEF_PROGRAMS.items():
+        if key == 'none':
+            continue
+        for muni in prog['municipalities']:
+            # Exact word match to avoid "MILTON" matching "HAMILTON"
+            if muni.upper() == city or city == muni.upper():
+                available.append(key)
+                break
+    return available
+
+def apply_dc_relief(rates, relief_key):
+    """
+    Apply a DC relief program to base rates.
+    Returns modified rates dict and a description string.
+    """
+    if not relief_key or relief_key == 'none':
+        return dict(rates), 'Full rate (no relief)'
+
+    prog = DC_RELIEF_PROGRAMS.get(relief_key)
+    if not prog:
+        return dict(rates), 'Full rate (unknown program)'
+
+    modified = dict(rates)
+    per_type = prog.get('per_type', {})
+
+    for bed in ('1bed', '2bed', '3bed'):
+        if bed in per_type:
+            override = per_type[bed]
+            if isinstance(override, dict) and 'fixed' in override:
+                modified[bed] = override['fixed']
+            else:
+                modified[bed] = round(rates[bed] * override)
+        else:
+            modified[bed] = round(rates[bed] * prog['multiplier'])
+
+    return modified, prog['label']
+
+# ---------------------------------------------------------------------------
 # DC RATE LOOKUP — loads municipality rates from Kanen's spreadsheet
 # ---------------------------------------------------------------------------
 
@@ -441,9 +523,23 @@ def _parse_sheet(cell, max_row):
     data['title'] = title
 
     # Extract address from title: "Estimated Stabilized Value - ADDRESS"
+    # Some proformas use "Today" as date suffix (e.g., "...Value - Today")
+    # and put the actual project name/address in the row below (E3 or F3).
     address = ""
     if " - " in str(title):
         address = str(title).split(" - ", 1)[1].strip()
+
+    # If the extracted address is generic (e.g., "Today"), check row 3 instead
+    generic_titles = {'today', 'date', 'current', ''}
+    if address.lower() in generic_titles or len(address) < 4:
+        row3 = cell(3, 'E') or cell(3, 'F') or ""
+        if row3:
+            row3_str = str(row3).strip()
+            # Row 3 may have "Project Name - Address" format
+            if " - " in row3_str:
+                address = row3_str.split(" - ", 1)[1].strip()
+            else:
+                address = row3_str
     data['address'] = address
 
     # --- Find TOTAL/AVG row to locate unit mix ---
@@ -799,7 +895,7 @@ def consolidate_unit_mix(unit_types):
 def populate_template(data, output_path, municipality=None, building_type='high-rise',
                       financing_program=None, construction_months=None,
                       gfa_override=None, parking_sf_override=None,
-                      construction_financing=None):
+                      construction_financing=None, dc_relief=None):
     """
     Copy the Reverse 1B template and write parsed 1A data into it.
     Uses the ZIP/XML writer to preserve all drawings, images, and formatting.
@@ -1260,11 +1356,18 @@ def populate_template(data, output_path, municipality=None, building_type='high-
 
     # Development charges — from selected municipality or skip
     if municipality:
-        dc = municipality['rates']
+        dc_base = municipality['rates']
         dc_label = municipality['name']
+        # Apply DC relief if selected
+        dc, relief_desc = apply_dc_relief(dc_base, dc_relief)
         queue_write(sheet5_writes, 'R57', dc['1bed'], f"{dc_label} DC: 1-Bed — ${dc['1bed']:,}")
         queue_write(sheet5_writes, 'R58', dc['2bed'], f"{dc_label} DC: 2-Bed — ${dc['2bed']:,}")
         queue_write(sheet5_writes, 'R59', dc['3bed'], f"{dc_label} DC: 3-Bed — ${dc['3bed']:,}")
+        if dc_relief and dc_relief != 'none':
+            log.append(f"  DC RELIEF: {relief_desc}")
+            for bed in ('1bed', '2bed', '3bed'):
+                if dc[bed] != dc_base[bed]:
+                    log.append(f"    {bed}: ${dc_base[bed]:,} → ${dc[bed]:,}")
         if municipality['notes']:
             log.append(f"  DC NOTES: {municipality['notes']}")
     else:
@@ -1701,7 +1804,7 @@ def _blended_construction_rate(cf):
 
 
 def export_project_json(data, output_path, municipality=None, building_type='high-rise',
-                        financing_program=None, construction_financing=None):
+                        financing_program=None, construction_financing=None, dc_relief=None):
     """
     Export project data as a JSON file for the presentation/sensitivity tool.
     Contains all inputs needed to calculate revenue, costs, and valuation
@@ -1736,7 +1839,8 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
     dc_total = 0
     dc_rates = {'1bed': 0, '2bed': 0, '3bed': 0}
     if municipality:
-        dc_rates = municipality['rates']
+        dc_rates_base = municipality['rates']
+        dc_rates, _relief_desc = apply_dc_relief(dc_rates_base, dc_relief)
         for ut in consolidated:
             label_lower = ut['label'].lower()
             if '1' in label_lower:
@@ -1831,6 +1935,7 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
             'profit_pct': 0.08,
             'dc_rates': dc_rates,
             'dc_total': round(dc_total),
+            'dc_relief': dc_relief or 'none',
         },
         'financing': {
             # Construction financing (Sheet 5 rows 67-71)
