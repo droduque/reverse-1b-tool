@@ -1,6 +1,7 @@
 ---
 name: run-reverse-1b
 description: Execute the Reverse 1B populator with a new 1A proforma file. Use when Alejandro provides a new 1A Excel file to process.
+last_validated: 2026-04-08
 allowed-tools: Read, Write, Bash, Grep, Glob
 ---
 

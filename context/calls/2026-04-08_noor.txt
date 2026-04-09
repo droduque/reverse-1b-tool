@@ -1,0 +1,266 @@
+﻿Apr 8, 2026
+Noor/Alejandro - Transcript
+00:00:00
+ 
+Alejandro Duque: Hello. What's the general call? It was for me and I prison. All right, I'm going to join now.
+Noor Khan: Hey, hey,
+Alejandro Duque: Hey, Nor, how are you?
+Noor Khan: very good. Sorry, you know, you sent me the invite on the office one and I was on the other Gmail. I was trying to find it there. It's okay. So,
+Alejandro Duque: Oh,
+Noor Khan: I had
+Alejandro Duque: that's fine. No, no. I was just getting a chance to read through your comments,
+Noor Khan: to
+Alejandro Duque: which I think are very good. Um, so do you want to go one by one?
+Noor Khan: I don't know.
+Alejandro Duque: I already found the Yeah.
+Noor Khan: I think I don't think we need to go through all of them because you know it's getting there now,
+Alejandro Duque: So, yeah. So the problem kind of like the first thing the submeter uh
+Noor Khan: right?
+Alejandro Duque: metering for the revenue so that wasn't being catched because in the expenses section it was being seen as a credit I think.
+ 
+ 
+00:03:09
+ 
+Noor Khan: Negative item. Yes, negative item.
+Alejandro Duque: So what was happening there is that I'm looking through kind of like the tree of decision making. So, so yeah, the parser that that does all of these is only scanning for revenue.
+Noor Khan: Okay.
+Alejandro Duque: So, if it was again, if it was positive, it would have caught it. But now, since it was negative, like that's why it missed it.
+Noor Khan: But it was it is catching in others like 490 it is catching.
+Alejandro Duque: But,
+Noor Khan: No in the 2240 it is catching as well.
+Alejandro Duque: okay. Yeah, I I was just looking at 290.
+Noor Khan: Let's see. Let's see. Let's see the other one. Like the 490. Let's look at 490. Is it catching it?
+Alejandro Duque: Okay.
+Noor Khan: Let me just go on my big computer because this is I'll keep I'll I'll speak to you on
+Alejandro Duque: Yeah, it's Yeah,
+Noor Khan: this one.
+Alejandro Duque: that's fine.
+Noor Khan: But I will do my other thing there actually because Okay.
+ 
+ 
+00:04:01
+ 
+Alejandro Duque: So, saying
+Noor Khan: 490.
+Alejandro Duque: clear
+Noor Khan: So let's go to my tweak one or the other one because I didn't tweak that part right. So there is it showing or no what happened it's matching exactly but it's not showing here also how one m let me open
+Alejandro Duque: Yeah. Yeah. So,
+Noor Khan: the
+Alejandro Duque: so for instance in 2240 in Birmmont it shows
+Noor Khan: oh actually you know one just for just a minute so what is happening here in 490 clear they don't have submeter in there there's no sub
+Alejandro Duque: Exactly
+Noor Khan: Okay. So that was not an issue there. Then let's go to the other one.
+Alejandro Duque: then.
+Noor Khan: In the other one it is there or
+Alejandro Duque: Yeah.
+Noor Khan: no?
+Alejandro Duque: So in 2240 it's there as a positive item. So it gets picked up.
+Noor Khan: Let me open the performer. The performer is showing uh here also performer doesn't have it here but submitting revenue is shown where here also I don't see in 2240 also there's no submit.
+ 
+ 
+00:05:16
+ 
+Noor Khan: Oh no what happened actually they put it in the revenue site.
+Alejandro Duque: Exactly.
+Noor Khan: Okay. Okay. So we can ask
+Alejandro Duque: So the reimbursement so that's the thing that on the estimated operating
+Noor Khan: every
+Alejandro Duque: revenues for 2240 the submetering comes up as a within as a positive
+Noor Khan: Okay, it's picking up there.
+Alejandro Duque: item within and then and
+Noor Khan: Okay, fine. We got it. So that means that means we can Okay. Okay.
+Alejandro Duque: then so we have two options the system
+Noor Khan: Go ahead. Go ahead.
+Alejandro Duque: I could just tell it that if it's in the expenses section as a negative credit it assumes it as a revenue Right.
+Noor Khan: Yeah, that that's it should be like that. That's
+Alejandro Duque: Okay. Yeah,
+Noor Khan: right.
+Alejandro Duque: that's that's why I missed it because since it was in the other section um
+Noor Khan: I think we should if it is in the expense section as a negative then take it as a like you know revenue
+ 
+ 
+00:06:03
+ 
+Alejandro Duque: then
+Noor Khan: accordingly. Otherwise if you want we can ask the team to put subtering reimbursement in the revenues like whichever is easy you decide I will leave to
+Alejandro Duque: no, let's let's do it this way so they don't have to change more things because I know
+Noor Khan: you
+Alejandro Duque: that at least my experience is that I rather change the tool because it uses logic and it picks it up rather than the other way around.
+Noor Khan: okay okay do that good that's
+Alejandro Duque: So, so that will fix that one. And then for the surf surface parking,
+Noor Khan: Okay.
+Alejandro Duque: uh, uh, let me see. So, so for that one, uh, let me just open it up.
+Noor Khan: Yeah. 1729. I think they have a 70 parking spots and it didn't pick up the like you know the port side and I think didn't pick up the revenues. I don't know why.
+Alejandro Duque: So let me just open it here. So okay. So yeah, I think that parking um so Glenn's uh sorry I'm trying to open it because I opened the 1B.
+ 
+ 
+00:07:33
+ 
+Alejandro Duque: So Glennov proforma. Yeah. So I think it was just uh missing because I'm just trying to compare it to what we're using before and usually um so underground parking. Yeah. Yeah, I don't know if it was the name the parking surface internal that that that one that that um since it contains both parking and surface,
+Noor Khan: Okay.
+Alejandro Duque: I'm thinking that that's why it didn't pick it up just in case that Yeah,
+Noor Khan: Okay.
+Alejandro Duque: but I mean it's it's a minor fix. I think that uh I'll just say that if it contains text like that to to let us know. So yeah. Uh I think that that one I'll fix it quickly.
+Noor Khan: It's a good
+Alejandro Duque: I I'm just trying because when I look at these things like I'm I'm trying to compare what was different between one and
+Noor Khan: quite impressed with you.
+Alejandro Duque: the Yeah.
+Noor Khan: I couldn't think like that.
+Alejandro Duque: No but but just so you know that's that's how these systems think.
+ 
+ 
+00:08:52
+ 
+Alejandro Duque: It's like an algorithm. It's a or b. So right now it's like if it's unclear it's just not going to pick it up. So I'm thinking that it was that but but yeah I I'll fix it. It's easy.
+Noor Khan: Okay,
+Alejandro Duque: So yeah.
+Noor Khan: that's it. I don't think there's anything else.
+Alejandro Duque: So yeah,
+Noor Khan: Uh,
+Alejandro Duque: and my my last question for you was so with regards to those
+Noor Khan: yeah.
+Alejandro Duque: checks that I included for the tool
+Noor Khan: Checks were working.
+Alejandro Duque: uh
+Noor Khan: But you know I was I was doing it in such a rush. So I just looked at the point then and as you can see like the what I did like in
+Alejandro Duque: Yeah.
+Noor Khan: good with good care I did the first one right. First one was good second one was fine right?
+Alejandro Duque: Yeah.
+Noor Khan: I think did I tweak the uh Okay, the first one basically the 490 I tweaked right.
+Alejandro Duque: Mhm.
+Noor Khan: So I think this is the one I Yeah.
+ 
+ 
+00:09:48
+ 
+Noor Khan: So everything was good after tweaking right because I I did basically like you know play with the numbers like I changed the debt equity ratio the this that so it all worked out. You can see the tweak file is showing everything good,
+Alejandro Duque: Yep. Yeah.
+Noor Khan: right?
+Alejandro Duque: Yeah. I'm looking at it now.
+Noor Khan: Yeah. So that was good thing to do other than that. Yeah.
+Alejandro Duque: Okay.
+Noor Khan: So I I think we are nearly there now.
+Alejandro Duque: Okay.
+Noor Khan: These are but we Yes.
+Alejandro Duque: So, so I'll make this little I'll make this little fixes and then So,
+Noor Khan: Okay.
+Alejandro Duque: for tomorrow, we have an hour. I don't know if we're going to use the hour, frankly, because I
+Noor Khan: We don't need the moment you finish the this thing.
+Alejandro Duque: Yeah.
+Noor Khan: You can ask them if there's any question. We can finish in uh half an hour. 35 minutes is fine or 25
+Alejandro Duque: Yeah. And so, if you want,
+ 
+ 
+00:10:31
+ 
+Noor Khan: minutes.
+Alejandro Duque: I'll lead it. I'll show one example or multiple ones like you tell me. But I I can use the one a that we have.
+Noor Khan: I think yeah you can like you know uh pick up the one like you know like we have the files also now you can do that or you can 490 is good example right
+Alejandro Duque: Mhm.
+Noor Khan: you can do 2240 also the best these do these two I think but uh
+Alejandro Duque: Yep.
+Noor Khan: we need to check if the once you fix the submeter and parking side then I think I just want to run one more another project like tomorrow I I'll see if I have time otherwise it's
+Alejandro Duque: Yep.
+Noor Khan: okay don't worry We will roll it out tomorrow to the team and we will tell them that you know team means basically
+Alejandro Duque: Yep.
+Noor Khan: our main person which is uh Canon. they will ask him to do it and come back basically after a week or so and once canon is okay then I think we'll
+ 
+ 
+00:11:20
+ 
+Alejandro Duque: Yep.
+Noor Khan: give it to Joanna or if they want to give it to both at the same time because Joanna means it goes to his uh person also right like his underwriter but his under I don't think if he can make a lot of use of it because it's not for them right this is basically our own product we generate one A and 1 A generates this one so I'm not sure that you know how how that will be working but it's been
+Alejandro Duque: Yeah.
+Noor Khan: basically between research and Jonah themselves to deal with it.
+Alejandro Duque: Okay. And then we have all these people on the call. Should I email?
+Noor Khan: Who are they?
+Alejandro Duque: So for tomorrow,
+Noor Khan: Oh, they've got all the
+Alejandro Duque: they put all these people.
+Noor Khan: company.
+Alejandro Duque: So should I email Lisa to just
+Noor Khan: Derek wanted you to Derek wanted you to do specific meetings with like you know uh like three
+Alejandro Duque: keep Yeah.
+Noor Khan: people something like that, right?
+Alejandro Duque: Yeah. So he said um first
+ 
+ 
+00:12:22
+ 
+Noor Khan: I don't think we need to do that, but this is just like, you know, but anyway,
+Alejandro Duque: that
+Noor Khan: you can speak to Liisa about that if you want to because it's just like a waste of your timely speaking because these guys have got nothing to do with it. It's basically a prog in my mind.
+Alejandro Duque: Okay.
+Noor Khan: It's still like, you know, underprocessed thing. Uh like I have said, I'm good with it. That is what we need to hear from canon.
+Alejandro Duque: Okay.
+Noor Khan: You know what I'm saying? So, so that is why basically for me it's important that you know uh we are all able at least the main people are able to
+Alejandro Duque: Yeah.
+Noor Khan: use it. So, he told you what first debt advisory which has got nothing to do with it and they're not going to run it. Okay. And otherwise they'll continue to go with the takeout financing the research and de price we don't need to do separately for Dave price.
+Alejandro Duque: Okay.
+ 
+ 
+00:13:09
+ 
+Noor Khan: I think it's all it tomorrow in the what time is tomorrow it is?
+Alejandro Duque: Okay. Uh, we have it at 1:00 p.m.
+Noor Khan: Yeah,
+Alejandro Duque: Eastern.
+Noor Khan: it's okay. 1 PM we run it for half an hour this and you can ask questions from each of them if they want to have
+Alejandro Duque: Okay.
+Noor Khan: uh and we'll see what happens.
+Alejandro Duque: Yeah.
+Noor Khan: But if you you can you can send an email to Derek reply to him in terms of like you know this thing that you know this is I think it's run it like that because you don't need to run it for Dave. I I know
+Alejandro Duque: Yeah. Yeah. Yeah. Okay. No, I'll keep it like this. I might email Lisa just to say like,
+Noor Khan: that.
+Alejandro Duque: "Hey, we'll think it'll take 30 minutes because the the point of the call is that after we explain it to you guys, you come back with feedback. anything that you think is funky and then I think Derek if he's there would be good just to get the
+ 
+ 
+00:13:52
+ 
+Noor Khan: Yeah.
+Alejandro Duque: team because I think that's the most important piece like this this section about about just getting people interested is more of a selling tool for them but but okay so I'll I'll make these fixes and then I'll send out an email this afternoon just replying to the team like hey we might only need 30 minutes the idea is to walk you through how easy how is he know about how to use the tool So we can start getting feedback and make sure that pretty much you go from a uh physibility study and 1A to a reverse 1B
+Noor Khan: bit. Yeah.
+Alejandro Duque: in the same amount of time.
+Noor Khan: Yeah. and and with little bit tweaking if required right then and the tweaking part like you know N can handle
+Alejandro Duque: Yeah. Yeah.
+Noor Khan: with you but that is basically for the research team just and that way it's not there are
+Alejandro Duque: Yeah.
+Noor Khan: everybody like so many people on the call but it's not there it's just I think he wants to demonstrate to them that you know Derek that you uh we've got the ability for example probably
+ 
+ 
+00:14:50
+ 
+Alejandro Duque: Yep.
+Noor Khan: that's what he included everybody but it's basically mainly for research team to basically to be able to run
+Alejandro Duque: Okay.
+Noor Khan: it because they've been asked for so long to run it and they were not able to run it. So that's the thing.
+Alejandro Duque: Yeah. No,
+Noor Khan: Okay.
+Alejandro Duque: and I can see why. It's like when I send people like in constructions like, "Hey, update this budget." If it's in Excel,
+Noor Khan: Yeah.
+Alejandro Duque: it's like like out.
+Noor Khan: Yeah.
+Alejandro Duque: So, all right, Nor.
+Noor Khan: Because you know I'm finance so I could run all these so quickly like you know otherwise like it's it's a quite time
+Alejandro Duque: Cool.
+Noor Khan: thing to even read them.
+Alejandro Duque: Yeah. Oh,
+Noor Khan: It's all numbers.
+Alejandro Duque: man. Man, like I know.
+Noor Khan: So many numbers.
+Alejandro Duque: And And that's why Yeah. That's why I was telling when I first talked to uh Rob, I think, which was like, "How do you guys do visibility study?" Yeah. Like you guys could compile and you have massive amounts of data just sitting there.
+Noor Khan: Yeah.
+Alejandro Duque: So, okay, cool. So, let me work on this. I'll send you an email. Then I'll send a reply to Derek before end of day. And then we'll run it tomorrow.
+Noor Khan: Okay. All the best. Thank you very much.
+Alejandro Duque: Thank you, Nor. Appreciate it.
+Noor Khan: Cheers.
+Alejandro Duque: Later.
+Noor Khan: Bye-bye.
+Alejandro Duque: Bye-bye.
+Noor Khan: Cheers.
+ 
+ 
+Transcription ended after 00:15:56
+
+
+This editable transcript was computer generated and might contain errors. People can also change the text after it was created.

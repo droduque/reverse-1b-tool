@@ -1,0 +1,376 @@
+00:00:00 Derek Lobo
+Well, so I think everybody here has met everybody, but physically we probably never met. Chantel and Angie, and is Angie a real person here? She is. Yes, there you are. Hello, Angie. Nice to meet you. Where do you live, Angie?
+00:00:14 Angie
+Nice to meet you. I am in West Kelowna in BC.
+00:00:17 Derek Lobo
+Okay, okay, All right, great Well, okay good, good So. We are a national company I guess Winnipeg Kelowna and so on But. It's amazing what you can do. Uh, you know, virtually now it's amazing what you can do technology. Okay, so Lisa, you're going ahead and recording? Yes. Okay. So the reason I asked everybody to get together all at once. So what we've got here is Rocket Advisors. Okay, we've got the National Apartment Council here. We've got Darryl McCullough our advisor here. And then we also have um Alejandro, who is the let's call him the AI guy. For now, we're all going to be AI people. And then we've got uh Joanna's team.
+00:00:57 Derek Lobo
+The debt advisory team, you know, as part of Rock Advisors. Okay, so basically and I don't want to talk too long. But where is Alejandro? He's here. Yeah, yeah. So basically we are in the apartment development business at Rock Advisors, the NAC and and join us team right and really everybody here. So the key to an apartment development Is the numbers okay? Hello, Vanessa. Okay, is the numbers okay? And so you've got to build a financial model in Excel. And not everybody needs to understand the financial model, but you need to understand that there is a financial model. Fair enough. And it's an Excel spreadsheet and it's quite complicated, right? And, it's a very long process to build one, and it comes later on the process. So I asked myself this question: What if we could find a shortcut?
+00:01:56 Derek Lobo
+To build a financial model to demonstrate to the apartment developer at a very early stage before he even builds a model that we can build one for him, and we can put in all the critical assumptions that you need to make in a financial model, right? So we built our model Noor, built it for us several years ago, and we called it. So we call our regular model, the one B and the one A is the twenty thousand dollar report The. One B is the financial model where you take that report. And you turn it into numbers. The problem is, most developers did it on their own. We lost track with them and so on. And so we just asked the question, could we build a one B, a reverse one B from basic information just by making logical assumptions? Okay, Now it's not the financial pro forma, a developer needs to spend twenty eighty hundred million dollars, but it shows the developer our IP, our intelligence, our assumptions.
+00:02:54 Derek Lobo
+And it becomes a sales tool, okay? So, the next step after feasibility study, We have to wait the leasing because we didn't have the debt advisory group in place. We now have that in place. This is the launching tool to take the client typically from their first transaction with us a feasibility into the next transaction, which is, let's find them the money to build a building. Then Carol and her team would help lease it up and then we're going to sell the building, okay? You've all seen the apartment. The the full service department development process. At least we can bring that up, okay? So that's what I charged Noor with doing, building the wallet one B many years ago. But it's very cumbersome. It takes three hours to fill in. So as a result, It never gets done because nobody's going to pay us because they know what it is, et cetera, et cetera. So what we created was a shortcut to create a full fledged financial model.
+00:03:47 Derek Lobo
+Okay, so it's not important you understand the model. It is valuable for those of you that are in debt, those that are in research and in brokerage to understand it. But for the rest of you, just understand we can do this. Okay? Alejandro, I'm going to turn it over to you to do a screen share. We've known Alejandro for a few years. Darryl introduced him to us. Okay?
+00:04:06 Alejandro Duque
+Yeah, So pleasure to meet all of you guys, if you want, let me present my desktop. Let me know if you guys are seeing it. Yep, we see it. Okay, perfect. Yeah, so pretty much I even put together a few slides just to start, but this is how today will go. So reverse one B and why it matters. I think that we cover that pretty clearly. We'll do a live demo of the tool. I'll open it in Excel, and we can do a walkthrough of the output and then see how each of us can use it again. Any questions are always welcome.
+00:04:41 Alejandro Duque
+Um, as far as the reverse one B, I think that Derek explained it better than I ever could. Now, as a developer myself, I think that the reverse one B where it becomes powerful is because it drives the conversation from feasibility to maybe they've already done some research by now. We go in depth into a financial model that actually starts looking at costs. How can it be financed? And is a fantastic marketing tool. Not only that, But it's a fifteen sheet spreadsheet with cash flow and thirty six month development analysis, which I don't think there is anything like that in the market. So before someone either Nor Cannon or again, or someone else in the team had to manually like pretty much copy the one data into the model. It would take a lot of time, and that's what we tried to solve by building this tool. So it's a lot easier for anyone in the team to use it, and then.
+00:05:39 Alejandro Duque
+What I wanted to where I see the as an outsider coming into this is that the first of all, they walk away with a fifteen sheet financial model that they were not expecting, which is the over delivery that Derek was mentioning, Building trust and then giving the client the encyclopedic knowledge that I believe SV and Rock has in the apartment development business. Again, I mean industrial construction which is right now a little different but, None of the brokers that we talk to understand construction. They might be able to do a feasibility study, but they don't understand with like that piece. So that's how we see it, And then I wanted to add that how do I see as an outsider, how each team can use it? And again, apologies if if apologies if I missed anyone on the team. That is part of each division, But here are some ideas right like for sales, it's something that you can do live for them for research.
+00:06:37 Alejandro Duque
+It's critical to understand how the construction might go. For debt advisory for Joanna's team, like starting to throw in construction debt and takeout numbers to them, I think the construction debt piece would be critical, and it's already modeled in the system. For leasing, you start getting into sensitivity analysis and then brokerage. I just again, I'm preaching to the choir, but I think that there is nobody doing this right now. Um, so yeah, so then I think that again, Just wanted to add these uh numbers that we want to show the client, how I see it. The depth behind the numbers that that we're showing to them. So a lot of firms have data, but very few can really, but they can't really operationalize it. I think that now you can. So again, that's the cells behind it for everyone on the team.
+00:07:35 Alejandro Duque
+Now, if we go to the tool them itself, It's a fairly simple tool where you have now the capability to upload any one, a pro forma right into the tool. We're going to use this project for instance for nine.
+00:07:54 Noor Khan
+Alejandro, Alejandro. Yep. You included it already? Okay,
+00:07:59 Alejandro Duque
+Okay fine. Yeah. Yeah, so oh, sorry. So I don't know if you guys were seeing, but I was looking through my computer for the file. So I upload that file. The system is going to immediately pick up a bunch of information. Nor and I added some of the Hold on,
+00:08:14 Derek Lobo
+Alejandro. Yeah, so for everybody else, Fran's department created a one page income and expense statement. Okay already now we're taking that one page, And we're going to turn it into a construction budget. So, Alejandro, you loaded in what we call the one page. That's one page. And, now we're going to make a whole bunch of assumptions and do something with it.
+00:08:36 Noor Khan
+Okay, so Derek, Derek, just Alejandro, can you do one thing? Just hold it here. Just open the one- page document in Excel. Yes. So team can see that you know what did you upload there? Okay Then then we can carry out with the what you were doing right? Yeah that's a good point now.
+00:08:52 Alejandro Duque
+Absolutely and sorry maybe the presentation, Okay. Can you?
+00:08:57 Noor Khan
+Yeah, come out of this. Doesn't matter, right?
+00:09:00 Alejandro Duque
+Yeah. So for instance, this is the document that was uploaded. It has different tabs, But pretty much it's gathering all this information and the one hundred data points that we needed to create a reverse one B. I am picking it up automatically. So,
+00:09:16 Noor Khan
+You have what has been actually.
+00:09:18 Derek Lobo
+This is what the client pays us to do, okay?
+00:09:21 Noor Khan
+So so the research department does this one page document. Which has its own sub tabs also for their own like you know, data library that they use for this one page, and that one page is called one A. So this file is uploaded into the tool. As is is uh as Anandhu was demonstrating now, you can close this file because otherwise there's an issue, right?
+00:09:46 Alejandro Duque
+Yeah. So that's the file that I just uploaded here, and, Before, like manually, you would have to go on and grab all the data points. Now it picks it up. It even understand another municipality because so in a Norse model, it looks at the development charges for each specific municipality. We have data on that, So based on the municipality is going to select which development charges to use for the model because again, we're giving. The builder an idea of how much it would cost based on market averages. Then it goes into property taxes, and again, Any of these can be automatically. Uh, it's automatically picked up, but you can always change it. Then he has building area, Total parking is gonna. Uh, think about the the building type based on uh the amount of units again.
+00:10:39 Alejandro Duque
+Then, construction duration how how much time do you think it's gonna take?
+00:10:44 Derek Lobo
+So so we are picking we are picking that period based on our knowledge.
+00:10:48 Alejandro Duque
+Exactly, and the system set up so based on that knowledge, the system now knows what to pre select. You can always come in and manually override this. And let's say it's twenty four months, But I want to go to thirty or thirty six, like I can always here and change it. Then for the, Financing program. Right now we have more permanent loan programs that we've uploaded. We have three of them, but if we wanted to add construction and different types of construction programs, we could also build that here. Right now we have for the permanent loan program.
+00:11:23 Noor Khan
+No no, We have the construction separately. You can just choose the forty year one, not the fifty year one Yeah Choose the forty year one. Yeah That's more conservative right Okay Okay The construction financing scenario is down there.
+00:11:35 Derek Lobo
+Yeah It's already there So. Joanna, you've had your input here. Yes or no? Yes. Okay. Good.
+00:11:42 Alejandro Duque
+Exactly, and here for the construction finance, we're going to look at the debt structure. And again, If you see, the equity will change as we think about a mess debt and the bank senior debt for the rate. So one thing I did. And for the team to know is that when you click refresh rate, this is nice, This is gonna go into a bank of Canada policy rate. Is gonna pick up the prime rate, and then you can add the margins according to where you think the market is. Again, Standard, we set it at three point five because that's what we had on the template. And, then we have financing and contingency percentages of the total debt to include here as well.
+00:12:22 Derek Lobo
+Okay, so so for everybody watching that doesn't do this on a daily basis, this would take a long time to do. And a lot of expertise, and we've automated it. Fran,
+00:12:34 Fran Hohol
+Just go back to the property taxes for a second. I just want to understand the you put in from the perform of the tax rate, correct? Yes, and is the assessed value?
+00:12:45 Noor Khan
+The tax rate is coming from the library that we have that we got from Canon, and okay, value per unit is coming from the one A that you provided.
+00:12:58 Fran Hohol
+Exactly, Come here. You say which cap rate,
+00:12:59 Noor Khan
+The middle one or what? No, the cap rate. No, you are talking about the property tax rate. You are not talking cap rate. Okay, okay. Yeah, Okay,
+00:13:06 Fran Hohol
+Because yeah, estimated one got it.
+00:13:08 Noor Khan
+Yeah. Okay,
+00:13:10 Alejandro Duque
+Yeah, continue. So yeah. So then again, these are the parameters that we've right now. They're all automated. You can override them as needed, at least for the first pass. Then i come and i oh,
+00:13:23 Derek Lobo
+So wait alejandro, that's it.
+00:13:26 Derek Lobo
+Yeah, You close the app, you check,
+00:13:29 Noor Khan
+Close the app and file again like that, right? Yeah.
+00:13:32 Alejandro Duque
+Yeah. So it's going to do it and then it's going to go. It's going to look at the 1 A and immediately is going to give you a reverse 1 B ready to go for you to download. We're adding some notes and warnings just things that it didn't pick up from the 1 A. For instance, right now they hold IRR is a little bit high. We have unexpected range, And again, these are things that you can then so the automated process is there. Then you come download the file.
+00:14:03 Noor Khan
+Alejandro, just okay. So, these notes that we have added in addition to what the model was generating, We wanted the analyst to get some kind of flags, so he can have a look if he needs to attend to some aspects. So we don't miss on them, basically right, for example, right now, if it is showing a cost. Return on cost, like you know, outside what you would typically expect. So it is telling parameter. Yes, Yes, like that. Right. So likewise it could be a return or something.
+00:14:35 Derek Lobo
+Right. So even if you don't understand it, It's flagging it for you by saying you can't make this kind of return or have.
+00:14:42 Alejandro Duque
+A look here exactly. And if you see here, he goes through all this checklist, and and it's checking for that. Once you open the file, then you get. The full report, uh, sorry. Sorry.
+00:14:57 Fran Hohol
+How did you open the file?
+00:14:58 Alejandro Duque
+Uh, sorry. I just click I just click here in download Excel.
+00:15:03 Noor Khan
+Okay okay And then and.
+00:15:05 Alejandro Duque
+Then it comes right out into this. I think this is what what gets really powerful. Because again, as a developer, I've never seen a brokerage do this or give me something like this, but we start with the one eight pro forma, right that has. All of the data now built into the model. Here are the key assumptions and.
+00:15:28 Fran Hohol
+Oh, go back to the one A. Sorry, go to the one A.
+00:15:31 Noor Khan
+Yeah, the one A is supposed to Does.
+00:15:34 Fran Hohol
+It give you the work below? Yeah, it probably do we need to give that? I'd rather just give the top part because that has.
+00:15:44 Noor Khan
+Actually you know, One A is not is already separately delivered anyway, right? One A is taken just like you know for building the model. So, it is currently taking all your notes within because there are data, for example, GFA that it is picking from the notes below right. Right. I don't think it's relevant for reverse one B. As such, the reverse one B actually starts from, The you know, executive summary onwards, because this, we wanted to have it here, so we can always compare to what was uploaded.
+00:16:16 Fran Hohol
+Okay, well, I guess it'll have to do with whatever you are delivering to the client.
+00:16:21 Derek Lobo
+At the end of the day. For now, yeah, I think for now, let's let Alejandro get through this because the other people on the call are like just barely hanging on to what this is. Right? If you are not in research or you are not an analyst, right? So let's keep going here. Alejandro and North.
+00:16:38 Alejandro Duque
+Yeah, yeah, But right now, it's starting to look at again based on the different assumptions that we have from. So based on these key assumptions, which again, I don't want to go in detail, but a lot of things to look at here. But, you can start seeing like from an executive summary, kind of like what the NOI might look like based on different cap rates, what the valuation might be for the property. And this is now taking again from a simple sorry, I don't know why my computer is doing this. But from we're taking the client and giving them pretty much like a full thirty six one development cash flow because you'll see it here that again, you can walk them through this and.
+00:17:33 Alejandro Duque
+The idea here is that you show them the encyclopedic knowledge that SVN Rock has in order to help them with their projects moving forward. And then based on. Hold on,
+00:17:42 Derek Lobo
+Hold on. I missed. Yeah, I missed that word. So you said encyclopedic knowledge, okay? So I got a Spanish guy and an Indian guy trying to teach a bunch of, you know, Canadian guys a spreadsheet here. So just okay. It's a little joke. Never mind. Um so the point was we have a lot of knowledge, Okay, individually, but it all comes so Carolyn's lease up knowledge comes into the lease up. Do you see what I am saying? So she says, "Oh yeah," in April we can lease fifteen apartments per month. Right, The research department's rent comes in construction knowledge, like for example, here is where you pay the architect in month one. Here is where you hire the leasing agent month fourteen. Right Noor knows how construction costs go they go on an S curve.
+00:18:30 Derek Lobo
+Right, so everybody's knowledge is coming in here. We're showing it to the developer all in one place. Okay,
+00:18:38 Alejandro Duque
+Exactly. Yeah and and you'll see here the full breakdown and how the model looks at that loan fees. So again, very easy to say, Property price land price is X, construction is Y, and financing is Z, but putting it all together in a breakdown over thirty six months. That's where I think this really sets the difference. And then obviously, Then you can come and given the different assumptions you want to give it or the manual review, Which is now the work of the analyst or the person looking at these reverse 1Bs is what other changes do we want to make to the model as we are about to present to the client based on their needs, based on their market, based on I don't know, the special characteristics that they have.
+00:19:26 Alejandro Duque
+So we can then start putting these numbers together. And no, and I would say that as a developer, I think that it's very easy to do back of the napkin kind of math by showing this. It sets in my opinion like a brokerage apart, because it's like, oh, okay, you understand construction like you know my business. So. Um, I would walk them every client through pretty much a lot of these sheets. So they know that this is not like a model that was built in one sheet over an afternoon using AI. Like this is something that someone that understands and knows construction put together. Another trying to give you better tools so you can make your decision a lot better based on the land cost and where you are projecting for your construction.
+00:20:17 Derek Lobo
+It's a sales tool,
+00:20:18 Alejandro Duque
+Yeah, and yeah, and, And again, right now, uh, Now as far as like the next step would be uh changing the parameters to and making sure that they they seem fine. Again, we highlight some of the items here kind of like uh the GFA, for instance, is coming from the from the 1A, but it is scaled. So to check for that. And again, as you play with it till, you understand what this uh, what each of these means. But. For the cost gap, like looking at sheet five, adding this cell, making sure that that is adjusted properly. The merchant IRR is likely driven by a cost gap again. But, you walk away with a full underwriting of the property or the project, giving a lot of assumptions, but again it's very thorough.
+00:21:13 Noor Khan
+It's not so actually see, Thank you, Alejandro. So what happens after this? Once the analyst generates it, So he or she is supposed to look into the output and to see like, you know, if there is an adjustment required to make sense of it. If there is like, you know, like there might be some changes needed anyway, depending upon the type of the project. So, that is the next steps required, which will depending upon the analyst experience and.
+00:21:45 Noor Khan
+Like how many times have he used the tool? You will be able to do it between half an hour to like, you know, thirty five, forty minutes maximum. Based that's that's the that's the thing.
+00:21:56 Alejandro Duque
+Yeah and what, Delacian would say is that what Noor and I try to do is condense, The manual labor. So it's now your analytical thinking your judgment as you as you play with this tool. And. You don't have to play with formulas. Nothing like now, you can just go in through the different tabs. And based on your department, you can massage or or look at different scenarios with the numbers. Keep going. Yeah, no, and I would say I mean I mean go down on this sheet.
+00:22:29 Noor Khan
+Go down on this sheet, so you can show them that all of these assumptions basically. That you know, I think Fran asked for us to have a highlighted item where there would be a need for adjustment if required. So they are all there. Go down further. This is basically key assumption sheet, right? You know, You can see I want to show you one thing here, which is item number H. You see? Sorry, item number I. You see that everybody.
+00:22:54 Derek Lobo
+Forgets about that.
+00:22:55 Noor Khan
+Yeah, so the development cost in the model is speaking now 197 million dollar, Well, in the high level cost that we determined was two sixty three million dollar. There's a difference of sixty five million, right? So that thirty three percent. We are saying it's okay only if it is below one percent. So, that is where the analyst has to work now based on his experience and knowledge of the model. And the business as such to correct these things, because this is what is if we go to the headline numbers, go to headline numbers, the third sheet. Yeah, this one.
+00:23:29 Noor Khan
+See the headline. Can you make it a little bigger? It's too small to see. So now these are this is showing abnormally high rate return on cost, for example, you know. So, this will be adjusted only when you when you fix that key assumption, because it it's from project to project, right? So, there is still some kind of a manual intervention required to make sure that, You know,
+00:23:51 Derek Lobo
+Yeah That's. That's that's too high of a return on cost for a high rise. Yeah so return on cost should be maybe thirty percent.
+00:23:59 Noor Khan
+Yeah, like depends upon project and rent, right? And the code can do that. Yeah,
+00:24:03 Alejandro Duque
+Yeah. And, that's why here this this flagged it as a red, which is sheet five F eighty six. That's this guy right here. That's why it was flagging it. So for instance, like you don't have to go through the entire model, like you can So.
+00:24:18 Derek Lobo
+So the point they're making is you don't just put it in and it's done It's. You got to check for assumptions because. Some, you know, if it's outside of these flags, right? Yeah. And remember, We're showing the client a thesis, not his building, but we're doing it on his building. So I would liken it to this: okay, If you told me a hundred things I could do to live to one hundred years old, I'd go that's interesting. But, if you read my blood work and did got all my physicals and said, Derek.
+00:24:52 Derek Lobo
+Here is a hundred things to do for you to live to a hundred. Everybody follow? Now it's about me, my building, my site, not some theory. That's what we're doing here. It's not perfect because we've estimated all these things, but we're demonstrating to you that if we get the right data, right? We can do exactly what you need and nobody else to do it. And we also demonstrate while we're demonstrating our knowledge. We hire the leasing agent in month eighteen. So it's a dynamic. It's this is when you spend the money, not all on day one, right? Cash flow model. Okay, keep going.
+00:25:31 Fran Hohol
+If that's a problem, where would you fix that?
+00:25:33 Derek Lobo
+Yes. No, not now friend. That's later, we got it because these guys in marketing are already like in orbit. Okay?
+00:25:41 Noor Khan
+I'll take I'll take you and Kenan through and any other millennials you want to be part of this thing to to kind of. App rise you how it works basically and where where you need to work and I'll demonstrate to you separately as well. This is a generic demo to everybody else to see the power, right?
+00:25:59 Alejandro Duque
+Yeah. Uh so yeah, so I think yeah. So we thought that yeah, as far as next steps, that that's what we would love to see, which is, uh I'll send an email to everyone on the call. I would love for you guys to play with it. As, One one ask that that we have is that sometimes in the morning. Alejandro, yeah,
+00:26:21 Noor Khan
+Alejandro, I don't think it is for everyone to play with it. Okay, we'll decide. Yeah, we'll decide. Yeah, this is fine. We'll more likely send the link to Fran and Kenan for now, because this is this tool is developed for the research department, right? If everybody starts like, you know, uploading information into it. This will the tool might get like?
+00:26:40 Derek Lobo
+No, no no, no, no, no, we'll deal with that. Yeah, I think it's more for it's it's for research for depth. For debt advisory, but also you know for sales, right? So we're gonna we're gonna talk about that. What else do you want to demonstrate? You just want to I'd.
+00:26:54 Darryl McCullough
+Like a copy of it. Just so I can have some time to go through it.
+00:26:58 Derek Lobo
+Sure. Yeah. Keep going.
+00:27:01 Alejandro Duque
+No, And I mean the the last thing for now, like, that's that's what we wanted to show up to this point because then once we get feedback again, the goal is that. We make this as simple as possible for you, So you can use it as a tool to uh for their finance team or sales research and and everyone here. And yeah, the next step would be just to start collecting everyone's feedback. And as as you go through it, so we can iterate it and making it better. But um but yeah I personally think as an outsider that it's a fantastic tool.
+00:27:35 Alejandro Duque
+For builders and developers, since this starts kind of like setting SVN Rock apart, like that's the last thing I wanted to say.
+00:27:43 Noor Khan
+Can, you do the second project also that you chose for demonstration to this, so they can see how it works?
+00:27:48 Alejandro Duque
+Yeah, yeah. So for instance, like that's one of them. I don't know if you guys are seeing. Yeah, I don't think okay. We can see. So yeah, for instance another property another one A again picks up the, Information about that specific property. You can go through any of these and change it. If you see the tax rate changes based on the one they compared to the other ones, same for the sizes. Now, the construction for this one is 18 months. Could be adjusted and then once we generate it, this is going to run it, make sure that it's there. We can download it. So I click on download.
+00:28:30 Alejandro Duque
+It spits out the the full model and while loads, you can then hear start looking at things that it highlighted. For this one, the cost gap was a lot better. So if you see it's now marked as green. And then yeah, then I can bring the full report. And now you have.
+00:28:54 Noor Khan
+It's basically one minute, if you see the time to generate. Yeah.
+00:28:58 Alejandro Duque
+It's a minute, and it'll highlight those parts. And if you see here, the uh sorry where before this was highlighted as a problem, The difference between the high level and the development cost model is only point seven percent. So right where we want it again because these are all based on assumptions. But um but yeah, uh I think that. And again, we as you as that. Each team, or anyone has one A's that the idea is to for the proper people to test it. And then start seeing how can this become better. So.
+00:29:38 Derek Lobo
+Yep. Okay, Alejandro, you finished? Yep. Okay, I want you to stay on Rod. Can you pop up the uh the ADSFE diagram? Okay, while you're doing that Jim Demanas give me your thoughts.
+00:29:56 Derek Lobo
+Can you hear me? Yep. Can't see, but yep, there you are. Okay, got it. Okay, what's your thoughts? Because you're the first first time I've ever seen it. But you understand the business.
+00:30:05 Jim Demanas
+Yeah, I do understand the business. I think it's incredibly powerful. Um, I mean, I don't see any downsides. Um, yeah uh, this is this is a game changer quite frankly. So from a marketing perspective, getting this information out quickly, uh, having the ability to change variables It's great.
+00:30:25 Derek Lobo
+Cool. Okay, Darryl, give me your give us your thoughts. You've just been thrown into this. You knew we've been working on it. you You get apartment math. What are your thoughts?
+00:30:34 Darryl McCullough
+Yeah, It's it brings brings in the simplicity that we all chase because of time, and we want to get to an answer quick. And we want to be able to take that answer into the next meeting. And this allows. This allows the process to move very quickly. That's the most important thing. It's fast.
+00:30:58 Derek Lobo
+I think that's the point. You'd never do it if it wasn't fast, right? We can't afford to spend three hours make all these assumptions, et cetera, et cetera. So this is our business model, everybody knows this. But, what this is is you now go from number two, okay to number three, that's what we've done. We financial model. And now this is the springboard to number four finding money, right? Right, construction financing. Then that becomes a springboard into number six and seven. You get it? And six and seven turn into springboard to number nine, which is brokerage. Right? So this is a sales tool. Okay, Joanna, give us your thoughts. Roddy, go to full screen. Thank you, Roddy. Joanna, give us your thoughts please.
+00:31:38 Joanna Zhou
+Uh, it is a great uh great tool for marketing for sure. I. Just wondering how do we deliver the result to our clients? Do we deliver it ourselves or.
+00:31:53 Derek Lobo
+We're Gonna discuss that. So now we've built it, what do we do with it? Okay, so next Dave Price. What does this do for you?
+00:32:02 Dave Price
+It's an incredible sales tool.
+00:32:04 Derek Lobo
+He's the tip of the spear.
+00:32:06 Dave Price
+Yeah, this is a powerful sales tool. You can market this, but this is a tool during sales, right? In the discovery process where you find out. Most of our clients or prospects right now are having trouble building the capital stack, getting financing. You know, they're having trouble finding money, making it work. And I just got off of a call with a guy that was talking about, "Look, I've launched from condos into rentals. I'm going into my first year of now. I'm hitting renewals." "I know what I know and I don't know what I don't know." And "I don't know what my numbers should be looking like. I know what they actually do look like."
+00:32:47 Dave Price
+But now I've got more projects and I need to be smarter. I mean, this is a perfect time.
+00:32:53 Derek Lobo
+And we know that's it, Mister Prospect. You know ninety percent of what you need to know;. We know the other ten percent, and we're prepared to demonstrate to you, Dave. What I want you to do is pick two clients who we've done research work for recently with Brandon Kanan, and let's run the reverse one B for them and get their feedback. You might need a couple of graphics in here, which Excel could easily draw. Like just show the capital stack picture so it visualizes in your mind. Everybody get what I said just there? Like, it's so much to absorb that maybe just a little graphic here and there would help. Even just costs, hard costs, soft costs. You know what I am saying? Because even if we didn't get the exact numbers right, the percentages should be close. Okay? So I am thinking a few Dave.
+00:33:42 Derek Lobo
+Think about the two people that you can test this on because we love it because it's ours. Okay, but maybe we're blindsided here. I think super super important. Okay, uh,
+00:33:53 Darryl McCullough
+Just a comment for to comment for Dave and you Derek is, You can use this on a fast track basis and start creating conceptualum agreements. You can start, Start helping to raise money by doing some creative exchanges, doing things to bring the right people in. And, the biggest problem we have with new new construction is the time it takes to show where the where the beauty of it is. This this makes things happen, But the world I live in says I can take that and create something very, I can put a creative deal together because of what's in front of me.
+00:34:34 Derek Lobo
+Carolyn, can you explain what Darrell just said? I'm not sure.
+00:34:41 Darryl McCullough
+Do you want me to say it again?
+00:34:43 Derek Lobo
+No, I want Caroline to say it.
+00:34:44 Carolyn Ennest
+Yeah, I think what he's saying is basically, you can use this to help write deals. Like we've used it for land sales before. We did the reverse one B many years ago to figure out again, you know, what can you put on this land and, you know, kind of demonstrate that to a developer buying it or something like that.
+00:35:03 Darryl McCullough
+Derek, think of the unbuilt building. That's how you think. So you've got X, and we know who they are. That we deliver a building two years from now, and you do this deal, and bring this and that in in cash, and the deal will work. That's what this can.
+00:35:21 Derek Lobo
+Oh okay okay so so so you're create you're bringing in the equity. I think we get some more. It's we got to talk about it more. But I think I'm starting to get it. Okay Ewan what what do you see here from your perspective?
+00:35:32 Ewan Cesar
+Yeah I think it's uh I think it's awesome really and uh I think, It'll be exciting for me to just start to use it and kind of, you know, It'll really teach me a lot about what goes on after these feasibility studies are delivered. And so yeah, yeah,
+00:35:49 Derek Lobo
+Yeah, yeah, yeah. Okay. All right. Okay. Vanessa, do you see anything any use here?
+00:35:56 Vanessa Lobo
+Uh like I wonder if maybe we could even use, Parts of this, when we do our leasing insights thing, To just show people who are coming on for the first time, like what kind of information we can offer them and to show them how valuable the leasing training will be based on the data that we have. That we're not just like a canned thing.
+00:36:13 Derek Lobo
+You know what you can show Vanessa if you get one hundred dollars more in rent here is how much more profit the deal makes. That would be huge, and it's not just a slide: one hundred dollars in rent equals twenty four thousand value. Okay, but you are saying the full thing always, and you go tell your boss this. Okay, who is going to hate this? No, okay. Uh, who's going to hate this? So easy. I.
+00:36:49 Darryl McCullough
+Love the Vanessa idea. Derek one hundred bucks on three hundred units is pretty pretty uh, Fast track to financial collaborators.
+00:36:59 Derek Lobo
+Who is not going to like this? Who's going to hate this? Jimbo,
+00:37:02 Rod Schulhauser
+Our two financial collaborators.
+00:37:03 Jim Demanas
+It'll be either. It'll probably be, you know, like the director of asset management for the person that you're presenting this to.
+00:37:11 Derek Lobo
+Yep. The financial analyst who used to build the spreadsheet. Right. Yeah He's going to hate it The owner's going to love it.
+00:37:24 Noor Khan
+Right, We are giving an extra anyway. This is like the old yeah, so this.
+00:37:30 Derek Lobo
+Is to wow the client, okay? And what I am saying is when you demo it, Alejandro.
+00:37:38 Alejandro Duque
+Yeah, no, no. I was going to add one comment which I think you guys all know. The way, I looked at these two, also as a developer, most most of the times were merchant. Builders were just thinking build sell. This now starts questioning, like," Oh, Maybe we can hold it and maybe it's not as a big of a hit right away." But I don't have to then finish and then go do it all over again. Maybe I just keep it so it starts playing with that idea as well. Which I don't think again, we talk to brokers;. They just care about build it, sell it and get out. So yeah,
+00:38:16 Darryl McCullough
+Derek only wants to list himself.
+00:38:19 Derek Lobo
+He's talking to the audience. We only no, we only care about the relationship. That's why we're in business. Fair enough. Okay, Rod, what are your thoughts? Adam, you are next. No, uh, Rod I got I mixed up here. Sorry? I see Adam where Rod's picture is but anyways or Rod's name now, rod What do you think?
+00:38:42 Rod Schulhauser
+Yeah, I usually put not rod Schellhouser when Adam uses that Zoomum so, The first thing I think to help with those that aren't intimately involved with the tool would be. So we do a feasibility study. How much additional work do we have to do, To complete the one A to ingest here or is feasibility getting us that runway already at the end of every feasibility study.
+00:39:08 Derek Lobo
+I don't understand the question.
+00:39:10 Rod Schulhauser
+So when we do a feasibility study, are is it is this. One B reverse one B model ready to go, Or do we have to do some additional work in the one B itself before we can? No,
+00:39:21 Derek Lobo
+They showed us. No, no, they showed us. You got to understand it and tweak it a little bit to make sure there's no like great big red spots.
+00:39:28 Rod Schulhauser
+Not much. Not much. But there is a step in between before we're ready to do that. That's number one.
+00:39:33 Derek Lobo
+Number two is so Nour's got a train on that step Fair enough?
+00:39:39 Rod Schulhauser
+Yeah, yeah So so, And then there's two steps here in terms of productization. One would be a product for Joanna's group for debt advisory is, Is there in the future a way? Should we think about decoupling it from the one A so that we can pick up other business that may not give us feasibility. You know what I'm saying? So, we might be able to have an internal tool where we just look for certain factors. Is there a way to decouple? It's just a thought, not looking for an answer. The second thing is, Yeah, so exactly. So. Then the second part of that is looking at this as a tool or a service to provide our clients, Like productizing this as a solution to get that developer excited about what we said. Their analyst isn't going to like it, but there's there's business there. So those are my two thoughts.
+00:40:27 Derek Lobo
+To get the developer excited about the and how quick he gets it, okay Adam, what do you think from a marketing standpoint?
+00:40:35 Adam
+I like how it's built in, Where it's checking itself, it's flagging things, it's prompting analysts to have a look at it. I think that is from a marketing perspective, a question that needs to be answered because some people are going to be like, oh, it's AI. You can't trust it. And the fact that nope, we can lead with. We build this. And then we're actually going through to make sure it's right is key. Um you know in terms of like all of the specifics of it, That's not my wheelhouse, but I was I was pretty impressed to see that there's safeguards.
+00:41:06 Derek Lobo
+Okay, Ali, how does this affect the National Apartment Council in terms of attracting members, keeping members, just adding value to them?
+00:41:18 Ali
+So I would say from a marketing sorry. Yeah go ahead. From a marketing standpoint, I think it'll definitely help us identify what those elements are, and it'll keep us I would say.
+00:41:35 Ali
+From a more higher level, I would have to understand and learn a little bit bit more, But I think it would definitely keep us on board and identify who those members are and how it affects them in their business challenges. Yeah,
+00:41:48 Derek Lobo
+I think for the National Apartment Council Jim, This is a great training tool because now if you can understand the one B, and that's really not what your guys'job is. You're lobbying for better legislation. But you're understanding when you talk to a developer, About internal rates of return, about what develop, what would happen to development charges got cut in half. Right now that's just verbiage to us. You could talk about its impact on profitability or impact on how much money you need for equity to get a job started. So I would think that just teaching people in National Apartment Council about what this is makes them better advocates for our industry. Okay?
+00:42:24 Ali
+Especially for the membership role, yeah.
+00:42:30 Kanan MacLellan
+I think that that last point you made was great. Um, My initial thoughts are that this would supercharge any analyst or anybody in our research team in doing more and less time. And I think that kind of scales us to provide more value to our clients like end all. So I think I am interested in how we apply this to the other eight steps, that we offer and see how we can scale through.
+00:42:55 Darryl McCullough
+That's totally my interest as well. Summary though which is interesting the unbuilt building. You create a building on the unbuilt, vacant piece of land, and you put you put certain parameters down. You can start talking about the end result. Always looking at the end, you are always looking for the end. This is what happens with this piece of land, depending on what you want to do with it. You want to move through it. You want to be part of a joint venture on it. Whatever you want to be here is our numbers, it.
+00:43:26 Darryl McCullough
+It all comes down to the unbuilt building and the power of the vacant piece of land and what you can do with it.
+00:43:34 Derek Lobo
+Okay, Carolyn, you see that? Yep. What are your thoughts for leasing and brokerage, knowing that we've got this in the back room?
+00:43:47 Carolyn Ennest
+Well, for brokerage, I mean obviously it's huge. I mean if we have this information prior to going into a broker pitch, we know a lot. Right, like it's we're just really smart about the building. We know, you know what kind of returns they need to trigger a sale. We have a good idea on you know pricing that you know the returns. Wait a minute,
+00:44:05 Derek Lobo
+Wait You just no no no I I never realized that So if we ask the developer, What did this cost you to build? He tells us We now run the reverse one B on the cost, and we show his returns Right Mhm. Alejandro, you get that? Like, I never thought of that before. We're listing a new building for sale. What did it cost to build it? And now we say," This price, this price, this price, this price." This is and no other brokers email to do that. They're just going to go well. You are going to make he'll go in his head. I am going to make ten million bucks. It cost me sixty to build. I am selling it for seventy Fair enough Here he's going to get R O R return on equity cash on cash I R R profit right.
+00:44:49 Dave Price
+In which case Derek could be. The reverse one B. This would be actually the one B.
+00:44:55 Derek Lobo
+Mhm. You're right, it would be the one B, be real rents, real construction and returns, right? Darryl Darryl what do you think?
+00:45:04 Darryl McCullough
+Yeah I agree, and there's an add- on to this that we talk about it in our meetings. Land is worth what you can do with it, and when you can do it. Mhm So. So to do a reverse is to basically this is what you can do with the land. This is the time. You can pull that all the way back to a land value. Pull it all the way back.
+00:45:26 Derek Lobo
+Can we do a residual? Yeah, I never thought Alejandro is this or nor is this a residual land value calculation already built in?
+00:45:35 Carolyn Ennest
+Yes, it's ten percent now.
+00:45:39 Dave Price
+Yeah, and just over ten percent of the total cost. That's powerful.
+00:45:43 Darryl McCullough
+When you're dealing in the market you guys are in. All that vacant land is a powerful tool.
+00:45:49 Derek Lobo
+No, no, no, no. The question I am asking is: I know. It's we build the model, and we assume we have to get a twenty percent IRR. What's the land worth?
+00:46:02 Noor Khan
+Land is based on two assumptions, right? The assumption, one is that you know, we do not know the land cost that how much did it cost to developer. No,
+00:46:15 Derek Lobo
+What's it worth? We're talking about what's it worth now by building and building on.
+00:46:19 Noor Khan
+So, So based on the assumption that you know, the primary assumption is that we do not know the land cost and it is splitting the land cost between the profit and how much, the land should cost. That is currently. And alternatively, if we make the, Land cost zero, then all the cash will go to the profit. So then you will see how much should be there. The third will be if the land is already purchased let's say, Uh, a Toronto land has been purchased for two hundred dollars a square foot. But, if you put it at the two hundred dollars, a square foot in the model, then it's basically profit is reduced to four percent. So that means like you know somewhere something has gone wrong. But anyway, you know what I am saying right?
+00:47:04 Derek Lobo
+So that's why I never thought about that. Joanna, what do you think of that? What Noah said? Do you understand it?
+00:47:11 Joanna Zhou
+Yeah, yeah. Like, the land value is like a residual land value can be. We can present to our clients for sure. It's very powerful. I have another question regarding this. It's like we have full in house team, We are we have leasing up. So we are pretty sure of the one A is correct, But and like I can make sure like the financing is like ninety percent correct. But how about the construction cost because that always that is also apply. So right,
+00:47:44 Derek Lobo
+Right. So so remember, right? This is forward looking. We're using standard construction costs from Altus, okay? And those are dropping. But that's the developer's job to put that in. We're putting in placeholder numbers right now that aren't stupid. Okay, we're using industry costs but this developer, Whether he has a GC, whether he's his own constructor, and remember, construction prices are dropping. So that's the wild card. But we've made logical assumptions on it from industry standards. But that was always our big worry before, right? So, we solved that by drawing on all this control,
+00:48:24 Dave Price
+They've yeah I just wanted to add on to what Carolyn was saying. You know we've got a client Millhouse right that's looking to uh, Start an operation in Canada, and what do they keep saying? We need to build a, you know, build a proforma. We need to build a building on paper so that we can. There you go.
+00:48:44 Derek Lobo
+We just did it.
+00:48:45 Dave Price
+This is the tool. Pick a piece of land, we estimate what it'll cost to acquire and you build the building. And if it doesn't pencil out to meet their metrics, reshape it, reshape it,
+00:48:57 Noor Khan
+Reshape it for any client, like you know, to run the model. We just need to have. At least some minimum form of one a, Which the research team can do even for the mill house project A B C D like you know, for each project, depending on the size and all that. And then it can be run very easily to to see that you know how. And then that's like, you know, when people get experienced, then we can roll it out to others also. But right now, I think research has to learn it well, actually,
+00:49:23 Alejandro Duque
+Yeah and what sorry go on Dave.
+00:49:27 Dave Price
+No I was just going to say Nour is right. Millhouse, we know they love to build six story wood. Okay, plug it in.
+00:49:36 Alejandro Duque
+Yeah, And I was going to add something that, again, for a lot of people might not be familiar, But the we have a reference data source that the numbers that we're putting together are actually coming from municipal development charges. Nice and nice credibility. Exactly. So all of this is being pulled into the system. So these are not just. Some average numbers that or an I or actually like I didn't do any of the underwriting; that was all Nor. But the model is actually picking up data that is verifiable, that you can mention to the client like," Hey, this is where these numbers come from." It's not just our data; like we're actually using the Altus construction cost guide. Right? And we keep updating.
+00:50:22 Derek Lobo
+Yeah, all you have to say is we're using Altus costs. End of story. We put in the Bank of Canada rate. You put in the normal bump ups. Boom, there is your interest rate as it changes, you know, right?
+00:50:34 Alejandro Duque
+Yeah, so sorry. And go ahead and you'll have access to this. Oh, sorry. Sorry, go go ahead. No, That's the last thing that it's here in the reference data sources, if at any point you need to reference them.
+00:50:51 Derek Lobo
+Yeah yeah and I think the more that becomes credible, The more, and yeah, if you want to change it, go ahead and change it. We took it from a credible source, but certainly construction costs come from the developer. Right? And land costs now I see the value of residual land value calculations. The other thing we can do is I mean, in a sense where we're developing look, a package for new construction building is essentially a pro forma fair enough, and you can get a rendering from almost any piece of software. Now, here's a piece of land. Here's the zoning boom, put a building on it, right?
+00:51:24 Derek Lobo
+Right, step it back, make it square, whatever. Right? And, so you can get a, you can really just do up a package so quickly from a one A. And the one A can be an estimate. It doesn't have to have a full research report behind it. Right? Just go unit mix. Just pick a unit mix that makes sense. Right? That's okay. So Noor and Alejandro we have to think about how we protect this. It's very valuable. We don't want this stolen Okay Um The next step is we've developed something here. How do we now start using it? So, the first thing I got was this is a research tool. So, we got to train research on it. There's not that much training. Kanan and Fran and Ewan and Jason, right? But it's pretty simple to use, right? And then Joanna, you've got to figure out how you're going to use it, right? And yours is more stress testing it for various financial options. Carolyn for you when you're doing a leasing pitch, it's like.
+00:52:23 Derek Lobo
+First of all, the developer is going to be impressed with it. Now, we're going to show them this profit margin based on the sale price and all the different metrics, right? Okay, Carolyn. Mm-hmm. That's a starting point. The other thing too is and I told Alejandro not to do this. You can pull executive reports from this also quite easily, But I didn't want him to do that because I wanted the developer developers are usually very good at spreadsheets. It's always surprised me how good they are at it. Right, they run their own. Most developers run their own spreadsheets or they did right, and so they like to see the raw okay. But at some point Alejandro, we may want to produce some executive summaries, Some graphics just to make a point really, or or dashboard on it or something. But, we've got a typical Excel dashboard right now on the front end of it, right? That shows the mul the, nor does this show equity multiple somewhere. I don't need to see it.
+00:53:17 Noor Khan
+But does it shows return on equity?
+00:53:21 Derek Lobo
+No, but what about equity multiple? If I put in ten million and I get twenty back, do I see a two x somewhere?
+00:53:27 Noor Khan
+It doesn't show right now.
+00:53:28 Derek Lobo
+Okay, it shows. So we'll work out things like that, right? But so for example because to do the equity multiple, do you need Alejandro or can you do that now?
+00:53:41 Noor Khan
+So there are two things. We are trying to do it like you know, all coming from the system itself. So manual work is limited to only, Adjusting like you know percentages, Rather than like, you know, adding more things. So we can separately we can discuss among the team. What kind of graphs or charts are needed with the cannon and the brand want to see once those items are identified, then we'll get it done through Alejandro.
+00:54:16 Ali
+Derek, can I just jump in for a second if that's okay? Yes. Okay, um, I was just putting this into AI right now, and I asked AI how we can use this as a lobby tool. Uh, in terms of an advocacy data engine. And, what it's saying here is the organization can use the aggregated and anonymized member data to turn individual performers into a broader evidence base for advocacy. Then, we can show governments and municipalities that the numbers and current policies that are.
+00:54:47 Ali
+Being brought forward aren't working based off of this data here and some of the reports that hundred percent.
+00:54:52 Derek Lobo
+Yeah can can that be? You can say, look, yep, yep, hundred percent. It's a good idea. Okay, all you can say is, look the numbers don't work. Here's my numbers. They don't work. Yeah. Okay,
+00:55:06 Rod Schulhauser
+Good I think what you were asking Derek, you know isum once this matures, and we get you're talking about a user interface where we can run scenarios at you know. Change variables, and it's kind of like a query tool into the model. So, um, Right now, what we're saying is that it's just an output of based upon the initial right. But you want like a query interactive process that could be added later on easily.
+00:55:30 Derek Lobo
+Maybe it's so good that I don't even see a querying necessary because we already have the model. But you can change things verbally.
+00:55:39 Darryl McCullough
+Rod, you're right, Derek to a certain extent. You walk in with your laptop computer. And you you say, you know, Under this and I, keep going back to Vanessa's comment and your and your thing, or or with Caroline changing a monthly rental by X on units, how fast the results come in other words, you're in a meeting, and you have your computer and you're doing what ifs with this powerful tool here to come to a conclusion or come to what the need needs to be to make something feasible.
+00:56:13 Derek Lobo
+Yep, Alejandro, why don't you wrap up if you've got to leave?
+00:56:17 Alejandro Duque
+Yep, sounds good. So thanks everyone. I'll send you then Derek and Nora Nemo, and then you guys can pass it on to the team. And yeah, for anyone else that will be playing with the tool, always welcome feedback and hope it's helpful.
+00:56:31 Derek Lobo
+Yeah no no we appreciate the work that you've done for us. And so what I want to take like what what have you learned here?
+00:56:39 Alejandro Duque
+Yeah no I think that uh again, With Darryl, This is something he's one of my mentors as well, and something that I've learned it's relationship building and over delivering. And I think that this is truly one way to show it with facts and data, not just pulling back of the envelope estimates. So I would definitely use it if if I could.
+00:57:03 Derek Lobo
+Okay, Rod, can we do like a sound effect round of applause for Alejandro? Okay. Good work.
+00:57:08 Alejandro Duque
+Thank you guys. Pleasure meeting you all today Thank you, Bye bye.
+00:57:12 Derek Lobo
+Thank you.

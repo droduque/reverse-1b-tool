@@ -1,0 +1,120 @@
+00:00:00 Derek Lobo
+Hey Alejandro.
+00:00:01 Alejandro Duque
+Hey Derek, good afternoon. How are you doing?
+00:00:04 Derek Lobo
+Good, good, good. Listen, we're all excited for this meeting at one o'clock today.
+00:00:08 Alejandro Duque
+Yeah, thank you. Yeah, me too. I just got your voicemail, sir. I was on a different call with Derma. Call of We're actually talking about something else. So he says hi and And yeah and and yeah So it regards to voicemail. Then yeah, absolutely again. I don't think we'll take the full thirty minutes, But where I want to hone in is that now they have a tool to have a full reverse one B. And yeah, I'll add from my side that being a developer myself, and having done that in the past, I think that what I want to voice across to the team is that the depth of knowledge sitting behind those numbers and what is VN provides is just incredible. You know so yes,
+00:00:49 Derek Lobo
+And i don't I don't think our staff gets that.
+00:00:53 Alejandro Duque
+Yeah, oh yeah.
+00:00:55 Derek Lobo
+Because each person individually, but when you take our collective knowledge and Alejandro, What I've said to people is, you don't understand apartment construction till you understand the one B.
+00:01:11 Alejandro Duque
+Yeah, exactly.
+00:01:12 Derek Lobo
+Once you understand the one B, you understand you have encyclopedic knowledge. Exactly.
+00:01:21 Derek Lobo
+Okay, so you're going to, Demo it, right?
+00:01:25 Alejandro Duque
+Yeah, yeah. I mean, I'm gonna demo, how to go from the one A to the reverse one B and show a little bit of kind of like all the data. I don't know how much into the width we'll go, but I think yeah. The again, like let me know how how you want to run that. Because then between me and Noor, we can go. I mean, he can explain the reverse one B deeper. He he has already done that in the past. Kind of like one of the first meetings that I joined, so happy to go deeper. But I think the first kind of like snapshot is that if you've built a pro forma for the one A or for the feasibility study, now you can get a completely reverse one B, Which is completely again, it's working backwards into giving the developer an idea like how much does it cost to build this.
+00:02:18 Alejandro Duque
+How should it be financed? Again, what return do they earn? What happens to your rental trust.
+00:02:26 Derek Lobo
+And how you can stress test it and do what if scenarios.
+00:02:32 Alejandro Duque
+Exactly, yeah.
+00:02:34 Derek Lobo
+That's right. And this is the launching pad for finance.
+00:02:41 Alejandro Duque
+Exactly, yeah.
+00:02:42 Derek Lobo
+For our debt advisory group that's what that's what this main tool is, It gets us to the next step.
+00:02:51 Alejandro Duque
+Yeah, yeah, exactly. Okay, yeah, I'll mention that because then what I wanted to do is just give, obviously, right after the call, send a quick email with access to the tool because again, we want people to run with it. There might be still some little bugs that we haven't caught that even the formatting.
+00:03:12 Derek Lobo
+Right. But but the main purpose is. To get people to use it. Exactly. There is no point now. Now, I'll tell you what I've learned from this, Alejandro. Okay? Is, you've got to take the person with the knowledge and match them up with the person who understands AI, okay? And in your case it was particularly good because you are already a developer. Yeah Right So. So but but most of the things that we want to convert to AI are much.
+00:03:45 Derek Lobo
+Simpler than this. Okay. Okay. Yeah. You follow? Yeah, absolutely. Okay, let me did you have like five minutes to hear something? I want to give you an example of my next big AI project. It's amazing.
+00:03:59 Alejandro Duque
+Okay, tell me.
+00:04:01 Derek Lobo
+Okay, So for thirty five years, I have kept notes for every meeting I've been to okay So I would write Alejandro, and then I would make. Write five or ten points to our discussion, okay? So, I've probably got one hundred and fifty black books where I've just written in. Okay, so what we're looking at doing now is scanning in all those notes. Okay, into a small language model—not an LLM but a small language model—fair enough. Yeah. So in sense now my writing is terrible but.
+00:04:43 Derek Lobo
+The AI app learns a little more every time, right? So now just assume all those one hundred and fifty books, okay, are all read into one giant file. Okay, yeah, And now I query it and I say, find every time I've used the word Windsor and land together. Okay, yeah, I am going to find all the land in Windsor that. I know about. Now, yes, I can go look on the municipal page, but these are people I've already been talking to, so there's a relationship. Right? Yeah. And now maybe you'll come on, maybe I said Windsor Land six times in the last thirty years. Okay? But those six get presented to me along with the person I talked to.
+00:05:36 Alejandro Duque
+Yeah, okay. And so did you already yeah, did you already digitize all your notes? Your handwriting.
+00:05:43 Derek Lobo
+No, no, no, no. We just we just digitized twenty pages as an example.
+00:05:47 Alejandro Duque
+Oh, got it, got it, got it. Yeah.
+00:05:49 Derek Lobo
+So. Now we've got to find a company that's going to scan and create all this. Okay? So. But the question then becomes once we do it. What do we do with it? In a sense, you know, you uploaded all those SEC notes, the CCIM notes, right? Yeah, Into your own, what did you call that? What's that thing you loaded into?
+00:06:14 Alejandro Duque
+It's Gemini, but yeah, I call it like I call it the real estate brain. But call it yeah, just the notebook. Notebook LLM is called yeah.
+00:06:24 Derek Lobo
+Okay, a notebook. Okay. So once I put all my thoughts in there, okay? And what I'm going to do is in every page of text, I'm going to also save the handwritten notes, So, I can read my own writing. You know what I am saying? Yeah. So, but now now I can connect that to my core database. I can, I mean, it's unlimited what we can do here, Alejandro.
+00:06:51 Alejandro Duque
+Yeah. Yeah Oh absolutely.
+00:06:54 Derek Lobo
+What would the caution be? You've already loaded all the SEC stuff into into a notebook right But. So and then you just have to. Period, like that's it. It's just that simple.
+00:07:09 Alejandro Duque
+It is and and most importantly, That before you were limited because everyone was trying to build local LLM models to for themselves, but now you can just send it to I don't know Google's Gemini. You can send it to OpenAI Chat, GPT Perplexity and just use the best one based on your needs. And and just off you go. Because again, Going back to the security question is the same thing as like, do you send uh delicate emails that shouldn't be on the wild and people?
+00:07:45 Derek Lobo
+No no no, no, no. No, But there's nothing in there that if somebody else gets that any value to them because it's my relationships.
+00:07:54 Alejandro Duque
+Exactly. No, no, but, But I am saying, and so first, like if you trust Google to handle or Microsoft to handle your emails, Then this piece, which, again, it's only going to be helpful to you is even less of a concern from a security standpoint. Exactly that was where I was going.
+00:08:13 Derek Lobo
+Right. So so then I am going to connect it to all my emails for that person, because sometimes I would send them a summary email, right? Yep, and lots of times I would send them something. And. I can say, like, yeah. And and how many promises didn't I fulfill? Cause you know, I wrote it down action and then I didn't do it. So so it could be really quite. I don't see any downside to doing this Alejandro. Taking all the notes I've written and putting them in one giant file.
+00:08:41 Alejandro Duque
+Oh no at all and you're gonna find a ton of things like, I mean, like i'll tell you a personal project of mine is that i went through. Uh, all of my emails. I gave access to my entire email, and i don't know. Spent like fifty bucks on API cost, Which is pretty much like having the system little by little scrub through all of it. It started picking up a bunch of things that I had completely forgotten about because maybe I deleted or archived that comment or missed it. And it was just saying, And then I said, like, okay, let's concentrate just in the last twelve months. What our interactions were. I didn't answer.
+00:09:21 Alejandro Duque
+And just that exercise alone was pretty worth it because it flagged a lot of things. And then again, Like you can even start building it. So it's like you're better than your executive assistant or personal assistant. Because now when an email comes in from that person or related to that project, you might actually start surfacing information about that interaction.
+00:09:45 Derek Lobo
+Right, right, right. So in this case, it's all about the handwriting? But you're right. So, we put it into an LLM, and then it can be searched by whatever engine we like, Gemini, whatever. Yeah. So it's really that simple. There's nothing complicated about this at all.
+00:10:04 Alejandro Duque
+Yeah, yeah, yeah, I know. Yeah, it's uh.
+00:10:07 Derek Lobo
+But but but when we connect it to core our database Right? Through an API You see my point? Now it can pull all the notes from core as well.
+00:10:20 Alejandro Duque
+Yeah, oh yeah.
+00:10:23 Derek Lobo
+And all the emails we sent them.
+00:10:26 Alejandro Duque
+Yeah. Yeah, yeah.
+00:10:28 Derek Lobo
+So every time I talk to a client, I can say I visited you five times in the last ten years. Here is what we talked about. They'll be amazed, right?
+00:10:38 Alejandro Duque
+Oh yeah. Yeah and again, and that to give you credit like that's exactly a type of work that AI is really good at doing today. Like people think it's about replacing them, which is not. It's just making you a lot more effective, because there are all these things that we have running. Even if you hire an employee, training them on what's important and what's not takes a lot of time. But, when you have AI do all the heavy work of those memories and interpretation, Because again, it's just systems that are algorithms running around and they've been trained on a ton of data. But at the end of the day they're.
+00:11:18 Alejandro Duque
+They're now getting extremely good at identifying what the needs are, But the judgment calls whether that information is useful? Or is it not comes to you, Which then you can then keep training that system, so it gets better and better. It's like this exercise with Nor from one A to reverse one B used to take three hours because of all the data points, at least three hours. Now.
+00:11:43 Derek Lobo
+And you would never do it exactly never do it.
+00:11:46 Alejandro Duque
+Exactly, because only someone that likes Excel understands it. And now you can have it in sixty seconds. Then you spend the next five going over after the assumptions. We even built in some parameters for the system to check automatically and flag so you can go in and fix it based on assumptions. And then again, like It's a pretty low hanging fruit. Like, then you go to the client, You do the feasibility. And then you have this fifteen sheet Excel sheet that hey, we're running a lot of assumptions. Yeah, of course. But this is not based on some here are the numbers and here's that. Like these are actually a cash flow and thirty six month analysis. So so yeah, I don't know that. That's why I think it's really cool. Like.
+00:12:35 Alejandro Duque
+Because there is no downside at all for if anything for the developer, They walk away with something that that has a schedule and a lot of information. So,
+00:12:47 Derek Lobo
+And by making certain assumptions, they realize how smart we are.
+00:12:52 Alejandro Duque
+Yeah, exactly.
+00:12:55 Derek Lobo
+Yeah, I want you to mention as an outsider, you see the depths of our company because I don't think we see it.
+00:13:02 Alejandro Duque
+Oh yeah, no i.
+00:13:03 Derek Lobo
+I don't think we see it.
+00:13:05 Alejandro Duque
+Yeah, no, and again, and this is what's not replaceable. You know, like yeah. And when I talk to Noor, Like this is the type of stuff that even if you go out and build a new brokerage, good luck putting this together.
+00:13:21 Derek Lobo
+So exactly.
+00:13:24 Alejandro Duque
+So yeah. But okay. All right Barry so.
+00:13:29 Derek Lobo
+See you at one o'clock?
+00:13:31 Alejandro Duque
+Yeah I'll see you in thirty five minutes. Thank you so much.
+00:13:33 Derek Lobo
+Thank you Bye bye.

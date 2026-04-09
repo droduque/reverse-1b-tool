@@ -577,9 +577,9 @@ def _print_result(xlsx_path, result):
 # The populator names outputs as "Reverse_1B_{address}_{date}.xlsx" — we
 # match by keywords in the filename to the correct 1A proforma.
 _1A_LOOKUP = [
-    ('Birchmount', 'reference/1A_Birchmount_2240.xlsx'),
+    ('Birchmount', 'reference/2. 1A_Birchmount_2240.xlsx'),
     ('Bayview', 'reference/1A_2470 Bayview Proforma - Feb 2025 v2.xls'),
-    ('St_Clair', 'reference/1A_490_St_Clair.xls'),
+    ('St_Clair', 'reference/1. Proforma - 490 St Clair West, Toronto, ON v1.xls'),
     ('Old_Weston', 'reference/1A_290 Old Weston Rd Client Proforma - Feb 2025.xls'),
     ('Glenavy', 'reference/1A_Glenavy Ave Proforma - May 2024 v2.xls'),
 ]

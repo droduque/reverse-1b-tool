@@ -1,6 +1,7 @@
 ---
 name: validate-output
 description: Verify a generated Reverse 1B output file is correct. Use after running run-reverse-1b.
+last_validated: 2026-04-08
 allowed-tools: Read, Bash, Grep, Glob
 ---
 

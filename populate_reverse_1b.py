@@ -5,8 +5,8 @@ Reads a 1A proforma Excel file, copies the Reverse 1B template,
 and writes the 1A data into the correct cells across 3 sheets.
 
 Usage:
-    python populate_reverse_1b.py reference/1A_Birchmount_2240.xlsx
-    python populate_reverse_1b.py reference/1A_490_St_Clair.xls
+    python populate_reverse_1b.py "reference/2. 1A_Birchmount_2240.xlsx"
+    python populate_reverse_1b.py "reference/1. Proforma - 490 St Clair West, Toronto, ON v1.xls"
 
 The tool will prompt for municipality selection (for DC rates)
 and building type (mid-rise vs high-rise).
@@ -2792,7 +2792,7 @@ def _log_municipality_gap(address, attempted, output_dir):
 def main():
     if len(sys.argv) < 2:
         print("Usage: python populate_reverse_1b.py <path_to_1a_proforma>")
-        print("Example: python populate_reverse_1b.py reference/1A_Birchmount_2240.xlsx")
+        print('Example: python populate_reverse_1b.py "reference/2. 1A_Birchmount_2240.xlsx"')
         sys.exit(1)
 
     input_path = sys.argv[1]
