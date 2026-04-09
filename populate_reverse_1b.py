@@ -622,12 +622,24 @@ def _parse_sheet(cell, max_row):
                 else:
                     if f_val and isinstance(f_val, (int, float)):
                         data['vacancy_rate'] = float(f_val)
-            elif 'UNDERGROUND' in label or ('PARKING' in label and 'VISITOR' not in label
+            elif 'UNDERGROUND' in label or 'RESIDENTIAL STALL' in label or 'TANDEM' in label or (
+                    'PARKING' in label and 'VISITOR' not in label
                     and 'RETAIL' not in label and 'SURFACE' not in label):
-                data['parking_underground'] = {
-                    'spaces': int(f_val) if isinstance(f_val, (int, float)) else 0,
-                    'fee': float(g_val) if isinstance(g_val, (int, float)) else 0,
-                }
+                # Accumulate parking spaces (some 1As split into multiple rows
+                # e.g., "Residential Stalls" + "Tandem Residential")
+                existing = data['parking_underground']
+                new_spaces = int(f_val) if isinstance(f_val, (int, float)) else 0
+                new_fee = float(g_val) if isinstance(g_val, (int, float)) else 0
+                if existing['spaces'] == 0:
+                    data['parking_underground'] = {'spaces': new_spaces, 'fee': new_fee}
+                else:
+                    # Weighted average fee when combining rows
+                    total_spaces = existing['spaces'] + new_spaces
+                    if total_spaces > 0:
+                        avg_fee = (existing['spaces'] * existing['fee'] + new_spaces * new_fee) / total_spaces
+                    else:
+                        avg_fee = 0
+                    data['parking_underground'] = {'spaces': total_spaces, 'fee': round(avg_fee, 2)}
             elif 'VISITOR' in label:
                 data['parking_visitor'] = {
                     'spaces': int(f_val) if isinstance(f_val, (int, float)) else 0,
