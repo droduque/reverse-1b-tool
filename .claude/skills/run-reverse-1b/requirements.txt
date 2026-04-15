@@ -1,0 +1,4 @@
+# The engine (populate_reverse_1b.py at repo root) declares its full deps.
+# This wrapper adds none of its own — it imports from the repo.
+# Install the repo's deps instead:
+#   pip install -r ../../../requirements.txt

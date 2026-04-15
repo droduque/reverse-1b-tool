@@ -1,0 +1,3 @@
+# Wrapper uses only stdlib (zipfile, xml.etree) via the repo's validate_output.py.
+# The engine itself imports openpyxl via parse_1a — install repo deps:
+#   pip install -r ../../../requirements.txt
