@@ -44,9 +44,33 @@
       "sheet": "All 15 sheets",
       "coverage_start": "2026-01-01",
       "coverage_end": "2026-12-31",
-      "last_updated": "2026-03-04",
+      "last_updated": "2026-04-16",
       "next_release": null,
-      "notes": "15-sheet financial model. Noor is expanding unit mix from 3 to 14 rows (~March 2026). When updated, code must be adjusted to match new row layout."
+      "notes": "15-sheet financial model. 14-row unit mix expansion on hold (per Noor, 2026-04). Template swaps logged in template_history below.",
+      "template_history": [
+        {
+          "date": "2026-04-16",
+          "version": "V4",
+          "source_file": "Reverse 1B Master Template Updated - 041626 - V4 - NK.xlsx",
+          "backup": "reference/REVERSE_1B_Template_V3.xlsx.bak",
+          "author": "Noor Khan",
+          "change": "Added Equity Multiple KPI on Sheet 3 row 40 (=G34/'2. Rev 1B Exec Summary'!G53). Rows 40-45 shifted down by 1. Sheet 5 F104 pointer updated G40->G41 to follow 10-year IRR. Sheet 15 unchanged.",
+          "verified": "Same-code V3-vs-V4 regression = identical numerics. Validator 66/66 on Birchmount and 490 St Clair. Live on Railway, C40 confirmed = 'Equity Multiple'."
+        },
+        {
+          "date": "2026-04-02",
+          "version": "V3",
+          "source_file": "RA Formatted Reverse_1B_490_St_Clair_West_20260402 - V3 - NK.xlsx",
+          "author": "Noor Khan",
+          "change": "Fixed template O48/P48."
+        },
+        {
+          "date": "2026-03-31",
+          "version": "V2 (Fran)",
+          "author": "Fran Hohol",
+          "change": "Gold/slate colors, Open Sans font."
+        }
+      ]
     },
     {
       "id": "opex_defaults",
