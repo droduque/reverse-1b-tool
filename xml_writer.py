@@ -235,15 +235,16 @@ def _clear_formula_cached_values_regex(xml_text):
     return re.sub(r'<c\b[^>]*>.*?</c>', _strip_v, xml_text, flags=re.DOTALL)
 
 
-def write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, description="", force=False):
+def write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, description="", force=False, is_formula=False):
     """
     Write a value to a cell in the parsed sheet XML.
 
     - Numeric values: stored inline as <v>
     - String values: added to shared strings table, stored as index
+    - Formula strings (is_formula=True): stored as <f>formula</f>, cell type cleared
     - Preserves the cell's style attribute
     - SKIPS cells that contain formulas (has <f> element) unless force=True
-    - force=True: removes the formula and writes the value (for external refs)
+    - force=True: removes the formula and writes the value (or new formula)
     """
     col_letter, row_num = _parse_cell_ref(cell_ref)
     if col_letter is None:
@@ -256,12 +257,12 @@ def write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, descrip
     row_el = _find_or_create_row(sheet_data, row_num)
     cell_el = _find_or_create_cell(row_el, cell_ref, row_num)
 
-    # Check for formula — never overwrite formula cells unless forced
+    # Check for formula — never overwrite formula cells unless forced (or replacing with new formula)
     formula_el = cell_el.find(f'{{{NS}}}f')
     if formula_el is not None:
-        if force:
+        if force or is_formula:
             cell_el.remove(formula_el)
-            log_entries.append(f"  FORCE {cell_ref}: removed formula '{formula_el.text}', replacing with value")
+            log_entries.append(f"  FORCE {cell_ref}: removed formula '{formula_el.text}', replacing")
         else:
             log_entries.append(f"  SKIPPED {cell_ref}: contains formula '{formula_el.text}' — not overwritten")
             return False
@@ -274,24 +275,31 @@ def write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, descrip
     if old_v is not None:
         cell_el.remove(old_v)
 
-    # Write the new value
-    v_el = ET.SubElement(cell_el, f'{{{NS}}}v')
-
-    if isinstance(value, str):
-        idx = _add_shared_string(shared_strings, value)
-        cell_el.set('t', 's')
-        v_el.text = str(idx)
-    elif isinstance(value, (int, float)):
+    if is_formula:
+        # Write formula — Excel will recalculate on open (fullCalcOnLoad is set)
         if 't' in cell_el.attrib:
             del cell_el.attrib['t']
-        if isinstance(value, float):
-            v_el.text = repr(value)
+        formula_text = value[1:] if isinstance(value, str) and value.startswith('=') else str(value)
+        f_el = ET.SubElement(cell_el, f'{{{NS}}}f')
+        f_el.text = formula_text
+    else:
+        # Write the new value
+        v_el = ET.SubElement(cell_el, f'{{{NS}}}v')
+        if isinstance(value, str):
+            idx = _add_shared_string(shared_strings, value)
+            cell_el.set('t', 's')
+            v_el.text = str(idx)
+        elif isinstance(value, (int, float)):
+            if 't' in cell_el.attrib:
+                del cell_el.attrib['t']
+            if isinstance(value, float):
+                v_el.text = repr(value)
+            else:
+                v_el.text = str(value)
+        elif value is None or value == 0:
+            v_el.text = '0'
         else:
             v_el.text = str(value)
-    elif value is None or value == 0:
-        v_el.text = '0'
-    else:
-        v_el.text = str(value)
 
     # Restore style
     if existing_style:

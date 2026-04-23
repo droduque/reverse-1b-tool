@@ -39,6 +39,11 @@ AMENITY_SF_PER_UNIT = 22
 # Parking SF per space — industry standard for underground
 PARKING_SF_PER_SPACE = 350
 
+# Altus Cost Guide (Sheet 13) row numbers for parking types
+ALTUS_PARKING_ROW_SURFACE = 36
+ALTUS_PARKING_ROW_ABOVE_GRADE = 37
+ALTUS_PARKING_ROW_UNDERGROUND = 38
+
 # High-rise threshold — 7+ storeys per Noor (2026-03-09)
 HIGH_RISE_FLOOR_THRESHOLD = 7
 
@@ -950,9 +955,9 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     if financing_program is None:
         financing_program = FINANCING_PROGRAMS['cmhc_mli_100']
 
-    def queue_write(target, cell_ref, value, description="", force=False):
+    def queue_write(target, cell_ref, value, description="", force=False, is_formula=False):
         """Queue a cell write for later application via XML writer."""
-        target[cell_ref] = (value, description, force)
+        target[cell_ref] = (value, description, force, is_formula)
 
     # ===================================================================
     # SHEET 1: 1A Proforma
@@ -982,19 +987,29 @@ def populate_template(data, output_path, municipality=None, building_type='high-
             queue_write(sheet1_writes, f'E{row}', unit['count'], f"Unit type {i+1} count")
             queue_write(sheet1_writes, f'H{row}', unit['rent'], f"Unit type {i+1} monthly rent")
 
-    # Operating revenues — combine underground + surface parking into template row 18
+    # Parking row 18 — detect type from 1A, rewrite D18 label + Sheet 5 Altus
+    # cost refs (O49/P49). Surface parking costs ~$15-$30/SF vs underground
+    # $175-$285/SF; sending surface spaces through the underground Altus row
+    # overstates construction cost by ~$5M on a 77-space project.
     ug = data['parking_underground']
     sf_park = data.get('parking_surface', {'spaces': 0, 'fee': 0})
     if ug['spaces'] > 0 and sf_park['spaces'] > 0:
-        # Both exist: sum spaces, weighted-average fee
         total_spaces = ug['spaces'] + sf_park['spaces']
         avg_fee = (ug['spaces'] * ug['fee'] + sf_park['spaces'] * sf_park['fee']) / total_spaces
         park_spaces, park_fee = total_spaces, avg_fee
+        parking_type = 'mixed'
+        parking_label = 'Underground Parking'
     elif sf_park['spaces'] > 0:
         park_spaces, park_fee = sf_park['spaces'], sf_park['fee']
+        parking_type = 'surface'
+        parking_label = 'Surface Parking'
     else:
         park_spaces, park_fee = ug['spaces'], ug['fee']
-    queue_write(sheet1_writes, 'E18', park_spaces, "Parking spaces (underground + surface)")
+        parking_type = 'underground'
+        parking_label = 'Underground Parking'
+    data['parking_type'] = parking_type
+    queue_write(sheet1_writes, 'D18', parking_label, f"Parking label (type: {parking_type})", force=True)
+    queue_write(sheet1_writes, 'E18', park_spaces, f"Parking spaces ({parking_type})")
     queue_write(sheet1_writes, 'F18', park_fee, "Parking monthly fee")
     queue_write(sheet1_writes, 'E19', data['parking_visitor']['spaces'], "Visitor parking spaces")
     queue_write(sheet1_writes, 'F19', data['parking_visitor']['fee'], "Visitor parking monthly fee")
@@ -1393,6 +1408,26 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         log.append("  *** FLAG: Building is mid-rise but Sheet 5 F29 references '13-39 Storeys'.")
         log.append("      Noor should verify and update the Altus height category if needed.")
 
+    # Parking Altus cost ref — Sheet 5 O49/P49 point to Sheet 13 row
+    # ALTUS_PARKING_ROW_UNDERGROUND by default. Rewrite to the surface row if
+    # the 1A shows surface parking.
+    if parking_type == 'surface':
+        row = ALTUS_PARKING_ROW_SURFACE
+        queue_write(sheet5_writes, 'O49',
+                    f"='13. Altus Cost Guide 25'!F{row}",
+                    f"Altus cost LOW — Surface Parking (row {row})",
+                    is_formula=True)
+        queue_write(sheet5_writes, 'P49',
+                    f"='13. Altus Cost Guide 25'!G{row}",
+                    f"Altus cost HIGH — Surface Parking (row {row})",
+                    is_formula=True)
+        log.append(f"  PARKING TYPE: Surface — Sheet 5 O49/P49 rewritten to Altus row {row}")
+    elif parking_type == 'mixed':
+        log.append("  *** FLAG: 1A has BOTH underground and surface parking. Output keeps")
+        log.append(f"      the underground Altus ref (row {ALTUS_PARKING_ROW_UNDERGROUND}) and sums spaces. Verify with Noor.")
+    else:
+        log.append(f"  PARKING TYPE: {parking_type} — Sheet 5 O49/P49 keeps template default (Altus row {ALTUS_PARKING_ROW_UNDERGROUND})")
+
     # ===================================================================
     # SHEET 6: Permanent Financing Parameters (C31:C35, Fran V2 shifted left)
     # ===================================================================
@@ -1447,7 +1482,8 @@ def populate_template(data, output_path, municipality=None, building_type='high-
             for cell_ref, entry in writes_dict.items():
                 value, description = entry[0], entry[1]
                 force = entry[2] if len(entry) > 2 else False
-                write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, description, force=force)
+                is_formula = entry[3] if len(entry) > 3 else False
+                write_cell(sheet_root, cell_ref, value, shared_strings, log_entries, description, force=force, is_formula=is_formula)
         return modifier
 
     sheet_modifications = {}
