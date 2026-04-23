@@ -113,7 +113,8 @@ Investigation (2026-03-04) revealed that Sheet 5 is **mostly formulas**. Our rea
 | E7:E9 | Unit sizes (SF) | 1A (weighted avg if consolidated) |
 | F7:F9 | Unit counts | 1A (summed if consolidated) |
 | I7:I9 | Monthly rents | 1A (weighted avg if consolidated) |
-| F18, G18 | Underground parking (spaces, fee) | 1A |
+| D18 | Parking label ("Underground Parking" or "Surface Parking") | Derived from 1A parking type |
+| F18, G18 | Parking spaces and monthly fee | 1A (underground or surface) |
 | F19, G19 | Visitor parking | 1A |
 | F20, G20 | Retail parking | 1A |
 | F21, G21 | Storage lockers (count, fee) | 1A |
