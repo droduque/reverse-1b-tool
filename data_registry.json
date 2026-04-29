@@ -29,12 +29,12 @@
       "name": "Altus Construction Cost Guide",
       "source": "Altus Group — Private Sector Construction Cost Database",
       "file": "reference/REVERSE_1B_Template.xlsx",
-      "sheet": "Altus Cost Guide 25 (Sheet 13)",
-      "coverage_start": "2025-01-31",
-      "coverage_end": "2026-06-30",
-      "last_updated": "2025-01-31",
-      "next_release": "2026-07-01",
-      "notes": "Embedded in template Sheet 13. Covers Vancouver, Calgary, GTA. Updated annually by Altus. When new guide arrives, Noor updates the template sheet."
+      "sheet": "Altus Cost Guide 26 (Sheet 13)",
+      "coverage_start": "2026-01-31",
+      "coverage_end": "2027-06-30",
+      "last_updated": "2026-04-29",
+      "next_release": "2027-07-01",
+      "notes": "Embedded in template Sheet 13. Covers Vancouver, Calgary, Edmonton, Winnipeg, GTA, Ottawa. Updated annually by Altus. When new guide arrives, Noor updates the template sheet. 2026 edition added Edmonton + Winnipeg columns and a PARKING header row, shifting GTA from F/G to J/K and parking rows from 36/37/38 to 40/41/42."
     },
     {
       "id": "reverse_1b_template",
@@ -44,10 +44,19 @@
       "sheet": "All 15 sheets",
       "coverage_start": "2026-01-01",
       "coverage_end": "2026-12-31",
-      "last_updated": "2026-04-16",
+      "last_updated": "2026-04-29",
       "next_release": null,
       "notes": "15-sheet financial model. 14-row unit mix expansion on hold (per Noor, 2026-04). Template swaps logged in template_history below.",
       "template_history": [
+        {
+          "date": "2026-04-29",
+          "version": "V5b",
+          "source_file": "Reverse 1B Master Template Updated - 042826 - V5 - NK fixed.xlsx",
+          "backup": "reference/REVERSE_1B_Template_V4.xlsx.bak",
+          "author": "Noor Khan",
+          "change": "Swapped Altus Cost Guide from 2025 to 2026 edition. Sheet 13 renamed to '13. Altus Cost Guide 26'. Edmonton + Winnipeg columns inserted, shifting GTA from F/G to J/K and Ottawa from H/I to L/M. PARKING header row inserted, shifting parking rows from 36/37/38 to 40/41/42. New row 15 = 'Up to 6 Storey Wood Framed Condo'. F29 fix on V5b vs V5a (was #REF!, now ='13. Altus Cost Guide 26'!A7).",
+          "verified": "Same-code V4-vs-V5b regression: Birchmount Sheet 5 O48 $295->$280 (-5.1%), P48 $385->$350 (-9.1%), O49 $175->$165 (-5.7%), P49 $285->$285 (unchanged) — matches Altus 26 GTA 13-39 storey + underground deltas. Headline Numbers move correspondingly: Total Cost -5.0%, Equity Multiple 1.31->1.82, 10-yr IRR 25.2%->31.3%. 490 St Clair: Total Cost -5.4%, Construction PSF -5.4%, 10-yr IRR 37.1%->39.0%. Validator 66/66 on Birchmount and 490 St Clair. Surface parking targeted assertion: 1911 North Routledge writes O49=Altus 26!J40, P49=K40 (was J38/G38 in V4 = Altus 25 underground default for that pre-fix code path). LibreOffice headless recalc clean — no #REF!/#VALUE!/#NAME?."
+        },
         {
           "date": "2026-04-16",
           "version": "V4",

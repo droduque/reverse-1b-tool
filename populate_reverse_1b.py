@@ -39,10 +39,19 @@ AMENITY_SF_PER_UNIT = 22
 # Parking SF per space — industry standard for underground
 PARKING_SF_PER_SPACE = 350
 
-# Altus Cost Guide (Sheet 13) row numbers for parking types
-ALTUS_PARKING_ROW_SURFACE = 36
-ALTUS_PARKING_ROW_ABOVE_GRADE = 37
-ALTUS_PARKING_ROW_UNDERGROUND = 38
+# Altus Cost Guide 26 (Sheet 13) row numbers for parking types
+# Updated 2026-04-29 for the 2026 Altus edition: a "PARKING" header row was
+# inserted above this section, shifting each row down by 4.
+ALTUS_PARKING_ROW_SURFACE = 40
+ALTUS_PARKING_ROW_ABOVE_GRADE = 41
+ALTUS_PARKING_ROW_UNDERGROUND = 42
+
+ALTUS_SHEET_NAME = '13. Altus Cost Guide 26'
+
+# Altus Cost Guide 26 GTA columns. Edmonton + Winnipeg got inserted between
+# Calgary and GTA in the 2026 edition, shifting GTA from F/G to J/K.
+ALTUS_COL_GTA_LOW = 'J'
+ALTUS_COL_GTA_HIGH = 'K'
 
 # High-rise threshold — 7+ storeys per Noor (2026-03-09)
 HIGH_RISE_FLOOR_THRESHOLD = 7
@@ -1400,25 +1409,26 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     else:
         log.append("  DC RATES: No municipality selected — cells R57:R59 left unchanged (template defaults)")
 
-    # Building type — affects which Altus Cost Guide row Sheet 5 should reference
+    # Building type — affects which Altus Cost Guide 26 row Sheet 5 should reference
     # Sheet 5 F29 currently points to "13-39 Storeys" (Sheet 13 row 7)
     # Mid-rise would be "Up to 12 Storeys" (Sheet 13 row 6)
     log.append(f"  BUILDING TYPE: {building_type}")
     if building_type == 'mid-rise':
-        log.append("  *** FLAG: Building is mid-rise but Sheet 5 F29 references '13-39 Storeys'.")
+        log.append(f"  *** FLAG: Building is mid-rise but Sheet 5 F29 references '13-39 Storeys' ('{ALTUS_SHEET_NAME}' row 7).")
         log.append("      Noor should verify and update the Altus height category if needed.")
 
     # Parking Altus cost ref — Sheet 5 O49/P49 point to Sheet 13 row
     # ALTUS_PARKING_ROW_UNDERGROUND by default. Rewrite to the surface row if
-    # the 1A shows surface parking.
+    # the 1A shows surface parking. GTA columns are J (Low) / K (High) in the
+    # 2026 edition.
     if parking_type == 'surface':
         row = ALTUS_PARKING_ROW_SURFACE
         queue_write(sheet5_writes, 'O49',
-                    f"='13. Altus Cost Guide 25'!F{row}",
+                    f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_LOW}{row}",
                     f"Altus cost LOW — Surface Parking (row {row})",
                     is_formula=True)
         queue_write(sheet5_writes, 'P49',
-                    f"='13. Altus Cost Guide 25'!G{row}",
+                    f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_HIGH}{row}",
                     f"Altus cost HIGH — Surface Parking (row {row})",
                     is_formula=True)
         log.append(f"  PARKING TYPE: Surface — Sheet 5 O49/P49 rewritten to Altus row {row}")
@@ -1451,18 +1461,13 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("=" * 60)
     log.append("FLAGS FOR NOOR'S REVIEW")
     log.append("=" * 60)
-    log.append("1. ALTUS COST GUIDE COLUMNS: Sheet 5 O48/P48 reference Ottawa columns (H/I)")
-    log.append("   instead of GTA columns (F/G) on the Altus Cost Guide sheet.")
-    log.append("   Parking refs (O49/P49) correctly use GTA. This is a pre-existing")
-    log.append("   template issue — not changed by this automation.")
-    log.append("")
-    log.append(f"2. ALTUS HEIGHT CATEGORY: Building type set to '{building_type}'.")
-    log.append(f"   Sheet 5 F29 currently points to '13-39 Storeys' (Sheet 13 row 7).")
+    log.append(f"1. ALTUS HEIGHT CATEGORY: Building type set to '{building_type}'.")
+    log.append(f"   Sheet 5 F29 currently points to '13-39 Storeys' ('{ALTUS_SHEET_NAME}' row 7).")
     log.append(f"   Estimated floor count: {est_floors}.")
     if building_type == 'mid-rise':
-        log.append("   *** BUILDING IS MID-RISE — Noor must update F29 to 'Up to 12 Storeys'.")
+        log.append("   *** BUILDING IS MID-RISE — Noor must update F29 to 'Up to 12 Storeys' (row 6).")
     log.append("")
-    log.append("3. EXTERNAL WORKBOOK REFERENCES: Sheet 1 rows 70-77, 92-97, 107-113,")
+    log.append("2. EXTERNAL WORKBOOK REFERENCES: Sheet 1 rows 70-77, 92-97, 107-113,")
     log.append("   115-116, 120, 125-126, 132 reference '[2]Typical Conv.Operating Expenses'")
     log.append("   which is not included. These cells show stale Birchmount values.")
     log.append("   G22 (submetering fee) was overwritten with the 1A value.")
