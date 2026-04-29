@@ -93,10 +93,14 @@ FINANCING_PROGRAMS = {
 FINANCING_PROGRAMS['cmhc_mli_select'] = FINANCING_PROGRAMS['cmhc_mli_100']
 FINANCING_PROGRAMS['cmhc_standard'] = FINANCING_PROGRAMS['cmhc_mli_100']
 
-# Unit type grouping patterns — match labels to 3 template rows
-# Order matters: checked top-to-bottom, first match wins
+# Unit type grouping patterns — match labels to template rows.
+# Order matters: checked top-to-bottom, first match wins. "Bachelor" is its
+# own bucket; consolidate_unit_mix decides whether it becomes its own row
+# (when bachelor count > 0) or is empty (and the layout collapses to the
+# legacy 3-row 1B/2B/3B shape).
 UNIT_GROUP_PATTERNS = [
-    ("1 Bed", ["studio", "bachelor", "1 bed", "1bed", "one bed"]),
+    ("Bachelor", ["studio", "bachelor"]),
+    ("1 Bed", ["1 bed", "1bed", "one bed"]),
     ("2 Bed", ["2 bed", "2bed", "two bed"]),
     ("3 Bed", ["3 bed", "3bed", "three bed", "4 bed", "4bed"]),
 ]
@@ -873,12 +877,30 @@ def _solve_irr(cash_flows, initial_guess=0.12):
 # UNIT MIX CONSOLIDATION — groups N unit types into 3 rows
 # ---------------------------------------------------------------------------
 
+def _weighted_avg(units, label):
+    """Build a single consolidated unit dict from a bucket of source units."""
+    total = sum(u['count'] for u in units)
+    if total == 0:
+        return {'label': label, 'sf': 0, 'count': 0, 'rent': 0}
+    weighted_sf = sum(u['sf'] * u['count'] for u in units) / total
+    weighted_rent = sum(u['rent'] * u['count'] for u in units) / total
+    return {
+        'label': label,
+        'sf': round(weighted_sf, 2),
+        'count': total,
+        'rent': round(weighted_rent, 2),
+    }
+
+
 def consolidate_unit_mix(unit_types):
     """
-    Groups any number of unit types into 3 categories (1-Bed, 2-Bed, 3-Bed)
-    using weighted averages for SF and rent.
+    Groups any number of unit types into the 3 template rows using weighted
+    averages for SF and rent.
 
-    Returns a list of 3 dicts: [{'label', 'sf', 'count', 'rent'}, ...]
+    Layout depends on bachelor presence (Kanen 2026-04-24, sign-off pending):
+      - Bachelor present: row 7 = Bachelor, row 8 = 1 Bed,
+                          row 9 = weighted(2 Bed + 3 Bed)
+      - No bachelor:      row 7 = 1 Bed, row 8 = 2 Bed, row 9 = 3 Bed
     """
     groups = {name: [] for name, _ in UNIT_GROUP_PATTERNS}
 
@@ -894,24 +916,18 @@ def consolidate_unit_mix(unit_types):
             # Unrecognized type — put it in 1-Bed as a catch-all
             groups["1 Bed"].append(unit)
 
-    result = []
-    for group_name, _ in UNIT_GROUP_PATTERNS:
-        units_in_group = groups[group_name]
-        total_count = sum(u['count'] for u in units_in_group)
-        if total_count > 0:
-            # Weighted average SF and rent
-            weighted_sf = sum(u['sf'] * u['count'] for u in units_in_group) / total_count
-            weighted_rent = sum(u['rent'] * u['count'] for u in units_in_group) / total_count
-            result.append({
-                'label': group_name,
-                'sf': round(weighted_sf, 2),
-                'count': total_count,
-                'rent': round(weighted_rent, 2),
-            })
-        else:
-            result.append({'label': group_name, 'sf': 0, 'count': 0, 'rent': 0})
+    bachelor = _weighted_avg(groups['Bachelor'], 'Bachelor')
+    one_bed = _weighted_avg(groups['1 Bed'], '1 Bed')
+    two_bed = _weighted_avg(groups['2 Bed'], '2 Bed')
+    three_bed = _weighted_avg(groups['3 Bed'], '3 Bed')
 
-    return result
+    if bachelor['count'] > 0:
+        merged_2_3 = _weighted_avg(
+            groups['2 Bed'] + groups['3 Bed'],
+            '2 Bed + 3 Bed',
+        )
+        return [bachelor, one_bed, merged_2_3]
+    return [one_bed, two_bed, three_bed]
 
 
 # ---------------------------------------------------------------------------
@@ -938,8 +954,14 @@ def populate_template(data, output_path, municipality=None, building_type='high-
 
     log = []
 
-    # Consolidate unit mix if needed
-    if len(data['unit_types']) <= 3:
+    # Consolidate unit mix. Bachelor presence forces routing through
+    # consolidate_unit_mix even for ≤3 types, so a small bachelor 1A still
+    # lands in row 7 with 1 Bed in row 8 (Kanen 2026-04-24).
+    has_bachelor = any(
+        'bachelor' in u['label'].lower() or 'studio' in u['label'].lower()
+        for u in data['unit_types']
+    )
+    if len(data['unit_types']) <= 3 and not has_bachelor:
         consolidated = data['unit_types']
         # Pad to 3 rows if fewer than 3 types
         while len(consolidated) < 3:
@@ -952,6 +974,9 @@ def populate_template(data, output_path, municipality=None, building_type='high-
         log.append("  Grouped as:")
         for grp in consolidated:
             log.append(f"  → {grp['label']}: {grp['count']} units, {grp['sf']} SF, ${grp['rent']}/mo")
+        if has_bachelor:
+            log.append(f"  BACHELOR DETECTED: row 7 = Bachelor ({consolidated[0]['count']} units), "
+                       f"row 8 = 1 Bed, row 9 = weighted(2 Bed + 3 Bed)")
         log.append("")
 
     # Collect all cell writes per sheet: {cell_ref: (value, description)}
@@ -1864,7 +1889,11 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
     client-side without touching the Excel.
     """
     # Consolidate unit mix same way as populate_template
-    if len(data['unit_types']) <= 3:
+    has_bachelor = any(
+        'bachelor' in u['label'].lower() or 'studio' in u['label'].lower()
+        for u in data['unit_types']
+    )
+    if len(data['unit_types']) <= 3 and not has_bachelor:
         consolidated = list(data['unit_types'])
         while len(consolidated) < 3:
             consolidated.append({'label': f"{len(consolidated)+1} Bed", 'sf': 0, 'count': 0, 'rent': 0})
