@@ -256,6 +256,12 @@ def generate():
     if storey_tier and storey_tier not in {'up_to_6', '7_to_12', '13_to_39', '40_to_60', '60_plus'}:
         storey_tier = None
 
+    # Get construction type — only meaningful when storey_tier == 'up_to_6'.
+    # Wood-frame routes Altus row to 15 ("Up to 6 Storey Wood Framed Condo").
+    construction_type = request.form.get('construction_type', 'concrete')
+    if construction_type not in ('concrete', 'wood_frame'):
+        construction_type = 'concrete'
+
     # Get financing program selection
     fp_key = request.form.get('financing_program', 'cmhc_mli_100')
     financing_program = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_100'])
@@ -359,7 +365,8 @@ def generate():
                                 construction_months=construction_months,
                                 gfa_override=gfa_override, parking_sf_override=parking_sf_override,
                                 construction_financing=construction_financing,
-                                dc_relief=dc_relief, storey_tier=storey_tier)
+                                dc_relief=dc_relief, storey_tier=storey_tier,
+                                construction_type=construction_type)
 
         # Also export the project JSON for the presentation tool
         json_filename = f"Reverse_1B_{project_name}_{today}.json"

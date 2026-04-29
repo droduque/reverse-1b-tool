@@ -415,6 +415,10 @@ select option {
 .toggle-option input:checked + label .label-sub {
   color: var(--dim);
 }
+.toggle-option input:disabled + label {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 .toggle-group--5 {
   grid-template-columns: repeat(5, 1fr);
 }
@@ -941,6 +945,26 @@ select option {
         </div>
         <div class="hint" id="storeyTierHint">Auto-selected from estimated floors. Override if known.</div>
       </div>
+      <div class="form-group">
+        <label>Construction type</label>
+        <div class="toggle-group">
+          <div class="toggle-option">
+            <input type="radio" name="construction_type" id="constructionConcrete" value="concrete" checked>
+            <label for="constructionConcrete">
+              Concrete
+              <span class="label-sub">All storey tiers</span>
+            </label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="construction_type" id="constructionWood" value="wood_frame">
+            <label for="constructionWood">
+              Wood-frame
+              <span class="label-sub">≤6 storeys only</span>
+            </label>
+          </div>
+        </div>
+        <div class="hint" id="constructionTypeHint">Wood-frame routes to Altus row 15 (cheaper PSF). Only valid for ≤6-storey buildings.</div>
+      </div>
     </div>
 
     <!-- Construction Duration -->
@@ -1243,6 +1267,7 @@ function previewFile(file) {
       if (storeyHint) {
         storeyHint.textContent = 'Auto-selected from ~' + floors + ' floors. Override if known.';
       }
+      updateConstructionTypeGate();
 
       // Auto-select municipality if detected
       var muniSelect = document.getElementById('municipality');
@@ -1322,6 +1347,28 @@ function previewFile(file) {
       previewCard.classList.remove('visible');
     });
 }
+
+// Wood-frame is only valid for ≤6 storeys. Disable + force concrete otherwise.
+function updateConstructionTypeGate() {
+  var upTo6 = document.getElementById('storey_up_to_6');
+  var wood = document.getElementById('constructionWood');
+  var concrete = document.getElementById('constructionConcrete');
+  var hint = document.getElementById('constructionTypeHint');
+  if (!upTo6 || !wood || !concrete) return;
+  if (upTo6.checked) {
+    wood.disabled = false;
+    if (hint) hint.textContent = 'Wood-frame routes to Altus row 15 (cheaper PSF). Available because storey tier is ≤6.';
+  } else {
+    if (wood.checked) concrete.checked = true;
+    wood.disabled = true;
+    if (hint) hint.textContent = 'Wood-frame disabled — only valid for ≤6 storeys. Concrete forced.';
+  }
+}
+['storey_up_to_6', 'storey_7_to_12', 'storey_13_to_39', 'storey_40_to_60', 'storey_60_plus'].forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('change', updateConstructionTypeGate);
+});
+updateConstructionTypeGate();
 
 // Drag and drop
 uploadArea.addEventListener('dragover', function(e) {

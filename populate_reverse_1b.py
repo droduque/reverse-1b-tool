@@ -53,9 +53,8 @@ ALTUS_SHEET_NAME = '13. Altus Cost Guide 26'
 ALTUS_COL_GTA_LOW = 'J'
 ALTUS_COL_GTA_HIGH = 'K'
 
-# Maps storey-tier form values to Altus Cost Guide 26 row numbers.
-# Both "up_to_6" and "7_to_12" target row 6 ("Up to 12 Storeys") for concrete
-# construction. Wood-frame routing for ≤6 storeys lives in Commit 4.
+# Maps storey-tier form values to Altus Cost Guide 26 row numbers (concrete).
+# Both "up_to_6" and "7_to_12" target row 6 ("Up to 12 Storeys").
 STOREY_TIER_TO_ALTUS_ROW = {
     'up_to_6': 6,
     '7_to_12': 6,
@@ -63,6 +62,11 @@ STOREY_TIER_TO_ALTUS_ROW = {
     '40_to_60': 8,
     '60_plus': 9,
 }
+
+# Wood-frame ≤6-storey condos route to Altus row 15 instead of row 6.
+# Only valid when storey_tier == 'up_to_6' (Altus has no wood-frame row
+# for taller buildings).
+ALTUS_ROW_WOOD_FRAME_UP_TO_6 = 15
 
 # High-rise threshold — 7+ storeys per Noor (2026-03-09)
 HIGH_RISE_FLOOR_THRESHOLD = 7
@@ -949,7 +953,7 @@ def populate_template(data, output_path, municipality=None, building_type='high-
                       financing_program=None, construction_months=None,
                       gfa_override=None, parking_sf_override=None,
                       construction_financing=None, dc_relief=None,
-                      storey_tier=None):
+                      storey_tier=None, construction_type='concrete'):
     """
     Copy the Reverse 1B template and write parsed 1A data into it.
     Uses the ZIP/XML writer to preserve all drawings, images, and formatting.
@@ -1451,20 +1455,25 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     # writes F29/O48/P48 directly. Without storey_tier we fall back to a Noor flag.
     log.append(f"  BUILDING TYPE: {building_type}")
     if storey_tier in STOREY_TIER_TO_ALTUS_ROW:
-        altus_row = STOREY_TIER_TO_ALTUS_ROW[storey_tier]
+        if construction_type == 'wood_frame' and storey_tier == 'up_to_6':
+            altus_row = ALTUS_ROW_WOOD_FRAME_UP_TO_6
+            tier_desc = f"{storey_tier} + wood-frame"
+        else:
+            altus_row = STOREY_TIER_TO_ALTUS_ROW[storey_tier]
+            tier_desc = storey_tier
         queue_write(sheet5_writes, 'F29',
                     f"='{ALTUS_SHEET_NAME}'!A{altus_row}",
-                    f"Altus storey label (tier: {storey_tier})",
+                    f"Altus storey label ({tier_desc})",
                     is_formula=True)
         queue_write(sheet5_writes, 'O48',
                     f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_LOW}{altus_row}",
-                    f"Altus construction LOW (tier: {storey_tier})",
+                    f"Altus construction LOW ({tier_desc})",
                     is_formula=True)
         queue_write(sheet5_writes, 'P48',
                     f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_HIGH}{altus_row}",
-                    f"Altus construction HIGH (tier: {storey_tier})",
+                    f"Altus construction HIGH ({tier_desc})",
                     is_formula=True)
-        log.append(f"  STOREY TIER: {storey_tier} — Sheet 5 F29/O48/P48 rewritten to Altus row {altus_row}")
+        log.append(f"  STOREY TIER: {tier_desc} — Sheet 5 F29/O48/P48 rewritten to Altus row {altus_row}")
     elif building_type == 'mid-rise':
         log.append(f"  *** FLAG: Building is mid-rise but Sheet 5 F29 references '13-39 Storeys' ('{ALTUS_SHEET_NAME}' row 7).")
         log.append("      Noor should verify and update the Altus height category if needed.")
@@ -1514,8 +1523,13 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("FLAGS FOR NOOR'S REVIEW")
     log.append("=" * 60)
     if storey_tier in STOREY_TIER_TO_ALTUS_ROW:
-        altus_row = STOREY_TIER_TO_ALTUS_ROW[storey_tier]
-        log.append(f"1. ALTUS HEIGHT CATEGORY: Storey tier '{storey_tier}' selected on form.")
+        if construction_type == 'wood_frame' and storey_tier == 'up_to_6':
+            altus_row = ALTUS_ROW_WOOD_FRAME_UP_TO_6
+            tier_desc = f"{storey_tier} + wood-frame"
+        else:
+            altus_row = STOREY_TIER_TO_ALTUS_ROW[storey_tier]
+            tier_desc = storey_tier
+        log.append(f"1. ALTUS HEIGHT CATEGORY: Storey tier '{tier_desc}' selected on form.")
         log.append(f"   Sheet 5 F29/O48/P48 written to '{ALTUS_SHEET_NAME}' row {altus_row}.")
         log.append(f"   Estimated floor count: {est_floors}.")
     else:
