@@ -250,6 +250,12 @@ def generate():
     if building_type not in ('mid-rise', 'high-rise'):
         building_type = 'high-rise'
 
+    # Get storey tier — drives Sheet 5 F29/O48/P48 (Altus 26 row).
+    # None means the populator falls back to the legacy mid-rise/high-rise flag.
+    storey_tier = request.form.get('storey_tier', '').strip() or None
+    if storey_tier and storey_tier not in {'up_to_6', '7_to_12', '13_to_39', '40_to_60', '60_plus'}:
+        storey_tier = None
+
     # Get financing program selection
     fp_key = request.form.get('financing_program', 'cmhc_mli_100')
     financing_program = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_100'])
@@ -353,7 +359,7 @@ def generate():
                                 construction_months=construction_months,
                                 gfa_override=gfa_override, parking_sf_override=parking_sf_override,
                                 construction_financing=construction_financing,
-                                dc_relief=dc_relief)
+                                dc_relief=dc_relief, storey_tier=storey_tier)
 
         # Also export the project JSON for the presentation tool
         json_filename = f"Reverse_1B_{project_name}_{today}.json"

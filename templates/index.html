@@ -415,6 +415,16 @@ select option {
 .toggle-option input:checked + label .label-sub {
   color: var(--dim);
 }
+.toggle-group--5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+.toggle-group--5 .toggle-option label {
+  padding: 12px 6px;
+  font-size: 14px;
+}
+.toggle-group--5 .toggle-option label .label-sub {
+  font-size: 11px;
+}
 
 /* ── Stepper (construction duration) ─────── */
 .stepper {
@@ -902,6 +912,37 @@ select option {
       </div>
     </div>
 
+    <!-- Building Height -->
+    <div class="card">
+      <div class="card-title">Building Height</div>
+      <div class="form-group">
+        <label>Storey range (writes Altus cost row to Sheet 5)</label>
+        <div class="toggle-group toggle-group--5">
+          <div class="toggle-option">
+            <input type="radio" name="storey_tier" id="storey_up_to_6" value="up_to_6">
+            <label for="storey_up_to_6">&le;6<span class="label-sub">storeys</span></label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="storey_tier" id="storey_7_to_12" value="7_to_12">
+            <label for="storey_7_to_12">7-12<span class="label-sub">storeys</span></label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="storey_tier" id="storey_13_to_39" value="13_to_39" checked>
+            <label for="storey_13_to_39">13-39<span class="label-sub">storeys</span></label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="storey_tier" id="storey_40_to_60" value="40_to_60">
+            <label for="storey_40_to_60">40-60<span class="label-sub">storeys</span></label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="storey_tier" id="storey_60_plus" value="60_plus">
+            <label for="storey_60_plus">60+<span class="label-sub">storeys</span></label>
+          </div>
+        </div>
+        <div class="hint" id="storeyTierHint">Auto-selected from estimated floors. Override if known.</div>
+      </div>
+    </div>
+
     <!-- Construction Duration -->
     <div class="card">
       <div class="card-title">Construction Duration</div>
@@ -1187,6 +1228,20 @@ function previewFile(file) {
         document.getElementById('midrise').checked = true;
       } else {
         document.getElementById('highrise').checked = true;
+      }
+
+      // Auto-select storey tier from estimated floors
+      var storeyTierId;
+      var floors = data.est_floors || 0;
+      if (floors <= 6) storeyTierId = 'storey_up_to_6';
+      else if (floors <= 12) storeyTierId = 'storey_7_to_12';
+      else if (floors <= 39) storeyTierId = 'storey_13_to_39';
+      else if (floors <= 60) storeyTierId = 'storey_40_to_60';
+      else storeyTierId = 'storey_60_plus';
+      document.getElementById(storeyTierId).checked = true;
+      var storeyHint = document.getElementById('storeyTierHint');
+      if (storeyHint) {
+        storeyHint.textContent = 'Auto-selected from ~' + floors + ' floors. Override if known.';
       }
 
       // Auto-select municipality if detected
