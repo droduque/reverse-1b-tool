@@ -79,6 +79,10 @@ def _altus_cost_formula(region, level, row):
     level:  'low' | 'high'
     row:    Altus 26 row number (storey or parking row)
     """
+    if region not in ('gta', 'ottawa', 'other_ontario'):
+        raise ValueError(f"_altus_cost_formula: unknown region {region!r}")
+    if level not in ('low', 'high'):
+        raise ValueError(f"_altus_cost_formula: unknown level {level!r}")
     gta = ALTUS_COL_GTA_LOW if level == 'low' else ALTUS_COL_GTA_HIGH
     ott = ALTUS_COL_OTTAWA_LOW if level == 'low' else ALTUS_COL_OTTAWA_HIGH
     if region == 'ottawa':
@@ -87,6 +91,48 @@ def _altus_cost_formula(region, level, row):
         return (f"=AVERAGE('{ALTUS_SHEET_NAME}'!{gta}{row},"
                 f"'{ALTUS_SHEET_NAME}'!{ott}{row})")
     return f"='{ALTUS_SHEET_NAME}'!{gta}{row}"
+
+
+def _has_bachelor(unit_types):
+    """True if any 1A unit-type label looks like a bachelor / studio unit."""
+    return any(
+        'bachelor' in u['label'].lower() or 'studio' in u['label'].lower()
+        for u in unit_types
+    )
+
+
+def _resolve_altus_row(storey_tier, construction_type):
+    """Return (altus_row, descriptive_tier_string) for the storey/wood-frame combo.
+
+    Wood-frame is only valid for storey_tier == 'up_to_6'; any other combo
+    falls back to the concrete row for that storey tier.
+    """
+    if storey_tier not in STOREY_TIER_TO_ALTUS_ROW:
+        return None, None
+    if construction_type == 'wood_frame' and storey_tier == 'up_to_6':
+        return ALTUS_ROW_WOOD_FRAME_UP_TO_6, f"{storey_tier} + wood-frame"
+    return STOREY_TIER_TO_ALTUS_ROW[storey_tier], storey_tier
+
+
+# Altus 26 has N/A for Ottawa columns (L/M) on row 9 (60+ Storeys). When a
+# user picks `region=ottawa` + `storey_tier=60_plus`, fall back to GTA so the
+# Sheet 9 / Sheet 11 IRR cascade doesn't pick up #VALUE! and ship a wrong
+# IRR to the client. `other_ontario` + 60_plus also falls back so the
+# AVERAGE doesn't silently degenerate to GTA-only.
+ALTUS_NA_REGIONS_BY_ROW = {
+    9: {'ottawa', 'other_ontario'},
+}
+
+
+def _safe_region_for_row(region, row):
+    """Coerce region to GTA when the requested region has N/A data at that row.
+
+    Returns (effective_region, was_coerced).
+    """
+    bad = ALTUS_NA_REGIONS_BY_ROW.get(row, set())
+    if region in bad:
+        return 'gta', True
+    return region, False
 
 # High-rise threshold — 7+ storeys per Noor (2026-03-09)
 HIGH_RISE_FLOOR_THRESHOLD = 7
@@ -994,10 +1040,7 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     # Consolidate unit mix. Bachelor presence forces routing through
     # consolidate_unit_mix even for ≤3 types, so a small bachelor 1A still
     # lands in row 7 with 1 Bed in row 8 (Kanen 2026-04-24).
-    has_bachelor = any(
-        'bachelor' in u['label'].lower() or 'studio' in u['label'].lower()
-        for u in data['unit_types']
-    )
+    has_bachelor = _has_bachelor(data['unit_types'])
     if len(data['unit_types']) <= 3 and not has_bachelor:
         consolidated = data['unit_types']
         # Pad to 3 rows if fewer than 3 types
@@ -1475,26 +1518,31 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     # When storey_tier is provided (form selector in the upload tool), the populator
     # writes F29/O48/P48 directly. Without storey_tier we fall back to a Noor flag.
     log.append(f"  BUILDING TYPE: {building_type}  REGION: {region}")
-    if storey_tier in STOREY_TIER_TO_ALTUS_ROW:
-        if construction_type == 'wood_frame' and storey_tier == 'up_to_6':
-            altus_row = ALTUS_ROW_WOOD_FRAME_UP_TO_6
-            tier_desc = f"{storey_tier} + wood-frame"
-        else:
-            altus_row = STOREY_TIER_TO_ALTUS_ROW[storey_tier]
-            tier_desc = storey_tier
+    altus_row, tier_desc = _resolve_altus_row(storey_tier, construction_type)
+    if altus_row is not None:
+        # Wood-frame requested for non-up_to_6 silently coerces to concrete.
+        # Surface the coercion in the log so Noor sees what shipped.
+        if construction_type == 'wood_frame' and storey_tier != 'up_to_6':
+            log.append(f"  *** WOOD-FRAME REQUESTED but storey tier is '{storey_tier}'; "
+                       f"Altus has no wood-frame data for this tier. Coerced to concrete row {altus_row}.")
+        # Ottawa and Other Ontario have N/A at row 9 (60+ Storeys); fall back to GTA.
+        eff_region, region_coerced = _safe_region_for_row(region, altus_row)
+        if region_coerced:
+            log.append(f"  *** REGION COERCED: '{region}' has N/A data at Altus row {altus_row}. "
+                       f"Falling back to GTA so Sheet 9/Sheet 11 don't pick up #VALUE!.")
         queue_write(sheet5_writes, 'F29',
                     f"='{ALTUS_SHEET_NAME}'!A{altus_row}",
                     f"Altus storey label ({tier_desc})",
                     is_formula=True)
         queue_write(sheet5_writes, 'O48',
-                    _altus_cost_formula(region, 'low', altus_row),
-                    f"Altus construction LOW ({tier_desc}, {region})",
+                    _altus_cost_formula(eff_region, 'low', altus_row),
+                    f"Altus construction LOW ({tier_desc}, {eff_region})",
                     is_formula=True)
         queue_write(sheet5_writes, 'P48',
-                    _altus_cost_formula(region, 'high', altus_row),
-                    f"Altus construction HIGH ({tier_desc}, {region})",
+                    _altus_cost_formula(eff_region, 'high', altus_row),
+                    f"Altus construction HIGH ({tier_desc}, {eff_region})",
                     is_formula=True)
-        log.append(f"  STOREY TIER: {tier_desc} ({region}) — Sheet 5 F29/O48/P48 rewritten to Altus row {altus_row}")
+        log.append(f"  STOREY TIER: {tier_desc} ({eff_region}) — Sheet 5 F29/O48/P48 rewritten to Altus row {altus_row}")
     elif building_type == 'mid-rise':
         log.append(f"  *** FLAG: Building is mid-rise but Sheet 5 F29 references '13-39 Storeys' ('{ALTUS_SHEET_NAME}' row 7).")
         log.append("      Noor should verify and update the Altus height category if needed.")
@@ -1504,21 +1552,22 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     # region is non-GTA so the formula needs different columns / averaging.
     parking_row = ALTUS_PARKING_ROW_SURFACE if parking_type == 'surface' else ALTUS_PARKING_ROW_UNDERGROUND
     parking_label = 'Surface' if parking_type == 'surface' else 'Underground'
-    if parking_type == 'surface' or region != 'gta':
+    eff_parking_region, _ = _safe_region_for_row(region, parking_row)
+    if parking_type == 'surface' or eff_parking_region != 'gta':
         queue_write(sheet5_writes, 'O49',
-                    _altus_cost_formula(region, 'low', parking_row),
-                    f"Altus parking LOW — {parking_label} ({region}, row {parking_row})",
+                    _altus_cost_formula(eff_parking_region, 'low', parking_row),
+                    f"Altus parking LOW — {parking_label} ({eff_parking_region}, row {parking_row})",
                     is_formula=True)
         queue_write(sheet5_writes, 'P49',
-                    _altus_cost_formula(region, 'high', parking_row),
-                    f"Altus parking HIGH — {parking_label} ({region}, row {parking_row})",
+                    _altus_cost_formula(eff_parking_region, 'high', parking_row),
+                    f"Altus parking HIGH — {parking_label} ({eff_parking_region}, row {parking_row})",
                     is_formula=True)
-        log.append(f"  PARKING TYPE: {parking_label} ({region}) — Sheet 5 O49/P49 rewritten to Altus row {parking_row}")
+        log.append(f"  PARKING TYPE: {parking_label} ({eff_parking_region}) — Sheet 5 O49/P49 rewritten to Altus row {parking_row}")
     elif parking_type == 'mixed':
         log.append("  *** FLAG: 1A has BOTH underground and surface parking. Output keeps")
         log.append(f"      the underground Altus ref (row {ALTUS_PARKING_ROW_UNDERGROUND}) and sums spaces. Verify with Noor.")
     else:
-        log.append(f"  PARKING TYPE: {parking_label} ({region}) — Sheet 5 O49/P49 keeps template default (GTA underground, row {ALTUS_PARKING_ROW_UNDERGROUND})")
+        log.append(f"  PARKING TYPE: {parking_label} ({eff_parking_region}) — Sheet 5 O49/P49 keeps template default (GTA underground, row {ALTUS_PARKING_ROW_UNDERGROUND})")
 
     # ===================================================================
     # SHEET 6: Permanent Financing Parameters (C31:C35, Fran V2 shifted left)
@@ -1543,13 +1592,8 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     log.append("=" * 60)
     log.append("FLAGS FOR NOOR'S REVIEW")
     log.append("=" * 60)
-    if storey_tier in STOREY_TIER_TO_ALTUS_ROW:
-        if construction_type == 'wood_frame' and storey_tier == 'up_to_6':
-            altus_row = ALTUS_ROW_WOOD_FRAME_UP_TO_6
-            tier_desc = f"{storey_tier} + wood-frame"
-        else:
-            altus_row = STOREY_TIER_TO_ALTUS_ROW[storey_tier]
-            tier_desc = storey_tier
+    altus_row, tier_desc = _resolve_altus_row(storey_tier, construction_type)
+    if altus_row is not None:
         log.append(f"1. ALTUS HEIGHT CATEGORY: Storey tier '{tier_desc}' selected on form.")
         log.append(f"   Sheet 5 F29/O48/P48 written to '{ALTUS_SHEET_NAME}' row {altus_row}.")
         log.append(f"   Estimated floor count: {est_floors}.")
@@ -1957,10 +2001,7 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
     client-side without touching the Excel.
     """
     # Consolidate unit mix same way as populate_template
-    has_bachelor = any(
-        'bachelor' in u['label'].lower() or 'studio' in u['label'].lower()
-        for u in data['unit_types']
-    )
+    has_bachelor = _has_bachelor(data['unit_types'])
     if len(data['unit_types']) <= 3 and not has_bachelor:
         consolidated = list(data['unit_types'])
         while len(consolidated) < 3:
@@ -1993,12 +2034,23 @@ def export_project_json(data, output_path, municipality=None, building_type='hig
         dc_rates, _relief_desc = apply_dc_relief(dc_rates_base, dc_relief)
         for ut in consolidated:
             label_lower = ut['label'].lower()
-            if '1' in label_lower:
-                dc_total += ut['count'] * dc_rates['1bed']
-            elif '2' in label_lower:
-                dc_total += ut['count'] * dc_rates['2bed']
+            # Bachelor → 1-bed DC rate (smallest unit, lowest rate).
+            # "2 Bed + 3 Bed" merged row → blend of the two rates.
+            # Otherwise prefix-match on the digit.
+            if 'bachelor' in label_lower or 'studio' in label_lower:
+                rate = dc_rates['1bed']
+            elif '2 bed + 3 bed' in label_lower:
+                rate = (dc_rates['2bed'] + dc_rates['3bed']) / 2
+            elif label_lower.startswith('1'):
+                rate = dc_rates['1bed']
+            elif label_lower.startswith('2'):
+                rate = dc_rates['2bed']
+            elif label_lower.startswith('3'):
+                rate = dc_rates['3bed']
             else:
-                dc_total += ut['count'] * dc_rates['3bed']
+                # Unrecognized label — bias toward the cheaper 2-bed rate (was 3-bed).
+                rate = dc_rates['2bed']
+            dc_total += ut['count'] * rate
 
     # Construction cost per SF — derive from Altus guide baseline
     # The template has construction at ~$453/SF of GFA for high-rise in GTA
