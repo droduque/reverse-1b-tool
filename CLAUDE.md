@@ -24,6 +24,14 @@ At the END of every session:
 
 ---
 
+## Strategic Reference (read before any Derek interaction)
+
+- [notes/derek-9-steps-playbook.md](notes/derek-9-steps-playbook.md) — Distilled from the 10 ADFSE Deep Dive videos. Per-step Derek vocabulary, dollar hooks, metaphors. Drop a Derek-phrase per conversation.
+- [notes/svn-rock-consulting-launch.md](notes/svn-rock-consulting-launch.md) — Patron-platform engagement model, the "final hook." Phase 1 (Movie Mode, awaiting Derek) → Phase 2 (SVN OS modules) → Phase 3 (equity). **Don't act on Phase 2 until Derek surfaces it.**
+- Raw transcripts: [context/reference/adfse-deep-dive/](context/reference/adfse-deep-dive/)
+
+---
+
 ## Key Files
 
 ```
@@ -157,7 +165,9 @@ Most of Sheet 5 is formulas cascading from Sheets 1, 4, 7, 13. Only write to:
 | R58 | Dev charge: 2-Bed (>=700 SF) | $50,248 (Toronto) |
 | R59 | Dev charge: 3-Bed | $47,107 (Toronto) |
 
-**DO NOT write to:** B4, G10, F20-F29, D36, these are all formulas.
+**DO NOT write to:** B4, G10, F20-F28, D36, these are all formulas.
+
+**Formula-to-formula rewrite is OK for Altus row routing.** F29 + O48/P48/O49/P49 are formulas in the template, but the populator legitimately rewrites them via `is_formula=True` to point at the user-selected Altus row/column (storey_tier, construction_type, region, parking surface override). Never overwrite with a static value, only swap the formula target.
 
 ---
 
