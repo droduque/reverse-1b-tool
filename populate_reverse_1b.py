@@ -48,10 +48,13 @@ ALTUS_PARKING_ROW_UNDERGROUND = 42
 
 ALTUS_SHEET_NAME = '13. Altus Cost Guide 26'
 
-# Altus Cost Guide 26 GTA columns. Edmonton + Winnipeg got inserted between
-# Calgary and GTA in the 2026 edition, shifting GTA from F/G to J/K.
+# Altus Cost Guide 26 columns by region. Edmonton + Winnipeg got inserted
+# between Calgary and GTA in the 2026 edition, shifting GTA from F/G to J/K
+# and Ottawa from H/I to L/M.
 ALTUS_COL_GTA_LOW = 'J'
 ALTUS_COL_GTA_HIGH = 'K'
+ALTUS_COL_OTTAWA_LOW = 'L'
+ALTUS_COL_OTTAWA_HIGH = 'M'
 
 # Maps storey-tier form values to Altus Cost Guide 26 row numbers (concrete).
 # Both "up_to_6" and "7_to_12" target row 6 ("Up to 12 Storeys").
@@ -67,6 +70,23 @@ STOREY_TIER_TO_ALTUS_ROW = {
 # Only valid when storey_tier == 'up_to_6' (Altus has no wood-frame row
 # for taller buildings).
 ALTUS_ROW_WOOD_FRAME_UP_TO_6 = 15
+
+
+def _altus_cost_formula(region, level, row):
+    """Build a Sheet 5 formula that pulls Altus cost data for the given region.
+
+    region: 'gta' | 'ottawa' | 'other_ontario' (Other Ontario averages GTA + Ottawa)
+    level:  'low' | 'high'
+    row:    Altus 26 row number (storey or parking row)
+    """
+    gta = ALTUS_COL_GTA_LOW if level == 'low' else ALTUS_COL_GTA_HIGH
+    ott = ALTUS_COL_OTTAWA_LOW if level == 'low' else ALTUS_COL_OTTAWA_HIGH
+    if region == 'ottawa':
+        return f"='{ALTUS_SHEET_NAME}'!{ott}{row}"
+    if region == 'other_ontario':
+        return (f"=AVERAGE('{ALTUS_SHEET_NAME}'!{gta}{row},"
+                f"'{ALTUS_SHEET_NAME}'!{ott}{row})")
+    return f"='{ALTUS_SHEET_NAME}'!{gta}{row}"
 
 # High-rise threshold — 7+ storeys per Noor (2026-03-09)
 HIGH_RISE_FLOOR_THRESHOLD = 7
@@ -953,7 +973,8 @@ def populate_template(data, output_path, municipality=None, building_type='high-
                       financing_program=None, construction_months=None,
                       gfa_override=None, parking_sf_override=None,
                       construction_financing=None, dc_relief=None,
-                      storey_tier=None, construction_type='concrete'):
+                      storey_tier=None, construction_type='concrete',
+                      region='gta'):
     """
     Copy the Reverse 1B template and write parsed 1A data into it.
     Uses the ZIP/XML writer to preserve all drawings, images, and formatting.
@@ -1453,7 +1474,7 @@ def populate_template(data, output_path, municipality=None, building_type='high-
     # Building type — affects which Altus Cost Guide 26 row Sheet 5 should reference.
     # When storey_tier is provided (form selector in the upload tool), the populator
     # writes F29/O48/P48 directly. Without storey_tier we fall back to a Noor flag.
-    log.append(f"  BUILDING TYPE: {building_type}")
+    log.append(f"  BUILDING TYPE: {building_type}  REGION: {region}")
     if storey_tier in STOREY_TIER_TO_ALTUS_ROW:
         if construction_type == 'wood_frame' and storey_tier == 'up_to_6':
             altus_row = ALTUS_ROW_WOOD_FRAME_UP_TO_6
@@ -1466,38 +1487,38 @@ def populate_template(data, output_path, municipality=None, building_type='high-
                     f"Altus storey label ({tier_desc})",
                     is_formula=True)
         queue_write(sheet5_writes, 'O48',
-                    f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_LOW}{altus_row}",
-                    f"Altus construction LOW ({tier_desc})",
+                    _altus_cost_formula(region, 'low', altus_row),
+                    f"Altus construction LOW ({tier_desc}, {region})",
                     is_formula=True)
         queue_write(sheet5_writes, 'P48',
-                    f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_HIGH}{altus_row}",
-                    f"Altus construction HIGH ({tier_desc})",
+                    _altus_cost_formula(region, 'high', altus_row),
+                    f"Altus construction HIGH ({tier_desc}, {region})",
                     is_formula=True)
-        log.append(f"  STOREY TIER: {tier_desc} — Sheet 5 F29/O48/P48 rewritten to Altus row {altus_row}")
+        log.append(f"  STOREY TIER: {tier_desc} ({region}) — Sheet 5 F29/O48/P48 rewritten to Altus row {altus_row}")
     elif building_type == 'mid-rise':
         log.append(f"  *** FLAG: Building is mid-rise but Sheet 5 F29 references '13-39 Storeys' ('{ALTUS_SHEET_NAME}' row 7).")
         log.append("      Noor should verify and update the Altus height category if needed.")
 
-    # Parking Altus cost ref — Sheet 5 O49/P49 point to Sheet 13 row
-    # ALTUS_PARKING_ROW_UNDERGROUND by default. Rewrite to the surface row if
-    # the 1A shows surface parking. GTA columns are J (Low) / K (High) in the
-    # 2026 edition.
-    if parking_type == 'surface':
-        row = ALTUS_PARKING_ROW_SURFACE
+    # Parking Altus cost ref — Sheet 5 O49/P49. Template default is GTA
+    # underground (J42/K42). Rewrite when (a) parking is surface, or (b)
+    # region is non-GTA so the formula needs different columns / averaging.
+    parking_row = ALTUS_PARKING_ROW_SURFACE if parking_type == 'surface' else ALTUS_PARKING_ROW_UNDERGROUND
+    parking_label = 'Surface' if parking_type == 'surface' else 'Underground'
+    if parking_type == 'surface' or region != 'gta':
         queue_write(sheet5_writes, 'O49',
-                    f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_LOW}{row}",
-                    f"Altus cost LOW — Surface Parking (row {row})",
+                    _altus_cost_formula(region, 'low', parking_row),
+                    f"Altus parking LOW — {parking_label} ({region}, row {parking_row})",
                     is_formula=True)
         queue_write(sheet5_writes, 'P49',
-                    f"='{ALTUS_SHEET_NAME}'!{ALTUS_COL_GTA_HIGH}{row}",
-                    f"Altus cost HIGH — Surface Parking (row {row})",
+                    _altus_cost_formula(region, 'high', parking_row),
+                    f"Altus parking HIGH — {parking_label} ({region}, row {parking_row})",
                     is_formula=True)
-        log.append(f"  PARKING TYPE: Surface — Sheet 5 O49/P49 rewritten to Altus row {row}")
+        log.append(f"  PARKING TYPE: {parking_label} ({region}) — Sheet 5 O49/P49 rewritten to Altus row {parking_row}")
     elif parking_type == 'mixed':
         log.append("  *** FLAG: 1A has BOTH underground and surface parking. Output keeps")
         log.append(f"      the underground Altus ref (row {ALTUS_PARKING_ROW_UNDERGROUND}) and sums spaces. Verify with Noor.")
     else:
-        log.append(f"  PARKING TYPE: {parking_type} — Sheet 5 O49/P49 keeps template default (Altus row {ALTUS_PARKING_ROW_UNDERGROUND})")
+        log.append(f"  PARKING TYPE: {parking_label} ({region}) — Sheet 5 O49/P49 keeps template default (GTA underground, row {ALTUS_PARKING_ROW_UNDERGROUND})")
 
     # ===================================================================
     # SHEET 6: Permanent Financing Parameters (C31:C35, Fran V2 shifted left)

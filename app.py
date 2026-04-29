@@ -262,6 +262,12 @@ def generate():
     if construction_type not in ('concrete', 'wood_frame'):
         construction_type = 'concrete'
 
+    # Get region — drives which Altus column(s) Sheet 5 O48/P48/O49/P49 pull.
+    # 'other_ontario' averages GTA and Ottawa columns.
+    region = request.form.get('region', 'gta')
+    if region not in ('gta', 'ottawa', 'other_ontario'):
+        region = 'gta'
+
     # Get financing program selection
     fp_key = request.form.get('financing_program', 'cmhc_mli_100')
     financing_program = FINANCING_PROGRAMS.get(fp_key, FINANCING_PROGRAMS['cmhc_mli_100'])
@@ -366,7 +372,7 @@ def generate():
                                 gfa_override=gfa_override, parking_sf_override=parking_sf_override,
                                 construction_financing=construction_financing,
                                 dc_relief=dc_relief, storey_tier=storey_tier,
-                                construction_type=construction_type)
+                                construction_type=construction_type, region=region)
 
         # Also export the project JSON for the presentation tool
         json_filename = f"Reverse_1B_{project_name}_{today}.json"

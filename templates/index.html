@@ -429,6 +429,9 @@ select option {
 .toggle-group--5 .toggle-option label .label-sub {
   font-size: 11px;
 }
+.toggle-group--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
 
 /* ── Stepper (construction duration) ─────── */
 .stepper {
@@ -964,6 +967,33 @@ select option {
           </div>
         </div>
         <div class="hint" id="constructionTypeHint">Wood-frame routes to Altus row 15 (cheaper PSF). Only valid for ≤6-storey buildings.</div>
+      </div>
+      <div class="form-group">
+        <label>Region (Altus cost columns)</label>
+        <div class="toggle-group toggle-group--3">
+          <div class="toggle-option">
+            <input type="radio" name="region" id="regionGta" value="gta" checked>
+            <label for="regionGta">
+              GTA / Toronto
+              <span class="label-sub">cols J/K</span>
+            </label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="region" id="regionOttawa" value="ottawa">
+            <label for="regionOttawa">
+              Ottawa
+              <span class="label-sub">cols L/M</span>
+            </label>
+          </div>
+          <div class="toggle-option">
+            <input type="radio" name="region" id="regionOther" value="other_ontario">
+            <label for="regionOther">
+              Other Ontario
+              <span class="label-sub">avg GTA + Ottawa</span>
+            </label>
+          </div>
+        </div>
+        <div class="hint">Drives Sheet 5 O48/P48 (storey cost) and O49/P49 (parking cost). Other Ontario uses an AVERAGE of GTA and Ottawa columns.</div>
       </div>
     </div>
 
