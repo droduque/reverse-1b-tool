@@ -845,18 +845,6 @@ select option {
         </select>
         <div class="hint">Development charges are based on your selection. Some municipalities have multiple zones — verify the correct one applies.</div>
       </div>
-      <div class="form-group" id="dcReliefGroup" style="display: none;">
-        <label for="dc_relief">DC Relief Program (PBR)</label>
-        <select name="dc_relief" id="dcRelief">
-          <option value="none">Full Rate (no relief)</option>
-          {% for key, prog in dc_relief_programs.items() %}
-          {% if key != 'none' %}
-          <option value="{{ key }}" data-municipalities="{{ prog.municipalities | join(',') }}">{{ prog.label }}{% if prog.description is defined %} — {{ prog.description }}{% endif %}</option>
-          {% endif %}
-          {% endfor %}
-        </select>
-        <div class="hint" id="dcReliefHint">Ontario PBR incentive programs reduce development charges for purpose-built rental projects.</div>
-      </div>
     </div>
 
     <!-- Property Taxes -->
@@ -1315,8 +1303,6 @@ function previewFile(file) {
       var muniHint = document.querySelector('#municipality').parentNode.querySelector('.hint');
       if (data.municipality_name && data.municipality_index !== null) {
         muniHint.textContent = 'Auto-detected: ' + data.municipality_name + '. Change if needed \u2014 verify the correct zone.';
-        // Show DC relief options for auto-detected municipality
-        updateDcRelief(data.municipality_name);
       }
 
       // Auto-fill property tax fields from 1A
@@ -1430,44 +1416,7 @@ document.getElementById('municipality').addEventListener('change', function() {
     taxRateInput.style.borderColor = '#C9993A';
     taxHint.textContent = 'Tax rate set from ' + selected.textContent.trim().split(' \u2014')[0] + '. Override if needed.';
   }
-  // Update DC relief dropdown visibility based on municipality
-  updateDcRelief(selected.textContent.trim().split(' \u2014')[0]);
 });
-
-// DC Relief: show/hide and filter options based on selected municipality
-function updateDcRelief(muniName) {
-  var reliefGroup = document.getElementById('dcReliefGroup');
-  var reliefSelect = document.getElementById('dcRelief');
-  var reliefHint = document.getElementById('dcReliefHint');
-
-  if (!muniName || muniName === '-- Select municipality --') {
-    reliefGroup.style.display = 'none';
-    reliefSelect.value = 'none';
-    return;
-  }
-
-  var city = muniName.split(',')[0].split('(')[0].trim().toUpperCase();
-  var hasRelief = false;
-
-  // Show/hide options based on municipality match
-  for (var i = 0; i < reliefSelect.options.length; i++) {
-    var opt = reliefSelect.options[i];
-    if (opt.value === 'none') continue;
-    var munis = (opt.getAttribute('data-municipalities') || '').toUpperCase().split(',');
-    var matches = munis.some(function(m) {
-      return city.indexOf(m.trim()) >= 0 || m.trim().indexOf(city) >= 0;
-    });
-    opt.style.display = matches ? '' : 'none';
-    if (matches) hasRelief = true;
-  }
-
-  reliefGroup.style.display = hasRelief ? '' : 'none';
-  if (!hasRelief) {
-    reliefSelect.value = 'none';
-  } else {
-    reliefHint.textContent = 'DC relief programs available for ' + muniName.split(',')[0].trim() + '. Select if this is a purpose-built rental project.';
-  }
-}
 
 // Processing animation + loading state on submit
 document.getElementById('generateForm').addEventListener('submit', function() {
