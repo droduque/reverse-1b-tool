@@ -1,0 +1,11 @@
+exclude:
+  - context/
+  - notes/
+  - output/
+  - __pycache__/
+  - data/
+  - reference/
+  - "*.py"
+  - "*.pyc"
+  - requirements.txt
+  - Procfile
